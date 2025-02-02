@@ -1,1934 +1,1086 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Step3D.Viewer</title>
-    <!-- Подключение шрифта Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Подключение Font Awesome для иконок -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Подключение Shepherd.js для интерактивных туров -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@11.1.3/dist/css/shepherd.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        :root {
-            /* Базовые размеры с учетом золотого сечения */
-            --base-spacing: 16px; /* Основное расстояние */
-            --golden-ratio: 1.618;
-            --large-spacing: calc(var(--base-spacing) * var(--golden-ratio));
-            --small-spacing: calc(var(--base-spacing) / var(--golden-ratio));
-            --title-font-size: 2em;
-            --button-font-size: 1em;
-            --button-font-size-mobile: 0.9em;
-            --background-light: #d3d3d3;
-            --background-dark: #1e1e1e;
-            --text-light: #333;
-            --text-dark: #f0f0f0;
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --transition-duration: 0.3s;
-            --toast-duration: 3000ms;
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--background-light); /* Светло-серый фон */
-            overflow: hidden;
-            position: relative;
-            color: var(--text-light);
-            transition: background-color var(--transition-duration), color var(--transition-duration);
-        }
-
-        body.dark-mode {
-            background-color: var(--background-dark);
-            color: var(--text-dark);
-        }
-
-        /* Фиксированный заголовок */
-        #header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: var(--base-spacing);
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            transition: background-color var(--transition-duration);
-        }
-
-        body.dark-mode #header {
-            background-color: rgba(30, 30, 30, 0.95);
-        }
-
-        /* Логотип */
-        #welcome-message {
-            font-size: var(--title-font-size);
-            color: #000;
-            transition: all var(--transition-duration) ease;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        body.dark-mode #welcome-message {
-            color: #f0f0f0;
-        }
-
-        /* Кнопки в заголовке */
-        .header-buttons {
-            display: flex;
-            gap: var(--small-spacing);
-        }
-
-        button {
-            position: relative;
-            padding: var(--base-spacing) var(--large-spacing);
-            background-color: #fff;
-            border: 2px solid #000;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: var(--button-font-size);
-            color: #000;
-            transition: background-color var(--transition-duration), color var(--transition-duration), transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        body.dark-mode button {
-            background-color: #2e2e2e;
-            border-color: #f0f0f0;
-            color: #f0f0f0;
-        }
-
-        button:hover {
-            background-color: #000;
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        body.dark-mode button:hover {
-            background-color: #f0f0f0;
-            color: #000;
-            box-shadow: 0 4px 8px rgba(255,255,255,0.2);
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        /* Всплывающие подсказки */
-        button[data-tooltip]:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            color: #fff;
-            padding: 5px 8px;
-            border-radius: 3px;
-            white-space: nowrap;
-            font-size: 0.8em;
-            opacity: 1;
-            transition: opacity 0.3s;
-            pointer-events: none;
-            z-index: 200;
-        }
-
-        button[data-tooltip]::after {
-            opacity: 0;
-        }
-
-        /* Панель управления цветом и настройками */
-        #color-panel {
-            position: fixed;
-            right: var(--base-spacing);
-            top: 60px; /* Под заголовком */
-            background-color: #fff;
-            padding: var(--base-spacing);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            gap: var(--small-spacing);
-            z-index: 90;
-            transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
-        }
-
-        body.dark-mode #color-panel {
-            background-color: #2e2e2e;
-            box-shadow: 0 2px 8px rgba(255,255,255,0.1);
-        }
-
-        #color-picker {
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-            outline: none;
-        }
-
-        /* Предварительный просмотр цвета */
-        #color-preview {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #808080;
-            border: 2px solid #000;
-            cursor: pointer;
-        }
-
-        /* Информационная панель о модели */
-        #model-info {
-            background-color: #fff;
-            color: #333;
-            padding: var(--base-spacing) var(--large-spacing);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: var(--small-spacing);
-            position: fixed;
-            bottom: var(--base-spacing);
-            left: var(--base-spacing);
-            z-index: 90;
-            transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
-        }
-
-        body.dark-mode #model-info {
-            background-color: #2e2e2e;
-            box-shadow: 0 2px 8px rgba(255,255,255,0.1);
-            color: #f0f0f0;
-        }
-
-        #model-info.hide {
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-        }
-
-        #model-info.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1em;
-        }
-
-        .info-item img {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Спиннер загрузки */
-        #loading-spinner {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid var(--primary-color);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            display: none;
-            z-index: 200;
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Прогресс-бар загрузки */
-        #progress-bar {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 5px;
-            background-color: var(--primary-color);
-            width: 0%;
-            z-index: 250;
-            transition: width var(--transition-duration);
-        }
-
-        /* Модальное окно для ошибок */
-        #error-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 300;
-        }
-
-        #error-content {
-            background: #fff;
-            padding: 20px 30px;
-            border-radius: 8px;
-            max-width: 80%;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: var(--small-spacing);
-            transition: background-color var(--transition-duration), color var(--transition-duration);
-        }
-
-        body.dark-mode #error-content {
-            background-color: #2e2e2e;
-            color: #f0f0f0;
-            box-shadow: 0 2px 10px rgba(255,255,255,0.2);
-        }
-
-        #error-content p {
-            margin: 0;
-            color: #e74c3c;
-            font-weight: bold;
-        }
-
-        #error-content button {
-            padding: 8px 16px;
-            border: none;
-            background-color: var(--primary-color);
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color var(--transition-duration), transform 0.2s;
-        }
-
-        #error-content button:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        /* Кнопка закрытия модальных окон */
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #7f8c8d;
-            transition: color var(--transition-duration);
-        }
-
-        body.dark-mode .close-modal {
-            color: #f0f0f0;
-        }
-
-        .close-modal:hover {
-            color: #c0392b;
-        }
-
-        /* Подтверждение сброса вида */
-        #reset-confirmation {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: var(--base-spacing) var(--large-spacing);
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 350;
-            transition: opacity var(--transition-duration);
-        }
-
-        body.dark-mode #reset-confirmation {
-            background-color: #2e2e2e;
-            color: #f0f0f0;
-            box-shadow: 0 2px 10px rgba(255,255,255,0.2);
-        }
-
-        #reset-confirmation.show {
-            display: flex;
-            flex-direction: column;
-            gap: var(--small-spacing);
-            opacity: 1;
-        }
-
-        #reset-confirmation.hide {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Кнопки подтверждения */
-        .confirm-button {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color var(--transition-duration), transform 0.2s;
-        }
-
-        .confirm-button.yes {
-            background-color: #e74c3c;
-            color: #fff;
-        }
-
-        .confirm-button.yes:hover {
-            background-color: #c0392b;
-            transform: scale(1.05);
-        }
-
-        .confirm-button.no {
-            background-color: #bdc3c7;
-            color: #2c3e50;
-        }
-
-        .confirm-button.no:hover {
-            background-color: #95a5a6;
-            transform: scale(1.05);
-        }
-
-        /* Входной элемент для файлов */
-        #file-input {
-            display: none;
-        }
-
-        /* Контейнер для трехмерной сцены */
-        #viewer {
-            width: 100%;
-            height: 100vh;
-            display: block;
-        }
-
-        /* Темная тема переключатель */
-        #theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2em;
-            color: #000;
-            transition: color var(--transition-duration);
-            margin-left: var(--small-spacing);
-        }
-
-        body.dark-mode #theme-toggle {
-            color: #f0f0f0;
-        }
-
-        #theme-toggle:hover {
-            color: var(--primary-color);
-        }
-
-        /* Подвал */
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            color: #333;
-            text-align: center;
-            padding: var(--small-spacing);
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-            z-index: 100;
-            transition: background-color var(--transition-duration), color var(--transition-duration);
-        }
-
-        body.dark-mode footer {
-            background-color: rgba(30, 30, 30, 0.95);
-            color: #f0f0f0;
-            box-shadow: 0 -2px 4px rgba(255,255,255,0.1);
-        }
-
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color var(--transition-duration);
-        }
-
-        footer a:hover {
-            color: #2980b9;
-        }
-
-        body.dark-mode footer a:hover {
-            color: #3498db;
-        }
-
-        /* Адаптивность для мобильных устройств */
-        @media (max-width: 768px) {
-            :root {
-                --base-spacing: 12px;
-                --large-spacing: calc(var(--base-spacing) * var(--golden-ratio));
-                --small-spacing: calc(var(--base-spacing) / var(--golden-ratio));
-                --title-font-size: 1.5em;
-                --button-font-size: 0.9em;
-            }
-
-            #header {
-                padding: var(--small-spacing);
-            }
-
-            #welcome-message {
-                font-size: var(--title-font-size);
-            }
-
-            .header-buttons {
-                gap: var(--small-spacing);
-            }
-
-            button {
-                padding: var(--small-spacing) var(--small-spacing);
-                font-size: var(--button-font-size);
-            }
-
-            #color-panel {
-                top: 50px;
-                flex-wrap: wrap;
-            }
-
-            #model-info {
-                bottom: 80px;
-                left: var(--base-spacing);
-                width: calc(100% - 2 * var(--base-spacing));
-            }
-
-            #theme-toggle {
-                font-size: 1em;
-            }
-
-            /* Стили для кнопки сброса вида на мобильных */
-            #reset-view-button {
-                padding: var(--small-spacing);
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            :root {
-                --base-spacing: 8px;
-                --large-spacing: calc(var(--base-spacing) * var(--golden-ratio));
-                --small-spacing: calc(var(--base-spacing) / var(--golden-ratio));
-                --title-font-size: 1.2em;
-                --button-font-size: 0.8em;
-            }
-
-            #welcome-message {
-                font-size: var(--title-font-size);
-            }
-
-            button {
-                padding: var(--small-spacing) var(--small-spacing);
-                font-size: var(--button-font-size);
-            }
-
-            #color-panel {
-                top: 40px;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            #model-info {
-                bottom: 60px;
-                left: var(--base-spacing);
-                width: calc(100% - 2 * var(--base-spacing));
-                padding: var(--small-spacing) var(--base-spacing);
-                font-size: 0.8em;
-            }
-
-            #theme-toggle {
-                font-size: 0.9em;
-            }
-
-            /* Стили для кнопки сброса вида на мобильных */
-            #reset-view-button {
-                padding: var(--small-spacing);
-                font-size: 0.8em;
-            }
-        }
-
-        /* Темная тема элементы */
-        body.dark-mode #color-panel {
-            background-color: #2e2e2e;
-            box-shadow: 0 2px 8px rgba(255,255,255,0.1);
-        }
-
-        body.dark-mode #model-info {
-            background-color: #2e2e2e;
-            box-shadow: 0 2px 8px rgba(255,255,255,0.1);
-            color: #f0f0f0;
-        }
-
-        body.dark-mode button {
-            background-color: #2e2e2e;
-            border-color: #f0f0f0;
-            color: #f0f0f0;
-        }
-
-        body.dark-mode button[data-tooltip]:hover::after {
-            background-color: #f0f0f0;
-            color: #2e2e2e;
-        }
-
-        /* Дополнительные стили для анимаций */
-        #model-info.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        #model-info.hide {
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-        }
-
-        /* Плавные переходы для всех элементов */
-        * {
-            transition: all var(--transition-duration) ease;
-        }
-
-        /* Инструкции по взаимодействию */
-        #instructions {
-            position: fixed;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 0.9em;
-            z-index: 95;
-            max-width: 90%;
-            text-align: center;
-            pointer-events: none;
-            opacity: 1;
-            transition: opacity 1s;
-        }
-
-        /* Область для Drag-and-Drop */
-        #drop-zone {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 3px dashed var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 50;
-            pointer-events: none;
-            color: #333;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        #drop-zone.active {
-            opacity: 0.9;
-            pointer-events: all;
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-
-        /* Уведомления (Toasts) */
-        #toast-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 400;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-        }
-
-        .toast {
-            background-color: var(--primary-color);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            opacity: 0;
-            transition: opacity 0.5s;
-            min-width: 200px;
-            text-align: center;
-        }
-
-        .toast.show {
-            opacity: 1;
-        }
-
-        /* Выпадающие меню */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropbtn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2em;
-            color: #000;
-            transition: color var(--transition-duration);
-        }
-
-        body.dark-mode .dropbtn {
-            color: #f0f0f0;
-        }
-
-        .dropbtn:hover {
-            color: var(--primary-color);
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #fff;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            border-radius: 5px;
-            z-index: 1;
-            flex-direction: column;
-        }
-
-        body.dark-mode .dropdown-content {
-            background-color: #2e2e2e;
-            box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
-        }
-
-        .dropdown-content button {
-            color: #000;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: none;
-            border: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            font-size: 0.9em;
-        }
-
-        body.dark-mode .dropdown-content button {
-            color: #f0f0f0;
-        }
-
-        .dropdown-content button:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
-        body.dark-mode .dropdown-content button:hover {
-            background-color: #3498db;
-            color: #fff;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: flex;
-        }
-
-        /* Кнопка сброса вида */
-        #reset-view-button {
-            display: none;
-            margin-left: var(--small-spacing);
-            background-color: #e74c3c;
-            border-color: #c0392b;
-            color: #fff;
-        }
-
-        body.dark-mode #reset-view-button {
-            background-color: #c0392b;
-            border-color: #e74c3c;
-        }
-
-        #reset-view-button:hover {
-            background-color: #c0392b;
-            border-color: #a93226;
-        }
-    </style>
-    <!-- Добавление Import Map -->
-    <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.152.0/build/three.module.js"
-      }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Никита Шахтёр — Официальный сайт</title>
+
+  <!-- Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  <!-- Content Security Policy (CSP)
+       Здесь для демонстрационных целей добавлены нужные домены и 'unsafe-inline'.
+       В production рекомендуется заменить unsafe-inline на nonce или hash. -->
+  <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com https://www.googletagmanager.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com;
+      img-src 'self' data: https://via.placeholder.com https://259506.selcdn.ru https://upload.wikimedia.org;
+      font-src 'self' https://fonts.gstatic.com;">
+
+  <!-- Мета-теги для SEO и соцсетей -->
+  <meta name="description" content="Произведения Никиты Шахтёра: стихи, рассказы, статьи, поэма '33', галерея, новости и донаты." />
+  <meta property="og:title" content="Никита Шахтёр — Официальный сайт" />
+  <meta property="og:description" content="Стихи, рассказы, статьи, поэма '33', галерея, новости и донаты от современного писателя." />
+  <meta property="og:image" content="http://example.com/image.jpg" />
+  <meta property="og:url" content="http://example.com" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Никита Шахтёр — Официальный сайт" />
+  <meta name="twitter:description" content="Стихи, рассказы, статьи, поэма '33', галерея, новости и донаты от современного писателя." />
+  <meta name="twitter:image" content="http://example.com/image.jpg" />
+
+  <!-- Подключение шрифта Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Подключение Swiper (галерея) -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+  <!-- Основные стили и анимации -->
+  <style>
+    /* Основные переменные */
+    :root {
+      --primary-color: #333;
+      --secondary-color: #fff;
+      --accent-color: #007acc;
+      --border-thickness: 1px;
+      --transition-speed: 0.3s;
+      --font-base: 'Montserrat', sans-serif;
     }
-    </script>
+    /* Базовый сброс */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-base);
+      font-size: 1rem;
+      line-height: 1.6;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      padding: 1rem;
+    }
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+    }
+    /* Заголовки разделов */
+    #featured h2,
+    #poems h2,
+    #stories h2,
+    #articles h2,
+    #gallery h2,
+    #news h2 {
+      font-size: 2rem;
+    }
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    /* Ссылки и кнопки */
+    a, button {
+      text-decoration: none;
+      font-family: var(--font-base);
+      transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    a:focus, button:focus, input:focus, textarea:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 0.2rem;
+    }
+    button, .toggle-content, .donate-button, .load-more {
+      padding: 0.75rem 1.25rem;
+      border: var(--border-thickness) solid var(--primary-color);
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      font-weight: 700;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover, .toggle-content:hover, .donate-button:hover, .load-more:hover {
+      background-color: var(--accent-color);
+      color: var(--secondary-color);
+      box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.15);
+      transform: translateY(-0.125rem);
+    }
+    button:active {
+      transform: scale(0.95);
+      transition: transform 0.1s;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: var(--secondary-color);
+      border-bottom: 0.125rem solid #ddd;
+      padding: 1.25rem 0.625rem;
+      z-index: 10;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      transition: padding var(--transition-speed);
+    }
+    header.shrink { padding: 0.625rem 0.625rem; }
+    .header-brand {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    /* Кнопка "Меню" */
+    #menuButton {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    #menuButton:hover {
+      background-color: var(--accent-color);
+      color: var(--secondary-color);
+      transform: scale(1.05);
+    }
+    /* Кнопка переключения цветового режима (расположена ниже "Меню") */
+    #colorModeToggle {
+      position: absolute;
+      top: 3rem;
+      right: 0.75rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    #colorModeToggle:hover {
+      background-color: var(--accent-color);
+      color: var(--secondary-color);
+      transform: scale(1.05);
+    }
+
+    /* Контейнер основного контента */
+    main.container {
+      max-width: 56.25rem;
+      margin: 6.25rem auto 3.75rem;
+      padding: 0 1.25rem;
+    }
+    section { margin-top: 2rem; margin-bottom: 2rem; }
+
+    /* TOC и поисковая строка */
+    .toc-search-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    /* "Содержание" сдвинуто вправо и с кнопкой раскрытия */
+    #toc { margin-left: 1.5rem; }
+    #tocExpand {
+      margin-left: 0.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--primary-color);
+    }
+    #tocList {
+      display: none;
+      margin-top: 0.5rem;
+      margin-left: 1.5rem;
+      font-size: 0.9rem;
+    }
+    #tocList li { margin-bottom: 0.25rem; }
+    #tocList li a { color: var(--primary-color); text-decoration: underline; }
+
+    /* Поисковая строка – поле занимает всю ширину, кнопка очистки справа */
+    #searchBar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    #searchBar svg { width: 1.25rem; height: 1.25rem; }
+    #searchBar input {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+    }
+    #searchBar button {
+      font-size: 1.25rem;
+      padding: 0.25rem 0.5rem;
+      line-height: 1;
+    }
+
+    /* Кнопка "Наверх" */
+    #backToTop {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      padding: 0.625rem 1.25rem;
+      font-size: 1rem;
+      border: 0.0625rem solid var(--primary-color);
+      border-radius: 0.25rem;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      cursor: pointer;
+      display: none;
+      transition: background-color 0.2s, transform 0.5s;
+      z-index: 100;
+    }
+    #backToTop:hover, #backToTop:focus {
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
+    }
+    #backToTop.scrolled-pulse { animation: pulse 1.5s infinite; }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Модальное окно "Подробнее об авторе" */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1100;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+      animation: fadeIn 0.5s;
+    }
+    .modal-content {
+      background-color: var(--secondary-color);
+      margin: 5% auto;
+      padding: 1.25rem;
+      border: 0.125rem solid var(--primary-color);
+      border-radius: 0.5rem;
+      width: 90%;
+      max-width: 50rem;
+      position: relative;
+      box-shadow: 0 0.3125rem 0.9375rem rgba(0,0,0,0.5);
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .fade-out { animation: fadeOut 0.5s forwards; }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    .modal-close {
+      position: absolute;
+      top: 0.625rem;
+      right: 1.25rem;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+      color: var(--primary-color);
+    }
+    .modal-close:hover, .modal-close:focus { transform: rotate(90deg); }
+
+    /* Тёмная тема */
+    body.dark {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    body.dark header {
+      background-color: #1a1a1a;
+      border-bottom: 0.125rem solid #444;
+    }
+    body.dark a { color: #e0e0e0; }
+    body.dark a:hover { background-color: #333; }
+    body.dark .poem {
+      background-color: #1e1e1e;
+      border-color: #333;
+      box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.05);
+    }
+    body.dark .poem:hover,
+    body.dark .poem:focus-within {
+      box-shadow: 0 0.25rem 0.75rem rgba(255,255,255,0.1);
+    }
+    body.dark footer {
+      background-color: #1a1a1a;
+      border-top: 0.125rem solid #444;
+    }
+
+    /* Адаптивные изображения через <picture> */
+    picture img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Скрытый контент */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      border: 0;
+      padding: 0;
+      white-space: nowrap;
+      clip-path: inset(100%);
+      clip: rect(0 0 0 0);
+      overflow: hidden;
+    }
+
+    /* Анимация появления новостей */
+    .news-item {
+      opacity: 0;
+      transform: translateY(1.25rem);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .news-item.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      font-size: 0.9rem;
+      margin: 0.625rem 0;
+    }
+    .breadcrumbs ol {
+      list-style: none;
+      display: flex;
+      gap: 0.3125rem;
+    }
+    .breadcrumbs li+li:before {
+      content: '>';
+      margin: 0 0.3125rem;
+      color: #666;
+    }
+
+    /* Блок сборника (book-block) – с уменьшённой рамкой и новыми элементами */
+    .book-block {
+      border: 0.25px solid var(--accent-color); /* уменьшенная толщина рамки */
+      border-radius: 0.5rem;
+      padding: 1rem;
+      width: 18.75rem;
+      box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.1);
+      background-color: #fff;
+      text-align: center;
+      font-family: var(--font-base);
+      position: relative;
+    }
+    /* Контейнер с тремя кнопками под верхней линией */
+    .book-block .book-options {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .book-block .option-btn {
+      padding: 0.5rem 1rem;
+      border: var(--border-thickness) solid var(--primary-color);
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 0.25rem;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    .book-block .option-btn:hover {
+      background-color: var(--accent-color);
+      color: var(--secondary-color);
+      transform: translateY(-0.125rem);
+    }
+    /* Контейнер с кнопкой "Читать" над нижней линией */
+    .book-block .read-button-container {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .book-block .read-btn {
+      padding: 0.75rem 1.25rem;
+      border: var(--border-thickness) solid var(--primary-color);
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 0.25rem;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    .book-block .read-btn:hover {
+      background-color: var(--accent-color);
+      color: var(--secondary-color);
+      transform: translateY(-0.125rem);
+    }
+
+    /* Блок "Прочее" – оставлен только блок сборника.
+       В этом блоке вращающийся элемент "69" перемещён ближе к кнопке "Купить". */
+    .extra-book-block {
+      text-align: center;
+      margin-top: 1rem;
+      position: relative;
+    }
+    .extra-book-block .rotating-digits {
+      position: absolute;
+      left: -2rem;  /* уменьшенный отступ */
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 6rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      animation: rotate 5s linear infinite;
+      cursor: pointer;
+    }
+    .extra-book-block .rotating-digits:hover {
+      animation: quickRotate 0.5s linear;
+    }
+    @keyframes rotate {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+    @keyframes quickRotate {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+    .extra-book-block p {
+      margin: 0.5rem 0;
+    }
+    .extra-book-block .book-btn {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+
+    /* Для первого стиха в "Поэзия": вместо служебных данных выводим текст стиха целиком */
+    #poem1 .poem-title,
+    #poem1 .poem-year,
+    #poem1 .reading-time {
+      display: none;
+    }
+    #poem1 .poem-text {
+      font-size: 1.25rem;
+      /* Здесь разместите полный текст стиха */
+    }
+
+    /* Для второго стиха удалены кнопка "Читать", блок текста и "Поделиться" */
+    #poem2 .toggle-content,
+    #poem2 .poem-text,
+    #poem2 .share {
+      display: none;
+    }
+
+    /* Блок "Поэма '33'" для первого стиха */
+    #poem1 .logo-circle {
+      width: 20rem;
+      height: 20rem;
+      border: calc(1px / 3) solid var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      position: relative;
+    }
+    #poem1 .logo-circle > div:first-child {
+      font-size: 6rem;
+      font-weight: bold;
+    }
+    #poem1 .logo-circle .inner-read-btn {
+      font-size: 2.5rem;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+    }
+    /* Треугольные стрелочки внутри блока "Поэма '33'" */
+    .logo-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: #000;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      transition: transform 0.2s;
+    }
+    .logo-arrow:hover { transform: translateY(-50%) scale(1.1); }
+    .logo-arrow.left { left: -2rem; }
+    .logo-arrow.right { right: -2rem; }
+
+    /* Футер */
+    footer {
+      background-color: #f3f3f3;
+      padding: 1rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 1px solid #ddd;
+    }
+    footer nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+    footer nav a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer nav a:hover { color: var(--accent-color); }
+    footer p { margin: 0.5rem 0 0; }
+
+    /* Media queries для мобильных устройств */
+    @media (max-width: 600px) {
+      header { flex-direction: column; align-items: flex-start; }
+      #colorModeToggle { position: static; margin-top: 0.5rem; }
+      .toc-search-container { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+
+  <!-- Структурированные данные (JSON‑LD) для SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Person",
+    "name": "Никита Шахтёр",
+    "url": "http://example.com",
+    "sameAs": [
+      "https://facebook.com/yourprofile",
+      "https://twitter.com/yourprofile"
+    ],
+    "jobTitle": "Писатель",
+    "birthDate": "1989-01-01",
+    "birthPlace": "Москва, Россия"
+  }
+  </script>
 </head>
 <body>
+  <!-- ARIA live для уведомлений -->
+  <div id="notification" class="visually-hidden" aria-live="polite"></div>
 
-    <!-- Область для Drag-and-Drop -->
-    <div id="drop-zone" aria-label="Область для перетаскивания файлов" role="button" tabindex="0">
-        <p>Перетащите 3D-модель сюда или используйте кнопку "Загрузить"</p>
+  <!-- Breadcrumbs -->
+  <nav aria-label="Хлебные крошки" class="breadcrumbs">
+    <ol>
+      <li><a href="/">Главная</a></li>
+      <li aria-current="page">Поэзия</li>
+    </ol>
+  </nav>
+
+  <!-- Выдвижная панель -->
+  <div id="slidePanel" class="slide-panel">Дополнительные настройки и информация</div>
+
+  <a href="#mainContent" class="skip-link">Перейти к содержимому</a>
+
+  <!-- Прогресс-бар -->
+  <div id="progressBarContainer">
+    <div id="progressBar"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="pageHeader">
+    <div class="header-brand">Никита Шахтёр</div>
+    <!-- Кнопка "Меню" -->
+    <button id="menuButton" aria-label="Меню">Меню</button>
+    <!-- Кнопка переключения цвета -->
+    <button id="colorModeToggle" style="position: absolute; top: 3rem; right: 0.75rem;" aria-label="Переключить режим">Переключить режим</button>
+  </header>
+
+  <!-- Мобильное меню (при необходимости) -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <!-- Мобильное меню можно добавить при необходимости -->
+  </div>
+
+  <!-- TOC и поисковая строка -->
+  <div class="toc-search-container">
+    <section id="toc">
+      <h2>Содержание <button id="tocExpand" aria-label="Раскрыть содержимое">+</button></h2>
+      <ul id="tocList">
+        <li><a href="#poems">Поэзия</a></li>
+        <li><a href="#stories">Проза</a></li>
+        <li><a href="#articles">Блог "Н.Э.Ш."</a></li>
+        <li><a href="#gallery">Прочее</a></li>
+        <li><a href="#news">Партнер проекта</a></li>
+      </ul>
+    </section>
+    <div id="searchBar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242.656a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+      </svg>
+      <input type="text" id="searchInput" placeholder="Поиск" aria-label="Поиск" />
+      <button id="clearSearch" aria-label="Очистить поиск">×</button>
     </div>
+  </div>
 
-    <!-- Фиксированный заголовок -->
-    <div id="header">
-        <div id="welcome-message" tabindex="0">
-            <i class="fas fa-cube" aria-hidden="true"></i> Step3D.Viewer
-        </div>
-        <div class="header-buttons">
-            <button id="upload-button" data-tooltip="Загрузить 3D-модель" aria-label="Загрузить 3D-модель">
-                <i class="fas fa-upload" aria-hidden="true"></i> Загрузить
-            </button>
-            <!-- Выпадающее меню для дополнительных инструментов -->
-            <div class="dropdown">
-                <button class="dropbtn" data-tooltip="Инструменты" aria-label="Инструменты"><i class="fas fa-tools" aria-hidden="true"></i></button>
-                <div class="dropdown-content" role="menu">
-                    <button id="scale-up" data-tooltip="Увеличить" aria-label="Увеличить модель" role="menuitem">
-                        <i class="fas fa-search-plus" aria-hidden="true"></i> Увеличить
-                    </button>
-                    <button id="scale-down" data-tooltip="Уменьшить" aria-label="Уменьшить модель" role="menuitem">
-                        <i class="fas fa-search-minus" aria-hidden="true"></i> Уменьшить
-                    </button>
-                    <button id="rotate-left" data-tooltip="Вращать влево" aria-label="Вращать модель влево" role="menuitem">
-                        <i class="fas fa-undo" aria-hidden="true"></i> Влево
-                    </button>
-                    <button id="rotate-right" data-tooltip="Вращать вправо" aria-label="Вращать модель вправо" role="menuitem">
-                        <i class="fas fa-redo" aria-hidden="true"></i> Вправо
-                    </button>
-                    <button id="export-button" data-tooltip="Экспортировать модель" aria-label="Экспортировать модель" role="menuitem">
-                        <i class="fas fa-download" aria-hidden="true"></i> Экспорт
-                    </button>
-                </div>
-            </div>
-            <button id="theme-toggle" data-tooltip="Переключить тему" aria-label="Переключить тему">
-                <i class="fas fa-moon" aria-hidden="true"></i>
-            </button>
-            <!-- Кнопки Undo и Redo -->
-            <button id="undo-button" data-tooltip="Отменить последнее действие" aria-label="Отменить последнее действие" disabled>
-                <i class="fas fa-undo" aria-hidden="true"></i> Undo
-            </button>
-            <button id="redo-button" data-tooltip="Повторить отменённое действие" aria-label="Повторить отменённое действие" disabled>
-                <i class="fas fa-redo" aria-hidden="true"></i> Redo
-            </button>
-            <!-- Кнопка сброса вида -->
-            <button id="reset-view-button" data-tooltip="Сбросить вид" aria-label="Сбросить вид" disabled>
-                <i class="fas fa-sync-alt" aria-hidden="true"></i> Сбросить Вид
-            </button>
-        </div>
-    </div>
-
-    <!-- Панель управления цветом и настройками -->
-    <div id="color-panel" aria-label="Панель управления цветом">
-        <label for="color-picker" aria-hidden="true"><i class="fas fa-palette" aria-hidden="true"></i></label>
-        <input type="color" id="color-picker" value="#808080" aria-label="Выбор цвета модели">
-        <div id="color-preview" title="Предварительный просмотр цвета" aria-hidden="true"></div>
-        <!-- Выбор фона сцены -->
-        <label for="background-selector" style="margin-left: var(--small-spacing);" aria-hidden="true"><i class="fas fa-layer-group" aria-hidden="true"></i></label>
-        <select id="background-selector" aria-label="Выбор фона сцены" style="margin-left: var(--small-spacing);">
-            <option value="#d3d3d3">Светлый</option>
-            <option value="#1e1e1e">Темный</option>
-            <option value="#ffffff">Белый</option>
-            <option value="#000000">Черный</option>
-        </select>
-        <!-- Настройка освещения -->
-        <div id="lighting-controls" style="margin-left: var(--small-spacing);" aria-label="Настройка освещения">
-            <label for="ambient-light"><i class="fas fa-lightbulb" aria-hidden="true"></i> Амбиент</label>
-            <input type="range" id="ambient-light" min="0" max="2" step="0.1" value="0.8" aria-label="Настройка амбиентного освещения">
-            <label for="directional-light"><i class="fas fa-sun" aria-hidden="true"></i> Направленное</label>
-            <input type="range" id="directional-light" min="0" max="2" step="0.1" value="0.5" aria-label="Настройка направленного освещения">
-        </div>
-        <!-- Сохранение и загрузка вида -->
-        <button id="save-view-button" style="margin-left: var(--small-spacing); display: none;" data-tooltip="Сохранить текущий вид" aria-label="Сохранить текущий вид">
-            <i class="fas fa-save" aria-hidden="true"></i> Сохранить Вид
-        </button>
-        <button id="load-view-button" style="margin-left: var(--small-spacing); display: none;" data-tooltip="Загрузить сохранённый вид" aria-label="Загрузить сохранённый вид">
-            <i class="fas fa-undo" aria-hidden="true"></i> Загрузить Вид
-        </button>
-    </div>
-
-    <!-- Информационная панель о модели -->
-    <div id="model-info" class="hide" aria-live="polite">
-        <div class="info-item">
-            <img src="https://img.icons8.com/ios-filled/50/000000/height.png" alt="Высота">
-            <span id="dimensions">Высота: - мм</span>
-        </div>
-        <div class="info-item">
-            <img src="https://img.icons8.com/ios-filled/50/000000/triangle-stroked.png" alt="Полигонов">
-            <span id="polygons">Полигонов: - шт</span>
-        </div>
-        <button id="toggle-info" aria-label="Скрыть информационную панель"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
-    </div>
-
-    <!-- Спиннер загрузки -->
-    <div id="loading-spinner" aria-hidden="true"></div>
-
-    <!-- Прогресс-бар загрузки -->
-    <div id="progress-bar" aria-hidden="true"></div>
-
-    <!-- Модальное окно для ошибок -->
-    <div id="error-modal" role="alertdialog" aria-modal="true" aria-labelledby="error-title">
-        <div id="error-content">
-            <button class="close-modal" id="close-error" aria-label="Закрыть">&times;</button>
-            <h2 id="error-title">Ошибка</h2>
-            <p id="error-message">Произошла ошибка.</p>
-            <button class="confirm-button no" id="close-error-button">Закрыть</button>
-        </div>
-    </div>
-
-    <!-- Подтверждение сброса вида -->
-    <div id="reset-confirmation" aria-labelledby="reset-confirm-title" role="dialog">
-        <h2 id="reset-confirm-title">Сбросить вид</h2>
-        <p>Вы уверены, что хотите сбросить вид к исходному состоянию?</p>
-        <div style="display: flex; gap: var(--small-spacing); justify-content: center;">
-            <button class="confirm-button yes" id="confirm-reset">Да</button>
-            <button class="confirm-button no" id="cancel-reset">Нет</button>
-        </div>
-    </div>
-
-    <!-- Кнопка загрузки файла -->
-    <input type="file" id="file-input" accept=".stl,.obj,.stp,.step,.gltf,.glb,.fbx" aria-hidden="true" />
-
-    <!-- Контейнер для трехмерной сцены -->
-    <canvas id="viewer" tabindex="0" aria-label="3D Просмотрщик"></canvas>
-
-    <!-- Подвал -->
-    <footer>
-        <p>&copy; 2024 Step3D.Viewer. Все права защищены.</p>
+  <!-- Основной контент -->
+  <main class="container" id="mainContent" role="main" aria-live="polite">
+    <!-- Секция "О проекте" -->
+    <section id="featured">
+      <h2>О проекте</h2>
+      <p class="project-desc">
+        Проект «Никита Шахтёр — Официальный сайт» создан для того, чтобы познакомить вас с творчеством современного писателя, чьи произведения отражают искренность, глубокие переживания и особый взгляд на жизнь. Здесь собраны стихи, рассказы и статьи, каждая из которых несёт в себе частичку души автора.
+      </p>
+      <p class="project-desc">
+        Цель проекта – не только демонстрация литературных работ, но и создание пространства для общения с читателями, обмена идеями и вдохновения. Сайт предлагает удобную навигацию по различным жанрам, позволяя легко находить интересующий контент и следить за новостями.
+      </p>
+      <button id="aboutProjectToggle" class="toggle-content">Подробнее</button>
+      <div id="aboutProjectExtra" style="display: none; margin-top: 1rem;">
         <p>
-            <a href="#">Политика конфиденциальности</a> |
-            <a href="#">Контакты</a> |
-            <a href="#">О проекте</a>
+          Никита Шахтёр — современный московский писатель, родившийся в СССР в 1989 году. Его творчество охватывает поэзию, прозу и статьи. Завершив обучение по специальности инженер-механик, он нашёл своё призвание в литературе, сумев передать глубокие переживания и искренние эмоции.
         </p>
-        <button id="open-tour-button" style="background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.9em;">Начать Тур</button>
-    </footer>
+        <p>
+          Творчество включает 7 рассказов и один роман, а его стихи и проза находят отклик у широкой аудитории. Сайт создан как место общения и вдохновения для читателей.
+        </p>
+      </div>
+    </section>
 
-    <!-- Контейнер для уведомлений (Toasts) -->
-    <div id="toast-container" aria-live="assertive" aria-atomic="true"></div>
+    <!-- Секция "Поэзия" -->
+    <section id="poems">
+      <h2>Поэзия</h2>
+      <!-- Первый стих: вместо служебных строк выводим полный текст стиха -->
+      <article class="poem" id="poem1">
+        <div class="poem-text">
+          Здесь размещается полный текст стиха, который будет отображаться целиком без служебных данных.
+        </div>
+        <!-- Блок "Поэма '33'" с треугольными стрелками для переключения содержимого -->
+        <div class="logo-circle" aria-label="Блок поэмы" role="group">
+          <div>Поэма "33"</div>
+          <button class="inner-read-btn">Читать</button>
+          <button class="logo-arrow left" aria-label="Предыдущий вариант">&#9664;</button>
+          <button class="logo-arrow right" aria-label="Следующий вариант">&#9654;</button>
+        </div>
+      </article>
 
-    <!-- Подключение Shepherd.js через отдельный <script> тег с версией 11.1.3 -->
-    <script src="https://cdn.jsdelivr.net/npm/shepherd.js@11.1.3/dist/js/shepherd.min.js" crossorigin="anonymous"></script>
+      <!-- Второй стих: удалены кнопка "Читать", блок с текстом и "Поделиться" -->
+      <article class="poem" id="poem2">
+        <div class="poem-title">Микропоэма «Чугунные люки»</div>
+        <div class="poem-year">2018 год, Ховрино (Москва)</div>
+        <div class="reading-time">Время чтения: ~30 сек</div>
+        <div class="logo-circle">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="44" height="44" stroke="black" stroke-width="4" fill="white" />
+          </svg>
+        </div>
+      </article>
+    </section>
 
-    <!-- Основной скрипт с типом module -->
-    <script type="module">
-        import * as THREE from 'three';
-        import { OrbitControls } from 'https://unpkg.com/three@0.152.0/examples/jsm/controls/OrbitControls.js';
-        import { STLLoader } from 'https://unpkg.com/three@0.152.0/examples/jsm/loaders/STLLoader.js';
-        import { OBJLoader } from 'https://unpkg.com/three@0.152.0/examples/jsm/loaders/OBJLoader.js';
-        import { GLTFLoader } from 'https://unpkg.com/three@0.152.0/examples/jsm/loaders/GLTFLoader.js';
-        import { FBXLoader } from 'https://unpkg.com/three@0.152.0/examples/jsm/loaders/FBXLoader.js';
-        import { GLTFExporter } from 'https://unpkg.com/three@0.152.0/examples/jsm/exporters/GLTFExporter.js';
-        // Shepherd.js уже подключен через <script> тег и доступен глобально как Shepherd
+    <!-- Секция "Проза" -->
+    <section id="stories">
+      <h2>Проза</h2>
+      <article class="story">
+        <div class="story-logo">Проза</div>
+        <h3 class="story-title">Повесть о программисте</h3>
+        <button class="story-read-button" id="storyProgrammer">Читать</button>
+      </article>
+    </section>
 
-        // Элементы интерфейса
-        const welcome = document.getElementById('welcome-message');
-        const loadingSpinner = document.getElementById('loading-spinner');
-        const progressBar = document.getElementById('progress-bar');
-        const errorModal = document.getElementById('error-modal');
-        const errorMessage = document.getElementById('error-message');
-        const closeErrorBtn = document.getElementById('close-error');
-        const closeErrorButton = document.getElementById('close-error-button');
-        const header = document.getElementById('header');
+    <!-- Секция "Поэтический сборник '69+1'" с виджетом доната и дополнительными элементами -->
+    <section id="collection">
+      <div class="collection-container" style="display: flex; align-items: center; gap: 1rem;">
+        <!-- Виджет доната -->
+        <div class="donation-widget">
+          <button class="donation-decrease">–</button>
+          <div class="donation-circle">
+            <span class="donation-amount">500</span>
+            <div class="donation-label">Задонатить</div>
+          </div>
+          <button class="donation-increase">+</button>
+          <div class="donation-currency">рублей</div>
+        </div>
+        <!-- Прямоугольник сборника с дополнительными элементами -->
+        <div style="position: relative; display: inline-block;">
+          <button id="collectionPrev" style="position: absolute; left: -2rem; top: 50%; transform: translateY(-50%); border: none; background: none; font-size: 2rem; cursor: pointer;">&#9664;</button>
+          <div class="book-block" id="bookBlock">
+            <!-- Верхняя часть: Заголовок и блок с тремя кнопками -->
+            <div class="book-header">
+              <h3 class="book-title">Поэтический сборник "69+1"</h3>
+            </div>
+            <!-- Блок с кнопками под верхней линией -->
+            <div class="book-options">
+              <button class="option-btn">Проза</button>
+              <button class="option-btn">Стихи</button>
+              <button class="option-btn">Статьи</button>
+            </div>
+            <!-- Блок с кнопкой "Читать" над нижней линией -->
+            <div class="read-button-container">
+              <button class="read-btn">Читать</button>
+            </div>
+            <div class="book-action">
+              <button class="book-btn">Купить</button>
+            </div>
+            <div class="book-price">2 970 рублей</div>
+            <hr class="divider">
+            <div class="announcement-header">
+              <h4 class="announcement-title">
+                Сделай мир лучше! Пожертвуй <span id="donationText">500</span> рублей на развитие проекта. Внеси свой вклад в развитие отечественной литературы!
+              </h4>
+            </div>
+            <div class="announcement-action">
+              <button class="announcement-btn">Оплатить</button>
+            </div>
+          </div>
+          <button id="collectionNext" style="position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); border: none; background: none; font-size: 2rem; cursor: pointer;">&#9654;</button>
+        </div>
+      </div>
+    </section>
 
-        // Подтверждение сброса вида
-        const resetConfirmation = document.getElementById('reset-confirmation');
-        const confirmReset = document.getElementById('confirm-reset');
-        const cancelReset = document.getElementById('cancel-reset');
+    <!-- Секция "Блог 'Н.Э.Ш.'" -->
+    <section id="articles">
+      <h2>Блог "Н.Э.Ш."</h2>
+      <article class="article-item">
+        <div class="article-logo">ТОП 50</div>
+        <h3 class="article-title">ТОП 50 книг всех времен и народов</h3>
+        <button class="article-read-button">Читать</button>
+      </article>
+    </section>
 
-        // Информационные элементы
-        const dimensionsElem = document.getElementById('dimensions');
-        const polygonsElem = document.getElementById('polygons');
-        const modelInfo = document.getElementById('model-info');
-        const toggleInfoButton = document.getElementById('toggle-info');
+    <!-- Секция "Прочее" – оставлен только блок сборника -->
+    <section id="gallery">
+      <h2>Прочее</h2>
+      <div class="extra-book-block">
+        <!-- Вращающийся элемент "69" перемещён ближе к тексту сборника -->
+        <div class="rotating-digits" aria-label="Вращающиеся цифры">69</div>
+        <div style="display: inline-block; vertical-align: middle;">
+          <p style="font-weight: bold; font-size: 1.125rem;">Поэтический сборник "69+1"</p>
+          <p><button class="book-btn" style="padding: 0.5rem 1rem; font-size: 1rem;">Купить</button></p>
+          <p style="font-size: 1rem; font-weight: bold;">2 970 рублей</p>
+        </div>
+      </div>
+    </section>
 
-        // Панель управления цветом и настройками
-        const colorPanel = document.getElementById('color-panel');
-        const colorPicker = document.getElementById('color-picker');
-        const backgroundSelector = document.getElementById('background-selector');
-        const lightingControls = document.getElementById('lighting-controls');
-        const ambientLightControl = document.getElementById('ambient-light');
-        const directionalLightControl = document.getElementById('directional-light');
-        const saveViewButton = document.getElementById('save-view-button');
-        const loadViewButton = document.getElementById('load-view-button');
+    <!-- Секция "Партнер проекта" -->
+    <section id="news">
+      <h2>Партнер проекта</h2>
+      <div id="newsContainer">
+        <!-- Динамически загружаемые новости -->
+      </div>
+      <div id="newsLoader" class="loader"></div>
+      <div class="partner-links" style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem;">
+        <a href="https://t.me/STEP_3D_Lab" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width: 2rem; height: 2rem;">
+        </a>
+        <button id="loadMoreBtn" class="load-more">Перейти на сайт</button>
+        <a href="#">
+          <img src="https://259506.selcdn.ru/sites-static/site953902/096387b6-44c2-437d-90cd-16d7fd61076e/096387b6-44c2-437d-90cd-16d7fd61076e-10592150.png" alt="Логотип" style="width: 2rem; height: 2rem;">
+        </a>
+      </div>
+      <p style="font-size: 1rem; text-align: center; margin-top: 1rem;">
+        Step3D - AI-сервис для заказа 3D-услуг (моделирование, сканирование, печать)
+      </p>
+    </section>
 
-        // Кнопки загрузки файла
-        const uploadButton = document.getElementById('upload-button');
-        const fileInput = document.getElementById('file-input');
+    <!-- Секция "Донаты" -->
+    <section id="donates">
+      <h3 style="font-size: 1.5rem; color: #000;">Поддержите автора!</h3>
+      <button class="donate-button">Сделайте вклад</button>
+    </section>
 
-        // Undo/Redo кнопки (добавлены кнопки в HTML)
-        const undoButton = document.getElementById('undo-button');
-        const redoButton = document.getElementById('redo-button');
+    <p>© 1989-2025 Никита Шахтёр.</p>
+  </main>
 
-        // Выпадающее меню и инструменты
-        const scaleUpButton = document.getElementById('scale-up');
-        const scaleDownButton = document.getElementById('scale-down');
-        const rotateLeftButton = document.getElementById('rotate-left');
-        const rotateRightButton = document.getElementById('rotate-right');
-        const exportButton = document.getElementById('export-button');
+  <!-- Модальное окно "Подробнее об авторе" -->
+  <div id="aboutModal" class="modal" role="dialog" aria-labelledby="aboutModalTitle">
+    <div class="modal-content">
+      <span id="aboutModalClose" class="modal-close" tabindex="0" aria-label="Закрыть">&times;</span>
+      <div id="aboutModalText">
+        <p>Никита Шахтёр — современный московский писатель. Родился в СССР, 1989 год.</p>
+        <p>Образование — инженер-механик. Завершив аспирантуру, увлёкся коммерческой недвижимостью.</p>
+        <p>Творчество включает 7 рассказов и один роман:</p>
+        <ul>
+          <li>Повесть о программисте</li>
+          <li>Совхоз имени В.И. Ленина</li>
+          <li>Фирма веников не вяжет</li>
+          <li>Маша</li>
+          <li>Шахматный этюд</li>
+          <li>Уроки моделирования</li>
+          <li>За DVD</li>
+        </ul>
+        <p>Роман “Za деньги”</p>
+        <p>После завершения всех проектов, Никита поклялся больше не писать художественный текст.</p>
+      </div>
+    </div>
+  </div>
 
-        const themeToggle = document.getElementById('theme-toggle');
+  <footer id="contacts">
+    <nav>
+      <a href="#">Политика</a>
+      <a href="#">Оферта</a>
+      <a href="#">Согласие на обработку персональных данных</a>
+      <a href="#">ТОП 50 Фильмов</a>
+      <a href="#">ТОП 50 Книг</a>
+      <a href="#">Step3D.tech</a>
+    </nav>
+    <p>
+      По вопросам сотрудничества:<br>
+      Email: <a href="mailto:example@example.com">example@example.com</a>
+    </p>
+  </footer>
 
-        // Кнопка сброса вида
-        const resetViewButton = document.getElementById('reset-view-button');
+  <button id="backToTop" aria-label="Наверх">Наверх</button>
 
-        // Кнопка открытия тура
-        const openTourButton = document.getElementById('open-tour-button');
+  <!-- Подключение Swiper и GSAP -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js" defer></script>
 
-        // Цветовой предварительный просмотр
-        const colorPreview = document.getElementById('color-preview');
+  <!-- Основной скрипт -->
+  <script defer>
+    // Переключение цветового режима
+    const colorModeToggle = document.getElementById('colorModeToggle');
+    colorModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      alert(document.body.classList.contains('dark') ? 'Тёмный режим активирован' : 'Светлый режим активирован');
+    });
 
-        // Канвас для просмотра
-        const canvas = document.getElementById('viewer');
-        const renderer3D = new THREE.WebGLRenderer({ canvas, antialias: true });
-        renderer3D.setSize(window.innerWidth, window.innerHeight);
-        renderer3D.setPixelRatio(window.devicePixelRatio || 1); // Исправлена опечатка
+    // Кнопка "Меню"
+    const menuButton = document.getElementById('menuButton');
+    menuButton.addEventListener('click', () => {
+      alert('Меню открыто (здесь можно разместить навигацию)');
+    });
 
-        const scene3D = new THREE.Scene();
-        scene3D.background = new THREE.Color(0xd3d3d3); // Светло-серый фон
+    // Кнопка "Наверх"
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = 'block';
+        document.body.classList.add('scrolled');
+        backToTopBtn.classList.add('scrolled-pulse');
+      } else {
+        backToTopBtn.style.display = 'none';
+        document.body.classList.remove('scrolled');
+        backToTopBtn.classList.remove('scrolled-pulse');
+      }
+      const header = document.getElementById('pageHeader');
+      if (window.scrollY > 100) header.classList.add('shrink');
+      else header.classList.remove('shrink');
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.getElementById('progressBar').style.width = scrollPercent + '%';
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-        const camera3D = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera3D.position.set(0, 0, 5);
+    // Поисковая строка
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const poems = document.querySelectorAll('.poem');
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      poems.forEach(poem => {
+        const text = poem.innerText.toLowerCase();
+        poem.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      poems.forEach(poem => poem.style.display = 'block');
+    });
 
-        const controls = new OrbitControls(camera3D, renderer3D.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-        controls.target.set(0, 0, 0); // Устанавливаем целевую точку в центр
-        controls.update();
-
-        // Освещение
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-        scene3D.add(ambientLight);
-
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        directionalLight.position.set(10, 10, 10);
-        scene3D.add(directionalLight);
-
-        let currentModel = null;
-        let isAutoRotate = false;
-        let initialCubeGroup = null; // Группа для кубика Рубика
-
-        // Объявление переменной selectedColor
-        let selectedColor = '#808080'; // Начальный цвет - серый
-
-        // История трансформаций для Undo/Redo
-        let transformHistory = [];
-        let historyStep = -1;
-
-        // Темная тема
-        function toggleThemeFunction() {
-            document.body.classList.toggle('dark-mode');
-            // Сохранение состояния темы
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDark);
-            // Обновление иконки
-            if (isDark) {
-                themeToggle.innerHTML = '<i class="fas fa-sun" aria-hidden="true"></i>';
-                themeToggle.setAttribute('aria-label', 'Переключить на светлую тему');
-            } else {
-                themeToggle.innerHTML = '<i class="fas fa-moon" aria-hidden="true"></i>';
-                themeToggle.setAttribute('aria-label', 'Переключить на темную тему');
-            }
-            // Показываем уведомление
-            showToast(isDark ? 'Темный режим включен' : 'Светлый режим включен');
+    // Раскрытие блока "Подробнее" в "О проекте"
+    const aboutProjectToggle = document.getElementById('aboutProjectToggle');
+    const aboutProjectExtra = document.getElementById('aboutProjectExtra');
+    if (aboutProjectToggle) {
+      aboutProjectToggle.addEventListener('click', () => {
+        if (aboutProjectExtra.style.display === "none") {
+          aboutProjectExtra.style.display = "block";
+          aboutProjectToggle.textContent = "Свернуть";
+        } else {
+          aboutProjectExtra.style.display = "none";
+          aboutProjectToggle.textContent = "Подробнее";
         }
+      });
+    }
 
-        // Загрузка темы при старте
-        document.addEventListener('DOMContentLoaded', () => {
-            const darkMode = localStorage.getItem('darkMode') === 'true';
-            if (darkMode) {
-                document.body.classList.add('dark-mode');
-                themeToggle.innerHTML = '<i class="fas fa-sun" aria-hidden="true"></i>';
-                themeToggle.setAttribute('aria-label', 'Переключить на светлую тему');
-            } else {
-                themeToggle.innerHTML = '<i class="fas fa-moon" aria-hidden="true"></i>';
-                themeToggle.setAttribute('aria-label', 'Переключить на темную тему');
-            }
+    // Виджет доната
+    const donationDecrease = document.querySelector('.donation-decrease');
+    const donationIncrease = document.querySelector('.donation-increase');
+    const donationAmountElem = document.querySelector('.donation-amount');
+    const donationTextElem = document.getElementById('donationText');
+    let donationAmount = 500;
+    donationDecrease.addEventListener('click', () => {
+      donationAmount = Math.max(100, donationAmount - 100);
+      donationAmountElem.textContent = donationAmount;
+      donationTextElem.textContent = donationAmount;
+    });
+    donationIncrease.addEventListener('click', () => {
+      donationAmount += 100;
+      donationAmountElem.textContent = donationAmount;
+      donationTextElem.textContent = donationAmount;
+    });
 
-            // Добавление фокуса для улучшения навигации
-            uploadButton.setAttribute('tabindex', '0');
-            themeToggle.setAttribute('tabindex', '0');
-            colorPicker.setAttribute('tabindex', '0');
-            backgroundSelector.setAttribute('tabindex', '0');
-            ambientLightControl.setAttribute('tabindex', '0');
-            directionalLightControl.setAttribute('tabindex', '0');
-            saveViewButton.setAttribute('tabindex', '0');
-            loadViewButton.setAttribute('tabindex', '0');
-            scaleUpButton.setAttribute('tabindex', '0');
-            scaleDownButton.setAttribute('tabindex', '0');
-            rotateLeftButton.setAttribute('tabindex', '0');
-            rotateRightButton.setAttribute('tabindex', '0');
-            undoButton.setAttribute('tabindex', '0');
-            redoButton.setAttribute('tabindex', '0');
-            toggleInfoButton.setAttribute('tabindex', '0');
-            exportButton.setAttribute('tabindex', '0');
-            resetViewButton.setAttribute('tabindex', '0');
-            openTourButton.setAttribute('tabindex', '0');
+    // Переключение информации в блоке сборника
+    const collectionItems = [
+      {
+        title: 'Поэтический сборник "69+1"',
+        btnText: 'Купить',
+        price: '2 970 рублей',
+        announcement: 'Сделай мир лучше! Пожертвуй <span id="donationText">' + donationAmount + '</span> рублей на развитие проекта. Внеси свой вклад в развитие отечественной литературы!'
+      },
+      {
+        title: 'Поэтический сборник "70+1"',
+        btnText: 'Купить',
+        price: '3 500 рублей',
+        announcement: 'Новый сборник! Пожертвуй <span id="donationText">' + donationAmount + '</span> рублей и поддержи развитие отечественной литературы!'
+      }
+    ];
+    let currentCollectionIndex = 0;
+    const bookBlock = document.getElementById('bookBlock');
+    const collectionPrev = document.getElementById('collectionPrev');
+    const collectionNext = document.getElementById('collectionNext');
+    function updateCollection() {
+      const item = collectionItems[currentCollectionIndex];
+      document.querySelector('#bookBlock .book-title').textContent = item.title;
+      document.querySelector('#bookBlock .book-btn').textContent = item.btnText;
+      document.querySelector('#bookBlock .book-price').textContent = item.price;
+      document.querySelector('#bookBlock .announcement-title').innerHTML = item.announcement;
+    }
+    if (collectionPrev && collectionNext) {
+      collectionPrev.addEventListener('click', () => {
+        currentCollectionIndex = (currentCollectionIndex - 1 + collectionItems.length) % collectionItems.length;
+        updateCollection();
+      });
+      collectionNext.addEventListener('click', () => {
+        currentCollectionIndex = (currentCollectionIndex + 1) % collectionItems.length;
+        updateCollection();
+      });
+    }
 
-            // Инициализация интерактивного тура
-            initializeTour();
+    // Раскрытие древовидного списка в TOC
+    const tocExpand = document.getElementById('tocExpand');
+    const tocList = document.getElementById('tocList');
+    tocExpand.addEventListener('click', () => {
+      if (tocList.style.display === 'none' || tocList.style.display === '') {
+        tocList.style.display = 'block';
+        tocExpand.textContent = '–';
+      } else {
+        tocList.style.display = 'none';
+        tocExpand.textContent = '+';
+      }
+    });
 
-            // Запуск начальной анимации кубика Рубика
-            initInitialCubeAnimation();
-        });
-
-        // Функция для отображения спиннера
-        function showLoading(show) {
-            loadingSpinner.style.display = show ? 'block' : 'none';
+    // Динамическая загрузка новостей
+    let newsData = [
+      { title: "Пост 1 из STEP_3D_Lab", date: "01.04.2023", excerpt: "Описание поста 1...", link: "#" },
+      { title: "Пост 2 из STEP_3D_Lab", date: "02.04.2023", excerpt: "Описание поста 2...", link: "#" },
+      { title: "Пост 3 из STEP_3D_Lab", date: "03.04.2023", excerpt: "Описание поста 3...", link: "#" },
+      { title: "Пост 4 из STEP_3D_Lab", date: "04.04.2023", excerpt: "Описание поста 4...", link: "#" },
+      { title: "Пост 5 из STEP_3D_Lab", date: "05.04.2023", excerpt: "Описание поста 5...", link: "#" }
+    ];
+    let newsIndex = 0;
+    const newsBatchSize = 3;
+    function loadMoreNews() {
+      const newsContainer = document.getElementById('newsContainer');
+      const loader = document.getElementById('newsLoader');
+      loader.style.display = 'block';
+      setTimeout(() => {
+        for (let i = newsIndex; i < newsIndex + newsBatchSize && i < newsData.length; i++) {
+          const item = newsData[i];
+          const article = document.createElement('article');
+          article.classList.add('news-item');
+          article.innerHTML = `
+            <h3>${item.title}</h3>
+            <p style="font-size: 0.9rem; color: #666;">${item.date}</p>
+            <p>${item.excerpt}</p>
+            <a href="${item.link}">Читать подробнее</a>
+          `;
+          newsContainer.appendChild(article);
         }
-
-        // Функция для отображения прогресса загрузки
-        function showProgress(show) {
-            progressBar.style.display = show ? 'block' : 'none';
-            progressBar.style.width = '0%';
+        newsIndex += newsBatchSize;
+        loader.style.display = 'none';
+        if (newsIndex >= newsData.length) {
+          document.getElementById('loadMoreBtn').style.display = 'none';
         }
+      }, 1000);
+    }
+    window.addEventListener('DOMContentLoaded', loadMoreNews);
+    document.getElementById('loadMoreBtn').addEventListener('click', loadMoreNews);
 
-        function updateProgress(percent) {
-            progressBar.style.width = percent + '%';
+    // Инициализация Swiper
+    window.addEventListener('DOMContentLoaded', () => {
+      new Swiper('.swiper-container', {
+        loop: true,
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        autoplay: { delay: 3000, disableOnInteraction: false },
+        lazy: true
+      });
+    });
+
+    // Регистрация Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => console.log('Service Worker зарегистрирован с scope:', registration.scope))
+          .catch(error => console.error('Ошибка регистрации Service Worker:', error));
+      });
+    }
+
+    // Push-уведомления (пример)
+    if ('Notification' in window && 'serviceWorker' in navigator) {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          navigator.serviceWorker.ready.then(registration => {
+            const vapidPublicKey = '<YOUR_PUBLIC_VAPID_KEY>';
+            const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);
+            registration.pushManager.subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: convertedVapidKey
+            }).then(subscription => {
+              console.log('Пользователь подписан на уведомления:', subscription);
+            }).catch(error => { console.error('Ошибка подписки:', error); });
+          });
         }
-
-        // Функция для отображения ошибок
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorModal.style.display = 'flex';
-            showToast(`Ошибка: ${message}`);
-        }
-
-        // Функция для обновления информационной панели
-        function updateModelInfo(object, polygonCount) {
-            // Габаритные размеры в миллиметрах
-            const box = new THREE.Box3().setFromObject(object);
-            const size = new THREE.Vector3();
-            box.getSize(size);
-            // Предполагается, что исходные единицы измерения модели - метры
-            const sizeMM = size.clone().multiplyScalar(1000); // Перевод в мм
-
-            // Определение высоты, ширины и длины
-            const height = sizeMM.y;
-            const width = sizeMM.x;
-            const length = sizeMM.z;
-
-            dimensionsElem.innerHTML = `
-                Высота: ${height.toFixed(2)} мм<br>
-                Ширина: ${width.toFixed(2)} мм<br>
-                Длина: ${length.toFixed(2)} мм
-            `;
-
-            // Форматирование количества полигонов с пробелами и добавлением "шт"
-            polygonsElem.textContent = `Полигонов: ${polygonCount.toLocaleString('ru-RU')} шт`;
-
-            // Отображение информационной панели
-            showModelInfo(true);
-        }
-
-        /**
-         * Функция для загрузки модели
-         * @param {File} file - Файл модели
-         */
-        async function loadModel(file) {
-            showLoading(true);
-            showProgress(true);
-            try {
-                const filename = file.name;
-                const extension = filename.split('.').pop().toLowerCase();
-                const reader = new FileReader();
-
-                const fileContent = await new Promise((resolve, reject) => {
-                    reader.onload = () => resolve(reader.result);
-                    reader.onerror = () => reject(new Error('Ошибка чтения файла'));
-                    if (['stl', 'gltf', 'glb', 'fbx'].includes(extension)) {
-                        reader.readAsArrayBuffer(file);
-                    } else if (['obj'].includes(extension)) {
-                        reader.readAsText(file);
-                    } else {
-                        reject(new Error('Неподдерживаемый формат файла.'));
-                    }
-                });
-
-                // Удаление предыдущей модели
-                if (currentModel) {
-                    scene3D.remove(currentModel);
-                    if (currentModel.geometry) currentModel.geometry.dispose();
-                    if (currentModel.material) currentModel.material.dispose();
-                    currentModel = null;
-                }
-
-                // Удаление начальной анимации кубика Рубика
-                if (initialCubeGroup) {
-                    scene3D.remove(initialCubeGroup);
-                    initialCubeGroup = null;
-                }
-
-                let object;
-
-                if (extension === 'stl') {
-                    const loader = new STLLoader();
-                    const geometry = loader.parse(fileContent);
-                    geometry.computeVertexNormals();
-                    const material = new THREE.MeshStandardMaterial({ color: selectedColor, metalness: 0.5, roughness: 0.5 });
-                    object = new THREE.Mesh(geometry, material);
-                } else if (extension === 'obj') {
-                    const loader = new OBJLoader();
-                    object = loader.parse(fileContent);
-                    object.traverse((child) => {
-                        if (child.isMesh) {
-                            child.material = new THREE.MeshStandardMaterial({ color: selectedColor, metalness: 0.5, roughness: 0.5 });
-                        }
-                    });
-                } else if (extension === 'gltf' || extension === 'glb') {
-                    const loader = new GLTFLoader();
-                    const gltf = await loader.parseAsync(fileContent, '');
-                    object = gltf.scene;
-                } else if (extension === 'fbx') {
-                    const loader = new FBXLoader();
-                    // FBXLoader не поддерживает parseAsync, поэтому оборачиваем parse в Promise
-                    object = await new Promise((resolve, reject) => {
-                        try {
-                            const parsedObject = loader.parse(fileContent, '');
-                            resolve(parsedObject);
-                        } catch (error) {
-                            reject(error);
-                        }
-                    });
-                } else {
-                    throw new Error('Неподдерживаемый формат файла.');
-                }
-
-                // Центрирование и масштабирование модели
-                const box = new THREE.Box3().setFromObject(object);
-                const size = new THREE.Vector3();
-                box.getSize(size);
-                const maxDim = Math.max(size.x, size.y, size.z);
-                const scale = 2 / maxDim;
-                object.scale.set(scale, scale, scale);
-
-                box.setFromObject(object);
-                const center = new THREE.Vector3();
-                box.getCenter(center);
-                object.position.set(-center.x, -center.y, -center.z);
-
-                scene3D.add(object);
-                currentModel = object;
-
-                // Расчет количества полигонов
-                let polygonCount = 0;
-                object.traverse((child) => {
-                    if (child.isMesh) {
-                        const geometry = child.geometry;
-                        if (geometry.index) {
-                            polygonCount += geometry.index.count / 3;
-                        } else {
-                            polygonCount += geometry.attributes.position.count / 3;
-                        }
-                    }
-                });
-
-                // Обновление информационной панели
-                updateModelInfo(object, polygonCount);
-
-                // Перемещение и позиционирование элементов после загрузки
-                header.classList.add('loaded');
-
-                // Отображение панели управления цветом (цветовой селектор)
-                colorPanel.style.display = 'flex';
-
-                // Отображение дополнительных кнопок
-                saveViewButton.style.display = 'flex';
-                loadViewButton.style.display = 'flex';
-                undoButton.style.display = 'flex';
-                redoButton.style.display = 'flex';
-                exportButton.style.display = 'flex';
-                resetViewButton.style.display = 'flex';
-                resetViewButton.disabled = false;
-
-                // Обновление целевой точки OrbitControls
-                controls.target.set(0, 0, 0); // Так как модель центрирована в (0,0,0)
-                controls.update();
-
-                // Включение автоматического вращения
-                isAutoRotate = true;
-
-                // Сохранение текущего состояния для истории
-                saveHistory();
-
-                // Показываем уведомление об успешной загрузке
-                showToast('Модель успешно загружена!');
-            } catch (error) {
-                console.error(error);
-                showError(error.message);
-            } finally {
-                showLoading(false);
-                showProgress(false);
-            }
-        }
-
-        // Обработка загрузки файла через кнопку
-        uploadButton.addEventListener('click', () => {
-            fileInput.click();
-        });
-
-        // Обработка загрузки файла через drag-and-drop
-        const dropZone = document.getElementById('drop-zone');
-
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('active');
-        });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('active');
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('active');
-            const file = e.dataTransfer.files[0];
-            if (file) {
-                loadModel(file);
-            }
-        });
-
-        // Обработка загрузки файла через клавиатуру (Enter или Space)
-        dropZone.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                fileInput.click();
-            }
-        });
-
-        fileInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                console.log('Файл выбран:', file.name);
-                loadModel(file);
-                // Сброс значения input для возможности загрузки того же файла снова
-                fileInput.value = '';
-            } else {
-                console.log('Файл не выбран');
-            }
-        });
-
-        // Обработчик выбора цвета
-        colorPicker.addEventListener('input', (event) => {
-            selectedColor = event.target.value;
-            colorPreview.style.backgroundColor = selectedColor;
-            updateModelColor();
-            showToast('Цвет модели обновлен');
-        });
-
-        // Установка первоначального цвета предварительного просмотра
-        colorPreview.style.backgroundColor = selectedColor;
-
-        // Обработчик клика на предварительный просмотр цвета
-        colorPreview.addEventListener('click', () => {
-            colorPicker.click();
-        });
-
-        // Функция обновления цвета модели
-        function updateModelColor() {
-            if (currentModel) {
-                currentModel.traverse((child) => {
-                    if (child.isMesh) {
-                        child.material.color.set(selectedColor);
-                    }
-                });
-            }
-        }
-
-        // Обработка изменения размера окна
-        window.addEventListener('resize', () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            renderer3D.setSize(width, height);
-            camera3D.aspect = width / height;
-            camera3D.updateProjectionMatrix();
-        });
-
-        // Остановка вращения модели при взаимодействии
-        controls.addEventListener('start', () => {
-            isAutoRotate = false;
-        });
-
-        // Функция отображения информационной панели
-        function showModelInfo(show) {
-            if (show) {
-                modelInfo.classList.remove('hide');
-                modelInfo.classList.add('show');
-            } else {
-                modelInfo.classList.remove('show');
-                modelInfo.classList.add('hide');
-            }
-        }
-
-        // Переключение отображения информационной панели
-        toggleInfoButton.addEventListener('click', () => {
-            if (modelInfo.classList.contains('show')) {
-                showModelInfo(false);
-                toggleInfoButton.innerHTML = '<i class="fas fa-chevron-down" aria-hidden="true"></i>';
-                toggleInfoButton.setAttribute('aria-label', 'Показать информационную панель');
-            } else {
-                showModelInfo(true);
-                toggleInfoButton.innerHTML = '<i class="fas fa-chevron-up" aria-hidden="true"></i>';
-                toggleInfoButton.setAttribute('aria-label', 'Скрыть информационную панель');
-            }
-        });
-
-        // Обработчики закрытия модального окна ошибок
-        closeErrorBtn.addEventListener('click', () => {
-            errorModal.style.display = 'none';
-        });
-
-        closeErrorButton.addEventListener('click', () => {
-            errorModal.style.display = 'none';
-        });
-
-        // Управление фоном сцены
-        backgroundSelector.addEventListener('change', (event) => {
-            scene3D.background = new THREE.Color(event.target.value);
-            showToast('Фон сцены изменен');
-        });
-
-        // Настройка освещения
-        ambientLightControl.addEventListener('input', (event) => {
-            ambientLight.intensity = event.target.value;
-            showToast('Амбиентное освещение изменено');
-        });
-
-        directionalLightControl.addEventListener('input', (event) => {
-            directionalLight.intensity = event.target.value;
-            showToast('Направленное освещение изменено');
-        });
-
-        // Сохранение и восстановление настроек вида
-        saveViewButton.addEventListener('click', () => {
-            const viewState = {
-                position: camera3D.position.clone(),
-                rotation: camera3D.rotation.clone(),
-                target: controls.target.clone(),
-                modelScale: currentModel ? currentModel.scale.clone() : null,
-                modelRotation: currentModel ? currentModel.rotation.clone() : null
-            };
-            localStorage.setItem('viewState', JSON.stringify({
-                position: viewState.position.toArray(),
-                rotation: viewState.rotation.toArray(),
-                target: viewState.target.toArray(),
-                modelScale: viewState.modelScale ? viewState.modelScale.toArray() : null,
-                modelRotation: viewState.modelRotation ? viewState.modelRotation.toArray() : null
-            }));
-            showToast('Вид сохранен!');
-        });
-
-        loadViewButton.addEventListener('click', () => {
-            const savedState = JSON.parse(localStorage.getItem('viewState'));
-            if (savedState) {
-                camera3D.position.fromArray(savedState.position);
-                controls.target.fromArray(savedState.target);
-                camera3D.rotation.fromArray(savedState.rotation);
-                if (currentModel && savedState.modelScale && savedState.modelRotation) {
-                    currentModel.scale.fromArray(savedState.modelScale);
-                    currentModel.rotation.fromArray(savedState.modelRotation);
-                }
-                controls.update();
-                showToast('Вид загружен!');
-            } else {
-                showToast('Сохраненный вид не найден.');
-            }
-        });
-
-        // Инструменты манипуляции моделью
-        scaleUpButton.addEventListener('click', () => {
-            if (currentModel) {
-                currentModel.scale.multiplyScalar(1.1);
-                saveHistory();
-                showToast('Модель увеличена');
-            }
-        });
-
-        scaleDownButton.addEventListener('click', () => {
-            if (currentModel) {
-                currentModel.scale.multiplyScalar(0.9);
-                saveHistory();
-                showToast('Модель уменьшена');
-            }
-        });
-
-        rotateLeftButton.addEventListener('click', () => {
-            if (currentModel) {
-                currentModel.rotation.y -= Math.PI / 18;
-                saveHistory();
-                showToast('Модель повернута влево');
-            }
-        });
-
-        rotateRightButton.addEventListener('click', () => {
-            if (currentModel) {
-                currentModel.rotation.y += Math.PI / 18;
-                saveHistory();
-                showToast('Модель повернута вправо');
-            }
-        });
-
-        // Экспорт модели
-        exportButton.addEventListener('click', () => {
-            if (!currentModel) {
-                showToast('Нет загруженной модели для экспорта.');
-                return;
-            }
-            const exporter = new GLTFExporter();
-            showLoading(true);
-            exporter.parse(currentModel, (result) => {
-                const output = JSON.stringify(result, null, 2);
-                const blob = new Blob([output], { type: 'application/json' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'model.gltf';
-                link.click();
-                showToast('Модель экспортирована как GLTF');
-                showLoading(false);
-            }, { binary: false }, (error) => {
-                showError('Ошибка при экспорте модели.');
-                showLoading(false);
-            });
-        });
-
-        // Undo/Redo для трансформаций
-        undoButton.addEventListener('click', undo);
-        redoButton.addEventListener('click', redo);
-
-        function saveHistory() {
-            // Обрезать будущее истории, если мы вернулись назад
-            transformHistory = transformHistory.slice(0, historyStep + 1);
-            const state = {
-                position: camera3D.position.clone(),
-                rotation: camera3D.rotation.clone(),
-                target: controls.target.clone(),
-                modelScale: currentModel ? currentModel.scale.clone() : null,
-                modelRotation: currentModel ? currentModel.rotation.clone() : null
-            };
-            transformHistory.push(state);
-            historyStep++;
-            updateUndoRedoButtons();
-        }
-
-        function undo() {
-            if (historyStep > 0) {
-                historyStep--;
-                const state = transformHistory[historyStep];
-                camera3D.position.fromArray(state.position.toArray());
-                controls.target.fromArray(state.target.toArray());
-                camera3D.rotation.fromArray(state.rotation.toArray());
-                if (currentModel && state.modelScale && state.modelRotation) {
-                    currentModel.scale.fromArray(state.modelScale.toArray());
-                    currentModel.rotation.fromArray(state.modelRotation.toArray());
-                }
-                controls.update();
-                showToast('Отмена действия');
-                updateUndoRedoButtons();
-            } else {
-                showToast('Нет действий для отмены');
-            }
-        }
-
-        function redo() {
-            if (historyStep < transformHistory.length - 1) {
-                historyStep++;
-                const state = transformHistory[historyStep];
-                camera3D.position.fromArray(state.position);
-                controls.target.fromArray(state.target);
-                camera3D.rotation.fromArray(state.rotation);
-                if (currentModel && state.modelScale && state.modelRotation) {
-                    currentModel.scale.fromArray(state.modelScale);
-                    currentModel.rotation.fromArray(state.modelRotation);
-                }
-                controls.update();
-                showToast('Повтор действия');
-                updateUndoRedoButtons();
-            } else {
-                showToast('Нет действий для повторения');
-            }
-        }
-
-        // Обновление состояния кнопок Undo/Redo
-        function updateUndoRedoButtons() {
-            undoButton.disabled = historyStep <= 0;
-            redoButton.disabled = historyStep >= transformHistory.length - 1;
-        }
-
-        // Сохранение истории при трансформациях
-        controls.addEventListener('change', () => {
-            saveHistory();
-        });
-
-        // Инициализация истории
-        saveHistory();
-
-        // Добавление осей координат для лучшей ориентации модели
-        const axesHelper = new THREE.AxesHelper(5);
-        scene3D.add(axesHelper);
-
-        // Добавление сетки для ориентации
-        const gridHelper = new THREE.GridHelper(10, 10);
-        scene3D.add(gridHelper);
-
-        // Добавление инструкций по взаимодействию
-        const instructions = document.createElement('div');
-        instructions.id = 'instructions';
-        instructions.setAttribute('role', 'status');
-        instructions.setAttribute('aria-live', 'polite');
-        instructions.innerHTML = `
-            <strong>Инструкция:</strong> Используйте мышь или сенсор для вращения, масштабирования и перемещения модели. Кнопки выше позволяют загрузить модель, переключить тему, сохранить или загрузить вид, экспортировать модель, сбросить вид, а также отменить или повторить действия.
-        `;
-        document.body.appendChild(instructions);
-
-        // Удаление инструкций после 10 секунд
-        setTimeout(() => {
-            instructions.classList.add('fade-out');
-            setTimeout(() => {
-                instructions.remove();
-            }, 1000);
-        }, 10000);
-
-        // Функция отображения модели (плавное вращение)
-        function rotateModel() {
-            if (isAutoRotate && currentModel) {
-                currentModel.rotation.y += 0.005; // Плавное вращение
-            }
-        }
-
-        // Анимационный цикл для основной сцены
-        function animate() {
-            requestAnimationFrame(animate);
-
-            rotateModel();
-
-            controls.update();
-            renderer3D.render(scene3D, camera3D);
-        }
-
-        animate();
-
-        /* Дополнительные функции */
-
-        // Функция для отображения уведомлений (Toasts)
-        function showToast(message, duration = 3000) {
-            const toast = document.createElement('div');
-            toast.classList.add('toast');
-            toast.textContent = message;
-            document.getElementById('toast-container').appendChild(toast);
-            // Добавление класса show для анимации появления
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 100);
-            // Удаление toast после указанного времени
-            setTimeout(() => {
-                toast.classList.remove('show');
-                toast.remove();
-            }, duration + 100);
-        }
-
-        // Функция инициализации интерактивного тура
-        function initializeTour() {
-            if (typeof Shepherd === 'undefined') {
-                console.error('Shepherd.js не загружен.');
-                return;
-            }
-
-            const tour = new Shepherd.Tour({
-                defaultStepOptions: {
-                    classes: 'shepherd-theme-arrows',
-                    scrollTo: true
-                },
-                useModalOverlay: true
-            });
-
-            tour.addStep({
-                id: 'upload',
-                text: 'Нажмите сюда, чтобы загрузить 3D-модель.',
-                attachTo: {
-                    element: '#upload-button',
-                    on: 'bottom'
-                },
-                buttons: [
-                    {
-                        text: 'Далее',
-                        action: tour.next
-                    },
-                    {
-                        text: 'Отмена',
-                        action: tour.cancel
-                    }
-                ]
-            });
-
-            tour.addStep({
-                id: 'theme',
-                text: 'Нажмите сюда, чтобы переключить тему между светлой и темной.',
-                attachTo: {
-                    element: '#theme-toggle',
-                    on: 'bottom'
-                },
-                buttons: [
-                    {
-                        text: 'Далее',
-                        action: tour.next
-                    },
-                    {
-                        text: 'Назад',
-                        action: tour.back
-                    }
-                ]
-            });
-
-            tour.addStep({
-                id: 'color',
-                text: 'Выберите цвет модели с помощью этого инструмента.',
-                attachTo: {
-                    element: '#color-picker',
-                    on: 'bottom'
-                },
-                buttons: [
-                    {
-                        text: 'Далее',
-                        action: tour.next
-                    },
-                    {
-                        text: 'Назад',
-                        action: tour.back
-                    }
-                ]
-            });
-
-            tour.addStep({
-                id: 'lighting',
-                text: 'Настройте освещение сцены с помощью этих ползунков.',
-                attachTo: {
-                    element: '#lighting-controls',
-                    on: 'top'
-                },
-                buttons: [
-                    {
-                        text: 'Далее',
-                        action: tour.next
-                    },
-                    {
-                        text: 'Назад',
-                        action: tour.back
-                    }
-                ]
-            });
-
-            tour.addStep({
-                id: 'save-load',
-                text: 'Сохраните текущий вид или загрузите ранее сохраненный.',
-                attachTo: {
-                    element: '#save-view-button',
-                    on: 'bottom'
-                },
-                buttons: [
-                    {
-                        text: 'Далее',
-                        action: tour.next
-                    },
-                    {
-                        text: 'Назад',
-                        action: tour.back
-                    }
-                ]
-            });
-
-            tour.addStep({
-                id: 'manipulation',
-                text: 'Используйте эти инструменты для масштабирования и вращения модели.',
-                attachTo: {
-                    element: '#scale-up',
-                    on: 'bottom'
-                },
-                buttons: [
-                    {
-                        text: 'Далее',
-                        action: tour.next
-                    },
-                    {
-                        text: 'Назад',
-                        action: tour.back
-                    }
-                ]
-            });
-
-            tour.addStep({
-                id: 'export',
-                text: 'Экспортируйте модель в формат GLTF с помощью этой кнопки.',
-                attachTo: {
-                    element: '#export-button',
-                    on: 'bottom'
-                },
-                buttons: [
-                    {
-                        text: 'Далее',
-                        action: tour.next
-                    },
-                    {
-                        text: 'Назад',
-                        action: tour.back
-                    }
-                ]
-            });
-
-            tour.addStep({
-                id: 'reset-view',
-                text: 'Нажмите сюда, чтобы сбросить вид к исходным настройкам.',
-                attachTo: {
-                    element: '#reset-view-button',
-                    on: 'bottom'
-                },
-                buttons: [
-                    {
-                        text: 'Закончить',
-                        action: tour.complete
-                    },
-                    {
-                        text: 'Назад',
-                        action: tour.back
-                    }
-                ]
-            });
-
-            tour.start();
-        }
-
-        // Функция инициализации начальной анимации кубика Рубика
-        function initInitialCubeAnimation() {
-            // Создание группы для кубиков
-            initialCubeGroup = new THREE.Group();
-            scene3D.add(initialCubeGroup);
-
-            // Параметры кубика
-            const smallCubeSize = 0.3;
-            const spacing = 0.05;
-
-            // Материал маленьких кубиков
-            const material = new THREE.MeshStandardMaterial({ color: 0x3498db, metalness: 0.5, roughness: 0.5 });
-
-            // Создание маленьких кубиков (3x3x3)
-            for (let x = -1; x <= 1; x++) {
-                for (let y = -1; y <= 1; y++) {
-                    for (let z = -1; z <= 1; z++) {
-                        const geometry = new THREE.BoxGeometry(smallCubeSize, smallCubeSize, smallCubeSize);
-                        const smallCube = new THREE.Mesh(geometry, material);
-                        smallCube.position.set(
-                            x * (smallCubeSize + spacing),
-                            y * (smallCubeSize + spacing),
-                            z * (smallCubeSize + spacing)
-                        );
-                        smallCube.scale.set(0, 0, 0); // Начальное масштабирование
-                        initialCubeGroup.add(smallCube);
-                    }
-                }
-            }
-
-            // Анимация сборки кубика Рубика
-            const duration = 1000; // Длительность анимации в миллисекундах
-            const totalCubes = initialCubeGroup.children.length;
-            initialCubeGroup.children.forEach((cube, index) => {
-                const delay = index * 100; // Задержка для каждого кубика
-                setTimeout(() => {
-                    animateCubeScale(cube, 1, duration);
-                }, delay);
-            });
-
-            // После окончания анимации оставить кубик на сцене
-            setTimeout(() => {
-                // Можно оставить кубик или удалить
-                // scene3D.remove(initialCubeGroup); // Раскомментируйте, если хотите удалить кубик после анимации
-            }, totalCubes * 100 + duration + 500);
-        }
-
-        // Функция анимации масштабирования кубика
-        function animateCubeScale(cube, targetScale, duration) {
-            const startScale = { x: cube.scale.x, y: cube.scale.y, z: cube.scale.z };
-            const endScale = { x: targetScale, y: targetScale, z: targetScale };
-            const startTime = performance.now();
-
-            function animate(time) {
-                const elapsed = time - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                cube.scale.x = THREE.MathUtils.lerp(startScale.x, endScale.x, progress);
-                cube.scale.y = THREE.MathUtils.lerp(startScale.y, endScale.y, progress);
-                cube.scale.z = THREE.MathUtils.lerp(startScale.z, endScale.z, progress);
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                }
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        // Функция сброса вида
-        resetViewButton.addEventListener('click', () => {
-            resetConfirmation.classList.add('show');
-        });
-
-        // Подтверждение сброса вида
-        confirmReset.addEventListener('click', () => {
-            if (currentModel) {
-                camera3D.position.set(0, 0, 5);
-                controls.target.set(0, 0, 0);
-                currentModel.scale.set(1, 1, 1);
-                currentModel.rotation.set(0, 0, 0);
-                controls.update();
-                saveHistory();
-                showToast('Вид сброшен к исходному состоянию');
-            }
-            resetConfirmation.classList.remove('show');
-        });
-
-        // Отмена сброса вида
-        cancelReset.addEventListener('click', () => {
-            resetConfirmation.classList.remove('show');
-        });
-
-        // Кнопка открытия тура
-        openTourButton.addEventListener('click', () => {
-            initializeTour();
-        });
-
-        // Дополнительные клавиатурные сокращения
-        document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
-                e.preventDefault();
-                undo();
-            }
-            if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
-                e.preventDefault();
-                redo();
-            }
-            if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
-                e.preventDefault();
-                resetViewButton.click();
-            }
-        });
-
-        // Функция сброса истории при загрузке новой модели
-        function clearHistory() {
-            transformHistory = [];
-            historyStep = -1;
-            updateUndoRedoButtons();
-        }
-
-    </script>
+      });
+    }
+    function urlBase64ToUint8Array(base64String) {
+      const padding = '='.repeat((4 - base64String.length % 4) % 4);
+      const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+      const rawData = atob(base64);
+      return Uint8Array.from([...rawData].map(char => char.charCodeAt(0)));
+    }
+
+    // Переключение вариантов внутри блока "Поэма '33'".
+    // При нажатии стрелочек содержимое меняется с анимацией поворота шара на "Стихи" или "Проза"
+    const innerLeftArrow = document.querySelector('#poem1 .logo-arrow.left');
+    const innerRightArrow = document.querySelector('#poem1 .logo-arrow.right');
+    const innerContent = document.querySelector('#poem1 .logo-circle > div:first-child');
+    const innerVariants = ["Стихи", "Проза"];
+    let innerIndex = 0;
+    function updateInnerContent() {
+      if (typeof gsap !== 'undefined') {
+        gsap.to(innerContent, { duration: 0.5, rotationY: "+=360", onComplete: () => {
+          innerContent.textContent = innerVariants[innerIndex];
+        }});
+      } else {
+        innerContent.textContent = innerVariants[innerIndex];
+      }
+    }
+    if (innerLeftArrow && innerRightArrow) {
+      innerLeftArrow.addEventListener('click', () => {
+        innerIndex = (innerIndex - 1 + innerVariants.length) % innerVariants.length;
+        updateInnerContent();
+      });
+      innerRightArrow.addEventListener('click', () => {
+        innerIndex = (innerIndex + 1) % innerVariants.length;
+        updateInnerContent();
+      });
+    }
+  </script>
 </body>
 </html>
