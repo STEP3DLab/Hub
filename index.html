@@ -2,376 +2,366 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Step3D — мобильная платформа для удобной загрузки и выгрузки посуды из посудомоечной машины. Эргономика, дизайн и простота использования." />
-  <title>Step3D — Устройство для облегчения доступа к ПММ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Step3D — Устройство для доступа к ПММ</title>
+  <meta name="description" content="Мобильная платформа с подъёмом корзины для посудомоечной машины: меньше наклонов — меньше боли в спине. Дорожная карта, характеристики и контакты." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: {
+              50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',
+              500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'
+            }
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(31,41,55,.08), 0 4px 10px rgba(31,41,55,.06)'
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root { --glass-bg: rgba(255,255,255,0.62); }
+    .glass { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(255,255,255,.6); }
+    .reveal { opacity:0; transform: translateY(16px); transition: .6s cubic-bezier(.2,.8,.2,1); }
+    .reveal.on { opacity:1; transform: none; }
     html { scroll-behavior: smooth; }
-
-    /* Базовые эффекты */
-    .glass {
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      background: var(--glass-bg);
-    }
-    .floating { transition: transform 0.45s cubic-bezier(.2,.9,.3,1), box-shadow .2s; }
-    .floating:hover { transform: translateY(-6px); }
-
-    /* Демонстрация: плавное перемещение корзины */
-    #basket { transition: transform 420ms cubic-bezier(.2,.9,.3,1); }
-
-    /* Адаптивный header: скрывать nav на мобильных (будет переключаться через JS) */
-    @media (max-width: 768px) {
-      nav.desktop { display: none; }
-      .hero-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Предпочтение для уменьшения анимаций */
-    @media (prefers-reduced-motion: reduce) {
-      .floating, #basket { transition: none !important; }
-      html { scroll-behavior: auto; }
-    }
-
-    /* Стили для фокусировки (доступность) */
-    .focus-ring:focus { outline: 3px solid rgba(99,102,241,0.18); outline-offset: 3px; }
-
-    /* Простая анимация появления мобильного меню */
-    .mobile-nav-enter { transform: translateY(-6px); opacity: 0; }
-    .mobile-nav-enter.active { transform: translateY(0); opacity: 1; transition: all 220ms ease; }
   </style>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Step3D — устройство для доступа к ПММ">
+  <meta property="og:description" content="Подъём корзины ПММ без наклонов. Дорожная карта и контакты." />
+  <meta property="og:image" content="https://step3dlab.github.io/Viwer/og-cover.jpg" />
+  <meta name="theme-color" content="#6366f1">
 </head>
-<body class="antialiased text-gray-900 bg-gradient-to-b from-gray-50 via-white to-gray-100">
-
-  <!-- Skip link для клавиатурных пользователей -->
-  <a class="sr-only focus:not-sr-only focus:block p-2 m-2 rounded bg-indigo-600 text-white" href="#main">Перейти к содержанию</a>
-
-  <header class="fixed w-full z-40 top-0 bg-white/60 border-b border-gray-200 glass">
-    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <!-- Логотип (SVG) -->
-        <a href="#" class="flex items-center gap-3" aria-label="Step3D — на главную">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden>
-            <rect width="44" height="44" rx="10" fill="url(#g)"/>
-            <defs>
-              <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#6366F1" />
-                <stop offset="1" stop-color="#EC4899" />
-              </linearGradient>
-            </defs>
-            <path d="M13 28c6 0 6-12 12-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <div class="leading-tight">
-            <div class="font-semibold">Step3D</div>
-            <div class="text-xs text-gray-500">Комфорт · Эргономика · Дизайн</div>
-          </div>
-        </a>
+<body class="bg-slate-50 text-slate-800">
+  <!-- Header -->
+  <header class="fixed top-0 inset-x-0 z-40">
+    <nav class="glass border-b border-white/40">
+      <div class="mx-auto max-w-7xl px-4 py-3 flex items-center gap-4">
+        <a href="#home" class="font-extrabold tracking-tight text-xl">Step3D</a>
+        <div class="hidden md:flex items-center gap-6 ml-6 text-sm">
+          <a href="#problem" class="hover:text-brand-700">Проблема</a>
+          <a href="#solution" class="hover:text-brand-700">Решение</a>
+          <a href="#specs" class="hover:text-brand-700">Технические</a>
+          <a href="#roadmap" class="hover:text-brand-700">Дорожная карта</a>
+          <a href="#report" class="hover:text-brand-700">Отчёт</a>
+        </div>
+        <div class="ml-auto">
+          <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 shadow-soft">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.99 15.17 9.9 19c.36 0 .52-.16.71-.35l1.7-1.64 3.53 2.59c.65.36 1.1.17 1.27-.6l2.3-10.78h.01c.2-.94-.34-1.31-.96-1.08l-13.5 5.2c-.92.36-.9.88-.16 1.11l3.45 1.08 7.99-5.05c.38-.25.72-.11.44.14"/></svg>
+            Связаться
+          </a>
+        </div>
+        <button id="menuBtn" class="md:hidden ml-2 p-2 rounded-lg hover:bg-white/60" aria-label="Открыть меню">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
       </div>
-
-      <!-- Desktop nav -->
-      <nav class="desktop flex gap-6 text-sm text-gray-700" role="navigation" aria-label="Главное меню">
-        <a href="#problem" class="hover:text-indigo-600 focus-ring">Проблема</a>
-        <a href="#solution" class="hover:text-indigo-600 focus-ring">Решение</a>
-        <a href="#tech" class="hover:text-indigo-600 focus-ring">Технические</a>
-        <a href="#roadmap" class="hover:text-indigo-600 focus-ring">Дорожная карта</a>
-        <a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 focus-ring">Отчёт проекта</a>
-      </nav>
-
-      <!-- Единственная кнопка «Связаться» по всей странице -->
-      <div>
-        <a id="contactBtn" href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-600 text-white shadow hover:opacity-95 focus:ring-2 focus:ring-indigo-400 focus:outline-none">Связаться</a>
+      <div id="mobileMenu" class="hidden md:hidden border-t border-white/40 px-4 pb-4">
+        <div class="flex flex-col gap-3 py-3 text-sm">
+          <a href="#problem" class="hover:text-brand-700">Проблема</a>
+          <a href="#solution" class="hover:text-brand-700">Решение</a>
+          <a href="#specs" class="hover:text-brand-700">Технические</a>
+          <a href="#roadmap" class="hover:text-brand-700">Дорожная карта</a>
+          <a href="#report" class="hover:text-brand-700">Отчёт</a>
+        </div>
       </div>
-
-      <!-- Mobile menu toggle -->
-      <button id="mobileToggle" aria-expanded="false" aria-controls="mobileNav" class="md:hidden ml-3 p-2 rounded focus-ring bg-white/40">
-        <span class="sr-only">Открыть меню</span>
-        <!-- simple hamburger -->
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-          <path d="M3 7h18M3 12h18M3 17h18" stroke="#111827" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Mobile nav (hidden by default, toggled by JS) -->
-    <div id="mobileNav" class="md:hidden bg-white/90 border-t border-gray-100 hidden" role="dialog" aria-modal="false">
-      <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
-        <a href="#problem" class="py-2">Проблема</a>
-        <a href="#solution" class="py-2">Решение</a>
-        <a href="#tech" class="py-2">Технические</a>
-        <a href="#roadmap" class="py-2">Дорожная карта</a>
-        <a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="py-2">Отчёт проекта</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <main id="main" class="pt-24">
-    <!-- HERO -->
-    <section class="relative overflow-hidden">
-      <div class="max-w-6xl mx-auto px-6 py-20 grid hero-grid grid-cols-2 gap-12 items-center">
-        <div>
-          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Устройство для облегчения доступа к посудомоечной машине</h1>
-          <p class="mt-4 text-lg text-gray-700">Мобильная платформа с регулируемым подъёмом корзины: меньше наклонов — меньше боли в спине. Эргономично, эстетично и экономично — решение для домашнего использования.</p>
-
-          <div class="mt-6 text-sm text-gray-600">
-            <a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="underline hover:text-indigo-600">Полный отчёт проекта (Google Docs)</a>
+  <!-- Hero -->
+  <section id="home" class="pt-28 md:pt-32">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="reveal">
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+            Устройство для <span class="text-brand-600">доступа к ПММ</span> без наклонов
+          </h1>
+          <p class="mt-4 text-slate-600">
+            Мобильная платформа с регулируемым подъёмом корзины: меньше наклонов — меньше боли в спине. Эргономично, эстетично и экономично.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="inline-flex items-center gap-2 text-sm bg-white rounded-xl px-3 py-2 shadow-soft">
+              ✓ Мобильность: колёса с фиксатором
+            </span>
+            <span class="inline-flex items-center gap-2 text-sm bg-white rounded-xl px-3 py-2 shadow-soft">
+              ✓ Газовые амортизаторы
+            </span>
+            <span class="inline-flex items-center gap-2 text-sm bg-white rounded-xl px-3 py-2 shadow-soft">
+              ✓ Совместимость 45/60 см
+            </span>
           </div>
-
-          <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
-              <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
-              <div>
-                <div class="text-sm font-medium">Мобильность</div>
-                <div class="text-xs text-gray-500">Колёса с фиксатором</div>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
-              <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
-              <div>
-                <div class="text-sm font-medium">Регулировка</div>
-                <div class="text-xs text-gray-500">Плавный газовый подъём</div>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
-              <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
-              <div>
-                <div class="text-sm font-medium">Универсальность</div>
-                <div class="text-xs text-gray-500">45 / 60 см</div>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
-              <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
-              <div>
-                <div class="text-sm font-medium">Материалы</div>
-                <div class="text-xs text-gray-500">AISI 304 + влагостойкая ЛДСП</div>
-              </div>
-            </div>
+          <div class="mt-7 flex gap-3">
+            <a href="#roadmap" class="px-4 py-2 rounded-2xl border border-brand-200 text-brand-700 bg-brand-50 hover:bg-brand-100">Дорожная карта</a>
+            <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener" class="px-4 py-2 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white shadow-soft">Связаться</a>
           </div>
         </div>
 
-        <!-- DEMO MOCKUP -->
-        <div class="relative">
-          <div class="pointer-events-none absolute -left-24 -top-20 w-80 h-80 rounded-2xl bg-gradient-to-br from-pink-200 to-indigo-200 blur-3xl opacity-40"></div>
-
-          <div class="glass rounded-2xl p-6 shadow-2xl border border-gray-100">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-sm text-gray-500">Интерактивное демо</div>
-                <div class="font-semibold text-lg">Симуляция подъёма корзины</div>
-              </div>
-            </div>
-
-            <div id="demo" class="mt-6">
-              <div class="relative w-full h-64 bg-gradient-to-b from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden flex items-end justify-center">
-                <!-- стилизованная ПММ-зона -->
-                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-56 rounded-md bg-gray-100 border border-gray-200 shadow-inner flex flex-col items-center justify-end">
-                  <div class="w-64 h-2 bg-gray-200 rounded-t-md mt-3"></div>
-                  <div class="w-64 h-36 flex items-center justify-center relative">
-                    <!-- Корзина — управляется JS -->
-                    <div id="basket" class="w-52 h-24 bg-gradient-to-b from-white to-gray-50 border border-gray-300 rounded-md shadow flex items-center justify-center" style="transform: translateY(36px);">
-                      <!-- простая иллюстрация корзины -->
-                      <svg width="160" height="72" viewBox="0 0 160 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                        <rect x="2" y="2" width="156" height="68" rx="8" fill="#FFF" stroke="#E5E7EB" />
-                        <g transform="translate(12,14)" fill="#D1D5DB">
-                          <rect x="0" y="0" width="136" height="8" rx="3" />
-                          <rect x="0" y="12" width="136" height="8" rx="3" />
-                          <rect x="0" y="24" width="136" height="8" rx="3" />
-                        </g>
-                      </svg>
-                    </div>
-                  </div>
+        <!-- Simple interactive mock (height slider) -->
+        <div class="reveal">
+          <div class="relative rounded-3xl bg-gradient-to-br from-brand-50 to-white p-6 shadow-soft">
+            <div class="absolute inset-0 rounded-3xl ring-1 ring-black/5 pointer-events-none"></div>
+            <h3 class="font-semibold mb-3">Интерактивное демо (эскиз)</h3>
+            <div class="grid md:grid-cols-[1fr_auto] gap-5">
+              <div class="relative bg-white rounded-2xl p-4 ring-1 ring-slate-100">
+                <div class="h-64 md:h-72 relative">
+                  <!-- Base -->
+                  <div class="absolute bottom-0 inset-x-4 h-4 bg-slate-200 rounded-full"></div>
+                  <!-- Post -->
+                  <div id="post" class="absolute bottom-4 left-1/2 -translate-x-1/2 w-2 bg-slate-300 rounded-md" style="height: 160px;"></div>
+                  <!-- Basket -->
+                  <div id="basket" class="absolute left-1/2 -translate-x-1/2 w-40 h-20 bg-gradient-to-br from-slate-50 to-slate-200 rounded-xl shadow" style="bottom: 150px;"></div>
                 </div>
-
-                <div class="absolute right-6 top-6 text-xs text-gray-400">Эскиз: не финальный дизайн</div>
               </div>
-
-              <div class="mt-4">
-                <label for="demoRange" class="sr-only">Контролировать подъём корзины</label>
-                <input id="demoRange" aria-label="Подъём корзины" type="range" min="0" max="100" value="40" class="w-full" />
-                <div class="flex items-center justify-between text-sm text-gray-600 mt-2">
-                  <span>Низкая</span>
-                  <span id="percent" aria-live="polite">Высота — 40%</span>
-                </div>
+              <div class="flex flex-col justify-between">
+                <label for="height" class="text-sm text-slate-600">Высота подъёма</label>
+                <input id="height" type="range" min="0" max="100" value="40" class="w-40 accent-brand-600">
+                <div class="text-sm"><span id="heightVal" class="font-semibold">40%</span></div>
+                <p class="text-xs text-slate-500">Эскиз. Цель — показать идею подъёма корзины.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- PROBLEM & SOLUTION -->
-    <section id="problem" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-        <article class="bg-white rounded-2xl p-8 shadow">
-          <h3 class="text-2xl font-semibold">Проблема</h3>
-          <p class="mt-4 text-gray-700">Многократные наклоны при загрузке/выгрузке ПММ приводят к болям в спине и повышенному риску травм. Особенно остро это сказывается на пожилых людях и людях с проблемами опорно‑двигательного аппарата.</p>
+      <!-- Badges -->
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-2xl p-4 shadow-soft text-center">
+          <div class="text-3xl font-extrabold text-brand-700">–60%</div>
+          <div class="text-xs text-slate-500 mt-1">снижение нагрузки на поясницу</div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 shadow-soft text-center">
+          <div class="text-3xl font-extrabold text-brand-700">45/60</div>
+          <div class="text-xs text-slate-500 mt-1">совместимость ПММ, узк./полноразм.</div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 shadow-soft text-center">
+          <div class="text-3xl font-extrabold text-brand-700">AISI 304</div>
+          <div class="text-xs text-slate-500 mt-1">каркас из нержавеющей стали</div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 shadow-soft text-center">
+          <div class="text-3xl font-extrabold text-brand-700">ЛДСП</div>
+          <div class="text-xs text-slate-500 mt-1">влагостойкая облицовка</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <ul class="mt-4 space-y-3 text-gray-600">
-            <li>Хроническая нагрузка на поясницу</li>
-            <li>Небольшие кухни — ограниченное пространство</li>
-            <li>Отсутствие эстетичных бытовых решений</li>
+  <!-- Problem -->
+  <section id="problem" class="py-16 md:py-24">
+    <div class="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-10 items-start">
+      <div class="reveal">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Проблема</h2>
+        <p class="mt-4 text-slate-600">
+          Многократные наклоны при загрузке/выгрузке ПММ приводят к болям в спине и рискам травм. Особенно актуально для пожилых и людей с ОДА.
+        </p>
+        <ul class="mt-4 space-y-2 text-slate-700">
+          <li>• Хроническая нагрузка на поясницу</li>
+          <li>• Ограниченное пространство небольших кухонь</li>
+          <li>• Отсутствие эстетичных бытовых решений</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="bg-white rounded-3xl p-6 shadow-soft ring-1 ring-slate-100">
+          <h3 class="font-semibold">Мы решаем это</h3>
+          <p class="mt-2 text-slate-600">Подъём корзины на комфортный уровень без усилий и наклонов.</p>
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <span class="text-sm bg-brand-50 text-brand-700 px-3 py-2 rounded-xl">Безопасность</span>
+            <span class="text-sm bg-brand-50 text-brand-700 px-3 py-2 rounded-xl">Эргономика</span>
+            <span class="text-sm bg-brand-50 text-brand-700 px-3 py-2 rounded-xl">Эстетика</span>
+            <span class="text-sm bg-brand-50 text-brand-700 px-3 py-2 rounded-xl">Комфорт</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution & Specs -->
+  <section id="solution" class="py-8">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal bg-white rounded-3xl p-6 md:p-10 shadow-soft ring-1 ring-slate-100">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Решение</h2>
+        <p class="mt-3 text-slate-600">
+          Мобильная платформа с плавным газовым подъёмом. Подходит для ПММ 45/60 см, компактно убирается, легко перемещается.
+        </p>
+        <div class="mt-6 grid sm:grid-cols-3 gap-4">
+          <div class="rounded-2xl bg-slate-50 p-4">
+            <div class="text-sm text-slate-500">Подъёмный механизм</div>
+            <div class="font-semibold">Газовые амортизаторы</div>
+            <p class="text-sm text-slate-600 mt-1">Плавность и регулируемое усилие.</p>
+          </div>
+          <div class="rounded-2xl bg-slate-50 p-4">
+            <div class="text-sm text-slate-500">Каркас</div>
+            <div class="font-semibold">Нержавеющая сталь AISI 304</div>
+            <p class="text-sm text-slate-600 mt-1">Долговечность и устойчивость к коррозии.</p>
+          </div>
+          <div class="rounded-2xl bg-slate-50 p-4">
+            <div class="text-sm text-slate-500">Облицовка</div>
+            <div class="font-semibold">Влагостойкая ЛДСП/МДФ</div>
+            <p class="text-sm text-slate-600 mt-1">Широкий выбор текстур и цветов.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="specs" class="py-8">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-3xl p-6 shadow-soft ring-1 ring-slate-100">
+          <h3 class="font-semibold">Технические характеристики</h3>
+          <ul class="mt-3 space-y-2 text-slate-700 text-sm">
+            <li>• Диапазон подъёма: 0–350 мм (настройка)</li>
+            <li>• Грузоподъёмность: 10–15 кг (домашняя ПММ)</li>
+            <li>• Габариты: компактные, проходят в стандартные проёмы</li>
+            <li>• Колёса: поворотные, фиксируемые</li>
+            <li>• Безопасность: демпфирование, механическая блокировка</li>
           </ul>
-        </article>
-
-        <article id="solution" class="bg-gradient-to-br from-indigo-600 to-pink-500 text-white rounded-2xl p-8 shadow-lg">
-          <h3 class="text-2xl font-semibold">Решение</h3>
-          <p class="mt-4 text-indigo-50">Мобильная платформа с плавным газовым подъёмом корзины — удобная, безопасная и эстетичная. Подходит для узких и полноразмерных ПММ; убирается, когда не нужна.</p>
-
-          <div class="mt-6 grid grid-cols-1 gap-3">
-            <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
-              <div class="text-sm">Снижение нагрузки</div>
-              <div class="font-semibold">— до 60%</div>
-            </div>
-            <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
-              <div class="text-sm">Совместимость</div>
-              <div class="font-semibold">45 / 60 см</div>
-            </div>
-            <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
-              <div class="text-sm">Материалы</div>
-              <div class="font-semibold">AISI 304 + влагостойкая ЛДСП</div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- TECH -->
-    <section id="tech" class="max-w-6xl mx-auto px-6 py-16">
-      <h3 class="text-3xl font-bold">Технические характеристики</h3>
-      <p class="text-gray-600 mt-3">Краткое описание ключевых инженерных решений и выбранных материалов.</p>
-
-      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl p-6 shadow floating">
-          <div class="text-sm text-gray-500">Подъёмный механизм</div>
-          <div class="mt-2 font-medium">Кухонные газовые амортизаторы: плавность, регулировка усилия, экономичность</div>
         </div>
-        <div class="bg-white rounded-2xl p-6 shadow floating">
-          <div class="text-sm text-gray-500">Каркас</div>
-          <div class="mt-2 font-medium">AISI 304 — коррозионная стойкость и долговечность</div>
-        </div>
-        <div class="bg-white rounded-2xl p-6 shadow floating">
-          <div class="text-sm text-gray-500">Облицовка</div>
-          <div class="mt-2 font-medium">Влагостойкая ЛДСП / МДФ — широкий выбор текстур и цветов</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ROADMAP -->
-    <section id="roadmap" class="max-w-6xl mx-auto px-6 py-16">
-      <h3 class="text-3xl font-bold">Дорожная карта</h3>
-      <p class="text-gray-600 mt-3">Этапы реализации проекта — от исследования до серийного производства.</p>
-
-      <div class="mt-8 space-y-4">
-        <div class="flex gap-4 items-start">
-          <div class="w-28 text-sm text-gray-500">1–2 мес</div>
-          <div class="bg-white rounded-lg p-4 shadow flex-1">
-            <div class="font-semibold">Исследование и UX</div>
-            <div class="text-gray-600 text-sm mt-1">Опросы, фокус‑группы, анализ патентов</div>
-          </div>
-        </div>
-
-        <div class="flex gap-4 items-start">
-          <div class="w-28 text-sm text-gray-500">2–3 мес</div>
-          <div class="bg-white rounded-lg p-4 shadow flex-1">
-            <div class="font-semibold">Проектирование</div>
-            <div class="text-gray-600 text-sm mt-1">3D‑модели, чертежи, выбор поставщиков</div>
-          </div>
-        </div>
-
-        <div class="flex gap-4 items-start">
-          <div class="w-28 text-sm text-gray-500">3–4 мес</div>
-          <div class="bg-white rounded-lg p-4 shadow flex-1">
-            <div class="font-semibold">Прототипы и тесты</div>
-            <div class="text-gray-600 text-sm mt-1">Изготовление, тестирование, доработка</div>
-          </div>
-        </div>
-
-        <div class="flex gap-4 items-start">
-          <div class="w-28 text-sm text-gray-500">4–6 мес</div>
-          <div class="bg-white rounded-lg p-4 shadow flex-1">
-            <div class="font-semibold">Производство и маркетинг</div>
-            <div class="text-gray-600 text-sm mt-1">Запуск производства, рекламная кампания</div>
+        <div class="bg-gradient-to-br from-brand-50 to-white rounded-3xl p-6 shadow-soft ring-1 ring-slate-100">
+          <h3 class="font-semibold">Преимущества</h3>
+          <div class="mt-3 grid grid-cols-2 gap-3 text-sm">
+            <div class="bg-white rounded-2xl p-3 shadow">Снижение нагрузки на поясницу</div>
+            <div class="bg-white rounded-2xl p-3 shadow">Чистый внешний вид</div>
+            <div class="bg-white rounded-2xl p-3 shadow">Простая интеграция</div>
+            <div class="bg-white rounded-2xl p-3 shadow">Доступная себестоимость</div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CTA block simplified: не кнопка, а приглашение — единственная кнопка на сайте в хедере -->
-    <section class="max-w-6xl mx-auto px-6 py-16">
-      <div class="rounded-2xl bg-gradient-to-r from-indigo-600 to-pink-500 p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <h3 class="text-2xl font-bold">Готовы увидеть прототип?</h3>
-          <p class="mt-2 text-indigo-100">Напишите нам в Telegram (кнопка «Связаться» в шапке) — организуем тест‑драйв и подготовим коммерческое предложение.</p>
-        </div>
-        <div class="text-sm opacity-90">
-          <a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="underline">Ознакомиться с отчётом</a>
-        </div>
+  <!-- Roadmap -->
+  <section id="roadmap" class="py-16 md:py-24 bg-white">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal text-center">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Дорожная карта</h2>
+        <p class="mt-3 text-slate-600">Этапы от исследования до серийного запуска.</p>
       </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-gray-200 py-8 mt-8">
-      <div class="max-w-6xl mx-auto px-6 text-sm text-gray-600 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div>© <span id="year"></span> Step3D — идея‑прототип</div>
-        <div class="flex gap-4">
-          <a href="#" class="hover:text-indigo-600">Политика конфиденциальности</a>
-          <a href="#" class="hover:text-indigo-600">Контакты</a>
-        </div>
+      <!-- Progress timeline -->
+      <ol class="mt-10 relative border-s-2 border-brand-100 ps-6">
+        <!-- 1 -->
+        <li class="mb-10 ms-6 reveal">
+          <span class="absolute -start-3 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-white text-xs">1</span>
+          <h3 class="font-semibold">Исследование и UX <span class="text-slate-400 font-normal">· 1–2 мес</span></h3>
+          <p class="text-slate-600 text-sm mt-1">Опросы, фокус-группы, анализ патентов, сценарии использования.</p>
+          <div class="mt-2 w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div class="h-2 bg-brand-400 w-[85%]"></div>
+          </div>
+        </li>
+        <!-- 2 -->
+        <li class="mb-10 ms-6 reveal">
+          <span class="absolute -start-3 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-white text-xs">2</span>
+          <h3 class="font-semibold">Проектирование <span class="text-slate-400 font-normal">· 2–3 мес</span></h3>
+          <p class="text-slate-600 text-sm mt-1">3D-модели, чертежи, выбор поставщиков, расчёт себестоимости.</p>
+          <div class="mt-2 w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div class="h-2 bg-brand-400 w-[55%]" id="rm2"></div>
+          </div>
+        </li>
+        <!-- 3 -->
+        <li class="mb-10 ms-6 reveal">
+          <span class="absolute -start-3 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-white text-xs">3</span>
+          <h3 class="font-semibold">Прототипы и тесты <span class="text-slate-400 font-normal">· 3–4 мес</span></h3>
+          <p class="text-slate-600 text-sm mt-1">Изготовление прототипов, тестирование, доработка конструкции.</p>
+          <div class="mt-2 w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div class="h-2 bg-brand-400 w-[25%]" id="rm3"></div>
+          </div>
+        </li>
+        <!-- 4 -->
+        <li class="ms-6 reveal">
+          <span class="absolute -start-3 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-white text-xs">4</span>
+          <h3 class="font-semibold">Производство и маркетинг <span class="text-slate-400 font-normal">· 4–6 мес</span></h3>
+          <p class="text-slate-600 text-sm mt-1">Пилотная партия, сертификация, запуск рекламы и продаж.</p>
+          <div class="mt-2 w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div class="h-2 bg-brand-400 w-[10%]" id="rm4"></div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="mt-8 text-center reveal">
+        <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white px-5 py-3 shadow-soft">
+          Связаться для демо
+        </a>
       </div>
-    </footer>
-  </main>
+    </div>
+  </section>
+
+  <!-- Report -->
+  <section id="report" class="py-16 md:py-24">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="reveal text-center">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Полный отчёт проекта</h2>
+        <p class="mt-3 text-slate-600">Аналитика рынка, ТЗ, дорожная карта, базовая финмодель.</p>
+        <a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?tab=t.0" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-6 px-5 py-3 rounded-2xl border border-brand-200 bg-brand-50 text-brand-700 hover:bg-brand-100">
+          Ознакомиться с отчётом
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 border-t bg-white">
+    <div class="mx-auto max-w-7xl px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-600">
+      <div>© Step3D — идея-прототип</div>
+      <div class="flex items-center gap-4">
+        <a href="#home" class="hover:text-brand-700">Наверх</a>
+        <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener" class="hover:text-brand-700">Контакты</a>
+        <a href="#" class="hover:text-brand-700">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    // Инициализация года
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Mobile menu
+    const mb = document.getElementById('menuBtn');
+    const mm = document.getElementById('mobileMenu');
+    mb?.addEventListener('click', () => mm.classList.toggle('hidden'));
 
-    // Mobile menu toggle
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileNav = document.getElementById('mobileNav');
-    mobileToggle?.addEventListener('click', () => {
-      const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-      mobileToggle.setAttribute('aria-expanded', String(!expanded));
-      if (expanded) {
-        mobileNav.classList.add('hidden');
-      } else {
-        mobileNav.classList.remove('hidden');
-        // add slight animation class
-        mobileNav.classList.add('mobile-nav-enter', 'active');
-        setTimeout(() => mobileNav.classList.remove('mobile-nav-enter', 'active'), 300);
-      }
-    });
+    // Simple reveal on scroll
+    const io = new IntersectionObserver((entries)=> {
+      entries.forEach(e=> { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
 
-    // Логика демо-ползунка (более выразительное перемещение корзины)
-    const range = document.getElementById('demoRange');
+    // Demo slider logic
+    const range = document.getElementById('height');
+    const val = document.getElementById('heightVal');
     const basket = document.getElementById('basket');
-    const percent = document.getElementById('percent');
+    const post = document.getElementById('post');
+    const clamp = (n,min,max)=> Math.max(min, Math.min(max,n));
 
-    function updateBasket() {
-      const v = Number(range.value); // 0..100
-      // интерполируем смещение от +48px (нижняя позиция) до -12px (верхняя позиция)
-      const y = 48 - v * 0.6; // когда v=0 -> 48px; v=100 -> -12px
-      basket.style.transform = `translateY(${y}px)`;
-      percent.textContent = `Высота — ${v}%`;
+    function updateDemo(v){
+      val.textContent = v+'%';
+      const postH = 80 + (v*1.2); // 80–200
+      const basketB = 60 + (v*1.5); // 60–210
+      post.style.height = clamp(postH,80,220) + 'px';
+      basket.style.bottom = clamp(basketB,60,230) + 'px';
     }
+    range?.addEventListener('input', e=> updateDemo(e.target.value));
+    updateDemo(range?.value || 40);
 
-    range?.addEventListener('input', updateBasket);
-    // inic
-    updateBasket();
-
-    // Поддержка keyboard: при нажатии стрелок — range сам отрабатывает, но добавим +/- кнопки на клавиши +/-
-    range?.addEventListener('keydown', (e) => {
-      if (e.key === '+' || e.key === '=') { range.value = Math.min(100, Number(range.value) + 5); updateBasket(); }
-      if (e.key === '-') { range.value = Math.max(0, Number(range.value) - 5); updateBasket(); }
-    });
-
-    // Небольшая доступность: фокус на форме — подсветка
-    document.querySelectorAll('a, button, input').forEach(el => {
-      el.addEventListener('focus', () => el.classList.add('focus-ring'));
-      el.addEventListener('blur', () => el.classList.remove('focus-ring'));
-    });
+    // Animate roadmap bars when visible
+    const bars = ['rm2','rm3','rm4'].map(id=>document.getElementById(id)).filter(Boolean);
+    const ioBars = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const el = e.target;
+          const w = el.style.width;
+          el.style.width = '0%';
+          el.style.transition = 'width 1s cubic-bezier(.2,.8,.2,1)';
+          requestAnimationFrame(()=> { el.style.width = w; });
+          ioBars.unobserve(el);
+        }
+      });
+    }, {threshold:.3});
+    bars.forEach(el=> ioBars.observe(el));
   </script>
 </body>
 </html>
