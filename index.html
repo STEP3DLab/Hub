@@ -3,292 +3,375 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Step3D — мобильная платформа для удобной загрузки и выгрузки посуды из посудомоечной машины. Эргономика, дизайн и простота использования." />
   <title>Step3D — Устройство для облегчения доступа к ПММ</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Дополнительные стили и анимации */
+    :root { --glass-bg: rgba(255,255,255,0.62); }
+    html { scroll-behavior: smooth; }
+
+    /* Базовые эффекты */
     .glass {
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      background: rgba(255,255,255,0.6);
+      background: var(--glass-bg);
     }
-    .floating {
-      transition: transform 0.45s cubic-bezier(.2,.9,.3,1), box-shadow .2s;
-    }
+    .floating { transition: transform 0.45s cubic-bezier(.2,.9,.3,1), box-shadow .2s; }
     .floating:hover { transform: translateY(-6px); }
+
     /* Демонстрация: плавное перемещение корзины */
-    #basket { transition: transform 0.45s cubic-bezier(.2,.9,.3,1); }
-    /* Адаптивный header: скрывать nav на мобильных */
+    #basket { transition: transform 420ms cubic-bezier(.2,.9,.3,1); }
+
+    /* Адаптивный header: скрывать nav на мобильных (будет переключаться через JS) */
     @media (max-width: 768px) {
       nav.desktop { display: none; }
       .hero-grid { grid-template-columns: 1fr; }
     }
+
+    /* Предпочтение для уменьшения анимаций */
+    @media (prefers-reduced-motion: reduce) {
+      .floating, #basket { transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Стили для фокусировки (доступность) */
+    .focus-ring:focus { outline: 3px solid rgba(99,102,241,0.18); outline-offset: 3px; }
+
+    /* Простая анимация появления мобильного меню */
+    .mobile-nav-enter { transform: translateY(-6px); opacity: 0; }
+    .mobile-nav-enter.active { transform: translateY(0); opacity: 1; transition: all 220ms ease; }
   </style>
 </head>
 <body class="antialiased text-gray-900 bg-gradient-to-b from-gray-50 via-white to-gray-100">
 
-<header class="fixed w-full z-40 top-0 bg-white/60 border-b border-gray-200 glass">
-  <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      $
-      <div>
-        <div class="font-semibold">Step3D</div>
-        <div class="text-xs text-gray-500">Комфорт. Эргономика. Дизайн.</div>
-      </div>
-    </div>
+  <!-- Skip link для клавиатурных пользователей -->
+  <a class="sr-only focus:not-sr-only focus:block p-2 m-2 rounded bg-indigo-600 text-white" href="#main">Перейти к содержанию</a>
 
-    <nav class="desktop flex gap-6 text-sm text-gray-700">
-      <a href="#problem" class="hover:text-indigo-600">Проблема</a>
-      <a href="#solution" class="hover:text-indigo-600">Решение</a>
-      <a href="#tech" class="hover:text-indigo-600">Технические</a>
-      <a href="#roadmap" class="hover:text-indigo-600">Дорожная карта</a>
-    </nav>
-
-    <div>
-      <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-600 text-white shadow hover:opacity-95">Связаться</a>
-    </div>
-  </div>
-</header>
-
-<main class="pt-24">
-  <!-- HERO -->
-  <section class="relative overflow-hidden">
-    <div class="max-w-6xl mx-auto px-6 py-20 grid hero-grid grid-cols-2 gap-12 items-center">
-      <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Устройство для облегчения доступа к посудомоечной машине</h1>
-        <p class="mt-4 text-lg text-gray-700">Мобильная платформа с регулируемым подъемом корзины: меньше наклонов — меньше боли в спине. Эргономично, эстетично, удобно — для дома и семей.</p>
-
-        <div class="mt-8">
-          <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-3 px-5 py-3 rounded-lg bg-indigo-600 text-white shadow hover:bg-indigo-500">Связаться</a>
-        <div class="mt-3 text-sm"><a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?tab=t.0" target="_blank" rel="noopener noreferrer" class="underline text-indigo-600">Полный отчёт проекта (Google Docs)</a></div>"
-        </div>
-
-        <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
-            <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
-            <div>
-              <div class="text-sm font-medium">Мобильность</div>
-              <div class="text-xs text-gray-500">Колёса с фиксатором</div>
-            </div>
+  <header class="fixed w-full z-40 top-0 bg-white/60 border-b border-gray-200 glass">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <!-- Логотип (SVG) -->
+        <a href="#" class="flex items-center gap-3" aria-label="Step3D — на главную">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden>
+            <rect width="44" height="44" rx="10" fill="url(#g)"/>
+            <defs>
+              <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#6366F1" />
+                <stop offset="1" stop-color="#EC4899" />
+              </linearGradient>
+            </defs>
+            <path d="M13 28c6 0 6-12 12-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="leading-tight">
+            <div class="font-semibold">Step3D</div>
+            <div class="text-xs text-gray-500">Комфорт · Эргономика · Дизайн</div>
           </div>
-
-          <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
-            <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
-            <div>
-              <div class="text-sm font-medium">Регулировка</div>
-              <div class="text-xs text-gray-500">Плавный газовый подъём</div>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
-            <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
-            <div>
-              <div class="text-sm font-medium">Универсальность</div>
-              <div class="text-xs text-gray-500">45/60 см</div>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
-            <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
-            <div>
-              <div class="text-sm font-medium">Материалы</div>
-              <div class="text-xs text-gray-500">AISI 304 + ЛДСП</div>
-            </div>
-          </div>
-        </div>
+        </a>
       </div>
 
-      <!-- DEMO MOCKUP -->
-      <div class="relative">
-        <div class="pointer-events-none absolute -left-24 -top-20 w-80 h-80 rounded-2xl bg-gradient-to-br from-pink-200 to-indigo-200 blur-3xl opacity-40"></div>
+      <!-- Desktop nav -->
+      <nav class="desktop flex gap-6 text-sm text-gray-700" role="navigation" aria-label="Главное меню">
+        <a href="#problem" class="hover:text-indigo-600 focus-ring">Проблема</a>
+        <a href="#solution" class="hover:text-indigo-600 focus-ring">Решение</a>
+        <a href="#tech" class="hover:text-indigo-600 focus-ring">Технические</a>
+        <a href="#roadmap" class="hover:text-indigo-600 focus-ring">Дорожная карта</a>
+        <a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 focus-ring">Отчёт проекта</a>
+      </nav>
 
-        <div class="glass rounded-2xl p-6 shadow-2xl border border-gray-100">
-          <div class="flex items-center justify-between">
-            <div>
-              <div class="text-sm text-gray-500">Интерактивное демо</div>
-              <div class="font-semibold text-lg">Симуляция подъёма корзины</div>
-            </div>
+      <!-- Единственная кнопка «Связаться» по всей странице -->
+      <div>
+        <a id="contactBtn" href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-600 text-white shadow hover:opacity-95 focus:ring-2 focus:ring-indigo-400 focus:outline-none">Связаться</a>
+      </div>
+
+      <!-- Mobile menu toggle -->
+      <button id="mobileToggle" aria-expanded="false" aria-controls="mobileNav" class="md:hidden ml-3 p-2 rounded focus-ring bg-white/40">
+        <span class="sr-only">Открыть меню</span>
+        <!-- simple hamburger -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <path d="M3 7h18M3 12h18M3 17h18" stroke="#111827" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile nav (hidden by default, toggled by JS) -->
+    <div id="mobileNav" class="md:hidden bg-white/90 border-t border-gray-100 hidden" role="dialog" aria-modal="false">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
+        <a href="#problem" class="py-2">Проблема</a>
+        <a href="#solution" class="py-2">Решение</a>
+        <a href="#tech" class="py-2">Технические</a>
+        <a href="#roadmap" class="py-2">Дорожная карта</a>
+        <a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="py-2">Отчёт проекта</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="pt-24">
+    <!-- HERO -->
+    <section class="relative overflow-hidden">
+      <div class="max-w-6xl mx-auto px-6 py-20 grid hero-grid grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Устройство для облегчения доступа к посудомоечной машине</h1>
+          <p class="mt-4 text-lg text-gray-700">Мобильная платформа с регулируемым подъёмом корзины: меньше наклонов — меньше боли в спине. Эргономично, эстетично и экономично — решение для домашнего использования.</p>
+
+          <div class="mt-6 text-sm text-gray-600">
+            <a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="underline hover:text-indigo-600">Полный отчёт проекта (Google Docs)</a>
           </div>
 
-          <div id="demo" class="mt-6">
-            <div class="relative w-full h-64 bg-gradient-to-b from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden flex items-end justify-center">
-              <!-- стилизованная ПММ-зона -->
-              <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-56 rounded-md bg-gray-100 border border-gray-200 shadow-inner flex flex-col items-center justify-end">
-                <div class="w-64 h-2 bg-gray-200 rounded-t-md mt-3"></div>
-                <div class="w-64 h-36 flex items-center justify-center relative">
-                  <!-- Корзина — управляется JS -->
-                  <div id="basket" class="w-52 h-24 bg-gradient-to-b from-white to-gray-50 border border-gray-300 rounded-md shadow flex items-center justify-center" style="transform: translateY(36px);">
-                    <!-- простая иллюстрация корзины -->
-                    <svg width="160" height="72" viewBox="0 0 160 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                      <rect x="2" y="2" width="156" height="68" rx="8" fill="#FFF" stroke="#E5E7EB" />
-                      <g transform="translate(12,14)" fill="#D1D5DB">
-                        <rect x="0" y="0" width="136" height="8" rx="3" />
-                        <rect x="0" y="12" width="136" height="8" rx="3" />
-                        <rect x="0" y="24" width="136" height="8" rx="3" />
-                      </g>
-                    </svg>
+          <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
+              <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
+              <div>
+                <div class="text-sm font-medium">Мобильность</div>
+                <div class="text-xs text-gray-500">Колёса с фиксатором</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
+              <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
+              <div>
+                <div class="text-sm font-medium">Регулировка</div>
+                <div class="text-xs text-gray-500">Плавный газовый подъём</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
+              <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
+              <div>
+                <div class="text-sm font-medium">Универсальность</div>
+                <div class="text-xs text-gray-500">45 / 60 см</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
+              <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
+              <div>
+                <div class="text-sm font-medium">Материалы</div>
+                <div class="text-xs text-gray-500">AISI 304 + влагостойкая ЛДСП</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEMO MOCKUP -->
+        <div class="relative">
+          <div class="pointer-events-none absolute -left-24 -top-20 w-80 h-80 rounded-2xl bg-gradient-to-br from-pink-200 to-indigo-200 blur-3xl opacity-40"></div>
+
+          <div class="glass rounded-2xl p-6 shadow-2xl border border-gray-100">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm text-gray-500">Интерактивное демо</div>
+                <div class="font-semibold text-lg">Симуляция подъёма корзины</div>
+              </div>
+            </div>
+
+            <div id="demo" class="mt-6">
+              <div class="relative w-full h-64 bg-gradient-to-b from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden flex items-end justify-center">
+                <!-- стилизованная ПММ-зона -->
+                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-56 rounded-md bg-gray-100 border border-gray-200 shadow-inner flex flex-col items-center justify-end">
+                  <div class="w-64 h-2 bg-gray-200 rounded-t-md mt-3"></div>
+                  <div class="w-64 h-36 flex items-center justify-center relative">
+                    <!-- Корзина — управляется JS -->
+                    <div id="basket" class="w-52 h-24 bg-gradient-to-b from-white to-gray-50 border border-gray-300 rounded-md shadow flex items-center justify-center" style="transform: translateY(36px);">
+                      <!-- простая иллюстрация корзины -->
+                      <svg width="160" height="72" viewBox="0 0 160 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                        <rect x="2" y="2" width="156" height="68" rx="8" fill="#FFF" stroke="#E5E7EB" />
+                        <g transform="translate(12,14)" fill="#D1D5DB">
+                          <rect x="0" y="0" width="136" height="8" rx="3" />
+                          <rect x="0" y="12" width="136" height="8" rx="3" />
+                          <rect x="0" y="24" width="136" height="8" rx="3" />
+                        </g>
+                      </svg>
+                    </div>
                   </div>
                 </div>
+
+                <div class="absolute right-6 top-6 text-xs text-gray-400">Эскиз: не финальный дизайн</div>
               </div>
 
-              <div class="absolute right-6 top-6 text-xs text-gray-400">Эскиз: не финальный дизайн</div>
-            </div>
-
-            <div class="mt-4">
-              <input id="demoRange" aria-label="Подъём корзины" type="range" min="0" max="100" value="40" class="w-full">
-              <div class="flex items-center justify-between text-sm text-gray-600 mt-2">
-                <span>Низкая</span>
-                <span id="percent">Высокая — 40%</span>
+              <div class="mt-4">
+                <label for="demoRange" class="sr-only">Контролировать подъём корзины</label>
+                <input id="demoRange" aria-label="Подъём корзины" type="range" min="0" max="100" value="40" class="w-full" />
+                <div class="flex items-center justify-between text-sm text-gray-600 mt-2">
+                  <span>Низкая</span>
+                  <span id="percent" aria-live="polite">Высота — 40%</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PROBLEM & SOLUTION -->
-  <section id="problem" class="max-w-6xl mx-auto px-6 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-      <article class="bg-white rounded-2xl p-8 shadow">
-        <h3 class="text-2xl font-semibold">Проблема</h3>
-        <p class="mt-4 text-gray-700">Многократные наклоны при загрузке/выгрузке ПММ приводят к болям в спине и повышенному риску травм. Особенно остро это сказывается на пожилых людях и людях с проблемами опорно‑двигательного аппарата.</p>
+    <!-- PROBLEM & SOLUTION -->
+    <section id="problem" class="max-w-6xl mx-auto px-6 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+        <article class="bg-white rounded-2xl p-8 shadow">
+          <h3 class="text-2xl font-semibold">Проблема</h3>
+          <p class="mt-4 text-gray-700">Многократные наклоны при загрузке/выгрузке ПММ приводят к болям в спине и повышенному риску травм. Особенно остро это сказывается на пожилых людях и людях с проблемами опорно‑двигательного аппарата.</p>
 
-        <ul class="mt-4 space-y-3 text-gray-600">
-          <li>Хроническая нагрузка на поясницу</li>
-          <li>Небольшие кухни — ограниченное пространство</li>
-          <li>Отсутствие эстетичных бытовых решений</li>
-        </ul>
-      </article>
+          <ul class="mt-4 space-y-3 text-gray-600">
+            <li>Хроническая нагрузка на поясницу</li>
+            <li>Небольшие кухни — ограниченное пространство</li>
+            <li>Отсутствие эстетичных бытовых решений</li>
+          </ul>
+        </article>
 
-      <article class="bg-gradient-to-br from-indigo-600 to-pink-500 text-white rounded-2xl p-8 shadow-lg">
-        <h3 class="text-2xl font-semibold">Решение</h3>
-        <p class="mt-4 text-indigo-50">Мобильная платформа с плавным газовым подъёмом корзины — удобная, безопасная и эстетичная. Подходит для узких и полноразмерных ПММ; убирается, когда не нужна.</p>
+        <article id="solution" class="bg-gradient-to-br from-indigo-600 to-pink-500 text-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-2xl font-semibold">Решение</h3>
+          <p class="mt-4 text-indigo-50">Мобильная платформа с плавным газовым подъёмом корзины — удобная, безопасная и эстетичная. Подходит для узких и полноразмерных ПММ; убирается, когда не нужна.</p>
 
-        <div class="mt-6 grid grid-cols-1 gap-3">
-          <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
-            <div class="text-sm">Снижение нагрузки</div>
-            <div class="font-semibold">— до 60%</div>
+          <div class="mt-6 grid grid-cols-1 gap-3">
+            <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
+              <div class="text-sm">Снижение нагрузки</div>
+              <div class="font-semibold">— до 60%</div>
+            </div>
+            <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
+              <div class="text-sm">Совместимость</div>
+              <div class="font-semibold">45 / 60 см</div>
+            </div>
+            <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
+              <div class="text-sm">Материалы</div>
+              <div class="font-semibold">AISI 304 + влагостойкая ЛДСП</div>
+            </div>
           </div>
-          <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
-            <div class="text-sm">Совместимость</div>
-            <div class="font-semibold">45 / 60 см</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TECH -->
+    <section id="tech" class="max-w-6xl mx-auto px-6 py-16">
+      <h3 class="text-3xl font-bold">Технические характеристики</h3>
+      <p class="text-gray-600 mt-3">Краткое описание ключевых инженерных решений и выбранных материалов.</p>
+
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-6 shadow floating">
+          <div class="text-sm text-gray-500">Подъёмный механизм</div>
+          <div class="mt-2 font-medium">Кухонные газовые амортизаторы: плавность, регулировка усилия, экономичность</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow floating">
+          <div class="text-sm text-gray-500">Каркас</div>
+          <div class="mt-2 font-medium">AISI 304 — коррозионная стойкость и долговечность</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow floating">
+          <div class="text-sm text-gray-500">Облицовка</div>
+          <div class="mt-2 font-medium">Влагостойкая ЛДСП / МДФ — широкий выбор текстур и цветов</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="max-w-6xl mx-auto px-6 py-16">
+      <h3 class="text-3xl font-bold">Дорожная карта</h3>
+      <p class="text-gray-600 mt-3">Этапы реализации проекта — от исследования до серийного производства.</p>
+
+      <div class="mt-8 space-y-4">
+        <div class="flex gap-4 items-start">
+          <div class="w-28 text-sm text-gray-500">1–2 мес</div>
+          <div class="bg-white rounded-lg p-4 shadow flex-1">
+            <div class="font-semibold">Исследование и UX</div>
+            <div class="text-gray-600 text-sm mt-1">Опросы, фокус‑группы, анализ патентов</div>
           </div>
-          <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
-            <div class="text-sm">Материалы</div>
-            <div class="font-semibold">AISI 304 + влагостойкая ЛДСП</div>
+        </div>
+
+        <div class="flex gap-4 items-start">
+          <div class="w-28 text-sm text-gray-500">2–3 мес</div>
+          <div class="bg-white rounded-lg p-4 shadow flex-1">
+            <div class="font-semibold">Проектирование</div>
+            <div class="text-gray-600 text-sm mt-1">3D‑модели, чертежи, выбор поставщиков</div>
           </div>
         </div>
-      </article>
-    </div>
-  </section>
 
-  <!-- TECH -->
-  <section id="tech" class="max-w-6xl mx-auto px-6 py-16">
-    <h3 class="text-3xl font-bold">Технические характеристики</h3>
-    <p class="text-gray-600 mt-3">Краткое описание ключевых инженерных решений и выбранных материалов.</p>
+        <div class="flex gap-4 items-start">
+          <div class="w-28 text-sm text-gray-500">3–4 мес</div>
+          <div class="bg-white rounded-lg p-4 shadow flex-1">
+            <div class="font-semibold">Прототипы и тесты</div>
+            <div class="text-gray-600 text-sm mt-1">Изготовление, тестирование, доработка</div>
+          </div>
+        </div>
 
-    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl p-6 shadow floating">
-        <div class="text-sm text-gray-500">Подъемный механизм</div>
-        <div class="mt-2 font-medium">Кухонные газовые амортизаторы: плавность, регулировка усилия, экономичность</div>
-      </div>
-      <div class="bg-white rounded-2xl p-6 shadow floating">
-        <div class="text-sm text-gray-500">Каркас</div>
-        <div class="mt-2 font-medium">AISI 304 — коррозионная стойкость и долговечность</div>
-      </div>
-      <div class="bg-white rounded-2xl p-6 shadow floating">
-        <div class="text-sm text-gray-500">Облицовка</div>
-        <div class="mt-2 font-medium">Влагостойкая ЛДСП / МДФ — широкий выбор текстур и цветов</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROADMAP -->
-  <section id="roadmap" class="max-w-6xl mx-auto px-6 py-16">
-    <h3 class="text-3xl font-bold">Дорожная карта</h3>
-    <p class="text-gray-600 mt-3">Этапы реализации проекта — от исследования до серийного производства.</p>
-
-    <div class="mt-8 space-y-4">
-      <div class="flex gap-4 items-start">
-        <div class="w-28 text-sm text-gray-500">1–2 мес</div>
-        <div class="bg-white rounded-lg p-4 shadow flex-1">
-          <div class="font-semibold">Исследование и UX</div>
-          <div class="text-gray-600 text-sm mt-1">Опросы, фокус‑группы, анализ патентов</div>
+        <div class="flex gap-4 items-start">
+          <div class="w-28 text-sm text-gray-500">4–6 мес</div>
+          <div class="bg-white rounded-lg p-4 shadow flex-1">
+            <div class="font-semibold">Производство и маркетинг</div>
+            <div class="text-gray-600 text-sm mt-1">Запуск производства, рекламная кампания</div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="flex gap-4 items-start">
-        <div class="w-28 text-sm text-gray-500">2–3 мес</div>
-        <div class="bg-white rounded-lg p-4 shadow flex-1">
-          <div class="font-semibold">Проектирование</div>
-          <div class="text-gray-600 text-sm mt-1">3D-модели, чертежи, выбор поставщиков</div>
+    <!-- CTA block simplified: не кнопка, а приглашение — единственная кнопка на сайте в хедере -->
+    <section class="max-w-6xl mx-auto px-6 py-16">
+      <div class="rounded-2xl bg-gradient-to-r from-indigo-600 to-pink-500 p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-2xl font-bold">Готовы увидеть прототип?</h3>
+          <p class="mt-2 text-indigo-100">Напишите нам в Telegram (кнопка «Связаться» в шапке) — организуем тест‑драйв и подготовим коммерческое предложение.</p>
+        </div>
+        <div class="text-sm opacity-90">
+          <a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="underline">Ознакомиться с отчётом</a>
         </div>
       </div>
+    </section>
 
-      <div class="flex gap-4 items-start">
-        <div class="w-28 text-sm text-gray-500">3–4 мес</div>
-        <div class="bg-white rounded-lg p-4 shadow flex-1">
-          <div class="font-semibold">Прототипы и тесты</div>
-          <div class="text-gray-600 text-sm mt-1">Изготовление, тестирование, доработка</div>
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-200 py-8 mt-8">
+      <div class="max-w-6xl mx-auto px-6 text-sm text-gray-600 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>© <span id="year"></span> Step3D — идея‑прототип</div>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-indigo-600">Политика конфиденциальности</a>
+          <a href="#" class="hover:text-indigo-600">Контакты</a>
         </div>
       </div>
+    </footer>
+  </main>
 
-      <div class="flex gap-4 items-start">
-        <div class="w-28 text-sm text-gray-500">4–6 мес</div>
-        <div class="bg-white rounded-lg p-4 shadow flex-1">
-          <div class="font-semibold">Производство и маркетинг</div>
-          <div class="text-gray-600 text-sm mt-1">Запуск производства, рекламная кампания</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <script>
+    // Инициализация года
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  <!-- CTA -->
-  <section class="max-w-6xl mx-auto px-6 py-16">
-    <div class="rounded-2xl bg-gradient-to-r from-indigo-600 to-pink-500 p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-      <div>
-        <h3 class="text-2xl font-bold">Готовы показать прототип?</h3>
-        <p class="mt-2 text-indigo-100">Организуем тест-драйв и предоставим коммерческое предложение для пилотной партии.</p>
-      </div>
-      <div>
-        <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold shadow">Связаться</a>
-      </div>
-    </div>
-  </section>
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    mobileToggle?.addEventListener('click', () => {
+      const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+      mobileToggle.setAttribute('aria-expanded', String(!expanded));
+      if (expanded) {
+        mobileNav.classList.add('hidden');
+      } else {
+        mobileNav.classList.remove('hidden');
+        // add slight animation class
+        mobileNav.classList.add('mobile-nav-enter', 'active');
+        setTimeout(() => mobileNav.classList.remove('mobile-nav-enter', 'active'), 300);
+      }
+    });
 
-  <!-- FOOTER -->
-  <footer class="border-t border-gray-200 py-8 mt-8">
-    <div class="max-w-6xl mx-auto px-6 text-sm text-gray-600 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div>© <span id="year"></span> Step3D — идея-прототип</div>
-      <div class="flex gap-4">
-        <a href="#" class="hover:text-indigo-600">Политика конфиденциальности</a>
-        <a href="#" class="hover:text-indigo-600">Контакты</a>
-      </div>
-    </div>
-  </footer>
-</main>
+    // Логика демо-ползунка (более выразительное перемещение корзины)
+    const range = document.getElementById('demoRange');
+    const basket = document.getElementById('basket');
+    const percent = document.getElementById('percent');
 
-<script>
-  // Инициализация года
-  document.getElementById('year').textContent = new Date().getFullYear();
+    function updateBasket() {
+      const v = Number(range.value); // 0..100
+      // интерполируем смещение от +48px (нижняя позиция) до -12px (верхняя позиция)
+      const y = 48 - v * 0.6; // когда v=0 -> 48px; v=100 -> -12px
+      basket.style.transform = `translateY(${y}px)`;
+      percent.textContent = `Высота — ${v}%`;
+    }
 
-  // Логика демо-ползунка
-  const range = document.getElementById('demoRange');
-  const basket = document.getElementById('basket');
-  const percent = document.getElementById('percent');
-  function updateBasket() {
-    const v = Number(range.value);
-    // чем больше значение — тем выше корзина: мы переводим в пиксели смещения
-    const y = (100 - v) * 0.9; // чувствительность
-    basket.style.transform = `translateY(${y}px)`;
-    percent.textContent = `Высокая — ${v}%`;
-  }
-  range.addEventListener('input', updateBasket);
-  // начальное положение
-  updateBasket();
-</script>
+    range?.addEventListener('input', updateBasket);
+    // inic
+    updateBasket();
 
+    // Поддержка keyboard: при нажатии стрелок — range сам отрабатывает, но добавим +/- кнопки на клавиши +/-
+    range?.addEventListener('keydown', (e) => {
+      if (e.key === '+' || e.key === '=') { range.value = Math.min(100, Number(range.value) + 5); updateBasket(); }
+      if (e.key === '-') { range.value = Math.max(0, Number(range.value) - 5); updateBasket(); }
+    });
+
+    // Небольшая доступность: фокус на форме — подсветка
+    document.querySelectorAll('a, button, input').forEach(el => {
+      el.addEventListener('focus', () => el.classList.add('focus-ring'));
+      el.addEventListener('blur', () => el.classList.remove('focus-ring'));
+    });
+  </script>
 </body>
 </html>
-
