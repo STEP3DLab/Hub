@@ -1,241 +1,293 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Step3D — Устройство для облегчения доступа к ПММ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Дополнительные стили и анимации */
+    .glass {
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.6);
+    }
+    .floating {
+      transition: transform 0.45s cubic-bezier(.2,.9,.3,1), box-shadow .2s;
+    }
+    .floating:hover { transform: translateY(-6px); }
+    /* Демонстрация: плавное перемещение корзины */
+    #basket { transition: transform 0.45s cubic-bezier(.2,.9,.3,1); }
+    /* Адаптивный header: скрывать nav на мобильных */
+    @media (max-width: 768px) {
+      nav.desktop { display: none; }
+      .hero-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="antialiased text-gray-900 bg-gradient-to-b from-gray-50 via-white to-gray-100">
 
-// Одностраничный React-компонент с TailwindCSS + Framer Motion
-// Предназначен для предварительного просмотра в проекте (можно поместить в Create React App / Next.js)
+<header class="fixed w-full z-40 top-0 bg-white/60 border-b border-gray-200 glass">
+  <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      $1S3$2
+      <div>
+        <div class="font-semibold">Step3D</div>
+        <div class="text-xs text-gray-500">Комфорт. Эргономика. Дизайн.</div>
+      </div>
+    </div>
 
-export default function DishwasherAssistLanding() {
-  const [demoHeight, setDemoHeight] = useState(40); // процент подъёма корзины
+    <nav class="desktop flex gap-6 text-sm text-gray-700">
+      <a href="#problem" class="hover:text-indigo-600">Проблема</a>
+      <a href="#solution" class="hover:text-indigo-600">Решение</a>
+      <a href="#tech" class="hover:text-indigo-600">Технические</a>
+      <a href="#roadmap" class="hover:text-indigo-600">Дорожная карта</a>
+    </nav>
 
-  const heroVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
+    <div>
+      <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-indigo-600 text-white shadow hover:opacity-95">Связаться</a>
+    </div>
+  </div>
+</header>
 
-  const cardHover = { scale: 1.02, y: -6 };
+<main class="pt-24">
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6 py-20 grid hero-grid grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Устройство для облегчения доступа к посудомоечной машине</h1>
+        <p class="mt-4 text-lg text-gray-700">Мобильная платформа с регулируемым подъемом корзины: меньше наклонов — меньше боли в спине. Эргономично, эстетично, удобно — для дома и семей.</p>
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 text-gray-900 antialiased">
-      {/* NAV */}
-      <header className="fixed w-full z-40 top-0 backdrop-blur-md bg-white/60 border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center text-white font-bold shadow-lg">DA</div>
+        <div class="mt-8">
+          <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center gap-3 px-5 py-3 rounded-lg bg-indigo-600 text-white shadow hover:bg-indigo-500">Связаться</a>
+        <div class="mt-3 text-sm"><a href="https://docs.google.com/document/d/1rt-c9IXPk9TfibsPgENWii8aT75_IGGIeOkOGP7pX3g/edit?tab=t.0" target="_blank" rel="noopener noreferrer" class="underline text-indigo-600">Полный отчёт проекта (Google Docs)</a></div>"
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
+            <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
             <div>
-              <div className="font-semibold">DishwasherAssist</div>
-              <div className="text-xs text-gray-500">Комфорт. Эргономика. Дизайн.</div>
+              <div class="text-sm font-medium">Мобильность</div>
+              <div class="text-xs text-gray-500">Колёса с фиксатором</div>
             </div>
           </div>
-          <nav className="hidden md:flex gap-6 text-sm text-gray-700">
-            <a href="#problem" className="hover:text-indigo-600">Проблема</a>
-            <a href="#solution" className="hover:text-indigo-600">Решение</a>
-            <a href="#tech" className="hover:text-indigo-600">Техническиe</a>
-            <a href="#roadmap" className="hover:text-indigo-600">Дорожная карта</a>
-          </nav>
-          <div className="flex gap-3">
-            <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg bg-indigo-600 text-white shadow hover:opacity-95">Связаться</a>
+
+          <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
+            <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
+            <div>
+              <div class="text-sm font-medium">Регулировка</div>
+              <div class="text-xs text-gray-500">Плавный газовый подъём</div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
+            <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
+            <div>
+              <div class="text-sm font-medium">Универсальность</div>
+              <div class="text-xs text-gray-500">45/60 см</div>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
+            <div class="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
+            <div>
+              <div class="text-sm font-medium">Материалы</div>
+              <div class="text-xs text-gray-500">AISI 304 + ЛДСП</div>
+            </div>
           </div>
         </div>
-      </header>
+      </div>
 
-      <main className="pt-24">
-        {/* HERO */}
-        <section className="relative overflow-hidden">
-          <div className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <motion.div initial="hidden" whileInView="visible" variants={heroVariants} viewport={{ once: true }}>
-              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">Устройство для облегчения доступа к посудомоечной машине</h1>
-              <p className="mt-4 text-lg text-gray-700">Мобильная платформа с регулируемым подъемом корзины: меньше наклонов — меньше боли в спине. Эргономично, эстетично, удобно — для дома и семей.</p>
+      <!-- DEMO MOCKUP -->
+      <div class="relative">
+        <div class="pointer-events-none absolute -left-24 -top-20 w-80 h-80 rounded-2xl bg-gradient-to-br from-pink-200 to-indigo-200 blur-3xl opacity-40"></div>
 
-              <div className="mt-8">
-                <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" className="inline-flex w-full sm:w-auto items-center justify-center gap-3 px-5 py-3 rounded-lg bg-indigo-600 text-white shadow hover:bg-indigo-500">Связаться</a>
-              </div>
-
-              <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                <FeatureBadge title="Мобильность" subtitle="Колёса с фиксатором" />
-                <FeatureBadge title="Регулировка" subtitle="Плавный газовый подъём" />
-                <FeatureBadge title="Универсальность" subtitle="45/60 см" />
-                <FeatureBadge title="Материалы" subtitle="AISI 304 + ЛДСП" />
-              </div>
-            </motion.div>
-
-            {/* DEMO MOCKUP */}
-            <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 }} className="relative">
-              <div className="pointer-events-none absolute -left-24 -top-20 w-80 h-80 rounded-2xl bg-gradient-to-br from-pink-200 to-indigo-200 blur-3xl opacity-40"></div>
-
-              <div className="bg-white/60 backdrop-blur rounded-2xl p-6 shadow-2xl border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm text-gray-500">Интерактивное демо</div>
-                    <div className="font-semibold text-lg">Симуляция подъёма корзины</div>
-                  </div>
-                </div>
-
-                <div id="demo" className="mt-6">
-                  <div className="relative w-full h-64 bg-gradient-to-b from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden flex items-end justify-center">
-                    {/* стилизованная ПММ-зона */}
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-56 rounded-md bg-gray-100 border border-gray-200 shadow-inner flex flex-col items-center justify-end">
-                      <div className="w-64 h-2 bg-gray-200 rounded-t-md mt-3" />
-                      <div className="w-64 h-36 flex items-center justify-center relative">
-                        {/* Корзина — двигается от demoHeight */}
-                        <motion.div animate={{ y: `${(100 - demoHeight) * 0.9}px` }} transition={{ type: 'spring', stiffness: 160, damping: 18 }} className="w-52 h-24 bg-gradient-to-b from-white to-gray-50 border border-gray-300 rounded-md shadow flex items-center justify-center">
-                          <BasketIllustration />
-                        </motion.div>
-                      </div>
-                    </div>
-
-                    <div className="absolute right-6 top-6 text-xs text-gray-400">Эскиз: не финальный дизайн</div>
-                  </div>
-
-                  <div className="mt-4">
-                    <input aria-label="Подъём корзины" type="range" min={0} max={100} value={demoHeight} onChange={(e) => setDemoHeight(Number(e.target.value))} className="w-full" />
-                    <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
-                      <span>Низкая</span>
-                      <span>Высокая — {demoHeight}%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* PROBLEM & SOLUTION */}
-        <section id="problem" className="max-w-6xl mx-auto px-6 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-            <motion.article initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-2xl p-8 shadow">
-              <h3 className="text-2xl font-semibold">Проблема</h3>
-              <p className="mt-4 text-gray-700">Многократные наклоны при загрузке/выгрузке ПММ приводят к болям в спине и повышенному риску травм. Особенно остро это сказывается на пожилых людях и людях с проблемами опорно‑двигательного аппарата.</p>
-
-              <ul className="mt-4 space-y-3 text-gray-600">
-                <li>Хроническая нагрузка на поясницу</li>
-                <li>Небольшие кухни — ограниченное пространство</li>
-                <li>Отсутствие эстетичных бытовых решений</li>
-              </ul>
-            </motion.article>
-
-            <motion.article initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gradient-to-br from-indigo-600 to-pink-500 text-white rounded-2xl p-8 shadow-lg">
-              <h3 className="text-2xl font-semibold">Решение</h3>
-              <p className="mt-4 text-indigo-50">Мобильная платформа с плавным газовым подъёмом корзины — удобная, безопасная и эстетичная. Подходит для узких и полноразмерных ПММ; убирается, когда не нужна.</p>
-
-              <div className="mt-6 grid grid-cols-1 gap-3">
-                <StatPill title="Снижение нагрузки" value="— до 60%" />
-                <StatPill title="Совместимость" value="45 / 60 см" />
-                <StatPill title="Материалы" value="AISI 304 + влагостойкая ЛДСП" />
-              </div>
-            </motion.article>
-          </div>
-        </section>
-
-        {/* TECH SPEC */}
-        <section id="tech" className="max-w-6xl mx-auto px-6 py-16">
-          <h3 className="text-3xl font-bold">Технические характеристики</h3>
-          <p className="text-gray-600 mt-3">Краткое описание ключевых инженерных решений и выбранных материалов.</p>
-
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <SpecCard title="Подъемный механизм" desc="Кухонные газовые амортизаторы: плавность, регулировка усилия, экономичность" />
-            <SpecCard title="Каркас" desc="AISI 304 — коррозионная стойкость и долговечность" />
-            <SpecCard title="Облицовка" desc="Влагостойкая ЛДСП / МДФ — широкий выбор текстур и цветов" />
-          </div>
-        </section>
-
-        {/* ROADMAP */}
-        <section id="roadmap" className="max-w-6xl mx-auto px-6 py-16">
-          <h3 className="text-3xl font-bold">Дорожная карта</h3>
-          <p className="text-gray-600 mt-3">Этапы реализации проекта — от исследования до серийного производства.</p>
-
-          <div className="mt-8 space-y-4">
-            <RoadmapItem month="1–2 мес" title="Исследование и UX" desc="Опросы, фокус‑группы, анализ патентов" />
-            <RoadmapItem month="2–3 мес" title="Проектирование" desc="3D-модели, чертежи, выбор поставщиков" />
-            <RoadmapItem month="3–4 мес" title="Прототипы и тесты" desc="Изготовление, тестирование, доработка" />
-            <RoadmapItem month="4–6 мес" title="Производство и маркетинг" desc="Запуск производства, рекламная кампания" />
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="max-w-6xl mx-auto px-6 py-16">
-          <div className="rounded-2xl bg-gradient-to-r from-indigo-600 to-pink-500 p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="glass rounded-2xl p-6 shadow-2xl border border-gray-100">
+          <div class="flex items-center justify-between">
             <div>
-              <h3 className="text-2xl font-bold">Готовы показать прототип?</h3>
-              <p className="mt-2 text-indigo-100">Организуем тест-драйв и предоставим коммерческое предложение для пилотной партии.</p>
-            </div>
-            <div className="flex gap-4">
-              <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold shadow">Связаться</a>
+              <div class="text-sm text-gray-500">Интерактивное демо</div>
+              <div class="font-semibold text-lg">Симуляция подъёма корзины</div>
             </div>
           </div>
-        </section>
 
-        {/* FOOTER */}
-        <footer className="border-t border-gray-200 py-8 mt-8">
-          <div className="max-w-6xl mx-auto px-6 text-sm text-gray-600 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>© {new Date().getFullYear()} DishwasherAssist — идея-прототип</div>
-            <div className="flex gap-4">
-              <a href="#" className="hover:text-indigo-600">Политика конфиденциальности</a>
-              <a href="#" className="hover:text-indigo-600">Контакты</a>
+          <div id="demo" class="mt-6">
+            <div class="relative w-full h-64 bg-gradient-to-b from-gray-50 to-white rounded-lg border border-gray-200 overflow-hidden flex items-end justify-center">
+              <!-- стилизованная ПММ-зона -->
+              <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 h-56 rounded-md bg-gray-100 border border-gray-200 shadow-inner flex flex-col items-center justify-end">
+                <div class="w-64 h-2 bg-gray-200 rounded-t-md mt-3"></div>
+                <div class="w-64 h-36 flex items-center justify-center relative">
+                  <!-- Корзина — управляется JS -->
+                  <div id="basket" class="w-52 h-24 bg-gradient-to-b from-white to-gray-50 border border-gray-300 rounded-md shadow flex items-center justify-center" style="transform: translateY(36px);">
+                    <!-- простая иллюстрация корзины -->
+                    <svg width="160" height="72" viewBox="0 0 160 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                      <rect x="2" y="2" width="156" height="68" rx="8" fill="#FFF" stroke="#E5E7EB" />
+                      <g transform="translate(12,14)" fill="#D1D5DB">
+                        <rect x="0" y="0" width="136" height="8" rx="3" />
+                        <rect x="0" y="12" width="136" height="8" rx="3" />
+                        <rect x="0" y="24" width="136" height="8" rx="3" />
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div class="absolute right-6 top-6 text-xs text-gray-400">Эскиз: не финальный дизайн</div>
+            </div>
+
+            <div class="mt-4">
+              <input id="demoRange" aria-label="Подъём корзины" type="range" min="0" max="100" value="40" class="w-full">
+              <div class="flex items-center justify-between text-sm text-gray-600 mt-2">
+                <span>Низкая</span>
+                <span id="percent">Высокая — 40%</span>
+              </div>
             </div>
           </div>
-        </footer>
-      </main>
+        </div>
+      </div>
     </div>
-  );
-}
+  </section>
 
-function FeatureBadge({ title, subtitle }) {
-  return (
-    <div className="flex items-start gap-3 bg-white rounded-lg p-3 shadow-sm border">
-      <div className="w-9 h-9 rounded-md bg-gradient-to-br from-indigo-500 to-pink-400 text-white flex items-center justify-center font-semibold">✓</div>
+  <!-- PROBLEM & SOLUTION -->
+  <section id="problem" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+      <article class="bg-white rounded-2xl p-8 shadow">
+        <h3 class="text-2xl font-semibold">Проблема</h3>
+        <p class="mt-4 text-gray-700">Многократные наклоны при загрузке/выгрузке ПММ приводят к болям в спине и повышенному риску травм. Особенно остро это сказывается на пожилых людях и людях с проблемами опорно‑двигательного аппарата.</p>
+
+        <ul class="mt-4 space-y-3 text-gray-600">
+          <li>Хроническая нагрузка на поясницу</li>
+          <li>Небольшие кухни — ограниченное пространство</li>
+          <li>Отсутствие эстетичных бытовых решений</li>
+        </ul>
+      </article>
+
+      <article class="bg-gradient-to-br from-indigo-600 to-pink-500 text-white rounded-2xl p-8 shadow-lg">
+        <h3 class="text-2xl font-semibold">Решение</h3>
+        <p class="mt-4 text-indigo-50">Мобильная платформа с плавным газовым подъёмом корзины — удобная, безопасная и эстетичная. Подходит для узких и полноразмерных ПММ; убирается, когда не нужна.</p>
+
+        <div class="mt-6 grid grid-cols-1 gap-3">
+          <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
+            <div class="text-sm">Снижение нагрузки</div>
+            <div class="font-semibold">— до 60%</div>
+          </div>
+          <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
+            <div class="text-sm">Совместимость</div>
+            <div class="font-semibold">45 / 60 см</div>
+          </div>
+          <div class="flex items-center justify-between bg-white/10 p-3 rounded-lg">
+            <div class="text-sm">Материалы</div>
+            <div class="font-semibold">AISI 304 + влагостойкая ЛДСП</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section id="tech" class="max-w-6xl mx-auto px-6 py-16">
+    <h3 class="text-3xl font-bold">Технические характеристики</h3>
+    <p class="text-gray-600 mt-3">Краткое описание ключевых инженерных решений и выбранных материалов.</p>
+
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-6 shadow floating">
+        <div class="text-sm text-gray-500">Подъемный механизм</div>
+        <div class="mt-2 font-medium">Кухонные газовые амортизаторы: плавность, регулировка усилия, экономичность</div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow floating">
+        <div class="text-sm text-gray-500">Каркас</div>
+        <div class="mt-2 font-medium">AISI 304 — коррозионная стойкость и долговечность</div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow floating">
+        <div class="text-sm text-gray-500">Облицовка</div>
+        <div class="mt-2 font-medium">Влагостойкая ЛДСП / МДФ — широкий выбор текстур и цветов</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="max-w-6xl mx-auto px-6 py-16">
+    <h3 class="text-3xl font-bold">Дорожная карта</h3>
+    <p class="text-gray-600 mt-3">Этапы реализации проекта — от исследования до серийного производства.</p>
+
+    <div class="mt-8 space-y-4">
+      <div class="flex gap-4 items-start">
+        <div class="w-28 text-sm text-gray-500">1–2 мес</div>
+        <div class="bg-white rounded-lg p-4 shadow flex-1">
+          <div class="font-semibold">Исследование и UX</div>
+          <div class="text-gray-600 text-sm mt-1">Опросы, фокус‑группы, анализ патентов</div>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="w-28 text-sm text-gray-500">2–3 мес</div>
+        <div class="bg-white rounded-lg p-4 shadow flex-1">
+          <div class="font-semibold">Проектирование</div>
+          <div class="text-gray-600 text-sm mt-1">3D-модели, чертежи, выбор поставщиков</div>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="w-28 text-sm text-gray-500">3–4 мес</div>
+        <div class="bg-white rounded-lg p-4 shadow flex-1">
+          <div class="font-semibold">Прототипы и тесты</div>
+          <div class="text-gray-600 text-sm mt-1">Изготовление, тестирование, доработка</div>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="w-28 text-sm text-gray-500">4–6 мес</div>
+        <div class="bg-white rounded-lg p-4 shadow flex-1">
+          <div class="font-semibold">Производство и маркетинг</div>
+          <div class="text-gray-600 text-sm mt-1">Запуск производства, рекламная кампания</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-6xl mx-auto px-6 py-16">
+    <div class="rounded-2xl bg-gradient-to-r from-indigo-600 to-pink-500 p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
       <div>
-        <div className="text-sm font-medium">{title}</div>
-        <div className="text-xs text-gray-500">{subtitle}</div>
+        <h3 class="text-2xl font-bold">Готовы показать прототип?</h3>
+        <p class="mt-2 text-indigo-100">Организуем тест-драйв и предоставим коммерческое предложение для пилотной партии.</p>
+      </div>
+      <div>
+        <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold shadow">Связаться</a>
       </div>
     </div>
-  );
-}
+  </section>
 
-function BasketIllustration() {
-  return (
-    <svg width="160" height="72" viewBox="0 0 160 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-      <rect x="2" y="2" width="156" height="68" rx="8" fill="url(#g)" stroke="#E5E7EB" />
-      <defs>
-        <linearGradient id="g" x1="0" x2="1">
-          <stop offset="0" stopColor="#FFFFFF" />
-          <stop offset="1" stopColor="#F3F4F6" />
-        </linearGradient>
-      </defs>
-      <g transform="translate(12,14)" fill="#D1D5DB">
-        <rect x="0" y="0" width="136" height="8" rx="3" />
-        <rect x="0" y="12" width="136" height="8" rx="3" />
-        <rect x="0" y="24" width="136" height="8" rx="3" />
-      </g>
-    </svg>
-  );
-}
-
-function StatPill({ title, value }) {
-  return (
-    <div className="flex items-center justify-between bg-white/10 p-3 rounded-lg">
-      <div className="text-sm">{title}</div>
-      <div className="font-semibold">{value}</div>
-    </div>
-  );
-}
-
-function SpecCard({ title, desc }) {
-  return (
-    <motion.div whileHover={{ y: -6 }} className="bg-white rounded-2xl p-6 shadow">
-      <div className="text-sm text-gray-500">{title}</div>
-      <div className="mt-2 font-medium">{desc}</div>
-    </motion.div>
-  );
-}
-
-function RoadmapItem({ month, title, desc }) {
-  return (
-    <div className="flex gap-4 items-start">
-      <div className="w-28 text-sm text-gray-500">{month}</div>
-      <div className="bg-white rounded-lg p-4 shadow flex-1">
-        <div className="font-semibold">{title}</div>
-        <div className="text-gray-600 text-sm mt-1">{desc}</div>
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-200 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-6 text-sm text-gray-600 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>© <span id="year"></span> Step3D — идея-прототип</div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-indigo-600">Политика конфиденциальности</a>
+        <a href="#" class="hover:text-indigo-600">Контакты</a>
       </div>
     </div>
-  );
-}
+  </footer>
+</main>
+
+<script>
+  // Инициализация года
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Логика демо-ползунка
+  const range = document.getElementById('demoRange');
+  const basket = document.getElementById('basket');
+  const percent = document.getElementById('percent');
+  function updateBasket() {
+    const v = Number(range.value);
+    // чем больше значение — тем выше корзина: мы переводим в пиксели смещения
+    const y = (100 - v) * 0.9; // чувствительность
+    basket.style.transform = `translateY(${y}px)`;
+    percent.textContent = `Высокая — ${v}%`;
+  }
+  range.addEventListener('input', updateBasket);
+  // начальное положение
+  updateBasket();
+</script>
+
+</body>
+</html>
