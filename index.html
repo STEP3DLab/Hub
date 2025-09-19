@@ -31,6 +31,11 @@
     .glass { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(255,255,255,.6); }
     .reveal { opacity:0; transform: translateY(16px); transition: .6s cubic-bezier(.2,.8,.2,1); }
     .reveal.on { opacity:1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; transform: none; }
+      .reveal.on { transition: none; }
+      .roadmap-bar { transition: none !important; transform: none !important; }
+    }
     html { scroll-behavior: smooth; }
   </style>
 
@@ -262,7 +267,7 @@
           <h3 class="font-semibold">Проектирование <span class="text-slate-400 font-normal">· 2–3 мес</span></h3>
           <p class="text-slate-600 text-sm mt-1">3D-модели, чертежи, выбор поставщиков, расчёт себестоимости.</p>
           <div class="mt-2 w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-            <div class="h-2 bg-brand-400 w-[55%]" id="rm2"></div>
+            <div class="h-2 bg-brand-400 w-[55%] roadmap-bar" id="rm2"></div>
           </div>
         </li>
         <!-- 3 -->
@@ -271,7 +276,7 @@
           <h3 class="font-semibold">Прототипы и тесты <span class="text-slate-400 font-normal">· 3–4 мес</span></h3>
           <p class="text-slate-600 text-sm mt-1">Изготовление прототипов, тестирование, доработка конструкции.</p>
           <div class="mt-2 w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-            <div class="h-2 bg-brand-400 w-[25%]" id="rm3"></div>
+            <div class="h-2 bg-brand-400 w-[25%] roadmap-bar" id="rm3"></div>
           </div>
         </li>
         <!-- 4 -->
@@ -280,7 +285,7 @@
           <h3 class="font-semibold">Производство и маркетинг <span class="text-slate-400 font-normal">· 4–6 мес</span></h3>
           <p class="text-slate-600 text-sm mt-1">Пилотная партия, сертификация, запуск рекламы и продаж.</p>
           <div class="mt-2 w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-            <div class="h-2 bg-brand-400 w-[10%]" id="rm4"></div>
+            <div class="h-2 bg-brand-400 w-[10%] roadmap-bar" id="rm4"></div>
           </div>
         </li>
       </ol>
@@ -324,11 +329,25 @@
     const mm = document.getElementById('mobileMenu');
     mb?.addEventListener('click', () => mm.classList.toggle('hidden'));
 
+    const motionQuery = typeof window.matchMedia === 'function'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)')
+      : null;
+    const prefersReducedMotion = motionQuery ? motionQuery.matches : false;
+
     // Simple reveal on scroll
-    const io = new IntersectionObserver((entries)=> {
-      entries.forEach(e=> { if (e.isIntersecting) e.target.classList.add('on'); });
-    }, {threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+    const revealElements = document.querySelectorAll('.reveal');
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('on');
+          }
+        });
+      }, { threshold: .12 });
+      revealElements.forEach((el) => io.observe(el));
+    } else {
+      revealElements.forEach((el) => el.classList.add('on'));
+    }
 
     // Demo slider logic
     const range = document.getElementById('height');
@@ -348,20 +367,49 @@
     updateDemo(range?.value || 40);
 
     // Animate roadmap bars when visible
-    const bars = ['rm2','rm3','rm4'].map(id=>document.getElementById(id)).filter(Boolean);
-    const ioBars = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          const el = e.target;
-          const w = el.style.width;
-          el.style.width = '0%';
-          el.style.transition = 'width 1s cubic-bezier(.2,.8,.2,1)';
-          requestAnimationFrame(()=> { el.style.width = w; });
-          ioBars.unobserve(el);
-        }
+    const bars = Array.from(document.querySelectorAll('.roadmap-bar'));
+    const storeFinalWidth = (el) => {
+      if (el.dataset.finalWidthStored === 'true') return;
+      const inlineWidth = el.style.width;
+      el.dataset.finalWidthStored = 'true';
+      if (inlineWidth) {
+        el.dataset.finalWidthValue = inlineWidth;
+        el.dataset.useClassWidth = 'false';
+      } else {
+        el.dataset.useClassWidth = 'true';
+      }
+    };
+    const applyFinalWidth = (el) => {
+      if (el.dataset.useClassWidth === 'true') {
+        el.style.removeProperty('width');
+      } else if (el.dataset.finalWidthValue !== undefined) {
+        el.style.width = el.dataset.finalWidthValue;
+      }
+    };
+    bars.forEach(storeFinalWidth);
+
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+      const ioBars = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            el.style.transition = 'none';
+            el.style.width = '0%';
+            requestAnimationFrame(() => {
+              el.style.transition = 'width 1s cubic-bezier(.2,.8,.2,1)';
+              applyFinalWidth(el);
+            });
+            ioBars.unobserve(el);
+          }
+        });
+      }, { threshold: .3 });
+      bars.forEach((el) => ioBars.observe(el));
+    } else {
+      bars.forEach((el) => {
+        el.style.transition = 'none';
+        applyFinalWidth(el);
       });
-    }, {threshold:.3});
-    bars.forEach(el=> ioBars.observe(el));
+    }
   </script>
 </body>
 </html>
