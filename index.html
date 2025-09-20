@@ -122,9 +122,9 @@
               </div>
               <div class="flex flex-col justify-between">
                 <label for="height" class="text-sm text-slate-600">Высота подъёма</label>
-                <input id="height" type="range" min="0" max="100" value="40" class="w-40 accent-brand-600">
-                <div class="text-sm"><span id="heightVal" class="font-semibold">40%</span></div>
-                <p class="text-xs text-slate-500">Эскиз. Цель — показать идею подъёма корзины.</p>
+                <input id="height" type="range" min="0" max="400" value="160" class="w-40 accent-brand-600" aria-valuemin="0" aria-valuemax="400" aria-valuenow="160" aria-describedby="heightDesc">
+                <div class="text-sm"><span id="heightVal" class="font-semibold" aria-live="polite">160 мм (40%)</span></div>
+                <p id="heightDesc" class="text-xs text-slate-500">Эскиз. Цель — показать идею подъёма корзины.</p>
               </div>
             </div>
           </div>
@@ -336,16 +336,26 @@
     const basket = document.getElementById('basket');
     const post = document.getElementById('post');
     const clamp = (n,min,max)=> Math.max(min, Math.min(max,n));
+    const HEIGHT_MIN_MM = 0;
+    const HEIGHT_MAX_MM = 400;
+    const DEFAULT_HEIGHT_MM = 160;
 
     function updateDemo(v){
-      val.textContent = v+'%';
-      const postH = 80 + (v*1.2); // 80–200
-      const basketB = 60 + (v*1.5); // 60–210
+      const mmValue = Number(v);
+      const mm = clamp(Number.isFinite(mmValue) ? mmValue : DEFAULT_HEIGHT_MM, HEIGHT_MIN_MM, HEIGHT_MAX_MM);
+      const percent = ((mm - HEIGHT_MIN_MM) / (HEIGHT_MAX_MM - HEIGHT_MIN_MM)) * 100;
+      const roundedMm = Math.round(mm);
+      const roundedPercent = Math.round(percent);
+      range?.setAttribute('aria-valuenow', String(roundedMm));
+      if(range) range.value = String(mm);
+      if(val) val.textContent = `${roundedMm} мм (${roundedPercent}%)`;
+      const postH = 80 + (percent*1.2); // 80–200
+      const basketB = 60 + (percent*1.5); // 60–210
       post.style.height = clamp(postH,80,220) + 'px';
       basket.style.bottom = clamp(basketB,60,230) + 'px';
     }
     range?.addEventListener('input', e=> updateDemo(e.target.value));
-    updateDemo(range?.value || 40);
+    updateDemo(range?.value || DEFAULT_HEIGHT_MM);
 
     // Animate roadmap bars when visible
     const bars = ['rm2','rm3','rm4'].map(id=>document.getElementById(id)).filter(Boolean);
