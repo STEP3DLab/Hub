@@ -10,23 +10,14 @@
       name="description"
       content="Практический курс ДПО по реверсивному инжинирингу и аддитивному производству: 3D-сканирование, CAD, 3D-печать, календарно-тематический план и команда преподавателей технопарка РГСУ."
     />
-    <link rel="canonical" href="https://step3dlab.ru/reverse-additive.html" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:type" content="article" />
+
     <meta
       property="og:title"
       content="Step3D.Lab — Курс «Реверсивный инжиниринг и аддитивное производство»"
     />
     <meta
       property="og:description"
-      content="Курс Step3D.Lab: реверсивный инжиниринг, 3D-сканирование, аддитивное производство и наставники технопарка РГСУ."
-    />
-    <meta
-      property="og:url"
-      content="https://step3dlab.ru/reverse-additive.html"
-    />
-    <meta property="og:site_name" content="Step3D.Lab" />
-    <meta property="og:image" content="https://step3dlab.ru/Logo_Step_3D.jpg" />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -34,9 +25,7 @@
     />
     <meta
       name="twitter:description"
-      content="Практический курс Step3D.Lab: полный цикл от 3D-сканирования и CAD до подготовки производства и защиты проекта."
-    />
-    <meta name="twitter:image" content="https://step3dlab.ru/Logo_Step_3D.jpg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -47,74 +36,9 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='6' y='6' width='52' height='52' rx='12' fill='%230ea5e9'/><path d='M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36' stroke='%23fff' stroke-width='2' fill='none'/></svg>"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/styles/tailwind.css" />
     <link rel="stylesheet" href="assets/styles/site.css" />
-    <script src="js/forms.js" defer></script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://step3dlab.ru/#organization",
-            "name": "Step3D.Lab",
-            "url": "https://step3dlab.ru/",
-            "logo": "https://step3dlab.ru/Logo_Step_3D.jpg",
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "contactType": "Обучение",
-              "email": "projects.step3d@gmail.com",
-              "availableLanguage": ["ru"]
-            }
-          },
-          {
-            "@type": "Course",
-            "@id": "https://step3dlab.ru/reverse-additive.html#course",
-            "name": "Реверсивный инжиниринг и аддитивное производство",
-            "description": "Практический курс: 3D-сканирование, обработка сеток, CAD/CAM и запуск аддитивного производства под руководством наставников Step3D.Lab.",
-            "educationalCredentialAwarded": "Удостоверение о повышении квалификации РГСУ",
-            "inLanguage": "ru",
-            "courseMode": ["офлайн", "онлайн"],
-            "provider": {
-              "@id": "https://step3dlab.ru/#organization"
-            },
-            "hasCourseInstance": {
-              "@type": "CourseInstance",
-              "courseMode": ["очно", "очно-заочно"],
-              "location": [
-                {
-                  "@type": "Place",
-                  "name": "Step3D.Lab — площадка ВДНХ",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "ул. Вильгельма Пика, 4, корп. 8",
-                    "addressLocality": "Москва",
-                    "addressCountry": "RU"
-                  }
-                },
-                {
-                  "@type": "Place",
-                  "name": "Step3D.Lab — площадка Беговая",
-                  "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "ул. Беговая, 12",
-                    "addressLocality": "Москва",
-                    "addressCountry": "RU"
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    </script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: { boxShadow: { soft: "0 6px 30px rgba(15,23,42,.08)" } },
-        },
-      };
-    </script>
+
     <style>
       :root {
         color-scheme: light dark;
@@ -444,6 +368,7 @@
     </style>
   </head>
   <body class="min-h-screen text-slate-800 dark:text-slate-100 antialiased">
+    <a class="skip-link" href="#main-content">Пропустить к основному контенту</a>
     <div
       id="progress"
       class="progress-shadow fixed top-0 left-0 h-1 bg-slate-900/90 origin-left z-50"
@@ -605,7 +530,7 @@
       </div>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <section
         id="course-gallery"
         class="section-shell py-16 md:py-24"
@@ -1435,7 +1360,9 @@
         </div>
       </section>
 
-      <footer
+    </main>
+
+    <footer
 
                 >
                   По всем вопросам
@@ -1454,7 +1381,7 @@
                 <a
                   href="https://t.me/step_3d_mngr"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-mono text-base text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
                 >
                   @step_3d_mngr
@@ -1474,7 +1401,7 @@
                 <a
                   href="https://t.me/STEP_3D_Lab"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-medium text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
                 >
                   t.me/STEP_3D_Lab
@@ -1495,7 +1422,7 @@
                 <a
                   href="https://technopark-rgsu.ru/"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-medium text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
                 >
                   technopark-rgsu.ru
