@@ -1,6 +1,3 @@
-const DESKTOP_CLASSES = "top-nav__link";
-const MOBILE_CLASSES = "top-nav__mobile-link";
-
 function parseNavData() {
   const navDataEl = document.getElementById("nav-data");
   if (!navDataEl) return [];
@@ -14,23 +11,117 @@ function parseNavData() {
   }
 }
 
-function renderLinks(container, variant, navItems) {
-  if (!container) return [];
-  container.innerHTML = "";
-  const className = variant === "desktop" ? DESKTOP_CLASSES : MOBILE_CLASSES;
-  navItems.forEach(({ id, label }) => {
-    const link = document.createElement("a");
-    link.href = `#${id}`;
-    link.dataset.navLink = "true";
-    link.textContent = label;
-    link.className = className;
-    container.appendChild(link);
-  });
-  return Array.from(container.querySelectorAll("a[data-nav-link]"));
+function createLink(item) {
+  const link = document.createElement("a");
+  const href = typeof item.href === "string" ? item.href : item.id ? `#${item.id}` : "#";
+  link.href = href;
+  link.textContent = item.label ?? href;
+  link.className = "site-map__link";
+  const isExternal = Boolean(item.external) || /^https?:/i.test(href);
+  if (isExternal) {
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+  }
+  return link;
 }
 
-function observeSections(sectionIds, anchors) {
-  if (!sectionIds.length || !anchors.length) return;
+function createList(items) {
+  const list = document.createElement("ul");
+  list.className = "site-map__list";
+
+  items.forEach((item) => {
+    if (!item || !item.label) return;
+    const listItem = document.createElement("li");
+    listItem.className = "site-map__item";
+
+    if (Array.isArray(item.children) && item.children.length) {
+      const title = document.createElement("span");
+      title.className = "site-map__item-title";
+      title.textContent = item.label;
+      listItem.appendChild(title);
+      listItem.appendChild(createList(item.children));
+    } else {
+      listItem.appendChild(createLink(item));
+    }
+
+    list.appendChild(listItem);
+  });
+
+  return list;
+}
+
+function collectSectionIds(items, set) {
+  items.forEach((item) => {
+    if (!item) return;
+    if (item.id) {
+      set.add(item.id);
+    }
+    if (Array.isArray(item.children) && item.children.length) {
+      collectSectionIds(item.children, set);
+    }
+  });
+}
+
+function renderSiteMap(navItems) {
+  const siteMap = document.querySelector("[data-site-map]");
+  const content = siteMap?.querySelector("[data-site-map-content]");
+  if (!siteMap || !content) return { anchors: [], sections: [] };
+
+  const groups = Array.isArray(navItems) ? navItems : [];
+  content.innerHTML = "";
+
+  const fragment = document.createDocumentFragment();
+  const sectionIds = new Set();
+
+  groups.forEach((group) => {
+    const groupSection = document.createElement("section");
+    groupSection.className = "site-map__group";
+
+    if (group?.label) {
+      const heading = document.createElement("h3");
+      heading.className = "site-map__group-title";
+      heading.textContent = group.label;
+      groupSection.appendChild(heading);
+    }
+
+    const items = Array.isArray(group?.children) ? group.children : [];
+    if (items.length) {
+      groupSection.appendChild(createList(items));
+      collectSectionIds(items, sectionIds);
+    }
+
+    fragment.appendChild(groupSection);
+  });
+
+  content.appendChild(fragment);
+
+  const anchors = Array.from(content.querySelectorAll("a"));
+  anchors.forEach((anchor) => {
+    anchor.addEventListener("click", () => {
+      window.requestAnimationFrame(() => {
+        siteMap.open = false;
+      });
+    });
+  });
+
+  return {
+    anchors,
+    sections: Array.from(sectionIds),
+  };
+}
+
+function initSiteMapHighlight(anchors, sectionIds) {
+  const mappedAnchors = anchors
+    .map((anchor) => {
+      const href = anchor.getAttribute("href") ?? "";
+      if (!href.startsWith("#")) return null;
+      const id = href.slice(1);
+      return id ? { id, anchor } : null;
+    })
+    .filter(Boolean);
+
+  if (!mappedAnchors.length || !sectionIds.length) return;
+
   const observer = new IntersectionObserver(
     (entries) => {
       const visible = entries
@@ -38,9 +129,9 @@ function observeSections(sectionIds, anchors) {
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
       if (!visible) return;
       const { id } = visible.target;
-      anchors.forEach((anchor) => {
-        const isActive = anchor.getAttribute("href") === `#${id}`;
-        anchor.classList.toggle("active-link", isActive);
+      mappedAnchors.forEach(({ id: anchorId, anchor }) => {
+        const isActive = anchorId === id;
+        anchor.classList.toggle("site-map__link--active", isActive);
         anchor.setAttribute("aria-current", isActive ? "page" : "false");
       });
     },
@@ -48,8 +139,10 @@ function observeSections(sectionIds, anchors) {
   );
 
   sectionIds.forEach((id) => {
-    const element = document.getElementById(id);
-    if (element) observer.observe(element);
+    const section = document.getElementById(id);
+    if (section) {
+      observer.observe(section);
+    }
   });
 }
 
@@ -68,64 +161,7 @@ function initProgressBar() {
 
 export function initNavigation() {
   const navItems = parseNavData();
-  const linksWrap = document.getElementById("links");
-  const mobileWrap = document.getElementById("mobile");
-  const mobileLinks = document.getElementById("mobileLinks") || mobileWrap;
-  const burger = document.getElementById("burger");
-  const mobileBackdrop = document.getElementById("mobile-backdrop");
-  const mobileContact = document.getElementById("mobileContact");
-
-  if (burger && mobileWrap) {
-    burger.setAttribute("aria-controls", mobileWrap.id);
-  }
-
-  const desktopAnchors = renderLinks(linksWrap, "desktop", navItems);
-  const mobileAnchors = renderLinks(mobileLinks, "mobile", navItems);
-
-  const setMobileState = (open) => {
-    if (!mobileWrap) return;
-    const wasOpen = !mobileWrap.classList.contains("hidden");
-    mobileWrap.classList.toggle("hidden", !open);
-    mobileWrap.setAttribute("aria-hidden", open ? "false" : "true");
-    mobileBackdrop?.classList.toggle("hidden", !open);
-    document.body.classList.toggle("overflow-hidden", open);
-    if (burger) {
-      burger.setAttribute("aria-expanded", String(open));
-    }
-    if (open) {
-      const focusable = mobileWrap.querySelector(
-        "a, button, [tabindex]:not([tabindex='-1'])",
-      );
-      focusable?.focus({ preventScroll: true });
-    } else if (wasOpen) {
-      burger?.focus({ preventScroll: true });
-    }
-  };
-
-  if (mobileWrap) {
-    mobileWrap
-      .querySelectorAll("a[data-nav-link]")
-      .forEach((anchor) =>
-        anchor.addEventListener("click", () => setMobileState(false)),
-      );
-  }
-
-  mobileContact?.addEventListener("click", () => setMobileState(false));
-  burger?.addEventListener("click", () => {
-    const open = mobileWrap?.classList.contains("hidden") === false;
-    setMobileState(!open);
-  });
-  mobileBackdrop?.addEventListener("click", () => setMobileState(false));
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768) setMobileState(false);
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") setMobileState(false);
-  });
-
-  observeSections(
-    navItems.map((item) => item.id).filter(Boolean),
-    [...desktopAnchors, ...mobileAnchors],
-  );
+  const { anchors, sections } = renderSiteMap(navItems);
+  initSiteMapHighlight(anchors, sections);
   initProgressBar();
 }
