@@ -9,8 +9,9 @@ export function initInvaderGrid() {
     container.innerHTML = "";
     for (let i = 0; i < 81; i += 1) {
       const cell = document.createElement("div");
+      cell.className = "hero__cell";
       if (ACTIVE_CELLS.has(i)) {
-        cell.className = "bg-slate-400/70";
+        cell.classList.add("hero__cell--active");
       }
       container.appendChild(cell);
     }
