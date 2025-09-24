@@ -372,3 +372,181 @@
   </script>
 </body>
 </html>
+<!-- ===== Microsoft-style footer (drop-in) ===== -->
+<footer class="ms-footer" role="contentinfo" aria-label="Сайт — подвал">
+  <div class="ms-footer__container">
+    <div class="ms-footer__cols">
+      <!-- Колонка -->
+      <section class="ms-footer__col">
+        <h3 class="ms-footer__title" tabindex="0" aria-expanded="false">Продукты</h3>
+        <ul class="ms-footer__links">
+          <li><a href="#">CAD/CAE-моделирование</a></li>
+          <li><a href="#">Реверсивный инжиниринг</a></li>
+          <li><a href="#">Аддитивное производство</a></li>
+          <li><a href="#">Прототипирование</a></li>
+        </ul>
+      </section>
+
+      <section class="ms-footer__col">
+        <h3 class="ms-footer__title" tabindex="0" aria-expanded="false">Образование</h3>
+        <ul class="ms-footer__links">
+          <li><a href="#">Курсы ДПО</a></li>
+          <li><a href="#">Проектные школы</a></li>
+          <li><a href="#">Силлабусы</a></li>
+          <li><a href="#">Заявка на обучение</a></li>
+        </ul>
+      </section>
+
+      <section class="ms-footer__col">
+        <h3 class="ms-footer__title" tabindex="0" aria-expanded="false">Проекты</h3>
+        <ul class="ms-footer__links">
+          <li><a href="#">MedTech</a></li>
+          <li><a href="#">Robotics</a></li>
+          <li><a href="#">Reverse engineering</a></li>
+          <li><a href="#">Design &amp; Render</a></li>
+        </ul>
+      </section>
+
+      <section class="ms-footer__col">
+        <h3 class="ms-footer__title" tabindex="0" aria-expanded="false">Ресурсы</h3>
+        <ul class="ms-footer__links">
+          <li><a href="#">Методические материалы</a></li>
+          <li><a href="#">3D-модели (STP)</a></li>
+          <li><a href="#">Политика данных</a></li>
+          <li><a href="#">Блог</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="ms-footer__bottom">
+      <div class="ms-footer__brand">
+        <svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true">
+          <defs><linearGradient id="g3d" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#22c55e"/>
+          </linearGradient></defs>
+          <rect x="6" y="6" width="52" height="52" rx="12" fill="url(#g3d)"/>
+          <path d="M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36" stroke="#fff" stroke-width="2" fill="none"/>
+        </svg>
+        <span>Step3D.Lab</span>
+      </div>
+
+      <ul class="ms-footer__legal">
+        <li><a href="#">Конфиденциальность</a></li>
+        <li><a href="#">Условия использования</a></li>
+        <li><a href="#">Файлы cookie</a></li>
+        <li><a href="#">Связаться с нами</a></li>
+        <li class="ms-footer__region">
+          <span aria-hidden="true">🌐</span>
+          <label class="sr-only" for="lang">Язык/регион</label>
+          <select id="lang" class="ms-footer__select">
+            <option selected>Русский (RU)</option>
+            <option>English (EN)</option>
+          </select>
+        </li>
+        <li class="ms-footer__copy">© <span id="msYear"></span> Step3D.Lab</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  :root{
+    --ms-bg:#f8f9fb;      /* фон секции колонок */
+    --ms-ink:#1f2937;     /* основной текст */
+    --ms-ink-2:#4b5563;   /* вторичный */
+    --ms-line:#e5e7eb;    /* границы */
+    --ms-link:#111827;    /* ссылки */
+    --ms-link-h:#111827;  /* hover */
+    --ms-radius:14px;
+    --ms-max:1100px;
+  }
+  .sr-only{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+  .ms-footer{background:#fff;border-top:1px solid var(--ms-line)}
+  .ms-footer__container{max-width:var(--ms-max);margin:0 auto;padding:32px 16px}
+  .ms-footer__cols{
+    display:grid;gap:24px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    background:var(--ms-bg);border:1px solid var(--ms-line);
+    border-radius:16px;padding:20px;
+  }
+  @media (min-width:760px){ .ms-footer__cols{grid-template-columns:repeat(4,1fr)} }
+
+  .ms-footer__col{min-width:0}
+  .ms-footer__title{
+    font:700 13px/1.2 ui-sans-serif,system-ui,Segoe UI,Roboto,Inter;
+    color:var(--ms-ink); margin:0 0 8px; letter-spacing:.02em;
+    display:flex;align-items:center;justify-content:space-between;cursor:default;
+  }
+  /* На мобильных — аккордеон по клику/фокусу, как у Microsoft */
+  @media (max-width:759px){
+    .ms-footer__title{cursor:pointer}
+    .ms-footer__title::after{content:"+"; color:#9ca3af}
+    .ms-footer__title[aria-expanded="true"]::after{content:"–"}
+    .ms-footer__links{display:none}
+    .ms-footer__links[aria-hidden="false"]{display:block}
+  }
+
+  .ms-footer__links{list-style:none;padding:0;margin:0}
+  .ms-footer__links a{
+    display:block; color:var(--ms-ink-2); font:400 14px/1.7 Inter,Segoe UI,system-ui;
+    padding:6px 0; text-decoration:none;
+  }
+  .ms-footer__links a:hover{color:var(--ms-link); text-decoration:underline}
+
+  .ms-footer__bottom{
+    display:flex;flex-wrap:wrap;gap:12px 18px;
+    align-items:center;justify-content:space-between;
+    padding:18px 4px; margin-top:18px;
+  }
+  .ms-footer__brand{display:flex;align-items:center;gap:8px;color:#111827;font-weight:700}
+  .ms-footer__legal{
+    display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;
+    list-style:none;margin:0;padding:0;color:var(--ms-ink-2);font:400 12px/1.6 Inter,Segoe UI,system-ui;
+  }
+  .ms-footer__legal a{color:var(--ms-ink-2)}
+  .ms-footer__legal a:hover{color:var(--ms-link-h);text-decoration:underline}
+  .ms-footer__region{display:flex;align-items:center;gap:6px}
+  .ms-footer__select{
+    appearance:none;background:#fff;border:1px solid var(--ms-line);border-radius:var(--ms-radius);
+    font:500 12px/1 Inter,system-ui; padding:8px 10px; color:#374151;
+  }
+  .ms-footer__copy{color:#9ca3af}
+</style>
+
+<script>
+  // Год
+  document.getElementById('msYear').textContent = new Date().getFullYear();
+
+  // Аккордеоны колонок на мобильных (поведение, похожее на microsoft.com)
+  const titles = document.querySelectorAll('.ms-footer__title');
+  titles.forEach(t=>{
+    const list = t.nextElementSibling;
+    const isMobile = ()=> window.matchMedia('(max-width: 759px)').matches;
+
+    const setState = (open)=> {
+      t.setAttribute('aria-expanded', String(open));
+      if(list) list.setAttribute('aria-hidden', String(!open));
+    };
+    // начальное состояние
+    setState(!isMobile() ? true : false);
+
+    // переключение по клику/Enter/Space
+    const toggle = (e)=>{
+      if(!isMobile()) return;
+      if(e.type==='click' || (e.type==='keydown' && (e.key==='Enter'||e.key===' '))){
+        e.preventDefault();
+        const open = t.getAttribute('aria-expanded') !== 'true';
+        setState(open);
+      }
+    };
+    t.addEventListener('click', toggle);
+    t.addEventListener('keydown', toggle);
+
+    // при ресайзе — раскрыть на десктопе, свернуть на мобилке
+    window.addEventListener('resize', ()=>{
+      setState(!isMobile());
+    });
+  });
+</script>
+<!-- ===== /Microsoft-style footer ===== -->
