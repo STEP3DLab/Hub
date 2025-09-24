@@ -46,8 +46,6 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='6' y='6' width='52' height='52' rx='12' fill='%230ea5e9'/><path d='M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36' stroke='%23fff' stroke-width='2' fill='none'/></svg>"
     />
-    <link rel="stylesheet" href="assets/styles/tailwind.css" />
-    <link rel="stylesheet" href="assets/styles/site.css" />
     <style>
       :root {
         color-scheme: light dark;
@@ -513,12 +511,12 @@
     </script>
   </head>
   <body class="min-h-screen text-slate-900 dark:text-slate-100 antialiased">
-    <a class="skip-link" href="#main-content">Пропустить к основному контенту</a>
     <!-- Прогресс-бар прокрутки -->
     <div
       id="progress"
       class="progress-shadow fixed top-0 left-0 h-1 bg-slate-900/90 origin-left z-50"
       style="transform: scaleX(0); transform-origin: left"
+      aria-hidden="true"
     ></div>
 
     <header class="relative overflow-hidden">
@@ -542,6 +540,9 @@
                 src="Logo_Step_3D.jpg"
                 alt="Логотип Step3D.Lab"
                 class="h-12 w-12 rounded-2xl object-cover shadow-sm"
+                fetchpriority="high"
+                decoding="async"
+                loading="eager"
               />
               Step3D.Lab
             </a>
@@ -563,6 +564,7 @@
                 id="burger"
                 type="button"
                 aria-expanded="false"
+                aria-controls="mobile"
                 aria-label="Меню"
                 class="mobile-nav-trigger rounded-xl border border-slate-200/80 bg-white/80 p-2 shadow-sm backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/80"
               >
@@ -580,6 +582,7 @@
           <div
             id="mobile"
             class="mobile-nav-panel md:hidden hidden absolute left-0 right-0 top-full mt-4 z-50 px-1 sm:px-0"
+            aria-hidden="true"
           >
 
               <div id="mobileLinks" class="grid gap-2"></div>
@@ -622,6 +625,8 @@
               <button
                 id="toggleAbout"
                 class="secondary-button inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium"
+                aria-expanded="false"
+                aria-controls="aboutBox"
               >
                 О лаборатории
               </button>
@@ -629,6 +634,7 @@
             <div
               id="aboutBox"
               class="surface-card-base mt-6 hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 glass p-6"
+              aria-hidden="true"
             >
               <h3 class="text-xl font-semibold mb-2">О лаборатории</h3>
               <p class="text-slate-700 dark:text-slate-200">
@@ -645,25 +651,9 @@
           <div class="relative aspect-square">
             <div
               class="absolute inset-0 grid grid-cols-9 grid-rows-9 gap-1 opacity-25 invader-grid"
-              aria-hidden
-            >
-              <!-- «Космический захватчик» рамка -->
-              <script>
-                // Строим простую пиксель-арт сетку вокруг иллюстрации без сторонних библиотек
-                document.addEventListener("DOMContentLoaded", () => {
-                  const g = document.currentScript.parentElement;
-                  const on = new Set([
-                    0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 27, 35, 45, 53, 63, 71, 72,
-                    73, 74, 75, 76, 77, 78, 79, 80,
-                  ]);
-                  for (let i = 0; i < 81; i++) {
-                    const d = document.createElement("div");
-                    if (on.has(i)) d.className = "bg-slate-400/70";
-                    g.appendChild(d);
-                  }
-                });
-              </script>
-            </div>
+              aria-hidden="true"
+              data-invader-grid
+            ></div>
             <!-- Плавающие «кубы» -->
             <div
               class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[floatY_4s_ease-in-out_infinite]"
@@ -1656,6 +1646,7 @@
                     type="button"
                     class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
                     aria-expanded="false"
+                    aria-controls="team-details-ganishin"
                     data-team-toggle="team-details-ganishin"
                   >
                     <span aria-hidden="true" data-state-icon>+</span>
@@ -1664,7 +1655,7 @@
                 </div>
               </div>
             </div>
-            <div id="team-details-ganishin" class="mt-4 hidden">
+            <div id="team-details-ganishin" class="mt-4 hidden" aria-hidden="true">
               <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
                 <li><span class="font-medium text-slate-900 dark:text-white">Возраст и город:</span> 34 года, Москва.</li>
                 <li>
@@ -1784,6 +1775,7 @@
                     type="button"
                     class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
                     aria-expanded="false"
+                    aria-controls="team-details-ponkratova"
                     data-team-toggle="team-details-ponkratova"
                   >
                     <span aria-hidden="true" data-state-icon>+</span>
@@ -1792,7 +1784,7 @@
                 </div>
               </div>
             </div>
-            <div id="team-details-ponkratova" class="mt-4 hidden">
+            <div id="team-details-ponkratova" class="mt-4 hidden" aria-hidden="true">
               <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
                 <li><span class="font-medium text-slate-900 dark:text-white">Полное имя:</span> Понкратова Христина Анатольевна.</li>
                 <li><span class="font-medium text-slate-900 dark:text-white">Возраст:</span> 23 года.</li>
@@ -1884,6 +1876,7 @@
                     type="button"
                     class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
                     aria-expanded="false"
+                    aria-controls="team-details-rekut"
                     data-team-toggle="team-details-rekut"
                   >
                     <span aria-hidden="true" data-state-icon>+</span>
@@ -1892,7 +1885,7 @@
                 </div>
               </div>
             </div>
-            <div id="team-details-rekut" class="mt-4 hidden">
+            <div id="team-details-rekut" class="mt-4 hidden" aria-hidden="true">
               <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
                 <li><span class="font-medium text-slate-900 dark:text-white">Возраст:</span> 54 года.</li>
                 <li>
@@ -2375,12 +2368,14 @@
                 <button
                   class="px-3 py-1.5 rounded-xl text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 shadow-sm"
                   data-maptab="0"
+                  aria-controls="map-vdnkh"
                 >
                   ВДНХ
                 </button>
                 <button
                   class="px-3 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 shadow-sm"
                   data-maptab="1"
+                  aria-controls="map-begovaya"
                 >
                   Беговая
                 </button>
@@ -2464,20 +2459,25 @@
               class="surface-card-base mt-6 relative w-full overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 shadow-inner aspect-video"
             >
               <iframe
+                id="map-vdnkh"
                 title="Карта — ВДНХ"
                 class="absolute inset-0 w-full h-full"
                 data-map="0"
                 src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=false&mode=search&text=%D1%83%D0%BB.%20%D0%92%D0%B8%D0%BB%D1%8C%D0%B3%D0%B5%D0%BB%D1%8C%D0%BC%D0%B0%20%D0%9F%D0%B8%D0%BA%D0%B0,%204,%20%D0%BA%D0%BE%D1%80%D0%BF.%208"
                 loading="lazy"
                 allowfullscreen
+                aria-hidden="false"
               ></iframe>
               <iframe
+                id="map-begovaya"
                 title="Карта — Беговая"
                 class="absolute inset-0 w-full h-full opacity-0 pointer-events-none"
                 data-map="1"
                 src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=false&mode=search&text=%D1%83%D0%BB.%20%D0%91%D0%B5%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F,%2012"
                 loading="lazy"
                 allowfullscreen
+                aria-hidden="true"
+                tabindex="-1"
               ></iframe>
             </div>
             <div class="mt-4 text-sm text-slate-500 dark:text-slate-400">
@@ -2568,13 +2568,19 @@
     <div
       id="modal"
       class="fixed inset-0 z-[60] hidden items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalDescription"
+      tabindex="-1"
+      aria-hidden="true"
     >
       <div id="modalBg" class="absolute inset-0 bg-black/40"></div>
       <div
         class="relative w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-2xl border border-slate-200 dark:border-slate-700"
       >
-        <h3 class="text-xl font-semibold">Оставить заявку</h3>
-        <p class="text-slate-700 dark:text-slate-200 mt-1">
+        <h3 id="modalTitle" class="text-xl font-semibold">Оставить заявку</h3>
+        <p id="modalDescription" class="text-slate-700 dark:text-slate-200 mt-1">
           Заполните контакты — мы свяжемся и обсудим задачу.
         </p>
         <form
@@ -2673,432 +2679,5 @@
       class="hidden"
       data-nav='[{"id":"top","label":"Главная"},{"id":"equipment","label":"Оборудование"},{"id":"projects","label":"Проекты"},{"id":"courses","label":"Обучение"},{"id":"team","label":"Команда"},{"id":"blog","label":"Новости"},{"id":"faq","label":"Часто задаваемые вопросы"},{"id":"contacts","label":"Контакты"}]'
     ></div>
-
-    <script>
-      // ===== Динамическое меню (desktop + mobile)
-      const navDataEl = document.getElementById("nav-data");
-      const navData = navDataEl ? JSON.parse(navDataEl.dataset.nav) : [];
-      const linksWrap = document.getElementById("links");
-      const mobileWrap = document.getElementById("mobile");
-      const mobileLinks = document.getElementById("mobileLinks");
-      const burger = document.getElementById("burger");
-      const mobileBackdrop = document.getElementById("mobile-backdrop");
-      // Определяем, нужно ли отключить анимации при системной настройке «уменьшить движение»
-      const prefersReduceMotion = window.matchMedia
-        ? window.matchMedia("(prefers-reduced-motion: reduce)")
-        : null;
-      const teamToggles = document.querySelectorAll("[data-team-toggle]");
-
-      teamToggles.forEach((button) => {
-        const targetId = button.dataset.teamToggle;
-        const target = targetId ? document.getElementById(targetId) : null;
-        if (!target) return;
-
-        button.addEventListener("click", () => {
-          const expanded = button.getAttribute("aria-expanded") === "true";
-          button.setAttribute("aria-expanded", (!expanded).toString());
-          target.classList.toggle("hidden", expanded);
-          const icon = button.querySelector("[data-state-icon]");
-          if (icon) {
-            icon.textContent = expanded ? "+" : "−";
-          }
-        });
-      });
-      function renderLinks(container, variant) {
-        if (!container) return;
-        // Каждый раз заново строим список ссылок, чтобы учесть актуальные данные из navData
-        container.innerHTML = "";
-        navData.forEach(({ id, label }) => {
-          const a = document.createElement("a");
-          a.href = `#${id}`;
-          a.textContent = label;
-          a.dataset.navLink = "true";
-          // Два набора классов: компактный для десктопа и «карточки» для мобильного меню
-          a.className =
-            variant === "desktop"
-              ? "inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-600 transition hover:-translate-y-0.5 hover:bg-white/70 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800/80"
-              : "inline-flex w-full items-center justify-start gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:border-slate-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-200";
-          container.appendChild(a);
-        });
-      }
-      renderLinks(linksWrap, "desktop");
-      renderLinks(mobileLinks || mobileWrap, "mobile");
-      function setMobileState(open) {
-        if (!mobileWrap) return;
-        mobileWrap.classList.toggle("hidden", !open);
-        mobileBackdrop?.classList.toggle("hidden", !open);
-        document.body.classList.toggle("overflow-hidden", open);
-        burger?.setAttribute("aria-expanded", String(open));
-      }
-      function bindMobileLinks() {
-        if (!mobileWrap) return;
-        mobileWrap
-          .querySelectorAll("a[data-nav-link]")
-          .forEach((a) =>
-            a.addEventListener("click", () => setMobileState(false)),
-          );
-      }
-      bindMobileLinks();
-      document
-        .getElementById("mobileContact")
-        ?.addEventListener("click", () => setMobileState(false));
-      burger &&
-        burger.addEventListener("click", () => {
-          const opened = !mobileWrap.classList.contains("hidden");
-          setMobileState(!opened);
-        });
-      mobileBackdrop?.addEventListener("click", () => setMobileState(false));
-      window.addEventListener("resize", () => {
-        if (window.innerWidth >= 768) setMobileState(false);
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") setMobileState(false);
-      });
-
-      // ===== Подсветка активного пункта по скроллу
-      const sectionIds = navData.map((n) => n.id);
-      const anchors = Array.from(
-        document.querySelectorAll("#links a[data-nav-link]"),
-      );
-      const mobAnchors = Array.from(
-        document.querySelectorAll("#mobile a[data-nav-link]"),
-      );
-      const obs = new IntersectionObserver(
-        (entries) => {
-          // Берём секцию с наибольшей долей видимости, чтобы корректно подсвечивать ссылку
-          const vis = entries
-            .filter((e) => e.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (!vis) return;
-          const id = vis.target.id;
-          [...anchors, ...mobAnchors].forEach((a) => {
-            a.classList.toggle(
-              "active-link",
-              a.getAttribute("href") === `#${id}`,
-            );
-          });
-        },
-        { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
-      );
-      sectionIds.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) obs.observe(el);
-      });
-
-      // ===== Прогресс-бар прокрутки
-      const progress = document.getElementById("progress");
-      document.addEventListener("scroll", () => {
-        const h = document.documentElement;
-        const sc = h.scrollTop / (h.scrollHeight - h.clientHeight);
-        progress.style.transform = `scaleX(${sc})`;
-      });
-
-      // ===== Модалка формы
-      const modal = document.getElementById("modal");
-      const openModal = () => modal.classList.remove("hidden");
-      const closeModal = () => modal.classList.add("hidden");
-      document
-        .getElementById("openModal")
-        ?.addEventListener("click", openModal);
-      document
-        .getElementById("openModal2")
-        ?.addEventListener("click", openModal);
-      document
-        .getElementById("closeModal")
-        ?.addEventListener("click", closeModal);
-      document.getElementById("modalBg")?.addEventListener("click", closeModal);
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !modal.classList.contains("hidden"))
-          closeModal();
-      });
-      const requestForm = document.getElementById("requestForm");
-      if (requestForm) {
-        const statusBox = document.getElementById("requestStatus");
-        const submitButton = requestForm.querySelector(
-          'button[type="submit"]',
-        );
-        const originalButtonText = submitButton?.textContent ?? "";
-        const setStatus = (message, state = "success") => {
-          if (!statusBox) return;
-          statusBox.textContent = message;
-          statusBox.dataset.state = state;
-          statusBox.classList.remove("hidden");
-        };
-        const resetStatus = () => {
-          if (!statusBox) return;
-          statusBox.textContent = "";
-          delete statusBox.dataset.state;
-          statusBox.classList.add("hidden");
-        };
-        requestForm.addEventListener("submit", async (event) => {
-          event.preventDefault();
-          resetStatus();
-          if (!requestForm.reportValidity()) {
-            return;
-          }
-          const formData = new FormData(requestForm);
-          const honeypot = formData.get("company");
-          if (typeof honeypot === "string" && honeypot.trim().length) {
-            setStatus("Похоже, что форма заполнена ботом. Отправка отменена.", "error");
-            return;
-          }
-          formData.append(
-            "_subject",
-            "Новая заявка с лендинга Step3D.Lab",
-          );
-          formData.append("_template", "table");
-          submitButton && (submitButton.disabled = true);
-          if (submitButton) {
-            submitButton.textContent = "Отправляем…";
-          }
-          const endpoint = requestForm.getAttribute("action");
-          try {
-            if (endpoint) {
-              const response = await fetch(endpoint, {
-                method: "POST",
-                body: formData,
-                headers: { Accept: "application/json" },
-              });
-              if (!response.ok) {
-                throw new Error(`Request failed: ${response.status}`);
-              }
-            } else {
-              console.warn("Form action is not configured; skipping network request.");
-            }
-            setStatus(
-              "Спасибо! Мы получили вашу заявку и свяжемся с вами в ближайшее время.",
-              "success",
-            );
-            requestForm.reset();
-            setTimeout(() => {
-              closeModal();
-              resetStatus();
-            }, 1800);
-          } catch (error) {
-            console.error("Не удалось отправить заявку", error);
-            setStatus(
-              "Не удалось отправить заявку. Попробуйте ещё раз или напишите на info@step3dlab.ru.",
-              "error",
-            );
-          } finally {
-            if (submitButton) {
-              submitButton.disabled = false;
-              submitButton.textContent = originalButtonText;
-            }
-          }
-        });
-      }
-
-      // ===== «О лаборатории» toggle
-      document
-        .getElementById("toggleAbout")
-        ?.addEventListener("click", () =>
-          document.getElementById("aboutBox").classList.toggle("hidden"),
-        );
-
-      // ===== Просмотрщики фото (главная галерея)
-      function initPhotoViewers() {
-        document.querySelectorAll(".js-photo-viewer").forEach((viewer) => {
-          const slides = viewer.querySelectorAll(".js-photo-slide");
-          if (!slides.length) return;
-          const dotsBox = viewer.querySelector(".js-photo-dots");
-          const prev = viewer.querySelector("[data-photo-prev]");
-          const next = viewer.querySelector("[data-photo-next]");
-          viewer.dataset.index = viewer.dataset.index || "0";
-          if (dotsBox) {
-            dotsBox.innerHTML = "";
-            slides.forEach((_, i) => {
-              const dot = document.createElement("button");
-              dot.type = "button";
-              dot.className =
-                "h-2.5 w-2.5 rounded-full bg-slate-300 transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 dark:bg-slate-600";
-              dot.setAttribute("aria-label", `Перейти к кадру ${i + 1}`);
-              dot.setAttribute("aria-current", "false");
-              dot.addEventListener("click", () => {
-                setActive(i);
-                schedule();
-              });
-              dotsBox.appendChild(dot);
-            });
-          }
-          let timerId = null;
-          function setActive(rawIndex) {
-            const total = slides.length;
-            if (!total) return;
-            // Нормализуем индекс, поддерживая отрицательные значения (перелистывание назад)
-            const idx = ((rawIndex % total) + total) % total;
-            viewer.dataset.index = idx;
-            slides.forEach((slide, slideIndex) => {
-              const active = slideIndex === idx;
-              slide.classList.toggle("opacity-100", active);
-              slide.classList.toggle("opacity-0", !active);
-              slide.classList.toggle("z-10", active);
-              slide.classList.toggle("z-0", !active);
-              slide.classList.toggle("pointer-events-none", !active);
-              slide.setAttribute("aria-hidden", active ? "false" : "true");
-            });
-            dotsBox?.querySelectorAll("button").forEach((dot, dotIndex) => {
-              const active = dotIndex === idx;
-              dot.classList.toggle("w-6", active);
-              dot.classList.toggle("bg-slate-900", active);
-              dot.classList.toggle("dark:bg-white", active);
-              dot.setAttribute("aria-current", active ? "true" : "false");
-            });
-          }
-          function schedule() {
-            if (slides.length <= 1) return;
-            if (timerId) {
-              clearInterval(timerId);
-              timerId = null;
-            }
-            // Если пользователь попросил «уменьшить движение» — отключаем авто-прокрутку
-            if (prefersReduceMotion?.matches) return;
-            timerId = setInterval(
-              () => setActive((+viewer.dataset.index || 0) + 1),
-              8000,
-            );
-          }
-          prev?.addEventListener("click", () => {
-            setActive((+viewer.dataset.index || 0) - 1);
-            schedule();
-          });
-          next?.addEventListener("click", () => {
-            setActive((+viewer.dataset.index || 0) + 1);
-            schedule();
-          });
-          let startX = null;
-          viewer.addEventListener("pointerdown", (e) => {
-            if (e.target.closest("button")) return;
-            startX = e.clientX;
-          });
-          viewer.addEventListener("pointerup", (e) => {
-            // Лёгкий свайп-взаимодействие: реагируем только если пользователь провёл пальцем/мышью достаточно далеко
-            if (startX === null || e.target.closest("button")) {
-              startX = null;
-              return;
-            }
-            const dx = e.clientX - startX;
-            if (Math.abs(dx) > 40) {
-              if (dx > 0) {
-                setActive((+viewer.dataset.index || 0) - 1);
-              } else {
-                setActive((+viewer.dataset.index || 0) + 1);
-              }
-              schedule();
-            }
-            startX = null;
-          });
-          viewer.addEventListener("pointerleave", () => {
-            startX = null;
-          });
-          if (slides.length > 1) {
-            // При наведении мыши останавливаем автоперелистывание, чтобы спокойно читать подписи
-            viewer.addEventListener("mouseenter", () => {
-              if (timerId) {
-                clearInterval(timerId);
-                timerId = null;
-              }
-            });
-            viewer.addEventListener("mouseleave", () => schedule());
-          }
-          // Перестраиваем расписание, когда пользователь меняет системную настройку движения
-          if (prefersReduceMotion?.addEventListener) {
-            prefersReduceMotion.addEventListener("change", () => schedule());
-          } else if (prefersReduceMotion?.addListener) {
-            prefersReduceMotion.addListener(() => schedule());
-          }
-          setActive(+viewer.dataset.index || 0);
-          schedule();
-        });
-      }
-
-      // ===== Галереи проектов
-      function initGalleries() {
-        document.querySelectorAll(".js-gallery").forEach((card) => {
-          const slides = card.querySelectorAll(".slide");
-          const dotsBox = card.querySelector(".js-dots");
-          if (!dotsBox) return; // Если в карточке нет контейнера точек, пропускаем инициализацию
-          function setActive(i) {
-            slides.forEach((s, idx) => s.classList.toggle("hidden", idx !== i));
-            dotsBox.querySelectorAll("span").forEach((d, idx) => {
-              d.classList.toggle("bg-slate-900", idx === i);
-              d.classList.toggle("dark:bg-white", idx === i);
-            });
-            card.dataset.index = i;
-          }
-          // Проставляем индикаторы слайдов, чтобы пользователь видел текущий кадр
-          dotsBox.innerHTML = "";
-          slides.forEach((_, i) => {
-            const dot = document.createElement("span");
-            dot.className =
-              "inline-block size-2 rounded-full bg-slate-300 dark:bg-slate-600";
-            dot.addEventListener("click", () => setActive(i));
-            dotsBox.appendChild(dot);
-          });
-          setActive(0);
-          card
-            .querySelector(".js-prev")
-            .addEventListener("click", () =>
-              setActive(
-                (+card.dataset.index - 1 + slides.length) % slides.length,
-              ),
-            );
-          card
-            .querySelector(".js-next")
-            .addEventListener("click", () =>
-              setActive((+card.dataset.index + 1) % slides.length),
-            );
-        });
-      }
-      initPhotoViewers();
-      initGalleries();
-
-      // ===== Карта табы
-      document.querySelectorAll("[data-maptab]").forEach((btn) =>
-        btn.addEventListener("click", () => {
-          const i = btn.dataset.maptab;
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) => b.classList.toggle("bg-slate-900", b === btn));
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) => b.classList.toggle("text-white", b === btn));
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) => b.classList.toggle("dark:bg-white", b === btn));
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) =>
-              b.classList.toggle("dark:text-slate-900", b === btn),
-            );
-
-
-  document
-    .getElementById("shareLink")
-    ?.addEventListener("click", async () => {
-      const url = window.location.href;
-      const title = document.title;
-      if (navigator.share) {
-        try {
-          await navigator.share({ title, url });
-        } catch (err) {
-          if (err?.name !== "AbortError")
-            alert("Не удалось поделиться ссылкой. Попробуйте ещё раз.");
-        }
-        return;
-      }
-      try {
-        await navigator.clipboard.writeText(url);
-        alert("Ссылка скопирована в буфер обмена");
-      } catch (err) {
-        prompt("Скопируйте ссылку вручную:", url);
-      }
-    });
-
-  // Год в футере
-  const y = new Date().getFullYear();
-  document.getElementById("y").textContent = y;
-  document.getElementById("y2").textContent = y;
-</script>
   </body>
 </html>
