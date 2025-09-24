@@ -6,6 +6,7 @@ import { initPhotoViewers, initGalleries } from "./modules/carousels.js";
 import { initMapTabs } from "./modules/map-tabs.js";
 import { initShareFeatures } from "./modules/share.js";
 import { initInvaderGrid } from "./modules/invader-grid.js";
+import { initEquipmentStatus } from "./modules/equipment-status.js";
 
 const prefersReduceMotion =
   typeof window !== "undefined" && window.matchMedia
@@ -22,6 +23,7 @@ function initializeSite() {
   initMapTabs();
   initShareFeatures();
   initInvaderGrid();
+  initEquipmentStatus();
 }
 
 if (document.readyState === "loading") {

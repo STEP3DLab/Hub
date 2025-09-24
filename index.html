@@ -384,7 +384,7 @@
         <div class="section-header">
           <h2 class="section-title">Оборудование и ПО</h2>
           <p class="section-lead">
-            3D‑сканеры RangeVision и Artec; принтеры FDM/DLP (Ultimaker, Picaso 3D, Formlabs); лазер Trotec, фрезерные Roland; софт Geomagic, GOM Inspect, Inventor, Fusion 360.
+            3D‑сканеры RangeVision, Artec и Leica; принтеры FDM/DLP (UltiMaker, Raise3D, Picaso 3D, Formlabs, Anycubic); лазер Trotec, фрезерные Roland; софт Geomagic, GOM Inspect, Inventor, Fusion 360.
           </p>
         </div>
         <div class="grid cols-2 equipment-grid">
@@ -399,12 +399,24 @@
                 </svg>
                 3D‑сканеры
               </h3>
-              <ul class="equipment-list">
-                <li class="equipment-item">
+              <ul class="equipment-list" data-equipment-list>
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-status="busy"
+                >
                   <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">3D‑сканер RangeVision NEO</h4>
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://rangevision.com/hardware/neo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        RangeVision
+                      </a>
+                    </h4>
                     <p class="equipment-item__text">
-                      Настольный структурированный свет, точность до 0,05 мм для малого бизнеса и учебных задач.
+                      Модель NEO — настольный структурированный свет с точностью до 0,05 мм для малого бизнеса и учебных задач.
                     </p>
                   </div>
                   <div class="equipment-item__meta">
@@ -412,9 +424,21 @@
                     <span class="meta-chip">≈ 450 тыс ₽</span>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-status="available"
+                >
                   <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">3D‑сканер RangeVision Spectrum</h4>
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://rangevision.com/hardware/spectrum"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        RangeVision Spectrum
+                      </a>
+                    </h4>
                     <p class="equipment-item__text">
                       Высокая детализация и сменные зоны сканирования для изделий средних размеров.
                     </p>
@@ -424,9 +448,21 @@
                     <span class="meta-chip">≈ 1,2 млн ₽</span>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-status="maintenance"
+                >
                   <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Artec Eva (ручной)</h4>
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://www.artec3d.com/portable-3d-scanners/artec-eva"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Artec Eva (ручной)
+                      </a>
+                    </h4>
                     <p class="equipment-item__text">
                       Портативный лазерный сканер для оперативной съёмки людей и крупногабаритных объектов.
                     </p>
@@ -436,7 +472,34 @@
                     <span class="meta-chip">≈ 2,7 млн ₽</span>
                   </div>
                 </li>
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-status="available"
+                >
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://shop.leica-geosystems.com/leica-blk/blk360"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Leica BLK360 (архитектурный)
+                      </a>
+                    </h4>
+                    <p class="equipment-item__text">
+                      Высокоточная съёмка фасадов и интерьеров для BIM и реставрационных проектов.
+                    </p>
+                  </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">1 шт.</span>
+                    <span class="meta-chip">≈ 2,8 млн ₽</span>
+                  </div>
+                </li>
               </ul>
+              <p class="equipment-summary" data-equipment-summary>
+                Загрузка рассчитывается…
+              </p>
             </div>
           </article>
           <article class="card card--equipment">
@@ -452,10 +515,29 @@
                 </svg>
                 3D‑принтеры
               </h3>
-              <ul class="equipment-list">
-                <li class="equipment-item">
+              <ul
+                class="equipment-list"
+                data-equipment-list
+                data-sheet-id="YOUR_GOOGLE_SHEET_ID"
+                data-sheet-range="Printers!A:C"
+                data-sheet-columns="id,status,availableUntil"
+              >
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-equipment-id="ultimaker-3"
+                  data-status="unknown"
+                >
                   <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Ultimaker 3 (FDM)</h4>
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://ultimaker.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        UltiMaker 3 (FDM)
+                      </a>
+                    </h4>
                     <p class="equipment-item__text">
                       Двухэкструдерная печать инженерными пластиками и поддержками PVA.
                     </p>
@@ -464,32 +546,346 @@
                     <span class="meta-chip">1 шт.</span>
                     <span class="meta-chip">≈ 420 тыс ₽</span>
                   </div>
+                  <div class="equipment-item__status">
+                    <button
+                      type="button"
+                      class="equipment-status is-unknown"
+                      data-status-trigger
+                      aria-controls="status-ultimaker-3"
+                      aria-expanded="false"
+                      aria-label="Статус UltiMaker 3 (FDM)"
+                    >
+                      <span class="equipment-status__light" aria-hidden="true"></span>
+                      <span class="sr-only" data-status-label>Статус уточняется</span>
+                    </button>
+                    <div
+                      class="equipment-status__message"
+                      id="status-ultimaker-3"
+                      data-status-message
+                      aria-live="polite"
+                      hidden
+                    ></div>
+                  </div>
                 </li>
-                <li class="equipment-item">
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-equipment-id="formlabs-2"
+                  data-status="unknown"
+                >
                   <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Picaso 3D Designer X (FDM)</h4>
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://formlabs.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Formlabs 2 (DLP/SLA)
+                      </a>
+                    </h4>
                     <p class="equipment-item__text">
-                      Промышленная камера, закрытый корпус и стабильная печать ABS/PA.
+                      Две установки для серийной печати высокоточных смол и биосовместимых материалов.
                     </p>
                   </div>
                   <div class="equipment-item__meta">
                     <span class="meta-chip">2 шт.</span>
-                    <span class="meta-chip">≈ 360 тыс ₽</span>
+                    <span class="meta-chip">≈ 550 тыс ₽</span>
+                  </div>
+                  <div class="equipment-item__status">
+                    <button
+                      type="button"
+                      class="equipment-status is-unknown"
+                      data-status-trigger
+                      aria-controls="status-formlabs-2"
+                      aria-expanded="false"
+                      aria-label="Статус Formlabs 2 (DLP/SLA)"
+                    >
+                      <span class="equipment-status__light" aria-hidden="true"></span>
+                      <span class="sr-only" data-status-label>Статус уточняется</span>
+                    </button>
+                    <div
+                      class="equipment-status__message"
+                      id="status-formlabs-2"
+                      data-status-message
+                      aria-live="polite"
+                      hidden
+                    ></div>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-equipment-id="formlabs-3"
+                  data-status="unknown"
+                >
                   <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Formlabs (DLP/SLA)</h4>
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://formlabs.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Formlabs 3 (DLP/SLA)
+                      </a>
+                    </h4>
                     <p class="equipment-item__text">
-                      Точная печать смолами для медицины и прототипирования с постобработкой.
+                      Следующее поколение LFS-печати с улучшенной кинематикой и удалённым мониторингом.
+                    </p>
+                  </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">2 шт.</span>
+                    <span class="meta-chip">≈ 620 тыс ₽</span>
+                  </div>
+                  <div class="equipment-item__status">
+                    <button
+                      type="button"
+                      class="equipment-status is-unknown"
+                      data-status-trigger
+                      aria-controls="status-formlabs-3"
+                      aria-expanded="false"
+                      aria-label="Статус Formlabs 3 (DLP/SLA)"
+                    >
+                      <span class="equipment-status__light" aria-hidden="true"></span>
+                      <span class="sr-only" data-status-label>Статус уточняется</span>
+                    </button>
+                    <div
+                      class="equipment-status__message"
+                      id="status-formlabs-3"
+                      data-status-message
+                      aria-live="polite"
+                      hidden
+                    ></div>
+                  </div>
+                </li>
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-equipment-id="anycubic-photon-mono"
+                  data-status="unknown"
+                >
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://www.anycubic.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Anycubic Photon Mono
+                      </a>
+                    </h4>
+                    <p class="equipment-item__text">
+                      Компактный смоляной принтер (Аникубик) для быстрых экспериментальных прототипов.
                     </p>
                   </div>
                   <div class="equipment-item__meta">
                     <span class="meta-chip">1 шт.</span>
-                    <span class="meta-chip">≈ 530 тыс ₽</span>
+                    <span class="meta-chip">≈ 55 тыс ₽</span>
+                  </div>
+                  <div class="equipment-item__status">
+                    <button
+                      type="button"
+                      class="equipment-status is-unknown"
+                      data-status-trigger
+                      aria-controls="status-anycubic-photon-mono"
+                      aria-expanded="false"
+                      aria-label="Статус Anycubic Photon Mono"
+                    >
+                      <span class="equipment-status__light" aria-hidden="true"></span>
+                      <span class="sr-only" data-status-label>Статус уточняется</span>
+                    </button>
+                    <div
+                      class="equipment-status__message"
+                      id="status-anycubic-photon-mono"
+                      data-status-message
+                      aria-live="polite"
+                      hidden
+                    ></div>
+                  </div>
+                </li>
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-equipment-id="anycubic-photon-mono-m5"
+                  data-status="unknown"
+                >
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://www.anycubic.com/products/photon-mono-m5"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Anycubic Photon Mono M5
+                      </a>
+                    </h4>
+                    <p class="equipment-item__text">
+                      12К LCD-матрица и повышенная детализация для ювелирных и дизайнерских задач.
+                    </p>
+                  </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">1 шт.</span>
+                    <span class="meta-chip">≈ 75 тыс ₽</span>
+                  </div>
+                  <div class="equipment-item__status">
+                    <button
+                      type="button"
+                      class="equipment-status is-unknown"
+                      data-status-trigger
+                      aria-controls="status-anycubic-photon-mono-m5"
+                      aria-expanded="false"
+                      aria-label="Статус Anycubic Photon Mono M5"
+                    >
+                      <span class="equipment-status__light" aria-hidden="true"></span>
+                      <span class="sr-only" data-status-label>Статус уточняется</span>
+                    </button>
+                    <div
+                      class="equipment-status__message"
+                      id="status-anycubic-photon-mono-m5"
+                      data-status-message
+                      aria-live="polite"
+                      hidden
+                    ></div>
+                  </div>
+                </li>
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-equipment-id="raise3d-large"
+                  data-status="unknown"
+                >
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://www.raise3d.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Raise3D Pro3 Plus (большая камера)
+                      </a>
+                    </h4>
+                    <p class="equipment-item__text">
+                      Две системы для печати крупногабаритных корпусов инженерными композитами.
+                    </p>
+                  </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">2 шт.</span>
+                    <span class="meta-chip">≈ 780 тыс ₽</span>
+                  </div>
+                  <div class="equipment-item__status">
+                    <button
+                      type="button"
+                      class="equipment-status is-unknown"
+                      data-status-trigger
+                      aria-controls="status-raise3d-large"
+                      aria-expanded="false"
+                      aria-label="Статус Raise3D Pro3 Plus"
+                    >
+                      <span class="equipment-status__light" aria-hidden="true"></span>
+                      <span class="sr-only" data-status-label>Статус уточняется</span>
+                    </button>
+                    <div
+                      class="equipment-status__message"
+                      id="status-raise3d-large"
+                      data-status-message
+                      aria-live="polite"
+                      hidden
+                    ></div>
+                  </div>
+                </li>
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-equipment-id="picaso-designer-x-pro"
+                  data-status="unknown"
+                >
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://picaso-3d.com/ru/printers/designer-x-pro"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Picaso 3D Designer X ПРО (FDM)
+                      </a>
+                    </h4>
+                    <p class="equipment-item__text">
+                      Закрытая камера, стабильно нагреваемые сопла и трёхзонный обдув для ABS/PA.
+                    </p>
+                  </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">3 шт.</span>
+                    <span class="meta-chip">≈ 360 тыс ₽</span>
+                  </div>
+                  <div class="equipment-item__status">
+                    <button
+                      type="button"
+                      class="equipment-status is-unknown"
+                      data-status-trigger
+                      aria-controls="status-picaso-designer-x-pro"
+                      aria-expanded="false"
+                      aria-label="Статус Picaso 3D Designer X ПРО"
+                    >
+                      <span class="equipment-status__light" aria-hidden="true"></span>
+                      <span class="sr-only" data-status-label>Статус уточняется</span>
+                    </button>
+                    <div
+                      class="equipment-status__message"
+                      id="status-picaso-designer-x-pro"
+                      data-status-message
+                      aria-live="polite"
+                      hidden
+                    ></div>
+                  </div>
+                </li>
+                <li
+                  class="equipment-item"
+                  data-equipment-item
+                  data-equipment-id="picaso-designer-xxl"
+                  data-status="unknown"
+                >
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">
+                      <a
+                        href="https://picaso-3d.com/ru/printers/designer-xxl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Picaso 3D Designer XXL (FDM)
+                      </a>
+                    </h4>
+                    <p class="equipment-item__text">
+                      Большой формат печати (600×400×400 мм) для демонстрационных корпусов и оснастки.
+                    </p>
+                  </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">1 шт.</span>
+                    <span class="meta-chip">≈ 890 тыс ₽</span>
+                  </div>
+                  <div class="equipment-item__status">
+                    <button
+                      type="button"
+                      class="equipment-status is-unknown"
+                      data-status-trigger
+                      aria-controls="status-picaso-designer-xxl"
+                      aria-expanded="false"
+                      aria-label="Статус Picaso 3D Designer XXL"
+                    >
+                      <span class="equipment-status__light" aria-hidden="true"></span>
+                      <span class="sr-only" data-status-label>Статус уточняется</span>
+                    </button>
+                    <div
+                      class="equipment-status__message"
+                      id="status-picaso-designer-xxl"
+                      data-status-message
+                      aria-live="polite"
+                      hidden
+                    ></div>
                   </div>
                 </li>
               </ul>
+              <p class="equipment-summary" data-equipment-summary>
+                Загрузка рассчитывается…
+              </p>
             </div>
           </article>
           <article class="card card--equipment">
@@ -503,8 +899,8 @@
                 </svg>
                 CNC и лазер
               </h3>
-              <ul class="equipment-list">
-                <li class="equipment-item">
+              <ul class="equipment-list" data-equipment-list>
+                <li class="equipment-item" data-equipment-item data-status="busy">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Roland MDX‑40/50/540 (CNC)</h4>
                     <p class="equipment-item__text">
@@ -516,7 +912,7 @@
                     <span class="meta-chip">от 650 тыс ₽</span>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="available">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Trotec Speedy 300 (лазер)</h4>
                     <p class="equipment-item__text">
@@ -529,6 +925,9 @@
                   </div>
                 </li>
               </ul>
+              <p class="equipment-summary" data-equipment-summary>
+                Загрузка рассчитывается…
+              </p>
             </div>
           </article>
           <article class="card card--equipment">
@@ -540,8 +939,8 @@
                 </svg>
                 Программное обеспечение
               </h3>
-              <ul class="equipment-list">
-                <li class="equipment-item">
+              <ul class="equipment-list" data-equipment-list>
+                <li class="equipment-item" data-equipment-item data-status="busy">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Geomagic (Reverse/Design)</h4>
                     <p class="equipment-item__text">
@@ -560,7 +959,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="busy">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">GOM Inspect (Метрология)</h4>
                     <p class="equipment-item__text">
@@ -579,7 +978,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="available">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Autodesk Inventor (CAD)</h4>
                     <p class="equipment-item__text">
@@ -598,7 +997,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="available">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Fusion 360 (CAD/CAM/CAE)</h4>
                     <p class="equipment-item__text">
@@ -617,7 +1016,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="available">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Bambu Studio (FDM-слайсер)</h4>
                     <p class="equipment-item__text">
@@ -636,7 +1035,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="available">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Orca Slicer (сообщество)</h4>
                     <p class="equipment-item__text">
@@ -655,7 +1054,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="available">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">PrusaSlicer (FDM/SLA)</h4>
                     <p class="equipment-item__text">
@@ -674,7 +1073,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="available">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Ultimaker Cura (FDM)</h4>
                     <p class="equipment-item__text">
@@ -693,7 +1092,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="busy">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Google NotebookLM</h4>
                     <p class="equipment-item__text">
@@ -712,7 +1111,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="available">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Perplexity AI</h4>
                     <p class="equipment-item__text">
@@ -731,7 +1130,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="maintenance">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Qwen AI</h4>
                     <p class="equipment-item__text">
@@ -750,7 +1149,7 @@
                     </a>
                   </div>
                 </li>
-                <li class="equipment-item">
+                <li class="equipment-item" data-equipment-item data-status="available">
                   <div class="equipment-item__info">
                     <h4 class="equipment-item__title">Hugging Face</h4>
                     <p class="equipment-item__text">
@@ -2523,6 +2922,6 @@
       ]'
     ></div>
 
-
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
