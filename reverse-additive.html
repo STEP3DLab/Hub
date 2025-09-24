@@ -10,27 +10,14 @@
       name="description"
       content="Практический курс ДПО по реверсивному инжинирингу и аддитивному производству: 3D-сканирование, CAD, 3D-печать, календарно-тематический план и команда преподавателей технопарка РГСУ."
     />
-    <link
-      rel="canonical"
-      href="https://step3dlab.github.io/Hub/reverse-additive.html"
-    />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content="https://step3dlab.github.io/Hub/reverse-additive.html"
-    />
+
     <meta
       property="og:title"
       content="Step3D.Lab — Курс «Реверсивный инжиниринг и аддитивное производство»"
     />
     <meta
       property="og:description"
-      content="Практический курс ДПО по реверсивному инжинирингу и аддитивному производству: 3D-сканирование, CAD, 3D-печать, календарно-тематический план и команда преподавателей технопарка РГСУ."
-    />
-    <meta
-      property="og:image"
-      content="https://step3dlab.github.io/Hub/Logo_Step_3D.jpg"
-    />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -38,12 +25,7 @@
     />
     <meta
       name="twitter:description"
-      content="Практический курс ДПО по реверсивному инжинирингу и аддитивному производству: 3D-сканирование, CAD, 3D-печать, календарно-тематический план и команда преподавателей технопарка РГСУ."
-    />
-    <meta
-      name="twitter:image"
-      content="https://step3dlab.github.io/Hub/Logo_Step_3D.jpg"
-    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -56,6 +38,7 @@
     />
     <link rel="stylesheet" href="assets/styles/tailwind.css" />
     <link rel="stylesheet" href="assets/styles/site.css" />
+
     <style>
       :root {
         color-scheme: light dark;
@@ -1589,67 +1572,155 @@
 
     <div
       id="modal"
+      data-modal
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="courseRequestTitle"
+      aria-describedby="courseRequestDescription"
+      tabindex="-1"
       class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50"
     >
-      <div id="modalBg" class="absolute inset-0"></div>
+      <div id="modalBg" data-modal-bg class="absolute inset-0"></div>
       <div
         class="surface-card-base relative max-w-lg mx-auto mt-24 bg-white dark:bg-slate-900 rounded-3xl shadow-soft p-8"
       >
-        <div class="flex items-center justify-between gap-3">
-          <h2 class="text-2xl font-semibold">Заявка на курс</h2>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h2 id="courseRequestTitle" class="text-2xl font-semibold">
+              Заявка на курс
+            </h2>
+            <p
+              id="courseRequestDescription"
+              class="mt-2 text-sm text-slate-600 dark:text-slate-300"
+            >
+              Заполните форму, и мы свяжемся с вами для уточнения деталей обучения.
+            </p>
+          </div>
           <button
             id="closeModal"
-            class="rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-1"
+            type="button"
+            data-modal-close
+            class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-500 transition hover:text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:text-white"
+            aria-label="Закрыть форму"
           >
             ✕
           </button>
         </div>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
-          Заполните форму, и мы свяжемся с вами для уточнения деталей обучения.
-        </p>
-        <form id="requestForm" class="mt-6 space-y-4">
-          <label
-            class="block text-sm font-medium text-slate-600 dark:text-slate-300"
-            >Имя<input
+        <form
+          id="requestForm"
+          class="mt-6 space-y-4"
+          novalidate
+          data-request-form
+          data-endpoint="https://httpbin.org/post"
+          data-success-message="Спасибо! Мы записали вас в лист ожидания курса и скоро подтвердим детали."
+          data-error-message="Не удалось отправить заявку. Обновите страницу или напишите на projects.step3d@gmail.com."
+          data-emailjs-service=""
+          data-emailjs-template=""
+          data-emailjs-public-key=""
+        >
+          <input
+            type="text"
+            name="company"
+            class="hidden"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300">
+            <label for="courseRequestName" class="font-medium">Имя</label>
+            <input
+              id="courseRequestName"
               required
               name="name"
               type="text"
-              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2"
-          /></label>
-          <label
-            class="block text-sm font-medium text-slate-600 dark:text-slate-300"
-            >E-mail<input
+              aria-required="true"
+              aria-invalid="false"
+              aria-describedby="courseRequestNameError"
+              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-sky-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="courseRequestNameError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300">
+            <label for="courseRequestEmail" class="font-medium">E-mail</label>
+            <input
+              id="courseRequestEmail"
               required
               name="email"
               type="email"
-              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2"
-          /></label>
-          <label
-            class="block text-sm font-medium text-slate-600 dark:text-slate-300"
-            >Телефон<input
+              inputmode="email"
+              aria-required="true"
+              aria-invalid="false"
+              aria-describedby="courseRequestEmailError"
+              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-sky-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="courseRequestEmailError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300">
+            <label for="courseRequestPhone" class="font-medium">Телефон</label>
+            <input
+              id="courseRequestPhone"
               name="phone"
               type="tel"
-              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2"
-          /></label>
-          <label
-            class="block text-sm font-medium text-slate-600 dark:text-slate-300"
-            >Комментарий<textarea
+              inputmode="tel"
+              placeholder="+7 (999) 123-45-67"
+              aria-invalid="false"
+              aria-describedby="courseRequestPhoneError"
+              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-sky-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="courseRequestPhoneError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300">
+            <label for="courseRequestComment" class="font-medium">Комментарий</label>
+            <textarea
+              id="courseRequestComment"
               name="comment"
               rows="3"
-              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2"
+              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-sky-200 dark:focus:ring-slate-700"
+              placeholder="Опишите задачу, проект или интересующие модули"
             ></textarea>
-          </label>
+          </div>
           <input
             type="hidden"
             name="course"
             value="Реверсивный инжиниринг и аддитивное производство"
           />
-          <button
-            type="submit"
-            class="w-full rounded-xl bg-slate-900 text-white py-3 font-medium hover:bg-slate-800"
-          >
-            Отправить
-          </button>
+          <div
+            class="hidden rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-200"
+            role="status"
+            aria-live="polite"
+            data-form-status
+          ></div>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button
+              type="submit"
+              data-submit
+              class="inline-flex w-full justify-center rounded-xl bg-slate-900 text-white py-3 font-medium transition hover:bg-slate-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+            >
+              Отправить
+            </button>
+            <button
+              type="button"
+              data-modal-close
+              class="inline-flex w-full justify-center rounded-xl border border-slate-300 px-4 py-2 font-medium text-slate-600 transition hover:text-slate-900 dark:border-slate-700 dark:text-slate-200"
+            >
+              Отмена
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -1672,6 +1743,81 @@
       const prefersReduceMotion = window.matchMedia
         ? window.matchMedia("(prefers-reduced-motion: reduce)")
         : null;
+
+      const sectionMeta = {
+        overview: {
+          title:
+            "Step3D.Lab — Курс по реверсивному инжинирингу: программа и возможности",
+          description:
+            "Обзор курса Step3D.Lab: цели обучения, индустриальные кейсы и компетенции по 3D-сканированию и аддитивному производству.",
+        },
+        "course-gallery": {
+          title: "Step3D.Lab — Галерея проектов слушателей курса",
+          description:
+            "Посмотрите, как слушатели курса Step3D.Lab применяют 3D-сканирование и печать в реальных проектах.",
+        },
+        focus: {
+          title: "Step3D.Lab — Фокус курса и ключевые навыки",
+          description:
+            "Курс концентрируется на практических навыках: реверсивный инжиниринг, подготовка моделей и запуск производства.",
+        },
+        modules: {
+          title: "Step3D.Lab — Учебные модули курса по аддитивному производству",
+          description:
+            "Модули курса Step3D.Lab: от 3D-сканирования и обработки сеток до CAD/CAM и постобработки.",
+        },
+        tutorial: {
+          title: "Step3D.Lab — Туториал и демо-материалы курса",
+          description:
+            "Погрузитесь в демо-материалы: видео, инструкции и шаблоны, которые получают слушатели курса Step3D.Lab.",
+        },
+        schedule: {
+          title: "Step3D.Lab — Календарный план и расписание занятий",
+          description:
+            "Календарно-тематический план курса Step3D.Lab: этапы обучения и распределение часов по темам.",
+        },
+        format: {
+          title: "Step3D.Lab — Формат обучения и условия участия",
+          description:
+            "Выберите формат обучения: очные занятия, VR-тур, проектная работа и сопровождение наставников Step3D.Lab.",
+        },
+        experts: {
+          title: "Step3D.Lab — Команда преподавателей и наставников курса",
+          description:
+            "Наставники Step3D.Lab — практикующие инженеры и технологи аддитивного производства.",
+        },
+        contacts: {
+          title: "Step3D.Lab — Контакты для записи на курс",
+          description:
+            "Запишитесь на курс: свяжитесь с Step3D.Lab по почте, в Telegram или отправьте заявку через форму.",
+        },
+      };
+      const descriptionMeta = document.querySelector('meta[name="description"]');
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      const ogDescription = document.querySelector(
+        'meta[property="og:description"]',
+      );
+      const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+      const twitterDescription = document.querySelector(
+        'meta[name="twitter:description"]',
+      );
+      const defaultSectionMeta =
+        (navData.length && sectionMeta[navData[0].id]) || sectionMeta.overview;
+
+      function applyMeta(sectionId) {
+        const meta = sectionMeta[sectionId] || defaultSectionMeta;
+        if (meta.title && document.title.trim() !== meta.title) {
+          document.title = meta.title;
+          ogTitle?.setAttribute("content", meta.title);
+          twitterTitle?.setAttribute("content", meta.title);
+        }
+        if (meta.description) {
+          descriptionMeta?.setAttribute("content", meta.description);
+          ogDescription?.setAttribute("content", meta.description);
+          twitterDescription?.setAttribute("content", meta.description);
+        }
+      }
+      applyMeta(navData[0]?.id || "overview");
 
       function renderLinks(container, variant) {
         if (!container) return;
@@ -1748,6 +1894,7 @@
               a.getAttribute("href") === `#${id}`,
             ),
           );
+          applyMeta(id);
         },
         { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
       );
@@ -1763,32 +1910,39 @@
         progress.style.transform = `scaleX(${sc})`;
       });
 
-      const modal = document.getElementById("modal");
-      const openModal = () => modal.classList.remove("hidden");
-      const closeModal = () => modal.classList.add("hidden");
+      const modal = document.querySelector("[data-modal]");
+      const modalBg = modal?.querySelector("[data-modal-bg]");
+      const focusableSelectors =
+        'input, select, textarea, button:not([data-modal-close]), [href]';
+      const openModal = () => {
+        if (!modal) return;
+        modal.classList.remove("hidden");
+        const firstField = modal.querySelector(focusableSelectors);
+        if (firstField) {
+          setTimeout(() => firstField.focus(), 0);
+        }
+      };
+      const closeModal = () => {
+        if (!modal) return;
+        const form = modal.querySelector("form[data-request-form]");
+        form?.reset();
+        modal.classList.add("hidden");
+      };
+      window.step3dModal = { open: openModal, close: closeModal };
       document
         .getElementById("openModal")
         ?.addEventListener("click", openModal);
       document
         .getElementById("openModal2")
         ?.addEventListener("click", openModal);
-      document
-        .getElementById("closeModal")
-        ?.addEventListener("click", closeModal);
-      document.getElementById("modalBg")?.addEventListener("click", closeModal);
+      modal
+        ?.querySelectorAll("[data-modal-close]")
+        .forEach((btn) => btn.addEventListener("click", closeModal));
+      modalBg?.addEventListener("click", closeModal);
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !modal.classList.contains("hidden"))
+        if (e.key === "Escape" && !modal?.classList.contains("hidden"))
           closeModal();
       });
-      document
-        .getElementById("requestForm")
-        ?.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const fd = new FormData(e.target);
-          console.log("[Request]", Object.fromEntries(fd.entries()));
-          closeModal();
-          alert("Заявка отправлена! (демо)");
-        });
 
       function initPhotoViewers() {
         document.querySelectorAll(".js-photo-viewer").forEach((viewer) => {

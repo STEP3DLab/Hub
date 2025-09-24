@@ -8,34 +8,7 @@
       name="description"
       content="CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, аддитивное производство. Курсы ДПО, проекты, услуги технопарка РГСУ."
     />
-    <link rel="canonical" href="https://step3dlab.github.io/Hub/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://step3dlab.github.io/Hub/" />
-    <meta
-      property="og:title"
-      content="Step3D.Lab — Лаборатория промдизайна и инжиниринга (R22.Lab)"
-    />
-    <meta
-      property="og:description"
-      content="CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, аддитивное производство. Курсы ДПО, проекты, услуги технопарка РГСУ."
-    />
-    <meta
-      property="og:image"
-      content="https://step3dlab.github.io/Hub/Logo_Step_3D.jpg"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Step3D.Lab — Лаборатория промдизайна и инжиниринга (R22.Lab)"
-    />
-    <meta
-      name="twitter:description"
-      content="CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, аддитивное производство. Курсы ДПО, проекты, услуги технопарка РГСУ."
-    />
-    <meta
-      name="twitter:image"
-      content="https://step3dlab.github.io/Hub/Logo_Step_3D.jpg"
-    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -46,6 +19,7 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='6' y='6' width='52' height='52' rx='12' fill='%230ea5e9'/><path d='M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36' stroke='%23fff' stroke-width='2' fill='none'/></svg>"
     />
+
     <style>
       :root {
         color-scheme: light dark;
@@ -2554,6 +2528,12 @@
     <!-- Модальное окно заявки -->
     <div
       id="modal"
+      data-modal
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="requestTitle"
+      aria-describedby="requestDescription"
+      tabindex="-1"
       class="fixed inset-0 z-[60] hidden items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
@@ -2562,19 +2542,11 @@
       tabindex="-1"
       aria-hidden="true"
     >
-      <div id="modalBg" class="absolute inset-0 bg-black/40"></div>
+      <div id="modalBg" data-modal-bg class="absolute inset-0 bg-black/40"></div>
       <div
         class="relative w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-2xl border border-slate-200 dark:border-slate-700"
       >
-        <h3 id="modalTitle" class="text-xl font-semibold">Оставить заявку</h3>
-        <p id="modalDescription" class="text-slate-700 dark:text-slate-200 mt-1">
-          Заполните контакты — мы свяжемся и обсудим задачу.
-        </p>
-        <form
-          id="requestForm"
-          class="mt-4 grid gap-3"
-          method="post"
-          action="https://formsubmit.co/ajax/info@step3dlab.ru"
+
         >
           <input
             type="text"
@@ -2582,75 +2554,115 @@
             class="hidden"
             tabindex="-1"
             autocomplete="off"
-            aria-hidden
+            aria-hidden="true"
           />
-          <label class="grid gap-1 text-sm"
-            ><span>Цель обращения</span>
+          <div class="grid gap-1 text-sm">
+            <label for="requestType">Цель обращения</label>
             <select
+              id="requestType"
               name="type"
               required
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+              aria-describedby="requestTypeError"
+              aria-invalid="false"
             >
               <option value="course">Запись на курс</option>
               <option value="service">Заказ услуги</option>
               <option value="partner">Сотрудничество</option>
             </select>
-          </label>
-          <label class="grid gap-1 text-sm"
-            ><span>Имя</span
-            ><input
-              required
-              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            <p
+              id="requestTypeError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestName">Имя</label>
+            <input
+              id="requestName"
               name="name"
-          /></label>
-          <label class="grid gap-1 text-sm"
-            ><span>Телефон</span
-            ><input
-              type="tel"
-              required
-              pattern="[0-9+\-\s]{6,20}"
+
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="requestNameError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestPhone">Телефон</label>
+            <input
+              id="requestPhone"
               name="phone"
-              autocomplete="tel"
-          /></label>
-          <label class="grid gap-1 text-sm"
-            ><span>Email</span
-            ><input
-              type="email"
+
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="requestPhoneError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestEmail">Email</label>
+            <input
+              id="requestEmail"
               name="email"
-          /></label>
-          <label class="grid gap-1 text-sm"
-            ><span>Комментарий</span
-            ><textarea
-              rows="3"
+              type="email"
+              inputmode="email"
+              aria-invalid="false"
+              aria-describedby="requestEmailError"
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="requestEmailError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestComment">Комментарий</label>
+            <textarea
+              id="requestComment"
               name="comment"
+              rows="3"
               placeholder="Опишите задачу, сроки, ссылки"
+              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
             ></textarea>
-          </label>
-          <div class="flex items-center gap-2 text-sm">
-            <input id="agree" required type="checkbox" class="h-4 w-4" /><label
-              for="agree"
+          </div>
+          <div class="flex items-start gap-2 text-sm">
+            <input
+              id="agree"
+              name="agreement"
+              type="checkbox"
+              required
+              aria-required="true"
+              aria-invalid="false"
+              aria-describedby="requestAgreementError"
+              class="mt-1 h-4 w-4"
+            />
+            <label for="agree" class="flex-1"
               >Согласен(а) на обработку персональных данных</label
             >
           </div>
           <p
-            id="requestStatus"
-            class="hidden rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700 dark:border-emerald-600/60 dark:bg-emerald-900/40 dark:text-emerald-200"
-            role="status"
-            aria-live="polite"
-          ></p>
-          <div class="mt-2 flex gap-3">
+
             <button
-              class="rounded-xl bg-slate-900 text-white px-4 py-2 hover:bg-slate-800"
+              class="rounded-xl bg-slate-900 text-white px-4 py-2 font-medium transition hover:bg-slate-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
               type="submit"
+              data-submit
             >
-              Отправить</button
-            ><button
+              Отправить
+            </button>
+            <button
               class="rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2"
               type="button"
-              id="closeModal"
+              data-modal-close
             >
               Отмена
             </button>
@@ -2666,5 +2678,6 @@
       class="hidden"
       data-nav='[{"id":"top","label":"Главная"},{"id":"equipment","label":"Оборудование"},{"id":"projects","label":"Проекты"},{"id":"courses","label":"Обучение"},{"id":"team","label":"Команда"},{"id":"blog","label":"Новости"},{"id":"faq","label":"Часто задаваемые вопросы"},{"id":"contacts","label":"Контакты"}]'
     ></div>
+
   </body>
 </html>
