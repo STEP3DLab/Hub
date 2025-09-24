@@ -983,94 +983,223 @@
     </section>
 
     <!-- Курсы ДПО -->
-    <section id="courses" class="py-16 md:py-24 bg-white dark:bg-slate-900">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">
-          Курсы ДПО и проектные школы
-        </h2>
-        <p class="text-slate-700 dark:text-slate-200 max-w-3xl">
-          Учебные планы на 48–72 часа с индивидуальными проектами, подготовка к
-          чемпионатам «Профессионалы», WorldSkills, HI‑TECH.
-        </p>
-        <details
-          class="mt-4 rounded-2xl border border-slate-200 dark:border-slate-700 p-4 open:shadow-sm"
-        >
-          <summary class="cursor-pointer font-medium">
-            Образовательные проекты совместно с ФГБОУ ВО РГСУ
-          </summary>
-          <ul
-            class="mt-3 list-disc pl-5 text-sm text-slate-700 dark:text-slate-200"
+
           >
-            <li>Знакомство со сканерами, подготовка объекта</li>
-            <li>Обработка сеток: чистка, выравнивание, ремешинг</li>
-            <li>Восстановление поверхностей / NURBS</li>
-            <li>CAD‑проектирование и контроль</li>
-            <li>Подготовка к печати, постобработка</li>
-          </ul>
-        </details>
-        <div class="mt-8 grid sm:grid-cols-2 gap-6 md:gap-8">
-          <a
-            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:border-slate-700 dark:bg-slate-800 block focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
-            href="reverse-additive.html"
-          >
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <div class="flex items-center gap-3">
-                  <svg viewBox="0 0 64 64" class="h-10 w-10" aria-hidden>
-                    <defs>
-                      <linearGradient id="c2" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0" stop-color="#0ea5e9" />
-                        <stop offset="1" stop-color="#22c55e" />
-                      </linearGradient>
-                    </defs>
-                    <rect
-                      x="6"
-                      y="6"
-                      width="52"
-                      height="52"
-                      rx="12"
-                      fill="url(#c2)"
-                    />
+            <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
+              Образовательные проекты совместно с ФГБОУ ВО РГСУ
+            </h3>
+            <p class="mt-3 text-slate-700 dark:text-slate-200">
+              Проходим путь от цифрового двойника до запуска аддитивного
+              производства, закрепляя навыки на собственных проектах слушателей.
+            </p>
+            <ul
+              class="mt-6 grid gap-3 text-sm text-slate-700 dark:text-slate-200"
+            >
+              <li class="flex items-start gap-3">
+                <span
+                  class="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-sky-500"
+                ></span>
+                Знакомство с оборудованием, подготовка объекта к сканированию
+              </li>
+              <li class="flex items-start gap-3">
+                <span
+                  class="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-sky-500"
+                ></span>
+                Обработка сеток, ремешинг, контроль качества поверхности
+              </li>
+              <li class="flex items-start gap-3">
+                <span
+                  class="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-sky-500"
+                ></span>
+                CAD‑проектирование, подготовка в CAM и цифровая аттестация
+              </li>
+              <li class="flex items-start gap-3">
+                <span
+                  class="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-sky-500"
+                ></span>
+                Подготовка к печати, постобработка и упаковка кейса для защиты
+              </li>
+            </ul>
+            <div
+              class="mt-6 flex flex-wrap items-center gap-3 text-xs text-slate-600 dark:text-slate-300"
+            >
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 font-medium uppercase tracking-wide text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+              >
+                Сертификат РГСУ
+              </span>
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 font-medium uppercase tracking-wide text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+              >
+                Проектный трек
+              </span>
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 font-medium uppercase tracking-wide text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+              >
+                Наставники-практики
+              </span>
+            </div>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#contacts"
+                class="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus:ring-slate-700"
+              >
+                Подобрать программу
+                <svg viewBox="0 0 24 24" class="h-4 w-4" aria-hidden="true">
+                  <path
+                    d="M5 12h14m-6-7 7 7-7 7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                  />
+                </svg>
+              </a>
+              <a
+                href="reverse-additive.html"
+                class="inline-flex items-center gap-2 rounded-2xl border border-slate-300/70 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:border-slate-700 dark:text-slate-100 dark:hover:border-slate-500 dark:hover:text-white dark:focus:ring-slate-700"
+              >
+                Смотреть подробности
+              </a>
+            </div>
+          </div>
+          <div class="grid gap-4">
+            <div
+              class="rounded-3xl border border-white/50 bg-white/70 p-6 shadow-lg backdrop-blur-sm transition duration-300 hover:shadow-xl dark:border-slate-700/60 dark:bg-slate-900/70"
+            >
+              <div class="flex items-center gap-3">
+                <span
+                  class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-sky-500/15 text-sky-600 dark:bg-sky-400/10 dark:text-sky-300"
+                  aria-hidden="true"
+                >
+                  <svg viewBox="0 0 24 24" class="h-5 w-5">
                     <path
-                      d="M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36"
-                      stroke="#fff"
-                      stroke-width="2"
+                      d="M4 7h16M4 12h16M4 17h10"
                       fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
                     />
                   </svg>
-                  <h3
-                    class="text-xl font-semibold leading-tight hover:underline underline-offset-4"
-                  >
-                    Реверсивный инжиниринг и аддитивное производство
-                  </h3>
-                </div>
-                <p class="mt-2 text-slate-700 dark:text-slate-200">
-                  3D‑сканирование, обработка сканов, CAD, 3D‑печать
-                </p>
-                <div
-                  class="mt-3 flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200"
-                >
-                  <span
-                    class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                    >48–72 ч</span
-                  ><span
-                    class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                    >Студенты и специалисты</span
-                  >
-                </div>
+                </span>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                  Интенсив «Digital Manufacturing Sprint»
+                </h3>
               </div>
-              <svg viewBox="0 0 24 24" class="mt-1 h-5 w-5 text-slate-400">
-                <path
-                  d="M5 12h14M13 5l7 7-7 7"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
+              <p class="mt-3 text-sm text-slate-700 dark:text-slate-200">
+                Неделя сжатой практики: от 3D‑сканирования до печати на
+                индустриальном оборудовании с наставником.
+              </p>
+              <div
+                class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-600 dark:text-slate-300"
+              >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
+                  >48 ч</span
+                >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
+                  >Проектная защита</span
+                >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
+                  >Смешанный формат</span
+                >
+              </div>
             </div>
-          </a>
+            <div
+              class="rounded-3xl border border-white/50 bg-white/70 p-6 shadow-lg backdrop-blur-sm transition duration-300 hover:shadow-xl dark:border-slate-700/60 dark:bg-slate-900/70"
+            >
+              <div class="flex items-center gap-3">
+                <span
+                  class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:bg-emerald-400/10 dark:text-emerald-300"
+                  aria-hidden="true"
+                >
+                  <svg viewBox="0 0 24 24" class="h-5 w-5">
+                    <path
+                      d="M12 5v14m0 0 5-5m-5 5-5-5m10-8-5-5-5 5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                </span>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                  Проектная школа «Advanced CAD/CAE»
+                </h3>
+              </div>
+              <p class="mt-3 text-sm text-slate-700 dark:text-slate-200">
+                Работаем над цифровыми прототипами, осваиваем анализ и оптимизацию
+                конструкции в CAE, завершаем защитой перед индустриальными
+                партнёрами.
+              </p>
+              <div
+                class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-600 dark:text-slate-300"
+              >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
+                  >72 ч</span
+                >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
+                  >Наставники из R22.Lab</span
+                >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
+                  >Командная работа</span
+                >
+              </div>
+            </div>
+            <div
+              class="rounded-3xl border border-white/50 bg-white/70 p-6 shadow-lg backdrop-blur-sm transition duration-300 hover:shadow-xl dark:border-slate-700/60 dark:bg-slate-900/70"
+            >
+              <div class="flex items-center gap-3">
+                <span
+                  class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-500/15 text-indigo-600 dark:bg-indigo-400/10 dark:text-indigo-300"
+                  aria-hidden="true"
+                >
+                  <svg viewBox="0 0 24 24" class="h-5 w-5">
+                    <path
+                      d="m4 7 8 5 8-5m-8 5v9"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                </span>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                  Практикум «Reverse Engineering Lab»
+                </h3>
+              </div>
+              <p class="mt-3 text-sm text-slate-700 dark:text-slate-200">
+                От скана до цифрового двойника: отрабатываем методики контроля,
+                обмеров, реверсивного проектирования и подготовки в CAM.
+              </p>
+              <div
+                class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-600 dark:text-slate-300"
+              >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
+                  >Гибкий график</span
+                >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
+                  >Индивидуальные кейсы</span
+                >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
+                  >Доступ к лаборатории 24/7</span
+                >
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1080,63 +1209,337 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl md:text-4xl font-bold mb-6">Команда</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          <div
-            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4"
+          <article
+            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800"
           >
-            <img
-              src="assets/images/index/team/vladimir-ganishin.svg"
-              alt="Владимир Ганьшин"
-              class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
-              loading="lazy"
-            />
-            <div>
-              <div class="font-semibold">Владимир Ганьшин</div>
-              <div class="text-sm text-slate-600 dark:text-slate-200">
-                руководитель лаборатории
-              </div>
-              <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
-                CAD/AM, реверс, методология ДПО
+            <div class="flex items-start gap-4">
+              <img
+                src="assets/images/index/team/vladimir-ganishin.svg"
+                alt="Владимир Ганьшин"
+                class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
+                loading="lazy"
+              />
+              <div class="flex-1">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="font-semibold text-lg">Владимир Ганьшин</div>
+                    <div class="text-sm text-slate-600 dark:text-slate-200">
+                      руководитель лаборатории
+                    </div>
+                    <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
+                      CAD/AM, реверс, методология ДПО
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
+                    aria-expanded="false"
+                    data-team-toggle="team-details-ganishin"
+                  >
+                    <span aria-hidden="true" data-state-icon>+</span>
+                    <span class="sr-only">Показать подробности о Владимире Ганьшине</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4"
+            <div id="team-details-ganishin" class="mt-4 hidden">
+              <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
+                <li><span class="font-medium text-slate-900 dark:text-white">Возраст и город:</span> 34 года, Москва.</li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Должности:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Руководитель технопарка ФГБОУ РГСУ (2019 — н.в.).</li>
+                    <li>Преподаватель РГСУ, филиал в г. Пятигорске (2024 — н.в.).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Образование:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>МГТУ «Станкин», бакалавриат «Технология, оборудование и автоматизация машиностроительных производств» (2008–2012).</li>
+                    <li>МГТУ «Станкин», магистратура «Конструкторско-технологическое обеспечение машиностроительных производств» (2012–2014).</li>
+                    <li>Аспирантура по направлению 05.02.07 «Технология и оборудование механической и физико-технической обработки», квалификация преподаватель-исследователь высшей школы (2014–2018).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Педагогический стаж &gt;10 лет:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>
+                      ВУЗы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>МГТУ «Станкин», кафедра «ИТиТФ» (2014–2018).</li>
+                        <li>Российский государственный социальный университет, факультет информационных технологий (2018 — н.в.).</li>
+                      </ul>
+                    </li>
+                    <li>
+                      СУЗы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>Политехнический колледж № 42 — мастер производственного обучения (2014).</li>
+                        <li>Западный комплекс непрерывного образования — преподаватель специальных дисциплин (2015–2018).</li>
+                      </ul>
+                    </li>
+                    <li>
+                      Школы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>ЗКНО — уроки технологии по 3D-моделированию (2017–2018).</li>
+                        <li>«Марьина Роща им. Орлова» — курсы «Промышленный дизайн» и «Прототипирование» (2021–2022).</li>
+                      </ul>
+                    </li>
+                    <li>ДПО: технопарк РГСУ (2018 — н.в.).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Преподаваемые курсы:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>«Промышленный дизайн и инжиниринг» (разработчик).</li>
+                    <li>«Инженерный дизайн (САПР)» (разработчик).</li>
+                    <li>«Реверсивный инжиниринг и технологии аддитивного производства» (соавтор).</li>
+                    <li>«Применение технологий искусственного интеллекта в профессиональной деятельности» (разработчик).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Программное обеспечение и оборудование:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>САПР: Autodesk Inventor, Fusion 360, T-FLEX CAD, КОМПАС-3D, Geomagic Design X, GOM Inspect и др.</li>
+                    <li>Оборудование: 3D-сканеры RangeVision, Artec Eva, Leica; 3D-принтеры (FDM, DLP, SLA); станки лазерной резки и механообрабатывающие станки с ЧПУ.</li>
+                    <li>Языки программирования: C++, Python и др.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Достижения и тренерский опыт:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Тренер сборной России по компетенции «Реверсивный инжиниринг» (WorldSkills): 3 место — Казань 2019, 1 место — BRICS 2020.</li>
+                    <li>Подготовил четырёх чемпионов России по WorldSkills (2018–2021) и двух призёров движения «Профессионалы» (2023–2025).</li>
+                    <li>Главный эксперт конкурсов (WorldSkills, «Абилимпикс», «Профессионалы», HI-TECH) в 2018–2023.</li>
+                    <li>Участник команды «Дезинтегратор», 1/4 Битвы роботов в категории 100+ кг (2023, 2024).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Учебно-методические материалы и интервью:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Видео-цикл «Методология проведения курсов ДПО по техническим дисциплинам» (<a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="https://surl.lu/xcfxzz" target="_blank" rel="noreferrer">ссылка</a>).</li>
+                    <li>Интервью: «Онлайн-экскурсия в социальный университет РГСУ», «Что такое технопарк РГСУ?».</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Проекты и портфолио:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Композиционный обвес для Kawasaki Puccetti Racing совместно с Umatex (Росатом).</li>
+                    <li>Telegram-канал: <a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="https://t.me/step_3d_mngr" target="_blank" rel="noreferrer">t.me/step_3d_mngr</a>.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Увлечения и контакты:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Шахматы, футбол, искусственный интеллект.</li>
+                    <li>E-mail: <a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="mailto:projects.step3d@gmail.com">projects.step3d@gmail.com</a>.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </article>
+          <article
+            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800"
           >
-            <img
-              src="assets/images/index/team/anna-ponkratova.svg"
-              alt="Анна Понкратова"
-              class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
-              loading="lazy"
-            />
-            <div>
-              <div class="font-semibold">Анна Понкратова</div>
-              <div class="text-sm text-slate-600 dark:text-slate-200">
-                ведущий инженер‑преподаватель
-              </div>
-              <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
-                3D‑сканирование, обработка сеток
+            <div class="flex items-start gap-4">
+              <img
+                src="assets/images/index/team/anna-ponkratova.svg"
+                alt="Анна Понкратова"
+                class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
+                loading="lazy"
+              />
+              <div class="flex-1">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="font-semibold text-lg">Анна Понкратова</div>
+                    <div class="text-sm text-slate-600 dark:text-slate-200">
+                      ведущий инженер‑преподаватель
+                    </div>
+                    <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
+                      3D‑сканирование, обработка сеток
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
+                    aria-expanded="false"
+                    data-team-toggle="team-details-ponkratova"
+                  >
+                    <span aria-hidden="true" data-state-icon>+</span>
+                    <span class="sr-only">Показать подробности об Анне Понкратовой</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4"
+            <div id="team-details-ponkratova" class="mt-4 hidden">
+              <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
+                <li><span class="font-medium text-slate-900 dark:text-white">Полное имя:</span> Понкратова Христина Анатольевна.</li>
+                <li><span class="font-medium text-slate-900 dark:text-white">Возраст:</span> 23 года.</li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Образование:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>РУДН, факультет ФМиЕН — бакалавриат «Прикладная математика и информатика» (2020–2024).</li>
+                    <li>Университет «Синергия», факультет «Дизайн» — магистратура «Дизайн и продвижение цифрового продукта» (2024 — н.в.).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Место работы:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Технопарк РГСУ — учебный мастер.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Педагогический стаж &gt;5 лет:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>
+                      СУЗы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>Первый Московский образовательный комплекс — мастер производственного обучения (аддитивное производство, подготовка к «Московским мастерам», 2023–2025).</li>
+                        <li>Западный комплекс непрерывного образования — лаборант лаборатории широкополосных систем радиосвязи, кружок по 3D-моделированию (2019–2020).</li>
+                      </ul>
+                    </li>
+                    <li>
+                      Школы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>Школа № 1287 — преподаватель допобразования, 3D-моделирование (6–11 классы, 2022–2024).</li>
+                        <li>«Марьина Роща им. Орлова» — преподаватель ДО, подготовка к «Московским мастерам», 3D-моделирование (5–11 классы, 2021–2024).</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Компетенции:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Реверсивный инжиниринг и изготовление индивидуальных имплантов.</li>
+                    <li>Аддитивное производство, инженерный дизайн САПР, биопротезирование.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Программное обеспечение:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>САПР: КОМПАС-3D, Geomagic Design X, Autodesk Inventor Professional 2018+, Fusion 360, GOM Inspect 2018+, Geomagic Control X, Materialise 3-matic и др.</li>
+                    <li>Blender.</li>
+                    <li>Слайсеры: Ultimaker Cura, Polygon X, Creality Slicer и др.</li>
+                    <li>ПО 3D-сканирования: Artec Studio 15 Professional+, RV 3D Studio (до 2023 — ScanCenter NG) и др.</li>
+                    <li>Языки программирования: C++, Python.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Достижения:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Чемпион финала VII Национального чемпионата «Молодые профессионалы» (WorldSkills Russia 2019) по реверсивному инжинирингу.</li>
+                    <li>Чемпион BRICS Skills Challenge 2019 (FutureSkills, реверсивный инжиниринг).</li>
+                    <li>Призёр WorldSkills HI-TECH 2018, чемпион WorldSkills HI-TECH 2019.</li>
+                    <li>Наставник десятков участников и победителей конкурсов профмастерства (Ростех, Сибур, Роскосмос, Северсталь и др.).</li>
+                    <li>Лауреат гранта Правительства Москвы в сфере образования (2024).</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium text-slate-900 dark:text-white">Увлечения:</span> музыка, программирование, спорт.</li>
+              </ul>
+            </div>
+          </article>
+          <article
+            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800"
           >
-            <img
-              src="assets/images/index/team/alexey-rekut.svg"
-              alt="Алексей Рекут"
-              class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
-              loading="lazy"
-            />
-            <div>
-              <div class="font-semibold">Алексей Рекут</div>
-              <div class="text-sm text-slate-600 dark:text-slate-200">
-                инженер‑конструктор
-              </div>
-              <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
-                CAD, ЧПУ, прототипы
+            <div class="flex items-start gap-4">
+              <img
+                src="assets/images/index/team/alexey-rekut.svg"
+                alt="Алексей Рекут"
+                class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
+                loading="lazy"
+              />
+              <div class="flex-1">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="font-semibold text-lg">Алексей Рекут</div>
+                    <div class="text-sm text-slate-600 dark:text-slate-200">
+                      инженер‑конструктор
+                    </div>
+                    <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
+                      CAD, ЧПУ, прототипы
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
+                    aria-expanded="false"
+                    data-team-toggle="team-details-rekut"
+                  >
+                    <span aria-hidden="true" data-state-icon>+</span>
+                    <span class="sr-only">Показать подробности об Алексее Рекуте</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+            <div id="team-details-rekut" class="mt-4 hidden">
+              <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
+                <li><span class="font-medium text-slate-900 dark:text-white">Возраст:</span> 54 года.</li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Должности:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Заместитель руководителя технопарка (2022 — н.в.).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Разработчик программ:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Программа ДПК преподавателей «Практика и методика реализации образовательных программ основного и среднего общего образования по предмету труд (технологии) на основе проектов спортивно-боевого роботостроения».</li>
+                    <li>Дополнительная общеразвивающая программа «Спортивно-боевое роботостроение».</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Образование:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Высшее: ГАУ им. Серго Орджоникидзе, «Экономическая кибернетика» (1994).</li>
+                    <li>Повышение квалификации: АНХ при Правительстве РФ, «Управление в маркетинге» (2004).</li>
+                    <li>Повышение квалификации: СКФУ, «Преподаватель высшей школы» (2017).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Педагогический стаж &gt;9 лет:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>ВУЗ: РГСУ, технопарк (2022 — н.в.).</li>
+                    <li>СУЗ: ГАПОУ Колледж предпринимательства №11 (2009–2020).</li>
+                    <li>ДПО: ГАПОУ Колледж предпринимательства №11 (2009–2015).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Компетенции:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Аддитивное производство (3D-печать FDM, DLP, SLA).</li>
+                    <li>Реверсивный инжиниринг.</li>
+                    <li>Промышленный дизайн и прототипирование (включая станки с ЧПУ).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Программное обеспечение:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>САПР: Rhino 3D, Geomagic Design X, GOM Inspect.</li>
+                    <li>Слайсеры: Ultimaker Cura, CHITUBOX, Polygon X, Creality Slicer.</li>
+                    <li>ПО 3D-сканирования: Artec Studio 15 Professional+, RV 3D Studio (до 2023 — ScanCenter NG).</li>
+                    <li>Языки программирования: C++.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Достижения:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Инициатор создания ФГОС СПО «Аддитивные технологии» (соавтор первой редакции, 2010–2013).</li>
+                    <li>Создатель компетенций «Реверсивный инжиниринг» (WorldSkills Russia, 2014) и «Additive Manufacturing» (WorldSkills, 2020).</li>
+                    <li>Менеджер компетенции «Реверсивный инжиниринг» в WorldSkills/Агентстве развития профессий и навыков (2014 — н.в.).</li>
+                    <li>Менеджер компетенции «Реверсивный инжиниринг» Всероссийского чемпионатного движения (2023 — н.в.).</li>
+                    <li>Инициатор и капитан команды «Дезинтегратор» — ТОП-16 «Битвы роботов» в категории 100+ кг (2023).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Учебные материалы и интервью:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>«Учебное пособие по Rhinoceros 3D», «Базовый курс Rhinoceros 3D».</li>
+                    <li>Интервью: фильм «Лучший по профессии» (Россия 24), канал «Аддитивная кухня», 4 канал (Екатеринбург).</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium text-slate-900 dark:text-white">Увлечения:</span> механика, кинетическая скульптура, креативная механика, спортивно-боевые роботы.</li>
+              </ul>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1497,56 +1900,119 @@
             </div>
           </div>
           <div
-            class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-soft"
+            class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-sky-50 via-white to-emerald-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-6 shadow-soft"
           >
-            <h3 class="font-semibold mb-2">Адреса</h3>
-            <div
-              class="grid sm:grid-cols-2 gap-4 text-sm text-slate-700 dark:text-slate-300"
-            >
               <div>
-                <div class="font-medium">ВДНХ</div>
-                <div>ул. Вильгельма Пика, 4, корп. 8</div>
+                <h3 class="font-semibold text-lg">Адреса и VR‑туры</h3>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                  Выберите площадку, чтобы посмотреть маршрут на карте или
+                  заглянуть внутрь лабораторий в формате 360°.
+                </p>
               </div>
-              <div>
-                <div class="font-medium">Беговая</div>
-                <div>ул. Беговая, 12</div>
-              </div>
-            </div>
-            <div class="mt-6">
-              <div class="flex items-center gap-2 mb-3">
+              <div
+                class="flex items-center gap-2 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 p-1"
+              >
                 <button
-                  class="px-3 py-1.5 rounded-xl text-sm border bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-slate-900 dark:border-white"
+                  class="px-3 py-1.5 rounded-xl text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 shadow-sm"
                   data-maptab="0"
                 >
                   ВДНХ
                 </button>
                 <button
-                  class="px-3 py-1.5 rounded-xl text-sm border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700"
+                  class="px-3 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 shadow-sm"
                   data-maptab="1"
                 >
                   Беговая
                 </button>
               </div>
-              <div
-                class="relative w-full overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 aspect-video"
-              >
-                <iframe
-                  title="Карта — ВДНХ"
-                  class="absolute inset-0 w-full h-full"
-                  data-map="0"
-                  src="https://www.google.com/maps?q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,%20%D1%83%D0%BB.%20%D0%92%D0%B8%D0%BB%D1%8C%D0%B3%D0%B5%D0%BB%D1%8C%D0%BC%D0%B0%20%D0%9F%D0%B8%D0%BA%D0%B0,%204,%20%D0%BA%D0%BE%D1%80%D0%BF.%208&output=embed"
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
-                <iframe
-                  title="Карта — Беговая"
-                  class="absolute inset-0 w-full h-full opacity-0 pointer-events-none"
-                  data-map="1"
-                  src="https://www.google.com/maps?q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,%20%D1%83%D0%BB.%20%D0%91%D0%B5%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F,%2012&output=embed"
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
+            </div>
+            <div
+              class="mt-6 grid gap-4 sm:grid-cols-2 text-sm text-slate-700 dark:text-slate-200"
+            >
+              <div class="rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="font-semibold text-slate-900 dark:text-white">
+                      ВДНХ
+                    </div>
+                    <div>ул. Вильгельма Пика, 4, корп. 8</div>
+                  </div>
+                  <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-xl bg-sky-100 text-sky-600 dark:bg-sky-900/60 dark:text-sky-200">
+                    🧭
+                  </span>
+                </div>
+                <a
+                  href="https://pika.technopark-rgsu.ru/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sky-600 hover:text-sky-700 dark:text-sky-300 dark:hover:text-sky-200"
+                >
+                  <span>VR‑тур по площадке ВДНХ</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    class="h-4 w-4"
+                  >
+                    <path d="M5 12h14" stroke-linecap="round" />
+                    <path d="m13 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
               </div>
+              <div class="rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="font-semibold text-slate-900 dark:text-white">
+                      Беговая
+                    </div>
+                    <div>ул. Беговая, 12</div>
+                  </div>
+                  <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 dark:bg-emerald-900/60 dark:text-emerald-200">
+                    🛰️
+                  </span>
+                </div>
+                <a
+                  href="https://begovaya.technopark-rgsu.ru/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700 dark:text-emerald-300 dark:hover:text-emerald-200"
+                >
+                  <span>VR‑тур по площадке Беговая</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    class="h-4 w-4"
+                  >
+                    <path d="M5 12h14" stroke-linecap="round" />
+                    <path d="m13 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div
+              class="mt-6 relative w-full overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 shadow-inner aspect-video"
+            >
+              <iframe
+                title="Карта — ВДНХ"
+                class="absolute inset-0 w-full h-full"
+                data-map="0"
+                src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=false&mode=search&text=%D1%83%D0%BB.%20%D0%92%D0%B8%D0%BB%D1%8C%D0%B3%D0%B5%D0%BB%D1%8C%D0%BC%D0%B0%20%D0%9F%D0%B8%D0%BA%D0%B0,%204,%20%D0%BA%D0%BE%D1%80%D0%BF.%208"
+                loading="lazy"
+                allowfullscreen
+              ></iframe>
+              <iframe
+                title="Карта — Беговая"
+                class="absolute inset-0 w-full h-full opacity-0 pointer-events-none"
+                data-map="1"
+                src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=false&mode=search&text=%D1%83%D0%BB.%20%D0%91%D0%B5%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F,%2012"
+                loading="lazy"
+                allowfullscreen
+              ></iframe>
             </div>
             <div class="mt-4 text-sm text-slate-500 dark:text-slate-400">
               © <span id="y"></span> Технопарк РГСУ
@@ -1741,6 +2207,23 @@
       const prefersReduceMotion = window.matchMedia
         ? window.matchMedia("(prefers-reduced-motion: reduce)")
         : null;
+      const teamToggles = document.querySelectorAll("[data-team-toggle]");
+
+      teamToggles.forEach((button) => {
+        const targetId = button.dataset.teamToggle;
+        const target = targetId ? document.getElementById(targetId) : null;
+        if (!target) return;
+
+        button.addEventListener("click", () => {
+          const expanded = button.getAttribute("aria-expanded") === "true";
+          button.setAttribute("aria-expanded", (!expanded).toString());
+          target.classList.toggle("hidden", expanded);
+          const icon = button.querySelector("[data-state-icon]");
+          if (icon) {
+            icon.textContent = expanded ? "+" : "−";
+          }
+        });
+      });
       function renderLinks(container, variant) {
         if (!container) return;
         // Каждый раз заново строим список ссылок, чтобы учесть актуальные данные из navData
@@ -2040,15 +2523,7 @@
             .forEach((b) =>
               b.classList.toggle("dark:text-slate-900", b === btn),
             );
-      document.querySelectorAll("[data-map]").forEach((frame) => {
-        frame.classList.toggle("opacity-0", frame.dataset.map !== i);
-        frame.classList.toggle(
-          "pointer-events-none",
-          frame.dataset.map !== i,
-        );
-      });
-    }),
-  );
+
 
   document
     .getElementById("shareLink")
