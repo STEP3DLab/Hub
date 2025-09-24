@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="coursePrint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <radialGradient id="printGlow" cx="0.4" cy="0.3" r="0.9">
+      <stop offset="0%" stop-color="rgba(192,132,252,0.8)" />
+      <stop offset="100%" stop-color="rgba(192,132,252,0)" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#coursePrint)" rx="44" ry="44" />
+  <circle cx="420" cy="280" r="260" fill="url(#printGlow)" />
+  <g fill="rgba(226,232,240,0.15)">
+    <rect x="200" y="320" width="280" height="240" rx="28" />
+    <rect x="540" y="280" width="420" height="300" rx="34" />
+  </g>
+  <rect x="580" y="320" width="200" height="200" rx="22" fill="rgba(30,41,59,0.5)" />
+  <rect x="810" y="320" width="110" height="200" rx="18" fill="rgba(30,41,59,0.45)" />
+  <path d="M600 540h160l-22 90H622z" fill="rgba(30,41,59,0.55)" />
+  <g fill="#f8f5ff">
+    <circle cx="640" cy="320" r="9" />
+    <circle cx="680" cy="320" r="9" />
+    <circle cx="720" cy="320" r="9" />
+  </g>
+  <text x="220" y="160" font-family="'Inter', 'Segoe UI', sans-serif" font-size="42" fill="#f5f3ff" font-weight="600">Лаборатория аддитивного производства</text>
+  <text x="220" y="650" font-family="'Inter', 'Segoe UI', sans-serif" font-size="28" fill="#f3e8ff">Настройка печати, постобработка и контроль геометрии изделий</text>
+</svg>

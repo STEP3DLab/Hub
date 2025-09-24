@@ -96,6 +96,41 @@
   </header>
 
   <main>
+    <section id="course-gallery" class="py-16 md:py-24 bg-white/70 dark:bg-slate-900/40">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold">Как проходит курс</h2>
+            <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl">Занятия проходят в лаборатории Step3D.Lab: от съёмки и анализа облаков точек до подготовки деталей к печати и постобработке. Переключайтесь, чтобы увидеть ключевые этапы практики.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-white/70 px-4 py-3 text-xs text-slate-500 shadow-sm backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-300">
+            Свайп или стрелки · 3 сцены
+          </div>
+        </div>
+        <div class="mt-8">
+          <div class="js-photo-viewer relative" data-index="0" role="group" aria-label="Фотогалерея курса">
+            <div class="relative aspect-[16/9] overflow-hidden rounded-3xl border border-slate-200 bg-slate-900/90 shadow-soft dark:border-slate-700">
+              <figure class="js-photo-slide absolute inset-0 z-10 opacity-100 transition-opacity duration-500 ease-out">
+                <img src="assets/images/reverse-additive/gallery/scanner-session.svg" alt="Практическая работа со сканером RangeVision" class="h-full w-full object-cover" loading="lazy" />
+                <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent px-6 py-5 text-sm text-slate-100">Практикум по сканированию: калибровка RangeVision Spectrum, установка меток и контроль данных.</figcaption>
+              </figure>
+              <figure class="js-photo-slide absolute inset-0 opacity-0 transition-opacity duration-500 ease-out">
+                <img src="assets/images/reverse-additive/gallery/cad-workshop.svg" alt="Сессия по построению CAD-моделей" class="h-full w-full object-cover" loading="lazy" />
+                <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent px-6 py-5 text-sm text-slate-100">Работа в Geomagic Design X и Autodesk Inventor: восстановление геометрии и выпуск КД.</figcaption>
+              </figure>
+              <figure class="js-photo-slide absolute inset-0 opacity-0 transition-opacity duration-500 ease-out">
+                <img src="assets/images/reverse-additive/gallery/additive-lab.svg" alt="Лаборатория аддитивного производства" class="h-full w-full object-cover" loading="lazy" />
+                <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent px-6 py-5 text-sm text-slate-100">Отработка печати и постобработки: подготовка, запуск и контроль геометрии изделий.</figcaption>
+              </figure>
+            </div>
+            <button type="button" data-photo-prev aria-label="Предыдущее фото" class="group absolute left-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-white/70 bg-white/80 text-slate-700 shadow-lg backdrop-blur transition hover:bg-white focus:outline-none focus-visible:ring-4 focus-visible:ring-sky-300 dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-100"><svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></svg></button>
+            <button type="button" data-photo-next aria-label="Следующее фото" class="group absolute right-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-white/70 bg-white/80 text-slate-700 shadow-lg backdrop-blur transition hover:bg-white focus:outline-none focus-visible:ring-4 focus-visible:ring-sky-300 dark:border-slate-600/70 dark:bg-slate-900/70 dark:text-slate-100"><svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></svg></button>
+            <div class="mt-6 flex items-center justify-center gap-2 js-photo-dots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="focus" class="py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl md:text-4xl font-bold mb-6">Что получает участник курса</h2>
@@ -476,7 +511,7 @@
     </div>
   </div>
 
-  <div id="nav-data" class="hidden" data-nav='[{"id":"overview","label":"О курсе"},{"id":"focus","label":"Фокус"},{"id":"modules","label":"Модули"},{"id":"schedule","label":"План"},{"id":"format","label":"Формат"},{"id":"experts","label":"Команда"},{"id":"contacts","label":"Контакты"}]'></div>
+  <div id="nav-data" class="hidden" data-nav='[{"id":"overview","label":"О курсе"},{"id":"course-gallery","label":"Галерея"},{"id":"focus","label":"Фокус"},{"id":"modules","label":"Модули"},{"id":"schedule","label":"План"},{"id":"format","label":"Формат"},{"id":"experts","label":"Команда"},{"id":"contacts","label":"Контакты"}]'></div>
 
   <script>
     const root = document.documentElement
@@ -559,6 +594,83 @@
       closeModal()
       alert('Заявка отправлена! (демо)')
     })
+
+    function initPhotoViewers(){
+      document.querySelectorAll('.js-photo-viewer').forEach(viewer=>{
+        const slides = viewer.querySelectorAll('.js-photo-slide')
+        if(!slides.length) return
+        const dotsBox = viewer.querySelector('.js-photo-dots')
+        const prev = viewer.querySelector('[data-photo-prev]')
+        const next = viewer.querySelector('[data-photo-next]')
+        viewer.dataset.index = viewer.dataset.index || '0'
+        if(dotsBox){
+          dotsBox.innerHTML = ''
+          slides.forEach((_,i)=>{
+            const dot = document.createElement('button')
+            dot.type = 'button'
+            dot.className = 'h-2.5 w-2.5 rounded-full bg-slate-300 transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 dark:bg-slate-600'
+            dot.setAttribute('aria-label', `Перейти к кадру ${i+1}`)
+            dot.setAttribute('aria-current', 'false')
+            dot.addEventListener('click', ()=>{ setActive(i); schedule() })
+            dotsBox.appendChild(dot)
+          })
+        }
+        let timerId = null
+        function setActive(rawIndex){
+          const total = slides.length
+          if(!total) return
+          const idx = ((rawIndex % total) + total) % total
+          viewer.dataset.index = idx
+          slides.forEach((slide,slideIndex)=>{
+            const active = slideIndex === idx
+            slide.classList.toggle('opacity-100', active)
+            slide.classList.toggle('opacity-0', !active)
+            slide.classList.toggle('z-10', active)
+            slide.classList.toggle('z-0', !active)
+            slide.classList.toggle('pointer-events-none', !active)
+            slide.setAttribute('aria-hidden', active ? 'false' : 'true')
+          })
+          dotsBox?.querySelectorAll('button').forEach((dot,dotIndex)=>{
+            const active = dotIndex === idx
+            dot.classList.toggle('w-6', active)
+            dot.classList.toggle('bg-slate-900', active)
+            dot.classList.toggle('dark:bg-white', active)
+            dot.setAttribute('aria-current', active ? 'true' : 'false')
+          })
+        }
+        function schedule(){
+          if(slides.length <= 1) return
+          if(timerId) clearInterval(timerId)
+          timerId = setInterval(()=> setActive((+viewer.dataset.index || 0) + 1), 8000)
+        }
+        prev?.addEventListener('click', ()=>{ setActive((+viewer.dataset.index || 0) - 1); schedule() })
+        next?.addEventListener('click', ()=>{ setActive((+viewer.dataset.index || 0) + 1); schedule() })
+        let startX = null
+        viewer.addEventListener('pointerdown', e=>{
+          if(e.target.closest('button')) return
+          startX = e.clientX
+        })
+        viewer.addEventListener('pointerup', e=>{
+          if(startX === null || e.target.closest('button')){ startX = null; return }
+          const dx = e.clientX - startX
+          if(Math.abs(dx) > 40){
+            if(dx > 0){ setActive((+viewer.dataset.index || 0) - 1) }
+            else { setActive((+viewer.dataset.index || 0) + 1) }
+            schedule()
+          }
+          startX = null
+        })
+        viewer.addEventListener('pointerleave', ()=>{ startX = null })
+        if(slides.length > 1){
+          viewer.addEventListener('mouseenter', ()=>{ if(timerId) { clearInterval(timerId); timerId = null } })
+          viewer.addEventListener('mouseleave', ()=> schedule())
+        }
+        setActive(+viewer.dataset.index || 0)
+        schedule()
+      })
+    }
+
+    initPhotoViewers()
 
     const mapTabs = document.querySelectorAll('[data-maptab]')
     if(mapTabs.length){
