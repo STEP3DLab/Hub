@@ -40,7 +40,6 @@
           </a>
           <div class="hidden md:flex items-center gap-1" id="links"></div>
           <div class="md:hidden flex items-center gap-2">
-            <button id="themeToggleSm" class="rounded-xl border px-3 py-2 text-sm">🌙</button>
             <button id="burger" aria-expanded="false" aria-label="Меню" class="rounded-xl border p-2">
               <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
@@ -442,7 +441,7 @@
       <div class="border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-            <div><div class="text-sm font-semibold mb-3">Продукты</div><ul class="space-y-2 text-sm"><li><a href="index.html#services" class="hover:underline">CAD/CAE‑моделирование</a></li><li><a href="index.html#services" class="hover:underline">Реверсивный инжиниринг</a></li><li><a href="index.html#services" class="hover:underline">Аддитивное производство</a></li><li><a href="index.html#services" class="hover:underline">Прототипирование</a></li></ul></div>
+            <div><div class="text-sm font-semibold mb-3">Продукты</div><ul class="space-y-2 text-sm"><li><a href="index.html#equipment" class="hover:underline">CAD/CAE‑моделирование</a></li><li><a href="index.html#equipment" class="hover:underline">Реверсивный инжиниринг</a></li><li><a href="index.html#equipment" class="hover:underline">Аддитивное производство</a></li><li><a href="index.html#equipment" class="hover:underline">Прототипирование</a></li></ul></div>
             <div><div class="text-sm font-semibold mb-3">Образование</div><ul class="space-y-2 text-sm"><li><a href="index.html#courses" class="hover:underline">Курсы ДПО</a></li><li><a href="index.html#courses" class="hover:underline">Проектные школы</a></li><li><a href="index.html#courses" class="hover:underline">Силлабусы</a></li><li><a href="index.html#contacts" class="hover:underline">Заявка на обучение</a></li></ul></div>
             <div><div class="text-sm font-semibold mb-3">Проекты</div><ul class="space-y-2 text-sm"><li><a href="index.html#projects" class="hover:underline">MedTech</a></li><li><a href="index.html#projects" class="hover:underline">Robotics</a></li><li><a href="index.html#projects" class="hover:underline">Reverse engineering</a></li><li><a href="index.html#projects" class="hover:underline">Design &amp; Render</a></li></ul></div>
             <div><div class="text-sm font-semibold mb-3">Ресурсы</div><ul class="space-y-2 text-sm"><li><a href="#" class="hover:underline">Методические материалы</a></li><li><a href="#" class="hover:underline">3D‑модели (STP)</a></li><li><a href="#" class="hover:underline">Политика данных</a></li><li><a href="#" class="hover:underline">Блог</a></li></ul></div>
@@ -479,23 +478,6 @@
   <div id="nav-data" class="hidden" data-nav='[{"id":"overview","label":"О курсе"},{"id":"focus","label":"Фокус"},{"id":"modules","label":"Модули"},{"id":"schedule","label":"План"},{"id":"format","label":"Формат"},{"id":"experts","label":"Команда"},{"id":"contacts","label":"Контакты"}]'></div>
 
   <script>
-    const root = document.documentElement
-    const stored = localStorage.getItem('step3d-theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const initial = stored || (prefersDark ? 'dark' : 'light')
-    if(initial === 'dark') root.classList.add('dark')
-    function setTheme(mode){
-      if(mode === 'dark'){ root.classList.add('dark'); localStorage.setItem('step3d-theme','dark') }
-      else { root.classList.remove('dark'); localStorage.setItem('step3d-theme','light') }
-      document.querySelectorAll('#themeToggle, #themeToggleSm').forEach(btn=>{
-        if(btn) btn.textContent = root.classList.contains('dark') ? '☀️' : '🌙'
-      })
-    }
-
-    const themeToggle = document.getElementById('themeToggle')
-    const themeToggleSm = document.getElementById('themeToggleSm')
-    ;[themeToggle, themeToggleSm].forEach(btn=> btn && btn.addEventListener('click', ()=> setTheme(root.classList.contains('dark') ? 'light' : 'dark')))
-
     const navData = JSON.parse(document.getElementById('nav-data').dataset.nav)
     const linksWrap = document.getElementById('links')
     const mobileWrap = document.getElementById('mobile')
@@ -510,13 +492,6 @@
         a.className = variant==='desktop' ? 'px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800' : 'px-3 py-2 rounded-xl text-sm font-medium border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700'
         container.appendChild(a)
       })
-      if(variant==='desktop'){
-        const tBtn = document.createElement('button')
-        tBtn.className = 'ml-2 rounded-xl border px-3 py-2 text-sm'
-        tBtn.textContent = root.classList.contains('dark') ? 'Светлая' : 'Тёмная'
-        tBtn.addEventListener('click', ()=>{ setTheme(root.classList.contains('dark') ? 'light':'dark'); tBtn.textContent = root.classList.contains('dark') ? 'Светлая' : 'Тёмная' })
-        container.appendChild(tBtn)
-      }
     }
     renderLinks(linksWrap, 'desktop')
     renderLinks(mobileWrap, 'mobile')
