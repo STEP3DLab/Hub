@@ -1,0 +1,239 @@
+/* Base styles and design tokens for Step3D.Lab */
+:root {
+  color-scheme: dark;
+  --font-sans: system-ui, -apple-system, "Segoe UI", "Roboto", "Inter", Arial, sans-serif;
+  --bg: #0b0d12;
+  --card: #0f1218;
+  --fg: #e8eef7;
+  --muted: #98a2b3;
+  --primary: #6ea8fe;
+  --accent: #3dd2ad;
+  --radius: 16px;
+  --shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --container-padding: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fg);
+  background-color: var(--bg);
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+img {
+  border-radius: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin-block: 0 1rem;
+  margin-inline-start: 1.25rem;
+  padding: 0;
+}
+
+li {
+  margin-block-end: 0.35rem;
+}
+
+p {
+  margin-block: 0 1rem;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a:hover {
+  color: #9dc2ff;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.container {
+  width: min(100%, 78.75rem);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+.section {
+  padding-block: 3rem;
+}
+
+.section-title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.5rem, 1.5vw + 1rem, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section-lead {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid.cols-2 {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.grid.cols-3 {
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow);
+  color: var(--fg);
+  overflow: hidden;
+}
+
+.card-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.card-media > img,
+.card-media > picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.card-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1.25rem, 1vw + 1rem, 1.75rem);
+  font-weight: 700;
+}
+
+.card-text {
+  margin: 0;
+  color: var(--muted);
+}
+
+.card-actions {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.95rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--fg);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, rgba(110, 168, 254, 0.18), rgba(110, 168, 254, 0.06));
+  border-color: rgba(110, 168, 254, 0.35);
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --container-padding: 1.5rem;
+  }
+
+  .section {
+    padding-block: 4rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --container-padding: 2rem;
+  }
+
+  .section {
+    padding-block: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
