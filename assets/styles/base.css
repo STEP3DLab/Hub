@@ -1,16 +1,7 @@
 /* Base styles and design tokens for Step3D.Lab */
 :root {
   color-scheme: dark;
-  --font-sans: system-ui, -apple-system, "Segoe UI", "Roboto", "Inter", Arial, sans-serif;
-  --bg: #0b0d12;
-  --card: #0f1218;
-  --fg: #e8eef7;
-  --muted: #98a2b3;
-  --primary: #6ea8fe;
-  --accent: #3dd2ad;
-  --radius: 16px;
-  --shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
-  --border-subtle: rgba(255, 255, 255, 0.08);
+
   --container-padding: 1rem;
 }
 
@@ -31,11 +22,12 @@ html {
 
 body {
   margin: 0;
+
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.6;
   color: var(--fg);
-  background-color: var(--bg);
+
 }
 
 img,
@@ -69,6 +61,7 @@ p {
   margin-block: 0 1rem;
 }
 
+
 a {
   color: var(--primary);
   text-decoration: none;
@@ -76,7 +69,7 @@ a {
 }
 
 a:hover {
-  color: #9dc2ff;
+
   text-decoration: underline;
   text-decoration-thickness: 2px;
 }
@@ -86,8 +79,7 @@ a:hover {
   outline-offset: 2px;
 }
 
-.container {
-  width: min(100%, 78.75rem);
+
   margin-inline: auto;
   padding-inline: var(--container-padding);
 }
@@ -108,6 +100,7 @@ a:hover {
   color: var(--muted);
   max-width: 62ch;
 }
+
 
 .grid {
   display: grid;
@@ -201,11 +194,13 @@ a:hover {
   border-color: rgba(110, 168, 254, 0.35);
 }
 
+
 .icon {
   width: 1.25rem;
   height: 1.25rem;
   flex: 0 0 auto;
 }
+
 
 @media (min-width: 48rem) {
   :root {

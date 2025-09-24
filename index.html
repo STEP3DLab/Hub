@@ -23,498 +23,6 @@
     <link rel="stylesheet" href="assets/styles/base.css" />
     <link rel="stylesheet" href="assets/styles/components.css" />
 
-    <style>
-      :root {
-        color-scheme: light dark;
-        --focus-ring-color: #0ea5e9;
-        --focus-ring-dark: #38bdf8;
-        --page-gradient-light: radial-gradient(
-            140% 170% at 12% -18%,
-            rgba(180, 215, 245, 0.22),
-            rgba(180, 215, 245, 0)
-          ),
-          radial-gradient(
-            160% 150% at 88% 8%,
-            rgba(171, 219, 255, 0.18),
-            rgba(171, 219, 255, 0)
-          ),
-          linear-gradient(180deg, #fefbf5 0%, #f7f1e8 55%, #fbf6ef 100%);
-        --page-gradient-dark: radial-gradient(
-            120% 140% at 12% -10%,
-            rgba(56, 189, 248, 0.26),
-            rgba(15, 23, 42, 0)
-          ),
-          radial-gradient(140% 120% at 85% 15%, rgba(16, 185, 129, 0.2), rgba(15, 23, 42, 0)),
-          linear-gradient(180deg, #020617 0%, #0f172a 100%);
-        --surface-light: rgba(255, 255, 255, 0.82);
-        --surface-dark: rgba(15, 23, 42, 0.78);
-        --surface-border-light: rgba(148, 163, 184, 0.25);
-        --surface-border-dark: rgba(100, 116, 139, 0.45);
-        --surface-shadow-light: 0 24px 65px -32px rgba(15, 23, 42, 0.35);
-        --surface-shadow-dark: 0 28px 70px -30px rgba(15, 23, 42, 0.8);
-        --chip-light: rgba(226, 232, 240, 0.65);
-        --chip-dark: rgba(51, 65, 85, 0.55);
-      }
-
-      body {
-        font-family: "Manrope", "Inter", "Segoe UI", system-ui, -apple-system,
-          BlinkMacSystemFont, sans-serif;
-        background-image: var(--page-gradient-light);
-        line-height: 1.65;
-        font-feature-settings: "liga" 1, "kern" 1;
-        position: relative;
-        min-height: 100vh;
-      }
-
-      h1,
-      .text-balance-1 {
-        font-size: clamp(2.5rem, 1.2vw + 2.1rem, 3.5rem);
-        line-height: 1.15;
-      }
-
-      h2,
-      .text-balance-2 {
-        font-size: clamp(2rem, 1vw + 1.6rem, 2.75rem);
-        line-height: 1.2;
-      }
-
-      h3,
-      .text-balance-3 {
-        font-size: clamp(1.5rem, 0.8vw + 1.2rem, 2rem);
-        line-height: 1.25;
-      }
-
-      .skip-link {
-        position: absolute;
-        left: 1rem;
-        top: -4rem;
-        padding: 0.5rem 1rem;
-        border-radius: 0.75rem;
-        background: rgb(15 23 42 / 0.95);
-        color: white;
-        font-weight: 600;
-        transition: top 0.2s ease, transform 0.2s ease;
-        z-index: 60;
-      }
-
-      .skip-link:focus-visible {
-        top: 1rem;
-        transform: translateY(0);
-      }
-
-      :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
-        outline: 3px solid var(--focus-ring-color);
-        outline-offset: 3px;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
-          outline-color: var(--focus-ring-dark);
-        }
-      }
-
-      body::before,
-      body::after {
-        content: "";
-        position: fixed;
-        inset: -25% -15% -15% -15%;
-        pointer-events: none;
-        z-index: -2;
-        transition: opacity 0.6s ease, transform 0.6s ease;
-      }
-
-      body::before {
-        background: radial-gradient(
-            48% 48% at 24% 14%,
-            rgba(197, 219, 255, 0.24),
-            rgba(197, 219, 255, 0)
-          ),
-          radial-gradient(
-            46% 46% at 72% 20%,
-            rgba(186, 227, 255, 0.18),
-            rgba(186, 227, 255, 0)
-          ),
-          radial-gradient(52% 60% at 50% 80%, rgba(253, 245, 235, 0.85), transparent);
-        filter: blur(0);
-        opacity: 0.8;
-      }
-
-      body::after {
-        background-image: linear-gradient(
-            rgba(203, 213, 225, 0.08) 1px,
-            transparent 1px
-          ),
-          linear-gradient(90deg, rgba(203, 213, 225, 0.08) 1px, transparent 1px);
-        background-size: 60px 60px;
-        mask-image: radial-gradient(60% 60% at 50% 45%, rgba(0, 0, 0, 0.55), transparent);
-        opacity: 0.55;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        body {
-          background-image: var(--page-gradient-dark);
-        }
-
-        body::before {
-          opacity: 0.75;
-          filter: blur(2px);
-        }
-
-        body::after {
-          opacity: 0.35;
-        }
-      }
-
-      .floating-nav-shell {
-        align-items: center;
-        border-radius: 999px;
-        border: 1px solid rgba(148, 163, 184, 0.18);
-        background: rgba(255, 255, 255, 0.72);
-        box-shadow: 0 12px 40px -22px rgba(15, 23, 42, 0.35);
-        backdrop-filter: blur(18px);
-        padding: 0.65rem 0.9rem;
-        transition: box-shadow 0.35s ease, transform 0.35s ease;
-      }
-
-      .floating-nav-shell:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 20px 55px -28px rgba(15, 23, 42, 0.45);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .floating-nav-shell {
-          background: rgba(15, 23, 42, 0.8);
-          border-color: rgba(71, 85, 105, 0.55);
-          box-shadow: 0 24px 55px -28px rgba(15, 23, 42, 0.8);
-        }
-      }
-
-      .floating-nav-shell a {
-        transition: color 0.3s ease;
-      }
-
-      .floating-nav-shell .active-link {
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
-      }
-
-      .floating-nav-shell button {
-        backdrop-filter: blur(16px);
-      }
-
-      .floating-nav-menu {
-        border-radius: 28px;
-        border: 1px solid rgba(148, 163, 184, 0.25);
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 25px 60px -30px rgba(15, 23, 42, 0.35);
-        backdrop-filter: blur(20px);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .floating-nav-menu {
-          background: rgba(15, 23, 42, 0.94);
-          border-color: rgba(71, 85, 105, 0.55);
-          box-shadow: 0 28px 60px -25px rgba(15, 23, 42, 0.75);
-        }
-      }
-
-      .surface-card-base {
-        border-radius: 1.75rem;
-        border: 1px solid var(--surface-border-light);
-        background: var(--surface-light);
-        box-shadow: var(--surface-shadow-light);
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-        backdrop-filter: blur(14px);
-      }
-
-      .surface-card-base:hover,
-      .surface-card-base:focus-within {
-        transform: translateY(-4px);
-        box-shadow: 0 32px 70px -30px rgba(15, 23, 42, 0.4);
-      }
-
-      .surface-card-base[data-variant="soft"] {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(241, 245, 249, 0.78));
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .surface-card-base {
-          background: var(--surface-dark);
-          border-color: var(--surface-border-dark);
-          box-shadow: var(--surface-shadow-dark);
-        }
-
-        .surface-card-base[data-variant="soft"] {
-          background: linear-gradient(135deg, rgba(15, 23, 42, 0.86), rgba(30, 41, 59, 0.75));
-        }
-      }
-
-      .rounded-2xl.border.bg-white,
-      .rounded-2xl.border.bg-white\/80,
-      .rounded-2xl.border.bg-white\/70 {
-        border-color: var(--surface-border-light);
-        background-color: rgba(255, 255, 255, 0.78);
-        box-shadow: 0 18px 50px -32px rgba(15, 23, 42, 0.35);
-        backdrop-filter: blur(12px);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .rounded-2xl.border.bg-white:hover,
-      .rounded-2xl.border.bg-white\/80:hover,
-      .rounded-2xl.border.bg-white\/70:hover,
-      .rounded-2xl.border.bg-white:focus-within,
-      .rounded-2xl.border.bg-white\/80:focus-within,
-      .rounded-2xl.border.bg-white\/70:focus-within {
-        transform: translateY(-3px);
-        box-shadow: 0 28px 65px -32px rgba(15, 23, 42, 0.38);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .rounded-2xl.border.bg-white,
-        .rounded-2xl.border.bg-white\/80,
-        .rounded-2xl.border.bg-white\/70 {
-          border-color: var(--surface-border-dark);
-          background-color: rgba(15, 23, 42, 0.72);
-          box-shadow: 0 24px 60px -30px rgba(15, 23, 42, 0.75);
-        }
-      }
-
-      .surface-chip,
-      .surface-chip-alt {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        border-radius: 999px;
-        padding: 0.35rem 0.85rem;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        background: var(--chip-light);
-        color: rgb(51 65 85);
-      }
-
-      .surface-chip svg,
-      .surface-chip-alt svg {
-        width: 0.85rem;
-        height: 0.85rem;
-      }
-
-      .surface-chip-alt {
-        background: rgba(14, 116, 144, 0.15);
-        color: rgb(15 118 110);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .surface-chip,
-        .surface-chip-alt {
-          background: var(--chip-dark);
-          color: rgb(203 213 225);
-        }
-
-        .surface-chip-alt {
-          background: rgba(94, 234, 212, 0.12);
-          color: rgb(125 211 252);
-        }
-      }
-
-      .section-shell {
-        position: relative;
-        isolation: isolate;
-      }
-
-      .section-shell::before {
-        content: "";
-        position: absolute;
-        inset: 12% 2% 10%;
-        border-radius: 48px;
-        background: linear-gradient(
-          135deg,
-          rgba(251, 245, 236, 0.6),
-          rgba(255, 255, 255, 0)
-        );
-        z-index: -1;
-        opacity: 0.6;
-        filter: blur(0.1px);
-        mask-image: radial-gradient(80% 80% at 50% 45%, rgba(0, 0, 0, 0.65), transparent);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .section-shell::before {
-          background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0));
-          opacity: 0.55;
-        }
-      }
-
-      .section-shell[data-section-accent="emerald"]::before {
-        background: radial-gradient(
-            60% 60% at 30% 30%,
-            rgba(16, 185, 129, 0.18),
-            rgba(16, 185, 129, 0)
-          ),
-          radial-gradient(
-            65% 65% at 75% 70%,
-            rgba(59, 130, 246, 0.18),
-            rgba(59, 130, 246, 0)
-          );
-        opacity: 0.45;
-        mask-image: none;
-      }
-
-      details.group > summary::-webkit-details-marker,
-      details.rounded-3xl > summary::-webkit-details-marker {
-        display: none;
-      }
-
-      summary {
-        outline: none;
-      }
-
-      details.rounded-3xl {
-        border-radius: 1.75rem;
-        border: 1px solid var(--surface-border-light);
-        background: var(--surface-light);
-        box-shadow: var(--surface-shadow-light);
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-        backdrop-filter: blur(14px);
-      }
-
-      details.rounded-3xl[open] {
-        transform: translateY(-2px);
-        box-shadow: 0 26px 70px -32px rgba(15, 23, 42, 0.38);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        details.rounded-3xl {
-          background: var(--surface-dark);
-          border-color: var(--surface-border-dark);
-          box-shadow: var(--surface-shadow-dark);
-        }
-      }
-
-      .progress-shadow {
-        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.22);
-      }
-
-      .primary-button {
-        position: relative;
-        overflow: hidden;
-        isolation: isolate;
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-      }
-
-      .primary-button::after {
-        content: "";
-        position: absolute;
-        inset: -40% -20% 60% -20%;
-        background: radial-gradient(
-          90% 120% at 50% 0%,
-          rgba(255, 255, 255, 0.6),
-          transparent
-        );
-        opacity: 0;
-        transition: opacity 0.35s ease, transform 0.35s ease;
-        z-index: -1;
-      }
-
-      .primary-button:hover,
-      .primary-button:focus-visible {
-        transform: translateY(-2px);
-        box-shadow: 0 20px 45px -22px rgba(15, 23, 42, 0.45);
-      }
-
-      .primary-button:hover::after,
-      .primary-button:focus-visible::after {
-        opacity: 1;
-        transform: translateY(-6%);
-      }
-
-      .secondary-button {
-        transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-      }
-
-      .secondary-button:hover,
-      .secondary-button:focus-visible {
-        transform: translateY(-2px);
-        box-shadow: 0 16px 40px -22px rgba(15, 23, 42, 0.25);
-      }
-
-      .badge-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-
-      .badge-grid span {
-        border-radius: 999px;
-        padding: 0.45rem 0.9rem;
-        font-size: 0.78rem;
-        font-weight: 600;
-        background: rgba(15, 118, 110, 0.1);
-        color: rgb(15 118 110);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .badge-grid span {
-          background: rgba(94, 234, 212, 0.12);
-          color: rgb(94 234 212);
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        body::before,
-        body::after,
-        .floating-nav-shell,
-        .surface-card-base,
-        details.rounded-3xl,
-        .primary-button,
-        .secondary-button {
-          transition-duration: 0s;
-        }
-
-        .primary-button::after {
-          display: none;
-        }
-      }
-
-      /* Анимации и мелочи без фреймворков */
-      @keyframes floatY {
-        0%,
-        100% {
-          transform: translate(-50%, -50%) translateY(-8px);
-        }
-        50% {
-          transform: translate(-50%, -50%) translateY(8px);
-        }
-      }
-      @keyframes driftX {
-        0%,
-        100% {
-          transform: translateY(-50%) translateX(-10px);
-        }
-        50% {
-          transform: translateY(-50%) translateX(10px);
-        }
-      }
-      .invader-grid > div {
-        border-radius: 2px;
-      }
-      .glass {
-        backdrop-filter: blur(8px);
-      }
-      .active-link {
-        background: rgba(15, 23, 42, 0.08);
-        color: rgb(15 23 42);
-        box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        .active-link {
-          background: rgba(148, 163, 184, 0.18);
-          color: rgb(226 232 240);
-          box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.3);
-        }
-      }
-    </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -544,176 +52,101 @@
       }
     </script>
   </head>
-  <body class="min-h-screen text-slate-900 dark:text-slate-100 antialiased">
+  <body>
     <a href="#main" class="skip-link">Пропустить к содержимому</a>
-    <!-- Прогресс-бар прокрутки -->
-    <div
-      id="progress"
-      class="progress-shadow fixed top-0 left-0 h-1 bg-slate-900/90 origin-left z-50"
-      style="transform: scaleX(0); transform-origin: left"
-      aria-hidden="true"
-    ></div>
+    <div id="progress" class="progress-bar" aria-hidden="true"></div>
 
-    <header class="relative overflow-hidden" role="banner">
-      <div class="absolute inset-0 pointer-events-none">
-        <div
-          class="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-sky-200/30 blur-3xl"
-        ></div>
-        <div
-          class="absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-emerald-200/30 blur-3xl"
-        ></div>
-      </div>
-
-      <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-28 md:pb-18 relative z-10"
-      >
-        <!-- Навигация -->
-        <nav class="mb-10 relative" aria-label="Главная навигация" role="navigation">
-          <div class="floating-nav-shell flex items-center gap-6">
-            <a href="#top" class="flex items-center gap-3 font-semibold text-slate-900 dark:text-white">
-              <img
-                src="Logo_Step_3D.jpg"
-                alt="Логотип Step3D.Lab"
-                class="h-12 w-12 rounded-2xl object-cover shadow-sm"
-                fetchpriority="high"
-                decoding="async"
-                loading="eager"
-              />
-              Step3D.Lab
-            </a>
-            <div
-              class="hidden md:flex items-center gap-4 ml-auto"
-              id="desktopNav"
-            >
-              <div class="flex items-center gap-1" id="links">
-                <!-- ссылки генерятся из data-nav ниже -->
-              </div>
-              <a
-                href="#contacts"
-                id="contactDesktop"
-                class="primary-button inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus:ring-slate-700"
-              >Связаться с нами</a>
-            </div>
-            <div class="md:hidden flex items-center gap-2 ml-auto">
-              <button
-                id="burger"
-                type="button"
-                aria-expanded="false"
-                aria-controls="mobile"
-                aria-label="Меню"
-                class="mobile-nav-trigger rounded-xl border border-slate-200/80 bg-white/80 p-2 shadow-sm backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/80"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5">
-                  <path
-                    d="M3 6h18M3 12h18M3 18h18"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div
-            id="mobile"
-            class="mobile-nav-panel md:hidden hidden absolute left-0 right-0 top-full mt-4 z-50 px-1 sm:px-0"
-            aria-hidden="true"
+    <header class="site-header" role="banner">
+      <div class="container">
+        <nav class="top-nav" aria-label="Главная навигация">
+          <a href="#top" class="top-nav__brand">
+            <img
+              src="Logo_Step_3D.jpg"
+              alt="Логотип Step3D.Lab"
+              class="top-nav__logo"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <span>Step3D.Lab</span>
+          </a>
+          <div class="top-nav__links" id="links"></div>
+          <a href="#contacts" id="contactDesktop" class="btn btn-primary top-nav__cta"
+            >Связаться с нами</a
           >
-
-              <div id="mobileLinks" class="grid gap-2"></div>
-              <a
-                href="#contacts"
-                id="mobileContact"
-                class="primary-button mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-slate-900 to-slate-700 px-4 py-2 text-sm font-semibold text-white shadow-lg transition hover:from-slate-800 hover:to-slate-600 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:from-white dark:to-slate-200 dark:text-slate-900 dark:focus:ring-slate-700"
-                >Связаться с нами</a
-              >
-            </div>
+          <button
+            type="button"
+            class="top-nav__toggle"
+            id="burger"
+            aria-expanded="false"
+            aria-controls="mobile"
+            aria-label="Меню"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-width="1.5"
+              />
+            </svg>
+          </button>
+          <div class="top-nav__panel hidden" id="mobile" aria-hidden="true">
+            <div class="top-nav__mobile-links" id="mobileLinks"></div>
+            <a
+              href="#contacts"
+              id="mobileContact"
+              class="btn btn-primary top-nav__mobile-cta"
+              >Связаться с нами</a
+            >
           </div>
         </nav>
-        <div
-          id="mobile-backdrop"
-          class="mobile-nav-backdrop fixed inset-0 hidden bg-slate-900/40 backdrop-blur-sm z-40 md:hidden"
-        ></div>
+      </div>
+      <div class="top-nav__backdrop hidden" id="mobile-backdrop" aria-hidden="true"></div>
 
-        <!-- Hero -->
-        <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" id="top">
-          <div>
-            <h1 class="text-balance-1 font-extrabold tracking-tight">
-              Лаборатория промдизайна и инжиниринга (R22.Lab)
-            </h1>
-            <p
-              class="mt-4 text-lg text-slate-700 dark:text-slate-200 max-w-prose"
-            >
+      <section class="section hero" id="top">
+        <div class="container hero__inner">
+          <div class="hero__content">
+            <h1>Лаборатория промдизайна и инжиниринга (R22.Lab)</h1>
+            <p class="hero__lead">
               CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, аддитивное
-              производство. Учим и делаем продукты на базе технопарка РГСУ
-              совместно с ООО «СТЕП 3Д».
+              производство. Учим и делаем продукты на базе технопарка РГСУ совместно с ООО
+              «СТЕП 3Д».
             </p>
-            <div class="mt-6 flex flex-wrap gap-3">
-              <button
-                id="openModal"
-                class="primary-button inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300"
-              >
-                Оставить заявку
-              </button>
+            <div class="hero__actions">
+              <button id="openModal" class="btn btn-primary">Оставить заявку</button>
               <button
                 id="toggleAbout"
-                class="secondary-button inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium"
+                class="btn btn-outline"
                 aria-expanded="false"
                 aria-controls="aboutBox"
               >
                 О лаборатории
               </button>
             </div>
-            <div
-              id="aboutBox"
-              class="surface-card-base mt-6 hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 glass p-6"
-              aria-hidden="true"
-            >
-              <h3 class="text-xl font-semibold mb-2">О лаборатории</h3>
-              <p class="text-slate-700 dark:text-slate-200">
-                Step3D.Lab — команда инженеров, дизайнеров и преподавателей.
-                Работаем на базе технопарка РГСУ совместно с ООО «СТЕП 3Д»:
-                выполняем R&amp;D‑проекты, проводим курсы ДПО (48–72 ч),
-                сопровождаем производственные задачи и студенческие инициативы.
-                Фокус — CAD/CAE, реверсивный инжиниринг, 3D‑сканирование,
-                прототипирование и аддитивное производство.
+            <div id="aboutBox" class="hero__about hidden" aria-hidden="true">
+              <h3>О лаборатории</h3>
+              <p>
+                Step3D.Lab — команда инженеров, дизайнеров и преподавателей. Работаем на базе
+                технопарка РГСУ совместно с ООО «СТЕП 3Д»: выполняем R&amp;D‑проекты, проводим курсы
+                ДПО (48–72 ч), сопровождаем производственные задачи и студенческие инициативы.
+                Фокус — CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, прототипирование и
+                аддитивное производство.
               </p>
             </div>
           </div>
-          <!-- Абстрактная 3D‑сцена без библиотек -->
-          <div class="relative aspect-square">
-            <div
-              class="absolute inset-0 grid grid-cols-9 grid-rows-9 gap-1 opacity-25 invader-grid"
-              aria-hidden="true"
-              data-invader-grid
-            ></div>
-            <!-- Плавающие «кубы» -->
-            <div
-              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[floatY_4s_ease-in-out_infinite]"
-            >
-              <div
-                class="size-24 md:size-28 rotate-45 bg-gradient-to-br from-slate-200 to-slate-400 dark:from-slate-600 dark:to-slate-800 rounded-[1.25rem] shadow-lg"
-              ></div>
-            </div>
-            <div
-              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[floatY_5.5s_ease-in-out_infinite]"
-            >
-              <div
-                class="size-20 md:size-24 rotate-45 bg-gradient-to-br from-slate-200 to-slate-400 dark:from-slate-600 dark:to-slate-800 rounded-[1.25rem] shadow-lg"
-              ></div>
-            </div>
-            <div
-              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[floatY_7s_ease-in-out_infinite]"
-            >
-              <div
-                class="size-16 md:size-20 rotate-45 bg-gradient-to-br from-slate-200 to-slate-400 dark:from-slate-600 dark:to-slate-800 rounded-[1.25rem] shadow-lg"
-              ></div>
-            </div>
+          <div class="hero__visual" aria-hidden="true">
+            <div class="hero__visual-layer invader-grid" data-invader-grid></div>
+            <div class="hero__cube" data-size="lg"></div>
+            <div class="hero__cube" data-size="md"></div>
+            <div class="hero__cube" data-size="sm"></div>
           </div>
         </div>
-      </div>
+      </section>
     </header>
 
+    <main id="main">
 
     <!-- Оборудование и ПО -->
     <section id="equipment" class="section-shell py-16 md:py-24" data-section-accent="emerald">
@@ -1513,12 +946,9 @@
               </span>
             </div>
             <div class="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#contacts"
-                class="primary-button inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus:ring-slate-700"
-              >
+              <a href="#contacts" class="btn btn-primary">
                 Подобрать программу
-                <svg viewBox="0 0 24 24" class="h-4 w-4" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
                   <path
                     d="M5 12h14m-6-7 7 7-7 7"
                     fill="none"
@@ -1529,10 +959,7 @@
                   />
                 </svg>
               </a>
-              <a
-                href="reverse-additive.html"
-                class="secondary-button inline-flex items-center gap-2 rounded-2xl border border-slate-300/70 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:border-slate-700 dark:text-slate-100 dark:hover:border-slate-500 dark:hover:text-white dark:focus:ring-slate-700"
-              >
+              <a href="reverse-additive.html" class="btn btn-outline">
                 Смотреть подробности
               </a>
             </div>
@@ -2274,6 +1701,8 @@
       </div>
     </section>
 
+    </main>
+
     <!-- Контакты + карта -->
 
     <footer
@@ -2281,34 +1710,24 @@
       class="section-shell py-16 md:py-24 border-t border-slate-200/60 dark:border-slate-700/60"
     >
 
-              <button
-                id="openModal2"
-                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300"
-              >
+              <button id="openModal2" class="btn btn-primary">
                 Оставить заявку
               </button>
               <a
                 href="https://t.me/step_3d_mngr"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="secondary-button inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+                class="btn btn-outline"
                 >Написать нам в телеграм</a
               >
-              <button
-                id="shareLink"
-                type="button"
-                class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
-              >
+              <button id="shareLink" type="button" class="btn btn-outline">
                 Поделиться ссылкой
               </button>
             </div>
 
                   По всем вопросам
                 </div>
-                <a
-                  href="mailto:projects.step3d@gmail.com"
-                  class="primary-button mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-3 py-1.5 font-medium text-white shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
-                >
+                <a href="mailto:projects.step3d@gmail.com" class="btn btn-primary mt-2">
                   projects.step3d@gmail.com
                 </a>
                 <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
@@ -2325,7 +1744,7 @@
                   href="https://t.me/step_3d_mngr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-mono text-base text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
+                  class="btn btn-outline contact-handle mt-2"
                 >
                   @step_3d_mngr
                 </a>
@@ -2714,8 +2133,6 @@
         </form>
       </div>
     </div>
-
-    </main>
 
     <!-- Секции для навигации (для автоподсветки) -->
 

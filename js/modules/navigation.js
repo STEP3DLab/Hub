@@ -1,7 +1,5 @@
-const DESKTOP_CLASSES =
-  "inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-600 transition hover:-translate-y-0.5 hover:bg-white/70 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800/80";
-const MOBILE_CLASSES =
-  "inline-flex w-full items-center justify-start gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:border-slate-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-200";
+const DESKTOP_CLASSES = "top-nav__link";
+const MOBILE_CLASSES = "top-nav__mobile-link";
 
 function parseNavData() {
   const navDataEl = document.getElementById("nav-data");
