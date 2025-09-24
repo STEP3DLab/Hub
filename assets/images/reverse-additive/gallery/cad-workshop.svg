@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="courseCad" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#22c55e" />
+    </linearGradient>
+    <linearGradient id="cadPanel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(34,197,94,0.8)" />
+      <stop offset="100%" stop-color="rgba(15,118,110,0.2)" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#courseCad)" rx="44" ry="44" />
+  <g fill="rgba(226,232,240,0.14)">
+    <rect x="160" y="180" width="880" height="480" rx="32" />
+    <rect x="220" y="240" width="360" height="360" rx="28" />
+    <rect x="620" y="240" width="320" height="360" rx="28" />
+  </g>
+  <rect x="650" y="260" width="260" height="220" rx="22" fill="url(#cadPanel)" />
+  <path d="M260 300h260v200H260z" fill="rgba(15,23,42,0.6)" />
+  <g stroke="#bbf7d0" stroke-width="6" stroke-linecap="round" fill="none">
+    <path d="M700 320h160" />
+    <path d="M700 360h140" />
+    <path d="M700 400h180" />
+  </g>
+  <text x="220" y="150" font-family="'Inter', 'Segoe UI', sans-serif" font-size="42" fill="#dcfce7" font-weight="600">CAD-сессия: Geomagic + Inventor</text>
+  <text x="220" y="640" font-family="'Inter', 'Segoe UI', sans-serif" font-size="28" fill="#bbf7d0">Построение NURBS-поверхностей и подготовка КД</text>
+</svg>

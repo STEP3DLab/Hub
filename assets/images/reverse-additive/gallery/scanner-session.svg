@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="courseScan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#082f49" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+    <radialGradient id="scannerBeam" cx="0.65" cy="0.35" r="0.7">
+      <stop offset="0%" stop-color="rgba(14,165,233,0.9)" />
+      <stop offset="100%" stop-color="rgba(14,165,233,0)" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#courseScan)" rx="44" ry="44" />
+  <circle cx="760" cy="320" r="320" fill="url(#scannerBeam)" />
+  <g fill="rgba(226,232,240,0.18)">
+    <rect x="220" y="220" width="280" height="360" rx="30" />
+    <rect x="540" y="240" width="180" height="300" rx="26" />
+    <rect x="780" y="260" width="220" height="280" rx="28" />
+  </g>
+  <path d="M600 240l280 120-280 120z" fill="rgba(125,211,252,0.25)" />
+  <g fill="#bae6fd">
+    <circle cx="620" cy="300" r="14" />
+    <circle cx="620" cy="360" r="14" />
+    <circle cx="620" cy="420" r="14" />
+  </g>
+  <text x="240" y="160" font-family="'Inter', 'Segoe UI', sans-serif" font-size="42" fill="#e0f2fe" font-weight="600">Практикум: 3D-сканирование</text>
+  <text x="240" y="630" font-family="'Inter', 'Segoe UI', sans-serif" font-size="28" fill="#f0f9ff">Съёмка деталей, работа с системой меток и контролем качества</text>
+</svg>

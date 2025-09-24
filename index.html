@@ -106,6 +106,7 @@
     </div>
   </header>
 
+
   <!-- Оборудование и ПО -->
   <section id="equipment" class="py-16 md:py-24 bg-white dark:bg-slate-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -586,7 +587,7 @@
   </div>
 
   <!-- Секции для навигации (для автоподсветки) -->
-  <div id="nav-data" class="hidden" data-nav='[{"id":"equipment","label":"Оборудование"},{"id":"projects","label":"Проекты"},{"id":"courses","label":"Курсы"},{"id":"team","label":"Команда"},{"id":"faq","label":"FAQ"},{"id":"contacts","label":"Контакты"}]'></div>
+
 
   <script>
     // ===== Динамическое меню (desktop + mobile)
@@ -637,6 +638,82 @@
     // ===== «О лаборатории» toggle
     document.getElementById('toggleAbout')?.addEventListener('click', ()=> document.getElementById('aboutBox').classList.toggle('hidden'))
 
+    // ===== Просмотрщики фото (главная галерея)
+    function initPhotoViewers(){
+      document.querySelectorAll('.js-photo-viewer').forEach(viewer=>{
+        const slides = viewer.querySelectorAll('.js-photo-slide')
+        if(!slides.length) return
+        const dotsBox = viewer.querySelector('.js-photo-dots')
+        const prev = viewer.querySelector('[data-photo-prev]')
+        const next = viewer.querySelector('[data-photo-next]')
+        viewer.dataset.index = viewer.dataset.index || '0'
+        if(dotsBox){
+          dotsBox.innerHTML = ''
+          slides.forEach((_,i)=>{
+            const dot = document.createElement('button')
+            dot.type = 'button'
+            dot.className = 'h-2.5 w-2.5 rounded-full bg-slate-300 transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 dark:bg-slate-600'
+            dot.setAttribute('aria-label', `Перейти к кадру ${i+1}`)
+            dot.setAttribute('aria-current', 'false')
+            dot.addEventListener('click', ()=>{ setActive(i); schedule() })
+            dotsBox.appendChild(dot)
+          })
+        }
+        let timerId = null
+        function setActive(rawIndex){
+          const total = slides.length
+          if(!total) return
+          const idx = ((rawIndex % total) + total) % total
+          viewer.dataset.index = idx
+          slides.forEach((slide,slideIndex)=>{
+            const active = slideIndex === idx
+            slide.classList.toggle('opacity-100', active)
+            slide.classList.toggle('opacity-0', !active)
+            slide.classList.toggle('z-10', active)
+            slide.classList.toggle('z-0', !active)
+            slide.classList.toggle('pointer-events-none', !active)
+            slide.setAttribute('aria-hidden', active ? 'false' : 'true')
+          })
+          dotsBox?.querySelectorAll('button').forEach((dot,dotIndex)=>{
+            const active = dotIndex === idx
+            dot.classList.toggle('w-6', active)
+            dot.classList.toggle('bg-slate-900', active)
+            dot.classList.toggle('dark:bg-white', active)
+            dot.setAttribute('aria-current', active ? 'true' : 'false')
+          })
+        }
+        function schedule(){
+          if(slides.length <= 1) return
+          if(timerId) clearInterval(timerId)
+          timerId = setInterval(()=> setActive((+viewer.dataset.index || 0) + 1), 8000)
+        }
+        prev?.addEventListener('click', ()=>{ setActive((+viewer.dataset.index || 0) - 1); schedule() })
+        next?.addEventListener('click', ()=>{ setActive((+viewer.dataset.index || 0) + 1); schedule() })
+        let startX = null
+        viewer.addEventListener('pointerdown', e=>{
+          if(e.target.closest('button')) return
+          startX = e.clientX
+        })
+        viewer.addEventListener('pointerup', e=>{
+          if(startX === null || e.target.closest('button')){ startX = null; return }
+          const dx = e.clientX - startX
+          if(Math.abs(dx) > 40){
+            if(dx > 0){ setActive((+viewer.dataset.index || 0) - 1) }
+            else { setActive((+viewer.dataset.index || 0) + 1) }
+            schedule()
+          }
+          startX = null
+        })
+        viewer.addEventListener('pointerleave', ()=>{ startX = null })
+        if(slides.length > 1){
+          viewer.addEventListener('mouseenter', ()=>{ if(timerId) { clearInterval(timerId); timerId = null } })
+          viewer.addEventListener('mouseleave', ()=> schedule())
+        }
+        setActive(+viewer.dataset.index || 0)
+        schedule()
+      })
+    }
+
     // ===== Галереи проектов
     function initGalleries(){
       document.querySelectorAll('.js-gallery').forEach(card=>{
@@ -651,6 +728,7 @@
         card.querySelector('.js-next').addEventListener('click', ()=> setActive((+card.dataset.index + 1)%slides.length))
       })
     }
+    initPhotoViewers()
     initGalleries()
 
     // ===== Карта табы
