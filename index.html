@@ -47,23 +47,32 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-28 md:pb-18 relative z-10">
       <!-- Навигация -->
-      <nav class="mb-10" aria-label="Главная навигация">
-        <div class="flex items-center justify-between gap-6">
+      <nav class="mb-10 relative" aria-label="Главная навигация">
+        <div class="flex items-center gap-6">
           <a href="#top" class="flex items-center gap-3 font-semibold">
             <svg viewBox="0 0 64 64" class="h-8 w-8"><defs><linearGradient id="g3d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#22c55e"/></linearGradient></defs><rect x="6" y="6" width="52" height="52" rx="12" fill="url(#g3d)"/><path d="M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36" stroke="#fff" stroke-width="2" fill="none"/></svg>
             Step3D.Lab
           </a>
-          <div class="hidden md:flex items-center gap-1" id="links">
-            <!-- ссылки генерятся из data-nav ниже -->
+          <div class="hidden md:flex items-center gap-4 ml-auto" id="desktopNav">
+            <div class="flex items-center gap-1" id="links">
+              <!-- ссылки генерятся из data-nav ниже -->
+            </div>
+            <a href="#contacts" id="contactDesktop" class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus:ring-slate-700">Связаться с нами</a>
           </div>
-          <div class="md:hidden flex items-center gap-2">
+          <div class="md:hidden flex items-center gap-2 ml-auto">
             <button id="burger" aria-expanded="false" aria-label="Меню" class="rounded-xl border p-2">
               <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
           </div>
         </div>
-        <div id="mobile" class="mt-3 grid gap-2 md:hidden hidden"></div>
+        <div id="mobile" class="md:hidden hidden absolute left-0 right-0 top-full mt-4 z-50 px-1 sm:px-0">
+          <div class="rounded-3xl border border-slate-200 bg-white/95 p-4 shadow-2xl backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/95" role="menu">
+            <div id="mobileLinks" class="grid gap-2"></div>
+            <a href="#contacts" id="mobileContact" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-slate-900 to-slate-700 px-4 py-2 text-sm font-semibold text-white shadow-lg transition hover:from-slate-800 hover:to-slate-600 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:from-white dark:to-slate-200 dark:text-slate-900 dark:focus:ring-slate-700">Связаться с нами</a>
+          </div>
+        </div>
       </nav>
+      <div id="mobile-backdrop" class="fixed inset-0 hidden bg-slate-900/40 backdrop-blur-sm z-40 md:hidden"></div>
 
       <!-- Hero -->
       <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" id="top">
@@ -456,24 +465,6 @@
             <div class="mt-1 text-sm text-slate-600 dark:text-slate-300">CAD, ЧПУ, прототипы</div>
           </div>
         </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
-          <img src="assets/images/index/team/step3d.svg" alt="Step3D" class="h-16 w-16 rounded-2xl border border-slate-200 bg-white object-contain p-1 shadow-sm dark:border-slate-600 dark:bg-slate-900" loading="lazy" />
-          <div>
-            <div class="font-semibold">Step3D</div>
-            <div class="text-sm text-slate-500 dark:text-slate-300">индустриальный партнёр лаборатории</div>
-          </div>
-        </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
-
-          <div>
-            <div class="font-semibold">Технопарк РГСУ</div>
-            <div class="text-sm text-slate-500 dark:text-slate-300">ресурсная база: ул. Беговая, 12 (лаб. промдизайна), ул. Вильгельма Пика, 4с8 (ауд. 203 и 205)</div>
-            <div class="mt-1 text-sm text-slate-600 dark:text-slate-300">Мечтатели, исследователи и изобретатели из технопарка и движения WordSkills по компетенции «Реверсинжиниринг»</div>
-          </div>
-        </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -589,29 +580,55 @@
   <!-- Секции для навигации (для автоподсветки) -->
 
 
+  <div id="nav-data" class="hidden" data-nav='[{"id":"top","label":"Главная"},{"id":"equipment","label":"Оборудование"},{"id":"projects","label":"Проекты"},{"id":"courses","label":"Обучение"},{"id":"team","label":"Команда"},{"id":"faq","label":"FAQ"},{"id":"contacts","label":"Контакты"}]'></div>
+
+
   <script>
     // ===== Динамическое меню (desktop + mobile)
-    const navData = JSON.parse(document.getElementById('nav-data').dataset.nav)
+    const navDataEl = document.getElementById('nav-data')
+    const navData = navDataEl ? JSON.parse(navDataEl.dataset.nav) : []
     const linksWrap = document.getElementById('links')
     const mobileWrap = document.getElementById('mobile')
+    const mobileLinks = document.getElementById('mobileLinks')
     const burger = document.getElementById('burger')
+    const mobileBackdrop = document.getElementById('mobile-backdrop')
     function renderLinks(container, variant){
+      if(!container) return
       container.innerHTML = ''
       navData.forEach(({id,label})=>{
         const a = document.createElement('a')
         a.href = `#${id}`
         a.textContent = label
-        a.className = variant==='desktop' ? 'px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800' : 'px-3 py-2 rounded-xl text-sm font-medium border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700'
+        a.dataset.navLink = 'true'
+        a.className = variant==='desktop'
+          ? 'inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-600 transition hover:-translate-y-0.5 hover:bg-white/70 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800/80'
+          : 'inline-flex w-full items-center justify-start gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:border-slate-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-200'
         container.appendChild(a)
       })
     }
-    renderLinks(linksWrap, 'desktop'); renderLinks(mobileWrap, 'mobile')
-    burger && burger.addEventListener('click', ()=>{ const opened = !mobileWrap.classList.contains('hidden'); burger.setAttribute('aria-expanded', String(!opened)); mobileWrap.classList.toggle('hidden') })
+    renderLinks(linksWrap, 'desktop'); renderLinks(mobileLinks || mobileWrap, 'mobile')
+    function setMobileState(open){
+      if(!mobileWrap) return
+      mobileWrap.classList.toggle('hidden', !open)
+      mobileBackdrop?.classList.toggle('hidden', !open)
+      document.body.classList.toggle('overflow-hidden', open)
+      burger?.setAttribute('aria-expanded', String(open))
+    }
+    function bindMobileLinks(){
+      if(!mobileWrap) return
+      mobileWrap.querySelectorAll('a[data-nav-link]').forEach(a=> a.addEventListener('click', ()=> setMobileState(false)))
+    }
+    bindMobileLinks()
+    document.getElementById('mobileContact')?.addEventListener('click', ()=> setMobileState(false))
+    burger && burger.addEventListener('click', ()=>{ const opened = !mobileWrap.classList.contains('hidden'); setMobileState(!opened) })
+    mobileBackdrop?.addEventListener('click', ()=> setMobileState(false))
+    window.addEventListener('resize', ()=>{ if(window.innerWidth >= 768) setMobileState(false) })
+    document.addEventListener('keydown', e=>{ if(e.key === 'Escape') setMobileState(false) })
 
     // ===== Подсветка активного пункта по скроллу
     const sectionIds = navData.map(n=> n.id)
-    const anchors = Array.from(document.querySelectorAll('#links a'))
-    const mobAnchors = Array.from(document.querySelectorAll('#mobile a'))
+    const anchors = Array.from(document.querySelectorAll('#links a[data-nav-link]'))
+    const mobAnchors = Array.from(document.querySelectorAll('#mobile a[data-nav-link]'))
     const obs = new IntersectionObserver(entries=>{
       const vis = entries.filter(e=>e.isIntersecting).sort((a,b)=> b.intersectionRatio-a.intersectionRatio)[0]
       if(!vis) return
