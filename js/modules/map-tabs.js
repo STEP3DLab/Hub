@@ -1,8 +1,40 @@
+const DEFAULT_ACTIVE_CLASSES = [
+  "bg-slate-900",
+  "text-white",
+  "dark:bg-white",
+  "dark:text-slate-900",
+];
+
+const DEFAULT_INACTIVE_CLASSES = ["text-slate-700", "dark:text-slate-200"];
+
+function parseClasses(value) {
+  return (value || "")
+    .split(/\s+/)
+    .map((cls) => cls.trim())
+    .filter(Boolean);
+}
+
+function getButtonClasses(button, type) {
+  const cacheKey = type === "active" ? "_mapTabActive" : "_mapTabInactive";
+  if (!button[cacheKey]) {
+    const dataKey = type === "active" ? "activeClass" : "inactiveClass";
+    const fallback =
+      type === "active" ? DEFAULT_ACTIVE_CLASSES : DEFAULT_INACTIVE_CLASSES;
+    const fromDataset = button.dataset?.[dataKey];
+    button[cacheKey] = fromDataset ? parseClasses(fromDataset) : fallback;
+  }
+  return button[cacheKey];
+}
+
 function updateButtonState(button, active) {
-  button.classList.toggle("bg-slate-900", active);
-  button.classList.toggle("text-white", active);
-  button.classList.toggle("dark:bg-white", active);
-  button.classList.toggle("dark:text-slate-900", active);
+  const activeClasses = getButtonClasses(button, "active");
+  const inactiveClasses = getButtonClasses(button, "inactive");
+  activeClasses.forEach((className) =>
+    button.classList.toggle(className, active),
+  );
+  inactiveClasses.forEach((className) =>
+    button.classList.toggle(className, !active),
+  );
   button.setAttribute("aria-pressed", String(active));
 }
 
