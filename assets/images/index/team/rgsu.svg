@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="portraitRGSU" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9333ea" />
+      <stop offset="1" stop-color="#22d3ee" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="56" fill="url(#portraitRGSU)" />
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="120" font-family="'Segoe UI',sans-serif" font-weight="700">РГСУ</text>
+  <text x="50%" y="82%" text-anchor="middle" fill="#fdf4ff" font-size="24" font-family="'Segoe UI',sans-serif">Образовательный партнёр</text>
+  <text x="50%" y="90%" text-anchor="middle" fill="#f5d0fe" font-size="20" font-family="'Segoe UI',sans-serif">Замените логотипом</text>
+</svg>
