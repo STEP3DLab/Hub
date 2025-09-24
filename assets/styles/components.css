@@ -1058,7 +1058,323 @@
     width: 100%;
   }
 
-  .schedule-card__badges {
+.schedule-card__badges {
     justify-content: flex-start;
+  }
+}
+
+.cylindrical-checklist-section {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(241, 245, 249, 0.7),
+    rgba(226, 232, 240, 0.45)
+  );
+}
+
+.dark .cylindrical-checklist-section {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.88),
+    rgba(15, 23, 42, 0.72)
+  );
+}
+
+.cylindrical-checklist {
+  display: grid;
+  gap: clamp(2rem, 6vw, 4.5rem);
+  align-items: center;
+}
+
+@media (min-width: 64rem) {
+  .cylindrical-checklist {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+}
+
+.cylindrical-checklist__content {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 42rem;
+}
+
+.cylindrical-checklist__badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.14);
+  color: #0369a1;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dark .cylindrical-checklist__badge {
+  background: rgba(125, 211, 252, 0.12);
+  color: #38bdf8;
+}
+
+.cylindrical-checklist__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 2.5vw + 1rem, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cylindrical-checklist__lead {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.75);
+  font-size: clamp(1rem, 1vw + 0.95rem, 1.15rem);
+  line-height: 1.8;
+}
+
+.dark .cylindrical-checklist__lead {
+  color: rgba(226, 232, 240, 0.88);
+}
+
+.cylindrical-checklist__note {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(15, 23, 42, 0.65);
+}
+
+.dark .cylindrical-checklist__note {
+  color: rgba(226, 232, 240, 0.75);
+}
+
+.cylindrical-checklist__list {
+  counter-reset: checklist;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.cylindrical-checklist__list li {
+  counter-increment: checklist;
+  position: relative;
+  padding: 1.35rem 1.5rem 1.4rem 3.65rem;
+  border-radius: 1.75rem;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 250, 252, 0.92),
+    rgba(241, 245, 249, 0.88)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.12);
+}
+
+.cylindrical-checklist__list li::before {
+  content: counter(checklist);
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0ea5e9, #0369a1);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 10px 24px rgba(14, 165, 233, 0.35);
+}
+
+.cylindrical-checklist__list h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.95);
+}
+
+.cylindrical-checklist__list p {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.72);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.dark .cylindrical-checklist__list li {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 59, 0.92),
+    rgba(15, 23, 42, 0.88)
+  );
+  border-color: rgba(71, 85, 105, 0.45);
+  box-shadow: 0 18px 42px rgba(2, 6, 23, 0.55);
+}
+
+.dark .cylindrical-checklist__list li::before {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  box-shadow: 0 10px 24px rgba(56, 189, 248, 0.35);
+}
+
+.dark .cylindrical-checklist__list h3 {
+  color: rgba(241, 245, 249, 0.94);
+}
+
+.dark .cylindrical-checklist__list p {
+  color: rgba(226, 232, 240, 0.78);
+}
+
+.cylindrical-checklist__visual {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.cylindrical-drum {
+  position: relative;
+  width: min(22rem, 78vw);
+  aspect-ratio: 1 / 1.25;
+  perspective: 1500px;
+  filter: drop-shadow(0 28px 40px rgba(15, 23, 42, 0.35));
+  --drum-radius: clamp(9rem, 24vw, 11.2rem);
+}
+
+.cylindrical-drum__stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(18deg) rotateZ(-12deg);
+}
+
+.cylindrical-drum__surface {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: cylindrical-drum-spin 24s linear infinite;
+  will-change: transform;
+}
+
+.cylindrical-drum__panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(12rem, 32vw, 15.5rem);
+  padding: 1.35rem 1.4rem 1.4rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 250, 252, 0.95),
+    rgba(241, 245, 249, 0.88)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18);
+  transform: rotateY(
+      calc(360deg / var(--panel-count) * var(--i))
+    )
+    translateZ(var(--drum-radius)) translate(-50%, -50%);
+  transform-style: preserve-3d;
+  transform-origin: center;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cylindrical-drum__panel h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.cylindrical-drum__panel p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: rgba(15, 23, 42, 0.72);
+}
+
+.cylindrical-drum__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: flex-start;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(14, 165, 233, 0.14);
+  color: #0369a1;
+}
+
+.dark .cylindrical-drum__panel {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 59, 0.92),
+    rgba(15, 23, 42, 0.86)
+  );
+  border-color: rgba(71, 85, 105, 0.45);
+  box-shadow: 0 24px 48px rgba(2, 6, 23, 0.55);
+}
+
+.dark .cylindrical-drum__panel h3 {
+  color: rgba(241, 245, 249, 0.94);
+}
+
+.dark .cylindrical-drum__panel p {
+  color: rgba(226, 232, 240, 0.78);
+}
+
+.dark .cylindrical-drum__label {
+  background: rgba(125, 211, 252, 0.12);
+  color: #38bdf8;
+}
+
+.cylindrical-drum__shadow {
+  position: absolute;
+  inset: auto 0 -8%;
+  margin-inline: auto;
+  width: 70%;
+  height: 18%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(15, 23, 42, 0.35),
+    transparent 65%
+  );
+  transform: translateZ(0);
+  filter: blur(6px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@keyframes cylindrical-drum-spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .cylindrical-checklist__content {
+    gap: 1.25rem;
+  }
+
+  .cylindrical-checklist__list li {
+    padding: 1.15rem 1.25rem 1.25rem 3.25rem;
+  }
+
+  .cylindrical-drum {
+    width: min(20rem, 88vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cylindrical-drum__surface {
+    animation: none;
   }
 }
