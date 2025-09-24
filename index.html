@@ -659,11 +659,49 @@
   <script>
     // ===== Тема (dark/light)
     const root = document.documentElement
-    const applyThemeButton = (btn) => btn && (btn.textContent = root.classList.contains('dark') ? '☀️' : '🌙')
-    function setTheme(mode){ if(mode==='dark'){ root.classList.add('dark') } else { root.classList.remove('dark') } localStorage.setItem('theme', mode) }
-    (function initTheme(){ const saved = localStorage.getItem('theme'); if(saved){ setTheme(saved) } else if (window.matchMedia('(prefers-color-scheme: dark)').matches){ setTheme('dark') } else { setTheme('light') } })()
+    const themeButtons = new Set()
+    function updateThemeUI(){
+      const isDark = root.classList.contains('dark')
+      root.style.colorScheme = isDark ? 'dark' : 'light'
+      themeButtons.forEach(btn=>{
+        if(!btn?.isConnected){ themeButtons.delete(btn); return }
+        const variant = btn.dataset.themeVariant || 'icon'
+        if(variant==='primary'){
+          btn.textContent = `${isDark ? '☀️' : '🌙'} ${isDark ? 'Светлая тема' : 'Тёмная тема'}`
+        } else if(variant==='label'){
+          btn.textContent = isDark ? 'Светлая' : 'Тёмная'
+        } else {
+          btn.textContent = isDark ? '☀️' : '🌙'
+        }
+        btn.setAttribute('aria-label', isDark ? 'Переключить на светлую тему' : 'Переключить на тёмную тему')
+      })
+    }
+    function setTheme(mode){
+      if(mode==='dark'){ root.classList.add('dark') } else { root.classList.remove('dark') }
+      localStorage.setItem('theme', mode)
+      updateThemeUI()
+    }
+    function registerThemeButton(btn, variant='icon'){
+      if(!btn) return
+      btn.dataset.themeVariant = variant
+      if(!themeButtons.has(btn)){
+        themeButtons.add(btn)
+        btn.addEventListener('click', ()=> setTheme(root.classList.contains('dark') ? 'light' : 'dark'))
+      }
+      updateThemeUI()
+    }
+    (function initTheme(){
+      const saved = localStorage.getItem('theme')
+      if(saved){
+        setTheme(saved)
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches){
+        setTheme('dark')
+      } else {
+        setTheme('light')
+      }
+    })()
     const themeToggle = document.getElementById('themeToggle'); const themeToggleSm = document.getElementById('themeToggleSm')
-    ;[themeToggle, themeToggleSm].forEach(btn=> btn && btn.addEventListener('click', ()=> setTheme(root.classList.contains('dark') ? 'light' : 'dark')))
+    registerThemeButton(themeToggle, 'primary'); registerThemeButton(themeToggleSm, 'icon')
 
     // ===== Динамическое меню (desktop + mobile)
     const navData = JSON.parse(document.getElementById('nav-data').dataset.nav)
@@ -682,8 +720,7 @@
       if(variant==='desktop'){
         const tBtn = document.createElement('button')
         tBtn.className = 'ml-2 rounded-xl border px-3 py-2 text-sm'
-        tBtn.textContent = root.classList.contains('dark') ? 'Светлая' : 'Тёмная'
-        tBtn.addEventListener('click', ()=>{ setTheme(root.classList.contains('dark') ? 'light':'dark'); tBtn.textContent = root.classList.contains('dark') ? 'Светлая' : 'Тёмная' })
+        registerThemeButton(tBtn, 'label')
         container.appendChild(tBtn)
       }
     }
