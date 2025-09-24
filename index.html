@@ -23,6 +23,8 @@
     <style>
       :root {
         color-scheme: light dark;
+        --focus-ring-color: #0ea5e9;
+        --focus-ring-dark: #38bdf8;
         --page-gradient-light: radial-gradient(
             140% 170% at 12% -18%,
             rgba(180, 215, 245, 0.22),
@@ -59,6 +61,53 @@
         font-feature-settings: "liga" 1, "kern" 1;
         position: relative;
         min-height: 100vh;
+      }
+
+      h1,
+      .text-balance-1 {
+        font-size: clamp(2.5rem, 1.2vw + 2.1rem, 3.5rem);
+        line-height: 1.15;
+      }
+
+      h2,
+      .text-balance-2 {
+        font-size: clamp(2rem, 1vw + 1.6rem, 2.75rem);
+        line-height: 1.2;
+      }
+
+      h3,
+      .text-balance-3 {
+        font-size: clamp(1.5rem, 0.8vw + 1.2rem, 2rem);
+        line-height: 1.25;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: -4rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.75rem;
+        background: rgb(15 23 42 / 0.95);
+        color: white;
+        font-weight: 600;
+        transition: top 0.2s ease, transform 0.2s ease;
+        z-index: 60;
+      }
+
+      .skip-link:focus-visible {
+        top: 1rem;
+        transform: translateY(0);
+      }
+
+      :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+        outline: 3px solid var(--focus-ring-color);
+        outline-offset: 3px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+          outline-color: var(--focus-ring-dark);
+        }
       }
 
       body::before,
@@ -493,6 +542,7 @@
     </script>
   </head>
   <body class="min-h-screen text-slate-900 dark:text-slate-100 antialiased">
+    <a href="#main" class="skip-link">Пропустить к содержимому</a>
     <!-- Прогресс-бар прокрутки -->
     <div
       id="progress"
@@ -501,7 +551,7 @@
       aria-hidden="true"
     ></div>
 
-    <header class="relative overflow-hidden">
+    <header class="relative overflow-hidden" role="banner">
       <div class="absolute inset-0 pointer-events-none">
         <div
           class="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-sky-200/30 blur-3xl"
@@ -515,7 +565,7 @@
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-28 md:pb-18 relative z-10"
       >
         <!-- Навигация -->
-        <nav class="mb-10 relative" aria-label="Главная навигация">
+        <nav class="mb-10 relative" aria-label="Главная навигация" role="navigation">
           <div class="floating-nav-shell flex items-center gap-6">
             <a href="#top" class="flex items-center gap-3 font-semibold text-slate-900 dark:text-white">
               <img
@@ -585,9 +635,7 @@
         <!-- Hero -->
         <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" id="top">
           <div>
-            <h1
-              class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight"
-            >
+            <h1 class="text-balance-1 font-extrabold tracking-tight">
               Лаборатория промдизайна и инжиниринга (R22.Lab)
             </h1>
             <p
@@ -663,25 +711,28 @@
       </div>
     </header>
 
-    <main id="main-content" tabindex="-1">
 
     <!-- Оборудование и ПО -->
     <section id="equipment" class="section-shell py-16 md:py-24" data-section-accent="emerald">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">Оборудование и ПО</h2>
-        <p class="text-slate-700 dark:text-slate-200 max-w-3xl">
-          3D‑сканеры RangeVision и Artec; принтеры FDM/DLP (Ultimaker, Picaso
-          3D, Formlabs); лазер Trotec, фрезерные Roland; софт Geomagic, GOM
-          Inspect, Inventor, Fusion 360.
-        </p>
-        <div class="mt-6 space-y-4 md:space-y-5">
+        <div class="space-y-6">
+          <div class="space-y-4 max-w-3xl">
+            <h2 class="text-balance-2 font-bold">Оборудование и ПО</h2>
+            <p class="text-slate-700 dark:text-slate-200">
+              3D‑сканеры RangeVision и Artec; принтеры FDM/DLP (Ultimaker, Picaso
+              3D, Formlabs); лазер Trotec, фрезерные Roland; софт Geomagic, GOM
+              Inspect, Inventor, Fusion 360.
+            </p>
+          </div>
+        </div>
+        <div class="mt-8 space-y-6">
           <details
             class="surface-card-base group rounded-3xl border border-slate-200 bg-white shadow-sm transition dark:border-slate-700 dark:bg-slate-800"
           >
             <summary
               class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
             >
-              <span class="text-lg font-semibold">3D‑сканеры</span>
+              <span class="text-balance-3 font-semibold text-slate-900 dark:text-white">3D‑сканеры</span>
               <span
                 class="inline-flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-transform group-open:rotate-180 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-300"
               >
@@ -697,69 +748,65 @@
                 </svg>
               </span>
             </summary>
-            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-2">
-              <ul class="mt-3 grid gap-3 sm:grid-cols-2 md:gap-4">
+            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-4">
+              <ul class="grid gap-4 sm:grid-cols-2">
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <div class="font-medium">3D‑сканер RangeVision NEO</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  <div class="space-y-2">
+                    <div class="font-medium text-slate-900 dark:text-white">3D‑сканер RangeVision NEO</div>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Настольный структурированный свет, точность до 0,05 мм для
                       малого бизнеса и учебных задач.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>2 шт.</div>
                     <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
+                      class="font-semibold text-slate-800 dark:text-slate-100"
                     >
                       ≈ 450 тыс ₽
                     </div>
                   </div>
                 </li>
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <div class="font-medium">
+                  <div class="space-y-2">
+                    <div class="font-medium text-slate-900 dark:text-white">
                       3D‑сканер RangeVision Spectrum
                     </div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Высокая детализация и сменные зоны сканирования для
                       изделий средних размеров.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>1 шт.</div>
-                    <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
-                    >
+                    <div class="font-semibold text-slate-800 dark:text-slate-100">
                       ≈ 1,2 млн ₽
                     </div>
                   </div>
                 </li>
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <div class="font-medium">Artec Eva (ручной)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  <div class="space-y-2">
+                    <div class="font-medium text-slate-900 dark:text-white">Artec Eva (ручной)</div>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Портативный лазерный сканер для оперативной съёмки людей и
                       крупногабаритных объектов.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>2 шт.</div>
-                    <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
-                    >
+                    <div class="font-semibold text-slate-800 dark:text-slate-100">
                       ≈ 2,7 млн ₽
                     </div>
                   </div>
@@ -773,7 +820,7 @@
             <summary
               class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
             >
-              <span class="text-lg font-semibold">3D‑принтеры</span>
+              <span class="text-balance-3 font-semibold text-slate-900 dark:text-white">3D‑принтеры</span>
               <span
                 class="inline-flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-transform group-open:rotate-180 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-300"
               >
@@ -789,67 +836,61 @@
                 </svg>
               </span>
             </summary>
-            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-2">
-              <ul class="mt-3 grid gap-3 sm:grid-cols-2 md:gap-4">
+            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-4">
+              <ul class="grid gap-4 sm:grid-cols-2">
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <div class="font-medium">Ultimaker 3 (FDM)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  <div class="space-y-2">
+                    <div class="font-medium text-slate-900 dark:text-white">Ultimaker 3 (FDM)</div>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Двухэкструдерная печать инженерными пластиками и
                       поддержками PVA.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>1 шт.</div>
-                    <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
-                    >
+                    <div class="font-semibold text-slate-800 dark:text-slate-100">
                       ≈ 420 тыс ₽
                     </div>
                   </div>
                 </li>
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <div class="font-medium">Picaso 3D Designer X (FDM)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  <div class="space-y-2">
+                    <div class="font-medium text-slate-900 dark:text-white">Picaso 3D Designer X (FDM)</div>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Промышленная камера, закрытый корпус и стабильная печать
                       ABS/PA.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>2 шт.</div>
-                    <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
-                    >
+                    <div class="font-semibold text-slate-800 dark:text-slate-100">
                       ≈ 360 тыс ₽
                     </div>
                   </div>
                 </li>
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <div class="font-medium">Formlabs (DLP/SLA)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  <div class="space-y-2">
+                    <div class="font-medium text-slate-900 dark:text-white">Formlabs (DLP/SLA)</div>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Точная печать смолами для медицины и прототипирования с
                       постобработкой.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>1 шт.</div>
-                    <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
-                    >
+                    <div class="font-semibold text-slate-800 dark:text-slate-100">
                       ≈ 530 тыс ₽
                     </div>
                   </div>
@@ -863,7 +904,7 @@
             <summary
               class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
             >
-              <span class="text-lg font-semibold">CNC и лазер</span>
+              <span class="text-balance-3 font-semibold text-slate-900 dark:text-white">CNC и лазер</span>
               <span
                 class="inline-flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-transform group-open:rotate-180 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-300"
               >
@@ -879,45 +920,45 @@
                 </svg>
               </span>
             </summary>
-            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-2">
-              <ul class="mt-3 grid gap-3 sm:grid-cols-2 md:gap-4">
+            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-4">
+              <ul class="grid gap-4 sm:grid-cols-2">
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
+                  <div class="space-y-2">
                     <div class="font-medium">Roland MDX‑40/50/540 (CNC)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Настольные 3‑осевые фрезеры для обработки пластика, воска
                       и алюминия.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>3 станции</div>
                     <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
+                      class="font-semibold text-slate-800 dark:text-slate-100"
                     >
                       от 650 тыс ₽
                     </div>
                   </div>
                 </li>
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
+                  <div class="space-y-2">
                     <div class="font-medium">Trotec Speedy 300 (лазер)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       CO₂‑лазер 80 Вт для резки и гравировки листовых материалов
                       до А2.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>1 шт.</div>
                     <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
+                      class="font-semibold text-slate-800 dark:text-slate-100"
                     >
                       ≈ 1,8 млн ₽
                     </div>
@@ -932,7 +973,7 @@
             <summary
               class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
             >
-              <span class="text-lg font-semibold">ПО</span>
+              <span class="text-balance-3 font-semibold text-slate-900 dark:text-white">ПО</span>
               <span
                 class="inline-flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-transform group-open:rotate-180 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-300"
               >
@@ -948,86 +989,86 @@
                 </svg>
               </span>
             </summary>
-            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-2">
-              <ul class="mt-3 grid gap-3 sm:grid-cols-2 md:gap-4">
+            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-4">
+              <ul class="grid gap-4 sm:grid-cols-2">
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
+                  <div class="space-y-2">
                     <div class="font-medium">Geomagic (Reverse/Design)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Реверсивный инжиниринг и восстановление поверхностей из
                       облаков точек.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>5 лицензий</div>
                     <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
+                      class="font-semibold text-slate-800 dark:text-slate-100"
                     >
                       от 320 тыс ₽/год
                     </div>
                   </div>
                 </li>
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
+                  <div class="space-y-2">
                     <div class="font-medium">GOM Inspect (Метрология)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Контроль геометрии, отклонения и отчёты по сканам и
                       CMM‑данным.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>3 лицензии</div>
                     <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
+                      class="font-semibold text-slate-800 dark:text-slate-100"
                     >
                       ≈ 210 тыс ₽/год
                     </div>
                   </div>
                 </li>
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
+                  <div class="space-y-2">
                     <div class="font-medium">Autodesk Inventor (CAD)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Параметрическое проектирование, сборки и расчёт нагрузок.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>10 лицензий</div>
                     <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
+                      class="font-semibold text-slate-800 dark:text-slate-100"
                     >
                       ≈ 120 тыс ₽/год
                     </div>
                   </div>
                 </li>
                 <li
-                  class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
+                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
+                  <div class="space-y-2">
                     <div class="font-medium">Fusion 360 (CAD/CAM/CAE)</div>
-                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    <p class="text-sm text-slate-600 dark:text-slate-300">
                       Единая среда для CAD‑проектирования, CAM‑траекторий и
                       симуляций.
                     </p>
                   </div>
                   <div
-                    class="text-sm text-right text-slate-500 dark:text-slate-400"
+                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
                   >
                     <div>15 лицензий</div>
                     <div
-                      class="mt-1 font-semibold text-slate-700 dark:text-slate-200"
+                      class="font-semibold text-slate-800 dark:text-slate-100"
                     >
                       ≈ 45 тыс ₽/год
                     </div>
@@ -1037,117 +1078,136 @@
             </div>
           </details>
         </div>
+        <p
+          id="blogEmpty"
+          class="mt-6 hidden rounded-2xl border border-dashed border-slate-300/80 bg-white/80 px-4 py-6 text-center text-sm font-medium text-slate-600 dark:border-slate-600 dark:bg-slate-800/70 dark:text-slate-200"
+        >
+          Пока нет новостей
+        </p>
       </div>
     </section>
 
     <!-- Проекты и НИР -->
     <section id="projects" class="section-shell py-16 md:py-24" data-section-accent="emerald">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">
-          Проекты и направления НИР
-        </h2>
-        <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div class="space-y-10 md:space-y-12">
+          <div class="space-y-4">
+            <h2 class="text-balance-2 font-bold">
+              Проекты и направления НИР
+            </h2>
+          </div>
+          <div class="grid gap-6 md:grid-cols-2 md:gap-8">
           <!-- Карточка проекта с мини-слайдером (ванильный JS) -->
           <article
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery"
+            data-news
+            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery space-y-4"
             data-index="0"
           >
-            <h3 class="text-lg font-semibold">
-              Изготовление ортезов и протезов
-            </h3>
-            <p class="mt-1 text-slate-700 dark:text-slate-200 text-sm">
-              Индивидуальные ортезы и протезы: от скана до готового изделия.
-            </p>
-            <div
-              class="mt-3 flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200"
-            >
-              <span
-                class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                >MedTech</span
-              >
-              <span
-                class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                >FDM/DLP</span
-              >
-            </div>
-            <div
-              class="mt-4 rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
-            >
-              <div class="aspect-video grid">
-                <div class="slide">
-                  <img
-                    src="assets/images/index/projects/orthosis/slide-1.svg"
-                    alt="Проект ортеза — фото 1"
-                    class="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="slide hidden">
-                  <img
-                    src="assets/images/index/projects/orthosis/slide-2.svg"
-                    alt="Проект ортеза — фото 2"
-                    class="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="slide hidden">
-                  <img
-                    src="assets/images/index/projects/orthosis/slide-3.svg"
-                    alt="Проект ортеза — фото 3"
-                    class="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <h3 class="text-balance-3 font-semibold text-slate-900 dark:text-white">
+                  Изготовление ортезов и протезов
+                </h3>
+                <p class="text-sm text-slate-700 dark:text-slate-200">
+                  Индивидуальные ортезы и протезы: от скана до готового изделия.
+                </p>
               </div>
-              <button
-                class="js-prev group absolute left-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                aria-label="Предыдущее изображение"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                  <path
-                    d="m14 18-6-6 6-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                  />
-                </svg>
-              </button>
-              <button
-                class="js-next group absolute right-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                aria-label="Следующее изображение"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                  <path
-                    d="m10 6 6 6-6 6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                  />
-                </svg>
-              </button>
+              <div class="flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200">
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-700"
+                  >MedTech</span
+                >
+                <span
+                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-700"
+                  >FDM/DLP</span
+                >
+              </div>
               <div
-                class="flex items-center justify-center border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
+                class="rounded-2xl border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative overflow-hidden"
               >
-                <div class="flex gap-2 js-dots"></div>
+                <div class="aspect-video relative">
+                  <div class="pointer-events-none absolute inset-0 bg-slate-900/25 md:hidden"></div>
+                  <div class="grid h-full w-full">
+                    <div class="slide">
+                      <img
+                        src="assets/images/index/projects/orthosis/slide-1.svg"
+                        alt="Проект ортеза — фото 1"
+                        class="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="slide hidden">
+                      <img
+                        src="assets/images/index/projects/orthosis/slide-2.svg"
+                        alt="Проект ортеза — фото 2"
+                        class="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="slide hidden">
+                      <img
+                        src="assets/images/index/projects/orthosis/slide-3.svg"
+                        alt="Проект ортеза — фото 3"
+                        class="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="js-prev group absolute left-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
+                  aria-label="Предыдущее изображение"
+                >
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+                    <path
+                      d="m14 18-6-6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.8"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="js-next group absolute right-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
+                  aria-label="Следующее изображение"
+                >
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+                    <path
+                      d="m10 6 6 6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.8"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="flex w-full flex-col items-center gap-2 border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
+                >
+                  <div class="flex gap-2 js-dots"></div>
+                  <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-700/60">
+                    <div class="h-full w-full origin-left scale-x-0 rounded-full bg-slate-900 dark:bg-white js-progress"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </article>
           <article
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery"
+            data-news
+            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery space-y-4"
             data-index="0"
           >
-            <h3 class="text-lg font-semibold">Промдизайн и прототипирование</h3>
-            <p class="mt-1 text-slate-700 dark:text-slate-200 text-sm">
+            <h3 class="text-balance-3 font-semibold text-slate-900 dark:text-white">Промдизайн и прототипирование</h3>
+            <p class="text-sm text-slate-700 dark:text-slate-200">
               Комплексные проекты по промышленному дизайну: быстрые макеты,
               пользовательские испытания, подготовка к малосерийному
               производству.
             </p>
             <div
-              class="mt-3 flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200"
+              class="flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200"
             >
               <span
                 class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
@@ -1163,9 +1223,11 @@
               >
             </div>
             <div
-              class="mt-4 rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
+              class="rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
             >
-              <div class="aspect-video grid">
+              <div class="aspect-video relative">
+          <div class="pointer-events-none absolute inset-0 bg-slate-900/25 md:hidden"></div>
+          <div class="grid h-full w-full">
                 <div
                   class="slide flex items-center justify-center bg-gradient-to-br from-orange-200 via-rose-200 to-amber-200 dark:from-orange-500/40 dark:via-rose-500/40 dark:to-amber-500/40 text-slate-700 dark:text-white text-sm font-medium"
                 >
@@ -1213,27 +1275,33 @@
                 </svg>
               </button>
               <div
-                class="flex items-center justify-center border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
+                class="flex w-full flex-col items-center gap-2 border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
               >
                 <div class="flex gap-2 js-dots"></div>
+                <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-700/60">
+                  <div class="h-full w-full origin-left scale-x-0 rounded-full bg-slate-900 dark:bg-white js-progress"></div>
+                </div>
               </div>
             </div>
           </article>
           <article
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery"
+            data-news
+            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery space-y-4"
             data-index="0"
           >
-            <h3 class="text-lg font-semibold">
+            <h3 class="text-balance-3 font-semibold text-slate-900 dark:text-white">
               Оцифровка объектов культурного наследия
             </h3>
-            <p class="mt-1 text-slate-700 dark:text-slate-200 text-sm">
+            <p class="text-sm text-slate-700 dark:text-slate-200">
               Сканирование и восстановление геометрии, подготовка экспозиционных
               макетов.
             </p>
             <div
-              class="mt-4 rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
+              class="rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
             >
-              <div class="aspect-video grid">
+              <div class="aspect-video relative">
+          <div class="pointer-events-none absolute inset-0 bg-slate-900/25 md:hidden"></div>
+          <div class="grid h-full w-full">
                 <div class="slide">
                   <img
                     src="assets/images/index/projects/heritage/slide-1.svg"
@@ -1282,25 +1350,28 @@
                 </svg>
               </button>
               <div
-                class="flex items-center justify-center border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
+                class="flex w-full flex-col items-center gap-2 border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
               >
                 <div class="flex gap-2 js-dots"></div>
+                <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-700/60">
+                  <div class="h-full w-full origin-left scale-x-0 rounded-full bg-slate-900 dark:bg-white js-progress"></div>
+                </div>
               </div>
             </div>
           </article>
           <article
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery"
+            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery space-y-4"
             data-index="0"
           >
-            <h3 class="text-lg font-semibold">
+            <h3 class="text-balance-3 font-semibold text-slate-900 dark:text-white">
               GenAI и XR‑технологии в инженерии
             </h3>
-            <p class="mt-1 text-slate-700 dark:text-slate-200 text-sm">
+            <p class="text-sm text-slate-700 dark:text-slate-200">
               Используем генеративный ИИ и дополненную/виртуальную реальность
               для ускорения проектирования, ревью и обучения инженеров.
             </p>
             <div
-              class="mt-3 flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200"
+              class="flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200"
             >
               <span
                 class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
@@ -1316,9 +1387,11 @@
               >
             </div>
             <div
-              class="mt-4 rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
+              class="rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
             >
-              <div class="aspect-video grid">
+              <div class="aspect-video relative">
+          <div class="pointer-events-none absolute inset-0 bg-slate-900/25 md:hidden"></div>
+          <div class="grid h-full w-full">
                 <div
                   class="slide flex items-center justify-center bg-gradient-to-br from-indigo-200 via-sky-200 to-purple-200 dark:from-indigo-500/40 dark:via-sky-500/40 dark:to-purple-500/40 text-slate-700 dark:text-white text-sm font-medium text-center px-6"
                 >
@@ -1366,9 +1439,12 @@
                 </svg>
               </button>
               <div
-                class="flex items-center justify-center border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
+                class="flex w-full flex-col items-center gap-2 border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
               >
                 <div class="flex gap-2 js-dots"></div>
+                <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-700/60">
+                  <div class="h-full w-full origin-left scale-x-0 rounded-full bg-slate-900 dark:bg-white js-progress"></div>
+                </div>
               </div>
             </div>
           </article>
@@ -1600,8 +1676,8 @@
 
     <!-- Команда -->
     <section id="team" class="section-shell py-16 md:py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">Команда</h2>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <h2 class="text-balance-2 font-bold">Команда</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           <article
             class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800"
@@ -1944,10 +2020,10 @@
     <!-- Новости и статьи -->
     <section id="blog" class="section-shell py-16 md:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold">Образовательные программы и статьи</h2>
-            <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl">
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div class="space-y-4 max-w-3xl">
+            <h2 class="text-balance-2 font-bold">Образовательные программы и статьи</h2>
+            <p class="text-slate-700 dark:text-slate-200">
               Коротко делимся проектами лаборатории, методическими материалами и
               вдохновляющими кейсами индустриального дизайна и инженерии.
             </p>
@@ -1972,8 +2048,9 @@
           </a>
         </div>
 
-        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div id="blogList" class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           <article
+            data-news
             class="surface-card-base group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800"
           >
             <div class="aspect-[16/10] overflow-hidden">
@@ -1984,31 +2061,31 @@
                 loading="lazy"
               />
             </div>
-            <div class="p-6">
-              <div class="flex items-center gap-3 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            <div class="space-y-4 p-6">
+              <div class="flex items-center gap-3 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
                 <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 dark:bg-slate-700">Проекты</span>
                 <time datetime="2024-04-18">18 апреля 2024</time>
               </div>
-              <h3 class="mt-4 text-xl font-semibold text-slate-900 dark:text-white">
+              <h3 class="text-balance-3 text-xl font-semibold text-slate-900 dark:text-white">
                 «Реверсивный инжиниринг и аддитивное производство»
               </h3>
-              <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+              <p class="text-sm text-slate-700 dark:text-slate-200">
                 Образовательные проекты совместно с ФГБОУ ВО РГСУ. Проходим путь
                 от цифрового двойника до запуска аддитивного производства,
                 закрепляя навыки на собственных проектах слушателей.
               </p>
-              <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+              <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-200">
                 <li>Знакомство с оборудованием, подготовка объекта к сканированию</li>
                 <li>Обработка сеток, ремешинг, контроль качества поверхности</li>
                 <li>CAD‑проектирование, подготовка в CAM и цифровая аттестация</li>
                 <li>Подготовка к печати, постобработка и упаковка кейса для защиты</li>
               </ul>
-              <div class="mt-5 flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              <div class="flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-slate-600 dark:text-slate-200">
                 <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-700">Сертификат РГСУ</span>
                 <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-700">Проектный трек</span>
                 <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-700">Наставники-практики</span>
               </div>
-              <div class="mt-5 flex flex-wrap gap-3">
+              <div class="flex flex-wrap gap-3">
                 <a
                   href="#"
                   class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus:ring-slate-700"
@@ -2022,11 +2099,11 @@
                   Смотреть подробности
                 </a>
               </div>
-              <div class="mt-6 space-y-4 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 dark:bg-slate-900/50 dark:text-slate-200">
+              <div class="space-y-4 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 dark:bg-slate-900/50 dark:text-slate-200">
                 <div>
                   <h4 class="font-semibold text-slate-900 dark:text-white">Интенсив «Digital Manufacturing Sprint»</h4>
                   <p class="mt-1 text-sm">Неделя сжатой практики: от 3D‑сканирования до печати на индустриальном оборудовании с наставником.</p>
-                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
                     <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">48 ч</span>
                     <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Проектная защита</span>
                     <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Смешанный формат</span>
@@ -2035,7 +2112,7 @@
                 <div>
                   <h4 class="font-semibold text-slate-900 dark:text-white">Проектная школа «Advanced CAD/CAE»</h4>
                   <p class="mt-1 text-sm">Работаем над цифровыми прототипами, осваиваем анализ и оптимизацию конструкции в CAE, завершаем защитой перед индустриальными партнёрами.</p>
-                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
                     <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">72 ч</span>
                     <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Наставники из R22.Lab</span>
                     <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Командная работа</span>
@@ -2044,7 +2121,7 @@
                 <div>
                   <h4 class="font-semibold text-slate-900 dark:text-white">Практикум «Reverse Engineering Lab»</h4>
                   <p class="mt-1 text-sm">От скана до цифрового двойника: отрабатываем методики контроля, обмеров, реверсивного проектирования и подготовки в CAM.</p>
-                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
                     <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Гибкий график</span>
                     <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Индивидуальные кейсы</span>
                     <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Доступ к лаборатории 24/7</span>
@@ -2055,6 +2132,7 @@
           </article>
 
           <article
+            data-news
             class="surface-card-base group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800"
           >
             <div class="aspect-[16/10] overflow-hidden">
@@ -2065,15 +2143,15 @@
                 loading="lazy"
               />
             </div>
-            <div class="p-6">
-              <div class="flex items-center gap-3 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            <div class="space-y-4 p-6">
+              <div class="flex items-center gap-3 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
                 <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 dark:bg-slate-700">Методика</span>
                 <time datetime="2024-03-27">27 марта 2024</time>
               </div>
-              <h3 class="mt-4 text-xl font-semibold text-slate-900 dark:text-white">
+              <h3 class="text-balance-3 text-xl font-semibold text-slate-900 dark:text-white">
                 7 советов по выбору технологии 3D‑печати под задачу
               </h3>
-              <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+              <p class="text-sm text-slate-700 dark:text-slate-200">
                 Как понимать ограничения материалов, точность и экономику разных
                 процессов — чек‑лист для конструкторов и менеджеров проекта.
               </p>
@@ -2097,6 +2175,7 @@
           </article>
 
           <article
+            data-news
             class="surface-card-base group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800"
           >
             <div class="aspect-[16/10] overflow-hidden">
@@ -2107,15 +2186,15 @@
                 loading="lazy"
               />
             </div>
-            <div class="p-6">
-              <div class="flex items-center gap-3 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            <div class="space-y-4 p-6">
+              <div class="flex items-center gap-3 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
                 <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 dark:bg-slate-700">Обучение</span>
                 <time datetime="2024-02-10">10 февраля 2024</time>
               </div>
-              <h3 class="mt-4 text-xl font-semibold text-slate-900 dark:text-white">
+              <h3 class="text-balance-3 text-xl font-semibold text-slate-900 dark:text-white">
                 Новый поток курса по комплексному реверсу: что внутри
               </h3>
-              <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+              <p class="text-sm text-slate-700 dark:text-slate-200">
                 Содержание модулей, проектные задания и практика на оборудовании
                 технопарка — делимся, что ждёт слушателей.
               </p>
@@ -2143,8 +2222,8 @@
 
     <!-- FAQ -->
     <section id="faq" class="section-shell py-16 md:py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">Часто задаваемые вопросы</h2>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <h2 class="text-balance-2 font-bold">Часто задаваемые вопросы</h2>
         <div class="grid md:grid-cols-2 gap-6 md:gap-8">
           <details
             class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm open:shadow-md dark:border-slate-700 dark:bg-slate-800"
@@ -2220,19 +2299,7 @@
       id="contacts"
       class="section-shell py-16 md:py-24 border-t border-slate-200/60 dark:border-slate-700/60"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          class="grid gap-12 items-start lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.9fr)]"
-        >
-          <div class="space-y-8">
-            <div class="space-y-3">
-              <h2 class="text-3xl md:text-4xl font-bold">Контакты</h2>
-              <p class="text-slate-600 dark:text-slate-300 max-w-prose">
-                Задайте вопрос или оставьте заявку — поможем выбрать формат:
-                учебный модуль, проект, НИОКР или услугу.
-              </p>
-            </div>
-            <div class="flex flex-wrap items-center gap-3">
+
               <button
                 id="openModal2"
                 class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300"
@@ -2254,11 +2321,7 @@
                 Поделиться ссылкой
               </button>
             </div>
-            <div class="grid gap-4 text-sm text-slate-700 dark:text-slate-300 sm:grid-cols-2">
-              <div
-                class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
-              >
-                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+
                   По всем вопросам
                 </div>
                 <a
@@ -2267,14 +2330,14 @@
                 >
                   projects.step3d@gmail.com
                 </a>
-                <div class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
                   Почта команды Step3D.Lab для любых запросов и заявок.
                 </div>
               </div>
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+
                   Контакт в Telegram
                 </div>
                 <a
@@ -2285,14 +2348,14 @@
                 >
                   @step_3d_mngr
                 </a>
-                <div class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
                   Никита — менеджер проекта, оперативная связь по Telegram.
                 </div>
               </div>
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+
                   Портфолио и новости
                 </div>
                 <a
@@ -2303,14 +2366,14 @@
                 >
                   t.me/STEP_3D_Lab
                 </a>
-                <div class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
                   Кейсы лаборатории, новости проектов и behind the scenes.
                 </div>
               </div>
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+
                   Обучение и профориентация
                 </div>
                 <a
@@ -2321,7 +2384,7 @@
                 >
                   technopark-rgsu.ru
                 </a>
-                <div class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
                   Образовательные программы и профориентация школьников.
                 </div>
               </div>
@@ -2357,7 +2420,7 @@
                     <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-full bg-[#ff8c00] text-white">
                       M
                     </span>
-                    <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-300">СВАО</span>
+                    <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">СВАО</span>
                   </div>
                 </div>
                 <a
@@ -2392,7 +2455,7 @@
                     <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-full bg-[#a6007a] text-white">
                       M
                     </span>
-                    <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-300">САО</span>
+                    <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">САО</span>
                   </div>
                 </div>
                 <a
@@ -2441,7 +2504,7 @@
                 tabindex="-1"
               ></iframe>
             </div>
-            <div class="text-sm text-slate-500 dark:text-slate-400">
+
               © <span id="y"></span> Технопарк РГСУ
             </div>
           </div>
@@ -2500,7 +2563,7 @@
             </div>
           </div>
           <div
-            class="mt-10 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400"
+            class="mt-10 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-600 dark:text-slate-200"
           >
             <div class="flex flex-wrap gap-3">
               <a href="#" class="hover:underline">Конфиденциальность</a
@@ -2518,7 +2581,7 @@
               </select>
             </div>
           </div>
-          <div class="mt-6 text-xs text-slate-500 dark:text-slate-400">
+          <div class="mt-6 text-xs text-slate-600 dark:text-slate-200">
             © <span id="y2"></span> Step3D.Lab · Все права защищены
           </div>
         </div>
@@ -2671,6 +2734,8 @@
       </div>
     </div>
 
+    </main>
+
     <!-- Секции для навигации (для автоподсветки) -->
 
     <div
@@ -2678,6 +2743,7 @@
       class="hidden"
       data-nav='[{"id":"top","label":"Главная"},{"id":"equipment","label":"Оборудование"},{"id":"projects","label":"Проекты"},{"id":"courses","label":"Обучение"},{"id":"team","label":"Команда"},{"id":"blog","label":"Новости"},{"id":"faq","label":"Часто задаваемые вопросы"},{"id":"contacts","label":"Контакты"}]'
     ></div>
+
 
   </body>
 </html>
