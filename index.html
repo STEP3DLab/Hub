@@ -84,13 +84,251 @@
     </div>
   </section>
 
-  <section id="equipment" class="py-14 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6">Оборудование и ПО</h2>
-      <p class="text-slate-600 max-w-3xl">3D‑сканеры, принтеры FDM/DLP, лазер/ЧПУ; ПО: Geomagic, GOM Inspect, Inventor, Fusion 360.</p>
-      <div id="equipWrap" class="mt-6 grid lg:grid-cols-2 gap-8"></div>
+  <!-- ========== Оборудование и ПО (улучшённый дизайн) ========== -->
+<section id="equipment" class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl md:text-4xl font-bold mb-3">Оборудование и ПО</h2>
+    <p class="text-slate-600 max-w-3xl">
+      Профессиональные 3D-сканеры, принтеры FDM/DLP, лазер/ЧПУ; ПО: Geomagic, GOM Inspect, Inventor, Fusion 360.
+    </p>
+
+    <!-- Панель: вкладки + поиск -->
+    <div class="mt-5 flex flex-wrap items-center gap-3">
+      <div class="inline-flex rounded-2xl border border-slate-200 bg-slate-50 p-1 text-sm">
+        <button class="px-3 py-1.5 rounded-xl data-[active=true]:bg-slate-900 data-[active=true]:text-white"
+                data-cat-tab="all" data-active="true">Все</button>
+        <button class="px-3 py-1.5 rounded-xl hover:bg-slate-100" data-cat-tab="scanner">3D-сканеры</button>
+        <button class="px-3 py-1.5 rounded-xl hover:bg-slate-100" data-cat-tab="printer">3D-принтеры</button>
+        <button class="px-3 py-1.5 rounded-xl hover:bg-slate-100" data-cat-tab="cnc">CNC и лазер</button>
+        <button class="px-3 py-1.5 rounded-xl hover:bg-slate-100" data-cat-tab="software">ПО</button>
+      </div>
+
+      <div class="relative ml-auto">
+        <svg viewBox="0 0 24 24" class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400"><path d="M21 21l-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <input id="equip-search" type="search" placeholder="Поиск по названию или бренду"
+               class="pl-10 pr-3 py-2 rounded-xl border border-slate-200 bg-white text-sm w-72 max-w-full outline-none focus:ring-4 focus:ring-slate-200" />
+      </div>
     </div>
-  </section>
+
+    <!-- Группы -->
+    <div id="equip-groups" class="mt-6 space-y-8">
+      <!-- ГРУППА: 3D-сканеры -->
+      <div class="rounded-3xl border border-slate-200 p-4 bg-gradient-to-br from-white to-slate-50" data-group-cat="scanner">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-lg font-semibold">3D-сканеры</h3>
+          <span class="text-xs text-slate-500">3 поз.</span>
+        </div>
+        <ul class="grid sm:grid-cols-2 gap-3">
+          <!-- item -->
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="scanner" data-name="RangeVision NEO RV 3D-сканер">
+            <div class="min-w-0">
+              <div class="font-medium truncate">3D-сканер RangeVision NEO</div>
+              <div class="mt-1 flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">RangeVision</span>
+              </div>
+            </div>
+            <span class="text-xs rounded-lg bg-slate-100 px-2 py-1 text-slate-600">2 шт.</span>
+          </li>
+
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="scanner" data-name="RangeVision Spectrum RV 3D-сканер">
+            <div class="min-w-0">
+              <div class="font-medium truncate">3D-сканер RangeVision Spectrum</div>
+              <div class="mt-1 flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">RangeVision</span>
+              </div>
+            </div>
+            <span class="text-xs rounded-lg bg-slate-100 px-2 py-1 text-slate-600">1 шт.</span>
+          </li>
+
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="scanner" data-name="Artec Eva 3D-сканер Artec">
+            <div class="min-w-0">
+              <div class="font-medium truncate">Artec Eva</div>
+              <div class="mt-1 flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">Artec</span>
+              </div>
+            </div>
+            <span class="text-xs rounded-lg bg-slate-100 px-2 py-1 text-slate-600">ручной, 2 шт.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ГРУППА: 3D-принтеры -->
+      <div class="rounded-3xl border border-slate-200 p-4 bg-gradient-to-br from-white to-slate-50" data-group-cat="printer">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-lg font-semibold">3D-принтеры</h3>
+          <span class="text-xs text-slate-500">3 поз.</span>
+        </div>
+        <ul class="grid sm:grid-cols-2 gap-3">
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="printer" data-name="Ultimaker 3 FDM принтер UM">
+            <div class="min-w-0">
+              <div class="font-medium truncate">Ultimaker 3</div>
+              <div class="mt-1 flex flex-wrap gap-1.5"><span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">Ultimaker</span></div>
+            </div>
+            <span class="text-xs rounded-lg bg-emerald-50 px-2 py-1 text-emerald-700">FDM</span>
+          </li>
+
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="printer" data-name="Picaso 3D Designer X FDM PX">
+            <div class="min-w-0">
+              <div class="font-medium truncate">Picaso 3D Designer X</div>
+              <div class="mt-1 flex flex-wrap gap-1.5"><span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">Picaso 3D</span></div>
+            </div>
+            <span class="text-xs rounded-lg bg-emerald-50 px-2 py-1 text-emerald-700">FDM</span>
+          </li>
+
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="printer" data-name="Formlabs DLP SLA FL">
+            <div class="min-w-0">
+              <div class="font-medium truncate">Formlabs (семейство)</div>
+              <div class="mt-1 flex flex-wrap gap-1.5"><span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">Formlabs</span></div>
+            </div>
+            <span class="text-xs rounded-lg bg-violet-50 px-2 py-1 text-violet-700">DLP/SLA</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ГРУППА: CNC и лазер -->
+      <div class="rounded-3xl border border-slate-200 p-4 bg-gradient-to-br from-white to-slate-50" data-group-cat="cnc">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-lg font-semibold">CNC и лазер</h3>
+          <span class="text-xs text-slate-500">2 поз.</span>
+        </div>
+        <ul class="grid sm:grid-cols-2 gap-3">
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="cnc" data-name="Roland MDX-40/50/540 ЧПУ Roland RL">
+            <div class="min-w-0">
+              <div class="font-medium truncate">Roland MDX-40/50/540</div>
+              <div class="mt-1 flex flex-wrap gap-1.5"><span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">Roland</span></div>
+            </div>
+            <span class="text-xs rounded-lg bg-sky-50 px-2 py-1 text-sky-700">CNC</span>
+          </li>
+
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="cnc" data-name="Trotec Speedy 300 Лазер TR">
+            <div class="min-w-0">
+              <div class="font-medium truncate">Trotec Speedy 300</div>
+              <div class="mt-1 flex flex-wrap gap-1.5"><span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">Trotec</span></div>
+            </div>
+            <span class="text-xs rounded-lg bg-rose-50 px-2 py-1 text-rose-700">Лазер</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ГРУППА: ПО -->
+      <div class="rounded-3xl border border-slate-200 p-4 bg-gradient-to-br from-white to-slate-50" data-group-cat="software">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-lg font-semibold">ПО</h3>
+          <span class="text-xs text-slate-500">4 поз.</span>
+        </div>
+        <ul class="grid sm:grid-cols-2 gap-3">
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="software" data-name="Geomagic Reverse Design GMG">
+            <div class="min-w-0">
+              <div class="font-medium truncate">Geomagic</div>
+              <div class="mt-1 flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">Reverse/Design</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="software" data-name="GOM Inspect метрология GOM">
+            <div class="min-w-0">
+              <div class="font-medium truncate">GOM Inspect</div>
+              <div class="mt-1 flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">Метрология</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="software" data-name="Autodesk Inventor CAD INV">
+            <div class="min-w-0">
+              <div class="font-medium truncate">Autodesk Inventor</div>
+              <div class="mt-1 flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">CAD</span>
+              </div>
+            </div>
+          </li>
+
+          <li class="equip-card rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-4 flex items-center justify-between"
+              data-cat="software" data-name="Fusion 360 CAD CAM CAE F360">
+            <div class="min-w-0">
+              <div class="font-medium truncate">Fusion 360</div>
+              <div class="mt-1 flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">CAD/CAM/CAE</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Пустая выдача -->
+    <div id="equip-empty" class="hidden mt-8 rounded-2xl border border-dashed border-slate-300 p-6 text-center text-slate-500">
+      Ничего не найдено. Измените запрос или переключите вкладку.
+    </div>
+  </div>
+
+  <!-- Небольшой скрипт фильтра и поиска -->
+  <script>
+    (function(){
+      const tabs = document.querySelectorAll('[data-cat-tab]');
+      const search = document.getElementById('equip-search');
+      const groups = document.querySelectorAll('[data-group-cat]');
+      const items = document.querySelectorAll('.equip-card');
+      const empty = document.getElementById('equip-empty');
+
+      let activeCat = 'all', q = '';
+
+      function apply(){
+        let anyVisible = false;
+
+        // показываем/скрываем карточки
+        items.forEach(it => {
+          const cat = it.dataset.cat;
+          const name = (it.dataset.name || it.textContent || '').toLowerCase();
+          const byCat = (activeCat === 'all') || (cat === activeCat);
+          const bySearch = !q || name.includes(q);
+          const show = byCat && bySearch;
+          it.style.display = show ? '' : 'none';
+          if (show) anyVisible = true;
+        });
+
+        // скрываем пустые группы
+        groups.forEach(g => {
+          const inner = g.querySelectorAll('.equip-card');
+          const visibleInside = Array.from(inner).some(el => el.style.display !== 'none');
+          g.style.display = visibleInside ? '' : 'none';
+        });
+
+        empty.classList.toggle('hidden', anyVisible);
+      }
+
+      tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabs.forEach(b => b.dataset.active = 'false');
+          btn.dataset.active = 'true';
+          activeCat = btn.dataset.catTab;
+          apply();
+        });
+      });
+
+      search.addEventListener('input', (e) => {
+        q = e.target.value.trim().toLowerCase();
+        apply();
+      });
+
+      apply();
+    })();
+  </script>
+</section>
+<!-- ========== /Оборудование и ПО ========== -->
+
 
   <section id="projects" class="py-14">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
