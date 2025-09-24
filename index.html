@@ -353,6 +353,27 @@
             <div class="mt-1 text-sm text-slate-600 dark:text-slate-300">CAD, ЧПУ, прототипы</div>
           </div>
         </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
+          <div class="grid place-items-center rounded-2xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-100" style="width:64px;height:64px">S3</div>
+          <div>
+            <div class="font-semibold">Step3D</div>
+            <div class="text-sm text-slate-500 dark:text-slate-300">индустриальный партнёр лаборатории</div>
+          </div>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
+          <div class="grid place-items-center rounded-2xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-100" style="width:64px;height:64px">ТП</div>
+          <div>
+            <div class="font-semibold">Технопарк РГСУ</div>
+            <div class="text-sm text-slate-500 dark:text-slate-300">ресурсная база</div>
+          </div>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
+          <div class="grid place-items-center rounded-2xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-100" style="width:64px;height:64px">РГ</div>
+          <div>
+            <div class="font-semibold">Российский государственный университет</div>
+            <div class="text-sm text-slate-500 dark:text-slate-300">образовательный партнёр</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -381,8 +402,8 @@
           <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-prose">Задайте вопрос или оставьте заявку — поможем выбрать формат: учебный модуль, проект, НИОКР или услуга.</p>
           <div class="mt-6 flex flex-wrap gap-3">
             <button class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300" id="openModal2">Оставить заявку</button>
-            <a href="https://t.me/DTRSSU" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700">Telegram‑канал</a>
-            <button id="dlIcs" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm">Добавить событие (.ics)</button>
+            <a href="https://t.me/step_3d_mngr" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700">Написать нам в телеграм</a>
+            <button id="shareLink" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm">Поделиться ссылкой</button>
           </div>
         </div>
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-soft">
@@ -545,21 +566,31 @@
       })
     }))
 
-    // ===== .ics загрузка (демо‑событие)
-    function pad(n){ return String(n).padStart(2,'0') }
-    function toICSTime(d){ return `${d.getUTCFullYear()}${pad(d.getUTCMonth()+1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z` }
-    function buildICS({ title, start, end, description, location }){
-      const safe = (description||'').replace(/\r?\n/g,'\\n')
-      return `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//RGSU TechnoPark//Lab//RU\nBEGIN:VEVENT\nUID:${Date.now()}@rgsu-techno\nDTSTAMP:${toICSTime(new Date())}\nDTSTART:${toICSTime(start)}\nDTEND:${toICSTime(end)}\nSUMMARY:${title}\nDESCRIPTION:${safe}\nLOCATION:${location||''}\nEND:VEVENT\nEND:VCALENDAR`
-    }
-    document.getElementById('dlIcs')?.addEventListener('click', ()=>{
-      const start = new Date(Date.UTC(2025,9,12,9,0)) // 12 Oct 2025 09:00Z
-      const end   = new Date(Date.UTC(2025,9,12,11,0))
-      const ics = buildICS({ title:'Step3D.Lab — День открытых дверей', start, end, description:'Встреча в технопарке', location:'Москва' })
-      const blob = new Blob([ics], { type:'text/calendar;charset=utf-8' })
-      const url = URL.createObjectURL(blob)
-      const a = Object.assign(document.createElement('a'), { href:url, download:'Step3D-Lab.ics' })
-      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url)
+    // ===== Поделиться ссылкой
+    document.getElementById('shareLink')?.addEventListener('click', async ()=>{
+      const url = window.location.href
+      const title = document.title
+      if(navigator.share){
+        try{
+          await navigator.share({ title, url })
+        }catch(err){
+          if(err && err.name === 'AbortError') return
+          alert('Не удалось поделиться ссылкой')
+        }
+        return
+      }
+      try{
+        await navigator.clipboard.writeText(url)
+        alert('Ссылка скопирована в буфер обмена')
+      }catch(_err){
+        const input = document.createElement('input')
+        input.value = url
+        document.body.appendChild(input)
+        input.select()
+        document.execCommand('copy')
+        input.remove()
+        alert('Ссылка скопирована')
+      }
     })
 
     // Год в футере
