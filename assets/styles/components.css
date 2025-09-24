@@ -36,6 +36,307 @@
 }
 
 
+/* Hero section */
+.hero {
+  position: relative;
+  padding-block: clamp(4rem, 6vw + 2.5rem, 8.5rem);
+  overflow: hidden;
+  background:
+    radial-gradient(120% 120% at -10% 0%, rgba(73, 126, 255, 0.18), transparent 65%),
+    radial-gradient(110% 140% at 90% -10%, rgba(14, 165, 233, 0.12), transparent 70%),
+    linear-gradient(180deg, rgba(7, 11, 19, 0.92), rgba(7, 11, 19, 0.78));
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -35% -20% auto -35%;
+  height: 68%;
+  background: radial-gradient(ellipse at center, rgba(136, 189, 255, 0.2), transparent 72%);
+  filter: blur(60px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2.25rem, 4vw, 3.75rem);
+  align-items: center;
+}
+
+@media (min-width: 64rem) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+  }
+}
+
+.hero__content {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 42rem;
+}
+
+.hero__lead {
+  margin: 0;
+  color: rgba(232, 238, 247, 0.82);
+  font-size: clamp(1.05rem, 1.2vw + 0.9rem, 1.25rem);
+  line-height: 1.75;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.hero__about {
+  margin-top: 1rem;
+  padding: 1.35rem 1.6rem 1.4rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: linear-gradient(180deg, rgba(10, 14, 22, 0.86), rgba(10, 14, 22, 0.72));
+  box-shadow: 0 32px 60px rgba(4, 10, 20, 0.45);
+  backdrop-filter: blur(20px);
+}
+
+.hero__about h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.hero__about p {
+  margin: 0;
+  color: rgba(232, 238, 247, 0.86);
+  line-height: 1.7;
+}
+
+.hero__visual {
+  position: relative;
+  width: min(100%, 29rem);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(0);
+}
+
+.hero__visual::before {
+  content: "";
+  position: absolute;
+  inset: 14% 18% 18% 14%;
+  border-radius: 32%;
+  background: radial-gradient(circle at 50% 40%, rgba(46, 160, 255, 0.22), transparent 70%);
+  filter: blur(40px);
+  opacity: 0.85;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__visual-layer {
+  z-index: 1;
+}
+
+@media (min-width: 64rem) {
+  .hero__visual {
+    margin-inline: 0;
+    justify-self: end;
+  }
+}
+
+.invader-grid {
+  position: absolute;
+  inset: -18% -22% -18% -16%;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: clamp(0.45rem, 1.2vw, 0.75rem);
+  opacity: 0.55;
+  transform: rotateX(55deg) rotateZ(-32deg) translate3d(0, 0, -40px);
+  transform-origin: center;
+  filter: saturate(1.2);
+  pointer-events: none;
+}
+
+.hero__cell {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.4rem;
+  background: rgba(74, 110, 210, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(90, 132, 255, 0.2);
+  transition: transform 0.6s ease, opacity 0.6s ease, background 0.6s ease, box-shadow 0.6s ease;
+}
+
+.hero__cell--active {
+  background: linear-gradient(145deg, rgba(139, 198, 255, 0.82), rgba(52, 142, 255, 0.55));
+  box-shadow: 0 16px 36px rgba(52, 142, 255, 0.35), inset 0 0 0 1px rgba(204, 230, 255, 0.4);
+  opacity: 0.95;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__cell--active {
+    animation: heroCellPulse 6.5s ease-in-out infinite;
+  }
+
+  .hero__cell--active:nth-child(3n) {
+    animation-delay: -2.2s;
+  }
+
+  .hero__cell--active:nth-child(4n) {
+    animation-delay: -3.4s;
+  }
+}
+
+@keyframes heroCellPulse {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+.hero__invader {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: var(--invader-size, 14rem);
+  --invader-light: #9ed2ff;
+  --invader-dark: #1d4fd8;
+  --invader-highlight: rgba(255, 255, 255, 0.92);
+  --invader-shadow: rgba(13, 36, 98, 0.58);
+  --invader-glow: rgba(64, 145, 255, 0.42);
+  pointer-events: none;
+  transform: rotateX(55deg) rotateZ(-32deg) scale(var(--invader-scale, 1));
+  transform-origin: center;
+  filter: drop-shadow(0 26px 48px var(--invader-glow));
+  z-index: 2;
+}
+
+.hero__invader::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: -14%;
+  left: 50%;
+  width: 74%;
+  height: 26%;
+  background: radial-gradient(ellipse at center, var(--invader-glow), transparent 65%);
+  transform: translateX(-50%);
+  filter: blur(18px);
+  opacity: 0.55;
+}
+
+.hero__invader svg {
+  position: relative;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+}
+
+.hero__invader rect {
+  vector-effect: non-scaling-stroke;
+}
+
+.hero__invader[data-size="lg"] {
+  --invader-size: clamp(11.5rem, 21vw, 18rem);
+  top: 6%;
+  left: -7%;
+}
+
+.hero__invader[data-size="md"] {
+  --invader-size: clamp(9.5rem, 18vw, 14.5rem);
+  top: -10%;
+  right: -10%;
+  --invader-scale: 0.96;
+}
+
+.hero__invader[data-size="sm"] {
+  --invader-size: clamp(6.75rem, 14vw, 10.5rem);
+  bottom: -12%;
+  left: 36%;
+  --invader-scale: 0.94;
+}
+
+.hero__invader[data-variant="boy"] {
+  --invader-light: #9ed2ff;
+  --invader-dark: #1d4fd8;
+  --invader-highlight: rgba(255, 255, 255, 0.92);
+  --invader-shadow: rgba(13, 36, 98, 0.58);
+  --invader-glow: rgba(64, 145, 255, 0.42);
+}
+
+.hero__invader[data-variant="girl"] {
+  --invader-light: #f3b2ff;
+  --invader-dark: #7c3aed;
+  --invader-highlight: rgba(255, 255, 255, 0.92);
+  --invader-shadow: rgba(70, 18, 134, 0.58);
+  --invader-glow: rgba(194, 102, 255, 0.4);
+}
+
+.hero__invader[data-variant="kid"] {
+  --invader-light: #82f6da;
+  --invader-dark: #0ea5e9;
+  --invader-highlight: rgba(255, 255, 255, 0.9);
+  --invader-shadow: rgba(12, 70, 110, 0.55);
+  --invader-glow: rgba(54, 210, 204, 0.4);
+}
+
+@media (max-width: 62rem) {
+  .hero__visual {
+    width: min(85vw, 25rem);
+  }
+
+  .hero__invader[data-size="lg"] {
+    left: -12%;
+  }
+
+  .hero__invader[data-size="md"] {
+    right: -16%;
+  }
+
+  .hero__invader[data-size="sm"] {
+    left: 32%;
+  }
+}
+
+@media (max-width: 48rem) {
+  .hero__inner {
+    text-align: center;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__visual {
+    width: min(90vw, 22rem);
+    margin-top: 1.5rem;
+  }
+
+  .hero__invader[data-size="lg"] {
+    left: -18%;
+  }
+
+  .hero__invader[data-size="md"] {
+    top: -14%;
+    right: -18%;
+  }
+
+  .hero__invader[data-size="sm"] {
+    bottom: -16%;
+    left: 26%;
+  }
+}
+
+
 
 .team-section {
   position: relative;
