@@ -149,380 +149,222 @@
     <main id="main">
 
     <!-- Оборудование и ПО -->
-    <section id="equipment" class="section-shell py-16 md:py-24" data-section-accent="emerald">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="space-y-6">
-          <div class="space-y-4 max-w-3xl">
-            <h2 class="text-balance-2 font-bold">Оборудование и ПО</h2>
-            <p class="text-slate-700 dark:text-slate-200">
-              3D‑сканеры RangeVision и Artec; принтеры FDM/DLP (Ultimaker, Picaso
-              3D, Formlabs); лазер Trotec, фрезерные Roland; софт Geomagic, GOM
-              Inspect, Inventor, Fusion 360.
-            </p>
-          </div>
+    <section id="equipment" class="section section--equipment">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Оборудование и ПО</h2>
+          <p class="section-lead">
+            3D‑сканеры RangeVision и Artec; принтеры FDM/DLP (Ultimaker, Picaso 3D, Formlabs); лазер Trotec, фрезерные Roland; софт Geomagic, GOM Inspect, Inventor, Fusion 360.
+          </p>
         </div>
-        <div class="mt-8 space-y-6">
-          <details
-            class="surface-card-base group rounded-3xl border border-slate-200 bg-white shadow-sm transition dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary
-              class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
-            >
-              <span class="text-balance-3 font-semibold text-slate-900 dark:text-white">3D‑сканеры</span>
-              <span
-                class="inline-flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-transform group-open:rotate-180 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-300"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5">
-                  <path
-                    d="M6 9l6 6 6-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                  />
+        <div class="grid cols-2 equipment-grid">
+          <article class="card card--equipment">
+            <div class="card-body">
+              <h3 class="card-title">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 8h16l-2 8H6L4 8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                  <path d="M8 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                  <circle cx="8" cy="18" r="1.5" fill="currentColor" />
+                  <circle cx="16" cy="18" r="1.5" fill="currentColor" />
                 </svg>
-              </span>
-            </summary>
-            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-4">
-              <ul class="grid gap-4 sm:grid-cols-2">
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium text-slate-900 dark:text-white">3D‑сканер RangeVision NEO</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Настольный структурированный свет, точность до 0,05 мм для
-                      малого бизнеса и учебных задач.
+                3D‑сканеры
+              </h3>
+              <ul class="equipment-list">
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">3D‑сканер RangeVision NEO</h4>
+                    <p class="equipment-item__text">
+                      Настольный структурированный свет, точность до 0,05 мм для малого бизнеса и учебных задач.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>2 шт.</div>
-                    <div
-                      class="font-semibold text-slate-800 dark:text-slate-100"
-                    >
-                      ≈ 450 тыс ₽
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">2 шт.</span>
+                    <span class="meta-chip">≈ 450 тыс ₽</span>
                   </div>
                 </li>
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium text-slate-900 dark:text-white">
-                      3D‑сканер RangeVision Spectrum
-                    </div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Высокая детализация и сменные зоны сканирования для
-                      изделий средних размеров.
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">3D‑сканер RangeVision Spectrum</h4>
+                    <p class="equipment-item__text">
+                      Высокая детализация и сменные зоны сканирования для изделий средних размеров.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>1 шт.</div>
-                    <div class="font-semibold text-slate-800 dark:text-slate-100">
-                      ≈ 1,2 млн ₽
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">1 шт.</span>
+                    <span class="meta-chip">≈ 1,2 млн ₽</span>
                   </div>
                 </li>
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium text-slate-900 dark:text-white">Artec Eva (ручной)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Портативный лазерный сканер для оперативной съёмки людей и
-                      крупногабаритных объектов.
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">Artec Eva (ручной)</h4>
+                    <p class="equipment-item__text">
+                      Портативный лазерный сканер для оперативной съёмки людей и крупногабаритных объектов.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>2 шт.</div>
-                    <div class="font-semibold text-slate-800 dark:text-slate-100">
-                      ≈ 2,7 млн ₽
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">2 шт.</span>
+                    <span class="meta-chip">≈ 2,7 млн ₽</span>
                   </div>
                 </li>
               </ul>
             </div>
-          </details>
-          <details
-            class="surface-card-base group rounded-3xl border border-slate-200 bg-white shadow-sm transition dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary
-              class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
-            >
-              <span class="text-balance-3 font-semibold text-slate-900 dark:text-white">3D‑принтеры</span>
-              <span
-                class="inline-flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-transform group-open:rotate-180 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-300"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5">
-                  <path
-                    d="M6 9l6 6 6-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                  />
+          </article>
+          <article class="card card--equipment">
+            <div class="card-body">
+              <h3 class="card-title">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 5h14v10H5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                  <path d="M3 17h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M9 21h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                  <circle cx="9" cy="9" r="1" fill="currentColor" />
+                  <circle cx="12" cy="9" r="1" fill="currentColor" />
+                  <circle cx="15" cy="9" r="1" fill="currentColor" />
                 </svg>
-              </span>
-            </summary>
-            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-4">
-              <ul class="grid gap-4 sm:grid-cols-2">
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium text-slate-900 dark:text-white">Ultimaker 3 (FDM)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Двухэкструдерная печать инженерными пластиками и
-                      поддержками PVA.
+                3D‑принтеры
+              </h3>
+              <ul class="equipment-list">
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">Ultimaker 3 (FDM)</h4>
+                    <p class="equipment-item__text">
+                      Двухэкструдерная печать инженерными пластиками и поддержками PVA.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>1 шт.</div>
-                    <div class="font-semibold text-slate-800 dark:text-slate-100">
-                      ≈ 420 тыс ₽
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">1 шт.</span>
+                    <span class="meta-chip">≈ 420 тыс ₽</span>
                   </div>
                 </li>
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium text-slate-900 dark:text-white">Picaso 3D Designer X (FDM)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Промышленная камера, закрытый корпус и стабильная печать
-                      ABS/PA.
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">Picaso 3D Designer X (FDM)</h4>
+                    <p class="equipment-item__text">
+                      Промышленная камера, закрытый корпус и стабильная печать ABS/PA.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>2 шт.</div>
-                    <div class="font-semibold text-slate-800 dark:text-slate-100">
-                      ≈ 360 тыс ₽
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">2 шт.</span>
+                    <span class="meta-chip">≈ 360 тыс ₽</span>
                   </div>
                 </li>
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium text-slate-900 dark:text-white">Formlabs (DLP/SLA)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Точная печать смолами для медицины и прототипирования с
-                      постобработкой.
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">Formlabs (DLP/SLA)</h4>
+                    <p class="equipment-item__text">
+                      Точная печать смолами для медицины и прототипирования с постобработкой.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>1 шт.</div>
-                    <div class="font-semibold text-slate-800 dark:text-slate-100">
-                      ≈ 530 тыс ₽
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">1 шт.</span>
+                    <span class="meta-chip">≈ 530 тыс ₽</span>
                   </div>
                 </li>
               </ul>
             </div>
-          </details>
-          <details
-            class="surface-card-base group rounded-3xl border border-slate-200 bg-white shadow-sm transition dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary
-              class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
-            >
-              <span class="text-balance-3 font-semibold text-slate-900 dark:text-white">CNC и лазер</span>
-              <span
-                class="inline-flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-transform group-open:rotate-180 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-300"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5">
-                  <path
-                    d="M6 9l6 6 6-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                  />
+          </article>
+          <article class="card card--equipment">
+            <div class="card-body">
+              <h3 class="card-title">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 5h14v6H5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                  <path d="M3 17h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M7 21h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                  <path d="M8 9h2M14 9h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
-              </span>
-            </summary>
-            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-4">
-              <ul class="grid gap-4 sm:grid-cols-2">
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium">Roland MDX‑40/50/540 (CNC)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Настольные 3‑осевые фрезеры для обработки пластика, воска
-                      и алюминия.
+                CNC и лазер
+              </h3>
+              <ul class="equipment-list">
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">Roland MDX‑40/50/540 (CNC)</h4>
+                    <p class="equipment-item__text">
+                      Настольные 3‑осевые фрезеры для обработки пластика, воска и алюминия.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>3 станции</div>
-                    <div
-                      class="font-semibold text-slate-800 dark:text-slate-100"
-                    >
-                      от 650 тыс ₽
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">3 станции</span>
+                    <span class="meta-chip">от 650 тыс ₽</span>
                   </div>
                 </li>
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium">Trotec Speedy 300 (лазер)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      CO₂‑лазер 80 Вт для резки и гравировки листовых материалов
-                      до А2.
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">Trotec Speedy 300 (лазер)</h4>
+                    <p class="equipment-item__text">
+                      CO₂‑лазер 80 Вт для резки и гравировки листовых материалов до А2.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>1 шт.</div>
-                    <div
-                      class="font-semibold text-slate-800 dark:text-slate-100"
-                    >
-                      ≈ 1,8 млн ₽
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">1 шт.</span>
+                    <span class="meta-chip">≈ 1,8 млн ₽</span>
                   </div>
                 </li>
               </ul>
             </div>
-          </details>
-          <details
-            class="surface-card-base group rounded-3xl border border-slate-200 bg-white shadow-sm transition dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary
-              class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left md:px-6 md:py-5"
-            >
-              <span class="text-balance-3 font-semibold text-slate-900 dark:text-white">ПО</span>
-              <span
-                class="inline-flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-transform group-open:rotate-180 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-300"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5">
-                  <path
-                    d="M6 9l6 6 6-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                  />
+          </article>
+          <article class="card card--equipment">
+            <div class="card-body">
+              <h3 class="card-title">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="14" rx="2.5" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+                  <path d="M7 9h10M7 13h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
-              </span>
-            </summary>
-            <div class="px-5 pb-5 pt-0 md:px-6 md:pb-6 group-open:pt-4">
-              <ul class="grid gap-4 sm:grid-cols-2">
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium">Geomagic (Reverse/Design)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Реверсивный инжиниринг и восстановление поверхностей из
-                      облаков точек.
+                Программное обеспечение
+              </h3>
+              <ul class="equipment-list">
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">Geomagic (Reverse/Design)</h4>
+                    <p class="equipment-item__text">
+                      Реверсивный инжиниринг и восстановление поверхностей из облаков точек.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>5 лицензий</div>
-                    <div
-                      class="font-semibold text-slate-800 dark:text-slate-100"
-                    >
-                      от 320 тыс ₽/год
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">5 лицензий</span>
+                    <span class="meta-chip">от 320 тыс ₽/год</span>
                   </div>
                 </li>
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium">GOM Inspect (Метрология)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Контроль геометрии, отклонения и отчёты по сканам и
-                      CMM‑данным.
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">GOM Inspect (Метрология)</h4>
+                    <p class="equipment-item__text">
+                      Контроль геометрии, отклонения и отчёты по сканам и CMM‑данным.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>3 лицензии</div>
-                    <div
-                      class="font-semibold text-slate-800 dark:text-slate-100"
-                    >
-                      ≈ 210 тыс ₽/год
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">3 лицензии</span>
+                    <span class="meta-chip">≈ 210 тыс ₽/год</span>
                   </div>
                 </li>
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium">Autodesk Inventor (CAD)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">Autodesk Inventor (CAD)</h4>
+                    <p class="equipment-item__text">
                       Параметрическое проектирование, сборки и расчёт нагрузок.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>10 лицензий</div>
-                    <div
-                      class="font-semibold text-slate-800 dark:text-slate-100"
-                    >
-                      ≈ 120 тыс ₽/год
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">10 лицензий</span>
+                    <span class="meta-chip">≈ 120 тыс ₽/год</span>
                   </div>
                 </li>
-                <li
-                  class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div class="space-y-2">
-                    <div class="font-medium">Fusion 360 (CAD/CAM/CAE)</div>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">
-                      Единая среда для CAD‑проектирования, CAM‑траекторий и
-                      симуляций.
+                <li class="equipment-item">
+                  <div class="equipment-item__info">
+                    <h4 class="equipment-item__title">Fusion 360 (CAD/CAM/CAE)</h4>
+                    <p class="equipment-item__text">
+                      Единая среда для CAD‑проектирования, CAM‑траекторий и симуляций.
                     </p>
                   </div>
-                  <div
-                    class="space-y-2 text-sm text-right text-slate-600 dark:text-slate-300"
-                  >
-                    <div>15 лицензий</div>
-                    <div
-                      class="font-semibold text-slate-800 dark:text-slate-100"
-                    >
-                      ≈ 45 тыс ₽/год
-                    </div>
+                  <div class="equipment-item__meta">
+                    <span class="meta-chip">15 лицензий</span>
+                    <span class="meta-chip">≈ 45 тыс ₽/год</span>
                   </div>
                 </li>
               </ul>
             </div>
-          </details>
+          </article>
         </div>
-        <p
-          id="blogEmpty"
-          class="mt-6 hidden rounded-2xl border border-dashed border-slate-300/80 bg-white/80 px-4 py-6 text-center text-sm font-medium text-slate-600 dark:border-slate-600 dark:bg-slate-800/70 dark:text-slate-200"
-        >
-          Пока нет новостей
-        </p>
       </div>
     </section>
-
     <!-- Проекты и НИР -->
     <section id="projects" class="section-shell py-16 md:py-24" data-section-accent="emerald">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
