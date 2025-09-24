@@ -1,0 +1,11 @@
+{
+  "name": "step3dlab-hub",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i styles/tailwind-input.css -o assets/styles/tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
+  }
+}
