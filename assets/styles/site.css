@@ -1,4 +1,6 @@
 /* Shared UI tweaks for Step3D.Lab */
+}
+
 .mobile-nav-trigger {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
