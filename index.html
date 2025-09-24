@@ -8,6 +8,30 @@
       name="description"
       content="CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, аддитивное производство. Курсы ДПО, проекты, услуги технопарка РГСУ."
     />
+    <link rel="canonical" href="https://step3dlab.ru/" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Step3D.Lab — Лаборатория промдизайна и инжиниринга"
+    />
+    <meta
+      property="og:description"
+      content="Инжиниринговая лаборатория Step3D.Lab: проекты, курсы ДПО по реверсивному инжинирингу и аддитивному производству, инфраструктура технопарка РГСУ."
+    />
+    <meta property="og:url" content="https://step3dlab.ru/" />
+    <meta property="og:site_name" content="Step3D.Lab" />
+    <meta property="og:image" content="https://step3dlab.ru/Logo_Step_3D.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Step3D.Lab — Лаборатория промдизайна и инжиниринга"
+    />
+    <meta
+      name="twitter:description"
+      content="Лаборатория Step3D.Lab развивает проекты и обучение по реверсивному инжинирингу, 3D‑сканированию и аддитивному производству."
+    />
+    <meta name="twitter:image" content="https://step3dlab.ru/Logo_Step_3D.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,6 +45,54 @@
     <!-- Tailwind (CDN, удобно для GitHub Pages). Для продакшна соберите локально. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="assets/styles/site.css" />
+    <script src="js/forms.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://step3dlab.ru/#organization",
+            "name": "Step3D.Lab",
+            "legalName": "Step3D.Lab — Лаборатория промдизайна и инжиниринга",
+            "url": "https://step3dlab.ru/",
+            "logo": "https://step3dlab.ru/Logo_Step_3D.jpg",
+            "description": "Инжиниринговая лаборатория Step3D.Lab: реверсивный инжиниринг, аддитивное производство и образовательные программы технопарка РГСУ.",
+            "sameAs": [
+              "https://t.me/STEP_3D_Lab",
+              "https://t.me/step_3d_mngr",
+              "https://technopark-rgsu.ru/"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "ул. Вильгельма Пика, 4, корп. 8",
+              "addressLocality": "Москва",
+              "addressRegion": "Москва",
+              "postalCode": "129223",
+              "addressCountry": "RU"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "Общие вопросы",
+              "email": "projects.step3d@gmail.com",
+              "availableLanguage": ["ru", "en"]
+            }
+          },
+          {
+            "@type": "Course",
+            "name": "Реверсивный инжиниринг и аддитивное производство",
+            "description": "Практический курс повышения квалификации: 3D-сканирование, обработка сеток, CAD/CAM и запуск аддитивного производства с наставниками Step3D.Lab.",
+            "educationalCredentialAwarded": "Удостоверение о повышении квалификации РГСУ",
+            "provider": {
+              "@id": "https://step3dlab.ru/#organization"
+            },
+            "timeRequired": "P3M",
+            "courseCode": "R22-REV-ADD",
+            "inLanguage": "ru"
+          }
+        ]
+      }
+    </script>
     <script>
       // Доп. токены Tailwind
       tailwind.config = {
@@ -2543,83 +2615,182 @@
     <!-- Модальное окно заявки -->
     <div
       id="modal"
+      data-modal
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="requestTitle"
+      aria-describedby="requestDescription"
+      tabindex="-1"
       class="fixed inset-0 z-[60] hidden items-center justify-center p-4"
     >
-      <div id="modalBg" class="absolute inset-0 bg-black/40"></div>
+      <div id="modalBg" data-modal-bg class="absolute inset-0 bg-black/40"></div>
       <div
         class="relative w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-2xl border border-slate-200 dark:border-slate-700"
       >
-        <h3 class="text-xl font-semibold">Оставить заявку</h3>
-        <p class="text-slate-700 dark:text-slate-200 mt-1">
-          Заполните контакты — мы свяжемся и обсудим задачу.
-        </p>
-        <form id="requestForm" class="mt-4 grid gap-3">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h3 id="requestTitle" class="text-xl font-semibold">Оставить заявку</h3>
+            <p id="requestDescription" class="text-slate-700 dark:text-slate-200 mt-1">
+              Заполните контакты — мы свяжемся и обсудим задачу.
+            </p>
+          </div>
+          <button
+            type="button"
+            id="closeModal"
+            data-modal-close
+            class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-500 transition hover:text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:text-white"
+            aria-label="Закрыть форму"
+          >
+            ✕
+          </button>
+        </div>
+        <form
+          id="requestForm"
+          class="mt-4 grid gap-4"
+          novalidate
+          data-request-form
+          data-endpoint="https://httpbin.org/post"
+          data-success-message="Спасибо! Мы получили вашу заявку и скоро ответим."
+          data-error-message="Не удалось отправить форму. Попробуйте ещё раз или свяжитесь с нами другим способом."
+          data-emailjs-service=""
+          data-emailjs-template=""
+          data-emailjs-public-key=""
+        >
           <input
             type="text"
             name="company"
             class="hidden"
             tabindex="-1"
             autocomplete="off"
-            aria-hidden
+            aria-hidden="true"
           />
-          <label class="grid gap-1 text-sm"
-            ><span>Цель обращения</span>
+          <div class="grid gap-1 text-sm">
+            <label for="requestType">Цель обращения</label>
             <select
+              id="requestType"
               name="type"
               required
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+              aria-describedby="requestTypeError"
+              aria-invalid="false"
             >
               <option value="course">Запись на курс</option>
               <option value="service">Заказ услуги</option>
               <option value="partner">Сотрудничество</option>
             </select>
-          </label>
-          <label class="grid gap-1 text-sm"
-            ><span>Имя</span
-            ><input
-              required
-              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            <p
+              id="requestTypeError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestName">Имя</label>
+            <input
+              id="requestName"
               name="name"
-          /></label>
-          <label class="grid gap-1 text-sm"
-            ><span>Телефон</span
-            ><input
               required
+              aria-required="true"
+              aria-invalid="false"
+              aria-describedby="requestNameError"
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="requestNameError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestPhone">Телефон</label>
+            <input
+              id="requestPhone"
               name="phone"
-          /></label>
-          <label class="grid gap-1 text-sm"
-            ><span>Email</span
-            ><input
-              type="email"
+              type="tel"
+              required
+              inputmode="tel"
+              placeholder="+7 (999) 123-45-67"
+              aria-required="true"
+              aria-invalid="false"
+              aria-describedby="requestPhoneError"
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="requestPhoneError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestEmail">Email</label>
+            <input
+              id="requestEmail"
               name="email"
-          /></label>
-          <label class="grid gap-1 text-sm"
-            ><span>Комментарий</span
-            ><textarea
-              rows="3"
+              type="email"
+              inputmode="email"
+              aria-invalid="false"
+              aria-describedby="requestEmailError"
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="requestEmailError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestComment">Комментарий</label>
+            <textarea
+              id="requestComment"
               name="comment"
+              rows="3"
               placeholder="Опишите задачу, сроки, ссылки"
+              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
             ></textarea>
-          </label>
-          <div class="flex items-center gap-2 text-sm">
-            <input id="agree" required type="checkbox" class="h-4 w-4" /><label
-              for="agree"
+          </div>
+          <div class="flex items-start gap-2 text-sm">
+            <input
+              id="agree"
+              name="agreement"
+              type="checkbox"
+              required
+              aria-required="true"
+              aria-invalid="false"
+              aria-describedby="requestAgreementError"
+              class="mt-1 h-4 w-4"
+            />
+            <label for="agree" class="flex-1"
               >Согласен(а) на обработку персональных данных</label
             >
           </div>
-          <div class="mt-2 flex gap-3">
+          <p
+            id="requestAgreementError"
+            class="hidden text-xs text-rose-600"
+            data-error-message
+            aria-live="polite"
+          ></p>
+          <div
+            class="hidden rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-200"
+            role="status"
+            aria-live="polite"
+            data-form-status
+          ></div>
+          <div class="mt-2 flex flex-wrap gap-3">
             <button
-              class="rounded-xl bg-slate-900 text-white px-4 py-2 hover:bg-slate-800"
+              class="rounded-xl bg-slate-900 text-white px-4 py-2 font-medium transition hover:bg-slate-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
               type="submit"
+              data-submit
             >
-              Отправить</button
-            ><button
+              Отправить
+            </button>
+            <button
               class="rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2"
               type="button"
-              id="closeModal"
+              data-modal-close
             >
               Отмена
             </button>
@@ -2650,6 +2821,75 @@
         ? window.matchMedia("(prefers-reduced-motion: reduce)")
         : null;
       const teamToggles = document.querySelectorAll("[data-team-toggle]");
+
+      const sectionMeta = {
+        top: {
+          title:
+            "Step3D.Lab — Лаборатория промдизайна и инжиниринга (R22.Lab)",
+          description:
+            "Step3D.Lab развивает промышленные проекты, обучение и услуги по 3D‑сканированию и аддитивному производству.",
+        },
+        equipment: {
+          title: "Step3D.Lab — Оборудование и инфраструктура лаборатории",
+          description:
+            "Инфраструктура Step3D.Lab: 3D‑сканеры, аддитивные комплексы, постобработка и VR‑зоны для инженерных проектов.",
+        },
+        projects: {
+          title: "Step3D.Lab — Проекты и индустриальные кейсы",
+          description:
+            "Кейсы Step3D.Lab: медтех, робототехника, реверсивный инжиниринг и дизайн с применением аддитивных технологий.",
+        },
+        courses: {
+          title: "Step3D.Lab — Курсы ДПО по реверсивному инжинирингу",
+          description:
+            "Курсы повышения квалификации Step3D.Lab: практика на оборудовании, наставники-практики, проектный трек и поддержка технопарка РГСУ.",
+        },
+        team: {
+          title: "Step3D.Lab — Команда инженеров и наставников",
+          description:
+            "Команда Step3D.Lab сочетает опыт инженеров, дизайнеров и технологов аддитивного производства.",
+        },
+        blog: {
+          title: "Step3D.Lab — Новости лаборатории и методические материалы",
+          description:
+            "Новости Step3D.Lab: образовательные методички, обзоры проектов и рекомендации по использованию 3D‑технологий.",
+        },
+        faq: {
+          title: "Step3D.Lab — Ответы на популярные вопросы",
+          description:
+            "FAQ Step3D.Lab: условия обучения, форматы сотрудничества и поддержка партнёров.",
+        },
+        contacts: {
+          title: "Step3D.Lab — Контакты лаборатории и формы связи",
+          description:
+            "Свяжитесь со Step3D.Lab: почта, Telegram, VR‑туры по площадкам и заявка на обучение или проект.",
+        },
+      };
+      const descriptionMeta = document.querySelector('meta[name="description"]');
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      const ogDescription = document.querySelector(
+        'meta[property="og:description"]',
+      );
+      const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+      const twitterDescription = document.querySelector(
+        'meta[name="twitter:description"]',
+      );
+      const defaultSectionMeta = sectionMeta.top;
+
+      function applyMeta(sectionId) {
+        const meta = sectionMeta[sectionId] || defaultSectionMeta;
+        if (meta.title && document.title !== meta.title) {
+          document.title = meta.title;
+          ogTitle?.setAttribute("content", meta.title);
+          twitterTitle?.setAttribute("content", meta.title);
+        }
+        if (meta.description) {
+          descriptionMeta?.setAttribute("content", meta.description);
+          ogDescription?.setAttribute("content", meta.description);
+          twitterDescription?.setAttribute("content", meta.description);
+        }
+      }
+      applyMeta("top");
 
       teamToggles.forEach((button) => {
         const targetId = button.dataset.teamToggle;
@@ -2739,6 +2979,7 @@
               a.getAttribute("href") === `#${id}`,
             );
           });
+          applyMeta(id);
         },
         { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
       );
@@ -2756,32 +2997,39 @@
       });
 
       // ===== Модалка формы
-      const modal = document.getElementById("modal");
-      const openModal = () => modal.classList.remove("hidden");
-      const closeModal = () => modal.classList.add("hidden");
+      const modal = document.querySelector("[data-modal]");
+      const modalBg = modal?.querySelector("[data-modal-bg]");
+      const focusableSelectors =
+        'input, select, textarea, button:not([data-modal-close]), [href]';
+      const openModal = () => {
+        if (!modal) return;
+        modal.classList.remove("hidden");
+        const firstField = modal.querySelector(focusableSelectors);
+        if (firstField) {
+          setTimeout(() => firstField.focus(), 0);
+        }
+      };
+      const closeModal = () => {
+        if (!modal) return;
+        const form = modal.querySelector("form[data-request-form]");
+        form?.reset();
+        modal.classList.add("hidden");
+      };
+      window.step3dModal = { open: openModal, close: closeModal };
       document
         .getElementById("openModal")
         ?.addEventListener("click", openModal);
       document
         .getElementById("openModal2")
         ?.addEventListener("click", openModal);
-      document
-        .getElementById("closeModal")
-        ?.addEventListener("click", closeModal);
-      document.getElementById("modalBg")?.addEventListener("click", closeModal);
+      modal
+        ?.querySelectorAll("[data-modal-close]")
+        .forEach((btn) => btn.addEventListener("click", closeModal));
+      modalBg?.addEventListener("click", closeModal);
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !modal.classList.contains("hidden"))
+        if (e.key === "Escape" && !modal?.classList.contains("hidden"))
           closeModal();
       });
-      document
-        .getElementById("requestForm")
-        ?.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const fd = new FormData(e.target);
-          console.log("[Request]", Object.fromEntries(fd.entries()));
-          closeModal();
-          alert("Заявка отправлена! (демо)");
-        });
 
       // ===== «О лаборатории» toggle
       document
