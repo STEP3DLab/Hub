@@ -224,3 +224,40 @@
 .tabs__panel[aria-hidden="false"] {
   display: block;
 }
+
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(15, 23, 42, 0.06);
+  color: rgb(30, 41, 59);
+  transition: background-color 0.2s ease, color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.meta-chip--link {
+  color: inherit;
+}
+
+.meta-chip--link:hover,
+.meta-chip--link:focus-visible {
+  background: rgba(14, 165, 233, 0.18);
+  color: rgb(14, 165, 233);
+  box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.16);
+}
+
+.dark .meta-chip {
+  background: rgba(148, 163, 184, 0.12);
+  color: rgb(226, 232, 240);
+}
+
+.dark .meta-chip--link:hover,
+.dark .meta-chip--link:focus-visible {
+  background: rgba(56, 189, 248, 0.24);
+  color: rgb(125, 211, 252);
+  box-shadow: 0 0 0 1px rgba(125, 211, 252, 0.2);
+}
