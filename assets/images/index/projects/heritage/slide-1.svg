@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="heritage1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a" />
+      <stop offset="1" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#heritage1)" rx="32" />
+  <text x="50%" y="44%" text-anchor="middle" fill="#e2e8f0" font-size="38" font-family="'Segoe UI',sans-serif">ОКН · фото 1</text>
+  <text x="50%" y="62%" text-anchor="middle" fill="#cbd5f5" font-size="18" font-family="'Segoe UI',sans-serif">Добавьте сюда изображение экспоната</text>
+</svg>
