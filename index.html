@@ -20,6 +20,7 @@
     />
     <!-- Tailwind (CDN, удобно для GitHub Pages). Для продакшна соберите локально. -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/styles/site.css" />
     <script>
       // Доп. токены Tailwind
       tailwind.config = {
@@ -540,9 +541,10 @@
             <div class="md:hidden flex items-center gap-2 ml-auto">
               <button
                 id="burger"
+                type="button"
                 aria-expanded="false"
                 aria-label="Меню"
-                class="rounded-xl border p-2"
+                class="mobile-nav-trigger rounded-xl border border-slate-200/80 bg-white/80 p-2 shadow-sm backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/80"
               >
                 <svg viewBox="0 0 24 24" class="h-5 w-5">
                   <path
@@ -557,9 +559,9 @@
           </div>
           <div
             id="mobile"
-            class="md:hidden hidden absolute left-0 right-0 top-full mt-4 z-50 px-1 sm:px-0"
+            class="mobile-nav-panel md:hidden hidden absolute left-0 right-0 top-full mt-4 z-50 px-1 sm:px-0"
           >
-            <div class="floating-nav-menu p-4" role="menu">
+
               <div id="mobileLinks" class="grid gap-2"></div>
               <a
                 href="#contacts"
@@ -572,7 +574,7 @@
         </nav>
         <div
           id="mobile-backdrop"
-          class="fixed inset-0 hidden bg-slate-900/40 backdrop-blur-sm z-40 md:hidden"
+          class="mobile-nav-backdrop fixed inset-0 hidden bg-slate-900/40 backdrop-blur-sm z-40 md:hidden"
         ></div>
 
         <!-- Hero -->
@@ -1947,7 +1949,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
           <div>
-            <h2 class="text-3xl md:text-4xl font-bold">Новости и статьи</h2>
+            <h2 class="text-3xl md:text-4xl font-bold">Образовательные программы и статьи</h2>
             <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-2xl">
               Коротко делимся проектами лаборатории, методическими материалами и
               вдохновляющими кейсами индустриального дизайна и инженерии.
@@ -1991,28 +1993,67 @@
                 <time datetime="2024-04-18">18 апреля 2024</time>
               </div>
               <h3 class="mt-4 text-xl font-semibold text-slate-900 dark:text-white">
-                Как мы за 5 дней восстановили 3D‑модель редкой детали
+                «Реверсивный инжиниринг и аддитивное производство»
               </h3>
               <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
-                Сканирование, облака точек, подготовка поверхности и печать на
-                SLS — рассказываем про рабочий процесс лаборатории шаг за шагом.
+                Образовательные проекты совместно с ФГБОУ ВО РГСУ. Проходим путь
+                от цифрового двойника до запуска аддитивного производства,
+                закрепляя навыки на собственных проектах слушателей.
               </p>
-              <a
-                href="#"
-                class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-sky-600 transition hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200"
-              >
-                Читать заметку
-                <svg viewBox="0 0 24 24" class="h-4 w-4">
-                  <path
-                    d="M5 12h13M13 5l7 7-7 7"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </a>
+              <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                <li>Знакомство с оборудованием, подготовка объекта к сканированию</li>
+                <li>Обработка сеток, ремешинг, контроль качества поверхности</li>
+                <li>CAD‑проектирование, подготовка в CAM и цифровая аттестация</li>
+                <li>Подготовка к печати, постобработка и упаковка кейса для защиты</li>
+              </ul>
+              <div class="mt-5 flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-700">Сертификат РГСУ</span>
+                <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-700">Проектный трек</span>
+                <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-700">Наставники-практики</span>
+              </div>
+              <div class="mt-5 flex flex-wrap gap-3">
+                <a
+                  href="#"
+                  class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus:ring-slate-700"
+                >
+                  Подобрать программу
+                </a>
+                <a
+                  href="#"
+                  class="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:text-slate-100"
+                >
+                  Смотреть подробности
+                </a>
+              </div>
+              <div class="mt-6 space-y-4 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 dark:bg-slate-900/50 dark:text-slate-200">
+                <div>
+                  <h4 class="font-semibold text-slate-900 dark:text-white">Интенсив «Digital Manufacturing Sprint»</h4>
+                  <p class="mt-1 text-sm">Неделя сжатой практики: от 3D‑сканирования до печати на индустриальном оборудовании с наставником.</p>
+                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">48 ч</span>
+                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Проектная защита</span>
+                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Смешанный формат</span>
+                  </div>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-slate-900 dark:text-white">Проектная школа «Advanced CAD/CAE»</h4>
+                  <p class="mt-1 text-sm">Работаем над цифровыми прототипами, осваиваем анализ и оптимизацию конструкции в CAE, завершаем защитой перед индустриальными партнёрами.</p>
+                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">72 ч</span>
+                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Наставники из R22.Lab</span>
+                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Командная работа</span>
+                  </div>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-slate-900 dark:text-white">Практикум «Reverse Engineering Lab»</h4>
+                  <p class="mt-1 text-sm">От скана до цифрового двойника: отрабатываем методики контроля, обмеров, реверсивного проектирования и подготовки в CAM.</p>
+                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Гибкий график</span>
+                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Индивидуальные кейсы</span>
+                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Доступ к лаборатории 24/7</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </article>
 
@@ -2177,7 +2218,7 @@
     </section>
 
     <!-- Контакты + карта -->
-    <footer
+        <footer
       id="contacts"
       class="section-shell py-16 md:py-24 border-t border-slate-200/60 dark:border-slate-700/60"
     >
@@ -2185,14 +2226,14 @@
         <div class="grid md:grid-cols-2 gap-10 items-center">
           <div>
             <h2 class="text-3xl md:text-4xl font-bold">Контакты</h2>
-            <p class="mt-3 text-slate-700 dark:text-slate-200 max-w-prose">
+            <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-prose">
               Задайте вопрос или оставьте заявку — поможем выбрать формат:
-              учебный модуль, проект, НИОКР или услуга.
+              учебный модуль, проект, НИОКР или услугу.
             </p>
             <div class="mt-6 flex flex-wrap gap-3">
               <button
-                class="primary-button inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300"
                 id="openModal2"
+                class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300"
               >
                 Оставить заявку
               </button>
@@ -2203,9 +2244,16 @@
                 class="secondary-button inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
                 >Написать нам в телеграм</a
               >
+              <button
+                id="shareLink"
+                type="button"
+                class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+              >
+                Поделиться ссылкой
+              </button>
             </div>
             <div
-              class="mt-8 grid gap-4 text-sm text-slate-700 dark:text-slate-200 sm:grid-cols-2"
+              class="mt-8 grid gap-4 text-sm text-slate-700 dark:text-slate-300 sm:grid-cols-2"
             >
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
@@ -2290,7 +2338,6 @@
           <div
             class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-sky-50 via-white to-emerald-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-6 shadow-soft"
           >
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h3 class="font-semibold text-lg">Адреса и VR‑туры</h3>
                 <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
@@ -2408,8 +2455,57 @@
             </div>
           </div>
         </div>
-      </div>
 
+        <div class="mt-16 border-t border-slate-200 dark:border-slate-700 pt-10">
+          <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div>
+              <div class="text-sm font-semibold mb-3">Образование</div>
+              <ul class="space-y-2 text-sm">
+                <li>
+                  <a href="index.html#courses" class="hover:underline">Курсы ДПО</a>
+                </li>
+                <li>
+                  <a href="index.html#courses" class="hover:underline">Проектные школы</a>
+                </li>
+                <li>
+                  <a href="index.html#courses" class="hover:underline">Силлабусы</a>
+                </li>
+                <li>
+                  <a href="index.html#contacts" class="hover:underline">Заявка на обучение</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div class="text-sm font-semibold mb-3">Проекты</div>
+              <ul class="space-y-2 text-sm">
+                <li>
+                  <a href="index.html#projects" class="hover:underline">MedTech</a>
+                </li>
+                <li>
+                  <a href="index.html#projects" class="hover:underline">Robotics</a>
+                </li>
+                <li>
+                  <a href="index.html#projects" class="hover:underline">Reverse engineering</a>
+                </li>
+                <li>
+                  <a href="index.html#projects" class="hover:underline">Design &amp; Render</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div class="text-sm font-semibold mb-3">Ресурсы</div>
+              <ul class="space-y-2 text-sm">
+                <li>
+                  <a href="index.html#blog" class="hover:underline">Методические материалы</a>
+                </li>
+                <li>
+                  <a href="#" class="hover:underline">3D‑модели (STP)</a>
+                </li>
+                <li>
+                  <a href="#" class="hover:underline">Политика данных</a>
+                </li>
+                <li><a href="index.html#blog" class="hover:underline">Блог</a></li>
+              </ul>
             </div>
           </div>
           <div
@@ -2419,7 +2515,7 @@
               <a href="#" class="hover:underline">Конфиденциальность</a
               ><a href="#" class="hover:underline">Условия использования</a
               ><a href="#" class="hover:underline">Cookies</a
-              ><a href="#" class="hover:underline">Контакты</a>
+              ><a href="#contacts" class="hover:underline">Контакты</a>
             </div>
             <div class="flex items-center gap-2">
               <span aria-hidden>🌐</span
@@ -2863,28 +2959,34 @@
             .forEach((b) =>
               b.classList.toggle("dark:text-slate-900", b === btn),
             );
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) => b.classList.toggle("text-slate-700", b !== btn));
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) =>
-              b.classList.toggle("dark:text-slate-200", b !== btn),
-            );
-          document.querySelectorAll("[data-map]").forEach((frame) => {
-            frame.classList.toggle("opacity-0", frame.dataset.map !== i);
-            frame.classList.toggle(
-              "pointer-events-none",
-              frame.dataset.map !== i,
-            );
-          });
-        }),
-      );
 
-      // Год в футере
-      const y = new Date().getFullYear();
-      document.getElementById("y").textContent = y;
-      document.getElementById("y2").textContent = y;
-    </script>
+
+  document
+    .getElementById("shareLink")
+    ?.addEventListener("click", async () => {
+      const url = window.location.href;
+      const title = document.title;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title, url });
+        } catch (err) {
+          if (err?.name !== "AbortError")
+            alert("Не удалось поделиться ссылкой. Попробуйте ещё раз.");
+        }
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        alert("Ссылка скопирована в буфер обмена");
+      } catch (err) {
+        prompt("Скопируйте ссылку вручную:", url);
+      }
+    });
+
+  // Год в футере
+  const y = new Date().getFullYear();
+  document.getElementById("y").textContent = y;
+  document.getElementById("y2").textContent = y;
+</script>
   </body>
 </html>
