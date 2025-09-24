@@ -59,51 +59,41 @@
     <header class="site-header" role="banner">
       <div class="container">
         <nav class="top-nav" aria-label="Главная навигация">
-          <a href="#top" class="top-nav__brand">
-            <img
-              src="Logo.svg"
-              alt="Логотип Step3D.Lab"
-              class="top-nav__logo"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-            />
-            <span>Step3D.Lab</span>
-          </a>
-          <div class="top-nav__links" id="links"></div>
-          <a href="#contacts" id="contactDesktop" class="btn btn-primary top-nav__cta"
-            >Связаться с нами</a
-          >
-          <button
-            type="button"
-            class="top-nav__toggle"
-            id="burger"
-            aria-expanded="false"
-            aria-controls="mobile"
-            aria-label="Меню"
-          >
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-              <path
-                d="M3 6h18M3 12h18M3 18h18"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-width="1.5"
+          <div class="top-nav__identity">
+            <a href="#top" class="top-nav__brand">
+              <img
+                src="Logo.svg"
+                alt="Логотип Step3D.Lab"
+                class="top-nav__logo"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
               />
-            </svg>
-          </button>
-          <div class="top-nav__panel hidden" id="mobile" aria-hidden="true">
-            <div class="top-nav__mobile-links" id="mobileLinks"></div>
-            <a
-              href="#contacts"
-              id="mobileContact"
-              class="btn btn-primary top-nav__mobile-cta"
-              >Связаться с нами</a
-            >
+              <span class="top-nav__brand-name">Step3D.Lab</span>
+            </a>
+            <details class="site-map" data-site-map>
+              <summary class="site-map__summary">
+                <span class="site-map__icon" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+                <span>Карта сайта</span>
+              </summary>
+              <div class="site-map__panel">
+                <nav class="site-map__nav" aria-label="Карта сайта" data-site-map-content></nav>
+              </div>
+            </details>
+          </div>
+          <div class="top-nav__info">
+            <div class="top-nav__tagline">
+              <span class="top-nav__tagline-line">Лаборатория R22_Лаб</span>
+              <span class="top-nav__tagline-line">Курс ДПО «R22 и АТ» — 48 ч.</span>
+            </div>
+            <a href="#contacts" class="btn btn-primary top-nav__cta">Связаться с нами</a>
           </div>
         </nav>
       </div>
-      <div class="top-nav__backdrop hidden" id="mobile-backdrop" aria-hidden="true"></div>
 
       <section class="section hero" id="top">
         <div class="container hero__inner">
@@ -1819,22 +1809,35 @@
       id="contacts"
       class="section-shell py-16 md:py-24 border-t border-slate-200/60 dark:border-slate-700/60"
     >
+      <div class="container space-y-16">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr),auto] items-start">
+          <div class="space-y-4">
+            <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Контакты</h2>
+            <p class="text-base text-slate-700 dark:text-slate-200">
+              Задайте вопрос или оставьте заявку — поможем выбрать формат: учебный модуль,
+              проект, НИОКР или услуга.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 justify-start lg:justify-end">
+            <button id="openModal2" class="btn btn-primary btn-cta">Оставить заявку</button>
+            <a
+              href="https://t.me/step_3d_mngr"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+              >Написать нам в телеграм</a
+            >
+            <button id="shareLink" type="button" class="btn btn-outline">Поделиться ↗</button>
+          </div>
+        </div>
 
-              <button id="openModal2" class="btn btn-primary btn-cta">
-                Оставить заявку
-              </button>
-              <a
-                href="https://t.me/step_3d_mngr"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-outline"
-                >Написать нам в телеграм</a
+        <div class="grid gap-10 xl:grid-cols-[minmax(0,1fr),minmax(0,1.15fr)]">
+          <div class="space-y-10">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div
+                class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-              <button id="shareLink" type="button" class="btn btn-outline">
-                Поделиться ↗
-              </button>
-            </div>
-
+                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
                   По всем вопросам
                 </div>
                 <a href="mailto:projects.step3d@gmail.com" class="btn btn-primary mt-2">
@@ -1847,7 +1850,7 @@
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-
+                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
                   Контакт в Telegram
                 </div>
                 <a
@@ -1865,7 +1868,7 @@
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-
+                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
                   Портфолио и новости
                 </div>
                 <a
@@ -1883,7 +1886,7 @@
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-
+                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
                   Обучение и профориентация
                 </div>
                 <a
@@ -1892,113 +1895,112 @@
                   rel="noopener noreferrer"
                   class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-medium text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
                 >
-                  <img
-                    src="https://optim.tildacdn.com/tild3331-6338-4339-b266-663436633930/-/resize/224x/-/format/webp/LOGO.png.webp"
-                    alt="Технопарк РГСУ"
-                    class="h-8 w-auto"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  technopark-rgsu.ru
                 </a>
                 <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
                   Образовательные программы и профориентация школьников.
                 </div>
               </div>
             </div>
+
+            <div class="space-y-6">
+              <div class="space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                    Площадки Step3D.Lab
+                  </h3>
+                  <div class="flex gap-2" role="tablist" aria-label="Переключение карт">
+                    <button
+                      class="px-3 py-1.5 rounded-xl text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 shadow-sm"
+                      data-maptab="0"
+                      data-active-class="bg-slate-900 text-white dark:bg-white dark:text-slate-900"
+                      data-inactive-class="text-slate-700 dark:text-slate-200"
+                    >
+                      ВДНХ
+                    </button>
+                    <button
+                      class="px-3 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 shadow-sm"
+                      data-maptab="1"
+                      data-active-class="bg-slate-900 text-white dark:bg-white dark:text-slate-900"
+                      data-inactive-class="text-slate-700 dark:text-slate-200"
+                    >
+                      Беговая
+                    </button>
+                  </div>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2 text-sm text-slate-700 dark:text-slate-200">
+                  <div class="rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <div class="font-semibold text-slate-900 dark:text-white">ВДНХ</div>
+                        <div>ул. Вильгельма Пика, 4, корп. 8</div>
+                      </div>
+                      <div class="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
+                        <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-full bg-[#ff8c00] text-white">
+                          M
+                        </span>
+                        <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">СВАО</span>
+                      </div>
+                    </div>
+                    <a
+                      href="https://pika.technopark-rgsu.ru/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sky-600 hover:text-sky-700 dark:text-sky-300 dark:hover:text-sky-200"
+                    >
+                      <span>VR‑тур по площадке ВДНХ</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        class="h-4 w-4"
+                      >
+                        <path d="M5 12h14" stroke-linecap="round" />
+                        <path d="m13 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <div class="font-semibold text-slate-900 dark:text-white">Беговая</div>
+                        <div>ул. Беговая, 12</div>
+                      </div>
+                      <div class="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
+                        <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-full bg-[#a6007a] text-white">
+                          M
+                        </span>
+                        <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">САО</span>
+                      </div>
+                    </div>
+                    <a
+                      href="https://begovaya.technopark-rgsu.ru/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700 dark:text-emerald-300 dark:hover:text-emerald-200"
+                    >
+                      <span>VR‑тур по площадке Беговая</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        class="h-4 w-4"
+                      >
+                        <path d="M5 12h14" stroke-linecap="round" />
+                        <path d="m13 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-                >
-                  <button
-                    class="px-3 py-1.5 rounded-xl text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 shadow-sm"
-                    data-maptab="0"
-                    data-active-class="bg-slate-900 text-white dark:bg-white dark:text-slate-900"
-                    data-inactive-class="text-slate-700 dark:text-slate-200"
-                  >
-                    ВДНХ
-                  </button>
-                  <button
-                    class="px-3 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 shadow-sm"
-                    data-maptab="1"
-                    data-active-class="bg-slate-900 text-white dark:bg-white dark:text-slate-900"
-                    data-inactive-class="text-slate-700 dark:text-slate-200"
-                  >
-                    Беговая
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="grid gap-4 sm:grid-cols-2 text-sm text-slate-700 dark:text-slate-200">
-              <div class="rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
-                <div class="flex items-start justify-between gap-3">
-                  <div>
-                    <div class="font-semibold text-slate-900 dark:text-white">
-                      ВДНХ
-                    </div>
-                    <div>ул. Вильгельма Пика, 4, корп. 8</div>
-                  </div>
-                  <div class="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-                    <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-full bg-[#ff8c00] text-white">
-                      M
-                    </span>
-                    <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">СВАО</span>
-                  </div>
-                </div>
-                <a
-                  href="https://pika.technopark-rgsu.ru/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sky-600 hover:text-sky-700 dark:text-sky-300 dark:hover:text-sky-200"
-                >
-                  <span>VR‑тур по площадке ВДНХ</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    class="h-4 w-4"
-                  >
-                    <path d="M5 12h14" stroke-linecap="round" />
-                    <path d="m13 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </a>
-              </div>
-              <div class="rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
-                <div class="flex items-start justify-between gap-3">
-                  <div>
-                    <div class="font-semibold text-slate-900 dark:text-white">
-                      Беговая
-                    </div>
-                    <div>ул. Беговая, 12</div>
-                  </div>
-                  <div class="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-                    <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-full bg-[#a6007a] text-white">
-                      M
-                    </span>
-                    <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">САО</span>
-                  </div>
-                </div>
-                <a
-                  href="https://begovaya.technopark-rgsu.ru/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700 dark:text-emerald-300 dark:hover:text-emerald-200"
-                >
-                  <span>VR‑тур по площадке Беговая</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    class="h-4 w-4"
-                  >
-                    <path d="M5 12h14" stroke-linecap="round" />
-                    <path d="m13 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+          <div class="space-y-4">
             <div
               class="surface-card-base relative w-full overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 shadow-inner aspect-video"
             >
@@ -2024,13 +2026,11 @@
                 tabindex="-1"
               ></iframe>
             </div>
-
-              © <span id="y"></span> Технопарк РГСУ
-            </div>
+            <div class="text-xs text-slate-600 dark:text-slate-200">© <span id="y"></span> Технопарк РГСУ</div>
           </div>
         </div>
 
-        <div class="mt-16 border-t border-slate-200 dark:border-slate-700 pt-10">
+        <div class="border-t border-slate-200 dark:border-slate-700 pt-10 space-y-6">
           <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <div class="text-sm font-semibold mb-3">Образование</div>
@@ -2099,7 +2099,7 @@
             </div>
           </div>
           <div
-            class="mt-10 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-600 dark:text-slate-200"
+            class="flex flex-wrap items-center justify-between gap-4 text-xs text-slate-600 dark:text-slate-200"
           >
             <div class="flex flex-wrap gap-3">
               <a href="#" class="hover:underline">Конфиденциальность</a
@@ -2117,12 +2117,13 @@
               </select>
             </div>
           </div>
-          <div class="mt-6 text-xs text-slate-600 dark:text-slate-200">
+          <div class="text-xs text-slate-600 dark:text-slate-200">
             © <span id="y2"></span> Step3D.Lab · Все права защищены
           </div>
         </div>
       </div>
     </footer>
+
 
     <!-- Модальное окно заявки -->
     <div
@@ -2275,7 +2276,29 @@
     <div
       id="nav-data"
       class="hidden"
-      data-nav='[{"id":"top","label":"Главная"},{"id":"courses","label":"ДПО R22 и A"}]'
+      data-nav='[
+        {
+          "label": "Разделы сайта",
+          "children": [
+            {"id": "top", "label": "Главная"},
+            {"id": "equipment", "label": "Оборудование"},
+            {"id": "projects", "label": "Проекты"},
+            {"id": "courses", "label": "Обучение"},
+            {"id": "team", "label": "Команда"},
+            {"id": "faq", "label": "FAQ"},
+            {"id": "blog", "label": "Блог"},
+            {"id": "contacts", "label": "Контакты"}
+          ]
+        },
+        {
+          "label": "Дополнительно",
+          "children": [
+            {"href": "reverse-additive.html", "label": "Кейс: Reverse Additive"},
+            {"href": "https://t.me/step3d_lab", "label": "Telegram Step3D.Lab", "external": true},
+            {"href": "https://technopark-rgsu.ru/", "label": "Technopark RGSU", "external": true}
+          ]
+        }
+      ]'
     ></div>
 
 
