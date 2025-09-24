@@ -1077,63 +1077,337 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl md:text-4xl font-bold mb-6">Команда</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          <div
-            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4"
+          <article
+            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800"
           >
-            <img
-              src="assets/images/index/team/vladimir-ganishin.svg"
-              alt="Владимир Ганьшин"
-              class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
-              loading="lazy"
-            />
-            <div>
-              <div class="font-semibold">Владимир Ганьшин</div>
-              <div class="text-sm text-slate-600 dark:text-slate-200">
-                руководитель лаборатории
-              </div>
-              <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
-                CAD/AM, реверс, методология ДПО
+            <div class="flex items-start gap-4">
+              <img
+                src="assets/images/index/team/vladimir-ganishin.svg"
+                alt="Владимир Ганьшин"
+                class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
+                loading="lazy"
+              />
+              <div class="flex-1">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="font-semibold text-lg">Владимир Ганьшин</div>
+                    <div class="text-sm text-slate-600 dark:text-slate-200">
+                      руководитель лаборатории
+                    </div>
+                    <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
+                      CAD/AM, реверс, методология ДПО
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
+                    aria-expanded="false"
+                    data-team-toggle="team-details-ganishin"
+                  >
+                    <span aria-hidden="true" data-state-icon>+</span>
+                    <span class="sr-only">Показать подробности о Владимире Ганьшине</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4"
+            <div id="team-details-ganishin" class="mt-4 hidden">
+              <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
+                <li><span class="font-medium text-slate-900 dark:text-white">Возраст и город:</span> 34 года, Москва.</li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Должности:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Руководитель технопарка ФГБОУ РГСУ (2019 — н.в.).</li>
+                    <li>Преподаватель РГСУ, филиал в г. Пятигорске (2024 — н.в.).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Образование:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>МГТУ «Станкин», бакалавриат «Технология, оборудование и автоматизация машиностроительных производств» (2008–2012).</li>
+                    <li>МГТУ «Станкин», магистратура «Конструкторско-технологическое обеспечение машиностроительных производств» (2012–2014).</li>
+                    <li>Аспирантура по направлению 05.02.07 «Технология и оборудование механической и физико-технической обработки», квалификация преподаватель-исследователь высшей школы (2014–2018).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Педагогический стаж &gt;10 лет:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>
+                      ВУЗы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>МГТУ «Станкин», кафедра «ИТиТФ» (2014–2018).</li>
+                        <li>Российский государственный социальный университет, факультет информационных технологий (2018 — н.в.).</li>
+                      </ul>
+                    </li>
+                    <li>
+                      СУЗы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>Политехнический колледж № 42 — мастер производственного обучения (2014).</li>
+                        <li>Западный комплекс непрерывного образования — преподаватель специальных дисциплин (2015–2018).</li>
+                      </ul>
+                    </li>
+                    <li>
+                      Школы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>ЗКНО — уроки технологии по 3D-моделированию (2017–2018).</li>
+                        <li>«Марьина Роща им. Орлова» — курсы «Промышленный дизайн» и «Прототипирование» (2021–2022).</li>
+                      </ul>
+                    </li>
+                    <li>ДПО: технопарк РГСУ (2018 — н.в.).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Преподаваемые курсы:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>«Промышленный дизайн и инжиниринг» (разработчик).</li>
+                    <li>«Инженерный дизайн (САПР)» (разработчик).</li>
+                    <li>«Реверсивный инжиниринг и технологии аддитивного производства» (соавтор).</li>
+                    <li>«Применение технологий искусственного интеллекта в профессиональной деятельности» (разработчик).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Программное обеспечение и оборудование:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>САПР: Autodesk Inventor, Fusion 360, T-FLEX CAD, КОМПАС-3D, Geomagic Design X, GOM Inspect и др.</li>
+                    <li>Оборудование: 3D-сканеры RangeVision, Artec Eva, Leica; 3D-принтеры (FDM, DLP, SLA); станки лазерной резки и механообрабатывающие станки с ЧПУ.</li>
+                    <li>Языки программирования: C++, Python и др.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Достижения и тренерский опыт:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Тренер сборной России по компетенции «Реверсивный инжиниринг» (WorldSkills): 3 место — Казань 2019, 1 место — BRICS 2020.</li>
+                    <li>Подготовил четырёх чемпионов России по WorldSkills (2018–2021) и двух призёров движения «Профессионалы» (2023–2025).</li>
+                    <li>Главный эксперт конкурсов (WorldSkills, «Абилимпикс», «Профессионалы», HI-TECH) в 2018–2023.</li>
+                    <li>Участник команды «Дезинтегратор», 1/4 Битвы роботов в категории 100+ кг (2023, 2024).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Учебно-методические материалы и интервью:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Видео-цикл «Методология проведения курсов ДПО по техническим дисциплинам» (<a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="https://surl.lu/xcfxzz" target="_blank" rel="noreferrer">ссылка</a>).</li>
+                    <li>Интервью: «Онлайн-экскурсия в социальный университет РГСУ», «Что такое технопарк РГСУ?».</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Проекты и портфолио:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Композиционный обвес для Kawasaki Puccetti Racing совместно с Umatex (Росатом).</li>
+                    <li>Telegram-канал: <a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="https://t.me/step_3d_mngr" target="_blank" rel="noreferrer">t.me/step_3d_mngr</a>.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Увлечения и контакты:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Шахматы, футбол, искусственный интеллект.</li>
+                    <li>E-mail: <a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="mailto:projects.step3d@gmail.com">projects.step3d@gmail.com</a>.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </article>
+          <article
+            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800"
           >
-            <img
-              src="assets/images/index/team/anna-ponkratova.svg"
-              alt="Анна Понкратова"
-              class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
-              loading="lazy"
-            />
-            <div>
-              <div class="font-semibold">Анна Понкратова</div>
-              <div class="text-sm text-slate-600 dark:text-slate-200">
-                ведущий инженер‑преподаватель
-              </div>
-              <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
-                3D‑сканирование, обработка сеток
+            <div class="flex items-start gap-4">
+              <img
+                src="assets/images/index/team/anna-ponkratova.svg"
+                alt="Анна Понкратова"
+                class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
+                loading="lazy"
+              />
+              <div class="flex-1">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="font-semibold text-lg">Анна Понкратова</div>
+                    <div class="text-sm text-slate-600 dark:text-slate-200">
+                      ведущий инженер‑преподаватель
+                    </div>
+                    <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
+                      3D‑сканирование, обработка сеток
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
+                    aria-expanded="false"
+                    data-team-toggle="team-details-ponkratova"
+                  >
+                    <span aria-hidden="true" data-state-icon>+</span>
+                    <span class="sr-only">Показать подробности об Анне Понкратовой</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4"
+            <div id="team-details-ponkratova" class="mt-4 hidden">
+              <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
+                <li><span class="font-medium text-slate-900 dark:text-white">Полное имя:</span> Понкратова Христина Анатольевна.</li>
+                <li><span class="font-medium text-slate-900 dark:text-white">Возраст:</span> 23 года.</li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Образование:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>РУДН, факультет ФМиЕН — бакалавриат «Прикладная математика и информатика» (2020–2024).</li>
+                    <li>Университет «Синергия», факультет «Дизайн» — магистратура «Дизайн и продвижение цифрового продукта» (2024 — н.в.).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Место работы:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Технопарк РГСУ — учебный мастер.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Педагогический стаж &gt;5 лет:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>
+                      СУЗы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>Первый Московский образовательный комплекс — мастер производственного обучения (аддитивное производство, подготовка к «Московским мастерам», 2023–2025).</li>
+                        <li>Западный комплекс непрерывного образования — лаборант лаборатории широкополосных систем радиосвязи, кружок по 3D-моделированию (2019–2020).</li>
+                      </ul>
+                    </li>
+                    <li>
+                      Школы:
+                      <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400/80">
+                        <li>Школа № 1287 — преподаватель допобразования, 3D-моделирование (6–11 классы, 2022–2024).</li>
+                        <li>«Марьина Роща им. Орлова» — преподаватель ДО, подготовка к «Московским мастерам», 3D-моделирование (5–11 классы, 2021–2024).</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Компетенции:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Реверсивный инжиниринг и изготовление индивидуальных имплантов.</li>
+                    <li>Аддитивное производство, инженерный дизайн САПР, биопротезирование.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Программное обеспечение:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>САПР: КОМПАС-3D, Geomagic Design X, Autodesk Inventor Professional 2018+, Fusion 360, GOM Inspect 2018+, Geomagic Control X, Materialise 3-matic и др.</li>
+                    <li>Blender.</li>
+                    <li>Слайсеры: Ultimaker Cura, Polygon X, Creality Slicer и др.</li>
+                    <li>ПО 3D-сканирования: Artec Studio 15 Professional+, RV 3D Studio (до 2023 — ScanCenter NG) и др.</li>
+                    <li>Языки программирования: C++, Python.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Достижения:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Чемпион финала VII Национального чемпионата «Молодые профессионалы» (WorldSkills Russia 2019) по реверсивному инжинирингу.</li>
+                    <li>Чемпион BRICS Skills Challenge 2019 (FutureSkills, реверсивный инжиниринг).</li>
+                    <li>Призёр WorldSkills HI-TECH 2018, чемпион WorldSkills HI-TECH 2019.</li>
+                    <li>Наставник десятков участников и победителей конкурсов профмастерства (Ростех, Сибур, Роскосмос, Северсталь и др.).</li>
+                    <li>Лауреат гранта Правительства Москвы в сфере образования (2024).</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium text-slate-900 dark:text-white">Увлечения:</span> музыка, программирование, спорт.</li>
+              </ul>
+            </div>
+          </article>
+          <article
+            class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800"
           >
-            <img
-              src="assets/images/index/team/alexey-rekut.svg"
-              alt="Алексей Рекут"
-              class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
-              loading="lazy"
-            />
-            <div>
-              <div class="font-semibold">Алексей Рекут</div>
-              <div class="text-sm text-slate-600 dark:text-slate-200">
-                инженер‑конструктор
-              </div>
-              <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
-                CAD, ЧПУ, прототипы
+            <div class="flex items-start gap-4">
+              <img
+                src="assets/images/index/team/alexey-rekut.svg"
+                alt="Алексей Рекут"
+                class="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm dark:border-slate-600"
+                loading="lazy"
+              />
+              <div class="flex-1">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="font-semibold text-lg">Алексей Рекут</div>
+                    <div class="text-sm text-slate-600 dark:text-slate-200">
+                      инженер‑конструктор
+                    </div>
+                    <div class="mt-1 text-sm text-slate-700 dark:text-slate-200">
+                      CAD, ЧПУ, прототипы
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
+                    aria-expanded="false"
+                    data-team-toggle="team-details-rekut"
+                  >
+                    <span aria-hidden="true" data-state-icon>+</span>
+                    <span class="sr-only">Показать подробности об Алексее Рекуте</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+            <div id="team-details-rekut" class="mt-4 hidden">
+              <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
+                <li><span class="font-medium text-slate-900 dark:text-white">Возраст:</span> 54 года.</li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Должности:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Заместитель руководителя технопарка (2022 — н.в.).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Разработчик программ:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Программа ДПК преподавателей «Практика и методика реализации образовательных программ основного и среднего общего образования по предмету труд (технологии) на основе проектов спортивно-боевого роботостроения».</li>
+                    <li>Дополнительная общеразвивающая программа «Спортивно-боевое роботостроение».</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Образование:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Высшее: ГАУ им. Серго Орджоникидзе, «Экономическая кибернетика» (1994).</li>
+                    <li>Повышение квалификации: АНХ при Правительстве РФ, «Управление в маркетинге» (2004).</li>
+                    <li>Повышение квалификации: СКФУ, «Преподаватель высшей школы» (2017).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Педагогический стаж &gt;9 лет:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>ВУЗ: РГСУ, технопарк (2022 — н.в.).</li>
+                    <li>СУЗ: ГАПОУ Колледж предпринимательства №11 (2009–2020).</li>
+                    <li>ДПО: ГАПОУ Колледж предпринимательства №11 (2009–2015).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Компетенции:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Аддитивное производство (3D-печать FDM, DLP, SLA).</li>
+                    <li>Реверсивный инжиниринг.</li>
+                    <li>Промышленный дизайн и прототипирование (включая станки с ЧПУ).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Программное обеспечение:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>САПР: Rhino 3D, Geomagic Design X, GOM Inspect.</li>
+                    <li>Слайсеры: Ultimaker Cura, CHITUBOX, Polygon X, Creality Slicer.</li>
+                    <li>ПО 3D-сканирования: Artec Studio 15 Professional+, RV 3D Studio (до 2023 — ScanCenter NG).</li>
+                    <li>Языки программирования: C++.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Достижения:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>Инициатор создания ФГОС СПО «Аддитивные технологии» (соавтор первой редакции, 2010–2013).</li>
+                    <li>Создатель компетенций «Реверсивный инжиниринг» (WorldSkills Russia, 2014) и «Additive Manufacturing» (WorldSkills, 2020).</li>
+                    <li>Менеджер компетенции «Реверсивный инжиниринг» в WorldSkills/Агентстве развития профессий и навыков (2014 — н.в.).</li>
+                    <li>Менеджер компетенции «Реверсивный инжиниринг» Всероссийского чемпионатного движения (2023 — н.в.).</li>
+                    <li>Инициатор и капитан команды «Дезинтегратор» — ТОП-16 «Битвы роботов» в категории 100+ кг (2023).</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-medium text-slate-900 dark:text-white">Учебные материалы и интервью:</span>
+                  <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
+                    <li>«Учебное пособие по Rhinoceros 3D», «Базовый курс Rhinoceros 3D».</li>
+                    <li>Интервью: фильм «Лучший по профессии» (Россия 24), канал «Аддитивная кухня», 4 канал (Екатеринбург).</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium text-slate-900 dark:text-white">Увлечения:</span> механика, кинетическая скульптура, креативная механика, спортивно-боевые роботы.</li>
+              </ul>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1682,6 +1956,23 @@
       const prefersReduceMotion = window.matchMedia
         ? window.matchMedia("(prefers-reduced-motion: reduce)")
         : null;
+      const teamToggles = document.querySelectorAll("[data-team-toggle]");
+
+      teamToggles.forEach((button) => {
+        const targetId = button.dataset.teamToggle;
+        const target = targetId ? document.getElementById(targetId) : null;
+        if (!target) return;
+
+        button.addEventListener("click", () => {
+          const expanded = button.getAttribute("aria-expanded") === "true";
+          button.setAttribute("aria-expanded", (!expanded).toString());
+          target.classList.toggle("hidden", expanded);
+          const icon = button.querySelector("[data-state-icon]");
+          if (icon) {
+            icon.textContent = expanded ? "+" : "−";
+          }
+        });
+      });
       function renderLinks(container, variant) {
         if (!container) return;
         // Каждый раз заново строим список ссылок, чтобы учесть актуальные данные из navData
