@@ -8,6 +8,7 @@
       name="description"
       content="CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, аддитивное производство. Курсы ДПО, проекты, услуги технопарка РГСУ."
     />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,30 +19,23 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='6' y='6' width='52' height='52' rx='12' fill='%230ea5e9'/><path d='M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36' stroke='%23fff' stroke-width='2' fill='none'/></svg>"
     />
-    <!-- Tailwind (CDN, удобно для GitHub Pages). Для продакшна соберите локально. -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/styles/site.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@motionone/dom@11.0.3/dist/motion-one.umd.min.js"></script>
-    <script>
-      // Доп. токены Tailwind
-      tailwind.config = {
-        theme: {
-          extend: { boxShadow: { soft: "0 6px 30px rgba(15,23,42,.08)" } },
-        },
-      };
-    </script>
+
     <style>
       :root {
         color-scheme: light dark;
         --focus-ring-color: #0ea5e9;
         --focus-ring-dark: #38bdf8;
         --page-gradient-light: radial-gradient(
-            135% 160% at 15% -20%,
-            rgba(125, 211, 252, 0.18),
-            rgba(125, 211, 252, 0)
+            140% 170% at 12% -18%,
+            rgba(180, 215, 245, 0.22),
+            rgba(180, 215, 245, 0)
           ),
-          radial-gradient(150% 130% at 88% 15%, rgba(129, 230, 217, 0.18), rgba(129, 230, 217, 0)),
-          linear-gradient(180deg, #f9fcff 0%, #eef5ff 100%);
+          radial-gradient(
+            160% 150% at 88% 8%,
+            rgba(171, 219, 255, 0.18),
+            rgba(171, 219, 255, 0)
+          ),
+          linear-gradient(180deg, #fefbf5 0%, #f7f1e8 55%, #fbf6ef 100%);
         --page-gradient-dark: radial-gradient(
             120% 140% at 12% -10%,
             rgba(56, 189, 248, 0.26),
@@ -128,26 +122,26 @@
 
       body::before {
         background: radial-gradient(
-            42% 42% at 22% 12%,
-            rgba(148, 197, 255, 0.22),
-            rgba(148, 197, 255, 0)
+            48% 48% at 24% 14%,
+            rgba(197, 219, 255, 0.24),
+            rgba(197, 219, 255, 0)
           ),
           radial-gradient(
-            34% 34% at 74% 18%,
-            rgba(129, 230, 217, 0.18),
-            rgba(129, 230, 217, 0)
+            46% 46% at 72% 20%,
+            rgba(186, 227, 255, 0.18),
+            rgba(186, 227, 255, 0)
           ),
-          radial-gradient(48% 58% at 50% 78%, rgba(191, 219, 254, 0.12), transparent);
+          radial-gradient(52% 60% at 50% 80%, rgba(253, 245, 235, 0.85), transparent);
         filter: blur(0);
         opacity: 0.8;
       }
 
       body::after {
         background-image: linear-gradient(
-            rgba(148, 163, 184, 0.06) 1px,
+            rgba(203, 213, 225, 0.08) 1px,
             transparent 1px
           ),
-          linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+          linear-gradient(90deg, rgba(203, 213, 225, 0.08) 1px, transparent 1px);
         background-size: 60px 60px;
         mask-image: radial-gradient(60% 60% at 50% 45%, rgba(0, 0, 0, 0.55), transparent);
         opacity: 0.55;
@@ -330,7 +324,11 @@
         position: absolute;
         inset: 12% 2% 10%;
         border-radius: 48px;
-        background: linear-gradient(135deg, rgba(241, 245, 249, 0.45), rgba(255, 255, 255, 0));
+        background: linear-gradient(
+          135deg,
+          rgba(251, 245, 236, 0.6),
+          rgba(255, 255, 255, 0)
+        );
         z-index: -1;
         opacity: 0.6;
         filter: blur(0.1px);
@@ -550,6 +548,7 @@
       id="progress"
       class="progress-shadow fixed top-0 left-0 h-1 bg-slate-900/90 origin-left z-50"
       style="transform: scaleX(0); transform-origin: left"
+      aria-hidden="true"
     ></div>
 
     <header class="relative overflow-hidden" role="banner">
@@ -573,6 +572,9 @@
                 src="Logo_Step_3D.jpg"
                 alt="Логотип Step3D.Lab"
                 class="h-12 w-12 rounded-2xl object-cover shadow-sm"
+                fetchpriority="high"
+                decoding="async"
+                loading="eager"
               />
               Step3D.Lab
             </a>
@@ -612,6 +614,7 @@
           <div
             id="mobile"
             class="mobile-nav-panel md:hidden hidden absolute left-0 right-0 top-full mt-4 z-50 px-1 sm:px-0"
+            aria-hidden="true"
           >
 
               <div id="mobileLinks" class="grid gap-2"></div>
@@ -652,6 +655,8 @@
               <button
                 id="toggleAbout"
                 class="secondary-button inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium"
+                aria-expanded="false"
+                aria-controls="aboutBox"
               >
                 О лаборатории
               </button>
@@ -659,6 +664,7 @@
             <div
               id="aboutBox"
               class="surface-card-base mt-6 hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 glass p-6"
+              aria-hidden="true"
             >
               <h3 class="text-xl font-semibold mb-2">О лаборатории</h3>
               <p class="text-slate-700 dark:text-slate-200">
@@ -675,25 +681,9 @@
           <div class="relative aspect-square">
             <div
               class="absolute inset-0 grid grid-cols-9 grid-rows-9 gap-1 opacity-25 invader-grid"
-              aria-hidden
-            >
-              <!-- «Космический захватчик» рамка -->
-              <script>
-                // Строим простую пиксель-арт сетку вокруг иллюстрации без сторонних библиотек
-                document.addEventListener("DOMContentLoaded", () => {
-                  const g = document.currentScript.parentElement;
-                  const on = new Set([
-                    0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 27, 35, 45, 53, 63, 71, 72,
-                    73, 74, 75, 76, 77, 78, 79, 80,
-                  ]);
-                  for (let i = 0; i < 81; i++) {
-                    const d = document.createElement("div");
-                    if (on.has(i)) d.className = "bg-slate-400/70";
-                    g.appendChild(d);
-                  }
-                });
-              </script>
-            </div>
+              aria-hidden="true"
+              data-invader-grid
+            ></div>
             <!-- Плавающие «кубы» -->
             <div
               class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[floatY_4s_ease-in-out_infinite]"
@@ -721,7 +711,6 @@
       </div>
     </header>
 
-    <main id="main" class="flex flex-col space-y-20 md:space-y-28">
 
     <!-- Оборудование и ПО -->
     <section id="equipment" class="section-shell py-16 md:py-24" data-section-accent="emerald">
@@ -1715,6 +1704,7 @@
                     type="button"
                     class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
                     aria-expanded="false"
+                    aria-controls="team-details-ganishin"
                     data-team-toggle="team-details-ganishin"
                   >
                     <span aria-hidden="true" data-state-icon>+</span>
@@ -1723,7 +1713,7 @@
                 </div>
               </div>
             </div>
-            <div id="team-details-ganishin" class="mt-4 hidden">
+            <div id="team-details-ganishin" class="mt-4 hidden" aria-hidden="true">
               <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
                 <li><span class="font-medium text-slate-900 dark:text-white">Возраст и город:</span> 34 года, Москва.</li>
                 <li>
@@ -1797,7 +1787,7 @@
                 <li>
                   <span class="font-medium text-slate-900 dark:text-white">Учебно-методические материалы и интервью:</span>
                   <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
-                    <li>Видео-цикл «Методология проведения курсов ДПО по техническим дисциплинам» (<a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="https://surl.lu/xcfxzz" target="_blank" rel="noreferrer">ссылка</a>).</li>
+                    <li>Видео-цикл «Методология проведения курсов ДПО по техническим дисциплинам» (<a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="https://surl.lu/xcfxzz" target="_blank" rel="noopener noreferrer">ссылка</a>).</li>
                     <li>Интервью: «Онлайн-экскурсия в социальный университет РГСУ», «Что такое технопарк РГСУ?».</li>
                   </ul>
                 </li>
@@ -1805,7 +1795,7 @@
                   <span class="font-medium text-slate-900 dark:text-white">Проекты и портфолио:</span>
                   <ul class="mt-1 ml-4 list-disc space-y-1 marker:text-slate-400">
                     <li>Композиционный обвес для Kawasaki Puccetti Racing совместно с Umatex (Росатом).</li>
-                    <li>Telegram-канал: <a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="https://t.me/step_3d_mngr" target="_blank" rel="noreferrer">t.me/step_3d_mngr</a>.</li>
+                    <li>Telegram-канал: <a class="text-sky-600 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200" href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer">t.me/step_3d_mngr</a>.</li>
                   </ul>
                 </li>
                 <li>
@@ -1843,6 +1833,7 @@
                     type="button"
                     class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
                     aria-expanded="false"
+                    aria-controls="team-details-ponkratova"
                     data-team-toggle="team-details-ponkratova"
                   >
                     <span aria-hidden="true" data-state-icon>+</span>
@@ -1851,7 +1842,7 @@
                 </div>
               </div>
             </div>
-            <div id="team-details-ponkratova" class="mt-4 hidden">
+            <div id="team-details-ponkratova" class="mt-4 hidden" aria-hidden="true">
               <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
                 <li><span class="font-medium text-slate-900 dark:text-white">Полное имя:</span> Понкратова Христина Анатольевна.</li>
                 <li><span class="font-medium text-slate-900 dark:text-white">Возраст:</span> 23 года.</li>
@@ -1943,6 +1934,7 @@
                     type="button"
                     class="team-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
                     aria-expanded="false"
+                    aria-controls="team-details-rekut"
                     data-team-toggle="team-details-rekut"
                   >
                     <span aria-hidden="true" data-state-icon>+</span>
@@ -1951,7 +1943,7 @@
                 </div>
               </div>
             </div>
-            <div id="team-details-rekut" class="mt-4 hidden">
+            <div id="team-details-rekut" class="mt-4 hidden" aria-hidden="true">
               <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-200">
                 <li><span class="font-medium text-slate-900 dark:text-white">Возраст:</span> 54 года.</li>
                 <li>
@@ -2039,7 +2031,7 @@
           <a
             href="https://t.me/step_3d_mngr"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             class="inline-flex items-center gap-2 self-start rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
           >
             Все обновления в телеграме
@@ -2302,19 +2294,12 @@
     </section>
 
     <!-- Контакты + карта -->
-        <footer
+
+    <footer
       id="contacts"
       class="section-shell py-16 md:py-24 border-t border-slate-200/60 dark:border-slate-700/60"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div class="grid md:grid-cols-2 gap-10 items-start">
-          <div class="space-y-4">
-            <h2 class="text-balance-2 font-bold">Контакты</h2>
-            <p class="text-slate-700 dark:text-slate-200 max-w-prose">
-              Задайте вопрос или оставьте заявку — поможем выбрать формат:
-              учебный модуль, проект, НИОКР или услугу.
-            </p>
-            <div class="flex flex-wrap gap-3">
+
               <button
                 id="openModal2"
                 class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300"
@@ -2324,7 +2309,7 @@
               <a
                 href="https://t.me/step_3d_mngr"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 class="secondary-button inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
                 >Написать нам в телеграм</a
               >
@@ -2336,15 +2321,7 @@
                 Поделиться ссылкой
               </button>
             </div>
-            <div
-              class="mt-8 grid gap-4 text-sm text-slate-700 dark:text-slate-200 sm:grid-cols-2"
-            >
-              <div
-                class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
-              >
-                <div
-                  class="text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-200"
-                >
+
                   По всем вопросам
                 </div>
                 <a
@@ -2360,15 +2337,13 @@
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-                <div
-                  class="text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-200"
-                >
+
                   Контакт в Telegram
                 </div>
                 <a
                   href="https://t.me/step_3d_mngr"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-mono text-base text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
                 >
                   @step_3d_mngr
@@ -2380,15 +2355,13 @@
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-                <div
-                  class="text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-200"
-                >
+
                   Портфолио и новости
                 </div>
                 <a
                   href="https://t.me/STEP_3D_Lab"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-medium text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
                 >
                   t.me/STEP_3D_Lab
@@ -2400,15 +2373,13 @@
               <div
                 class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
               >
-                <div
-                  class="text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-200"
-                >
+
                   Обучение и профориентация
                 </div>
                 <a
                   href="https://technopark-rgsu.ru/"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-medium text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
                 >
                   technopark-rgsu.ru
@@ -2419,36 +2390,24 @@
               </div>
             </div>
           </div>
-          <div
-            class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-sky-50 via-white to-emerald-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-6 shadow-soft"
-          >
-              <div>
-                <h3 class="font-semibold text-lg">Адреса и VR‑туры</h3>
-                <p class="mt-1 text-sm text-slate-700 dark:text-slate-200">
-                  Выберите площадку, чтобы посмотреть маршрут на карте или
-                  заглянуть внутрь лабораторий в формате 360°.
-                </p>
-              </div>
-              <div
-                class="flex items-center gap-2 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 p-1"
-              >
-                <button
-                  class="px-3 py-1.5 rounded-xl text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 shadow-sm"
-                  data-maptab="0"
+
                 >
-                  ВДНХ
-                </button>
-                <button
-                  class="px-3 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 shadow-sm"
-                  data-maptab="1"
-                >
-                  Беговая
-                </button>
+                  <button
+                    class="px-3 py-1.5 rounded-xl text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 shadow-sm"
+                    data-maptab="0"
+                  >
+                    ВДНХ
+                  </button>
+                  <button
+                    class="px-3 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 shadow-sm"
+                    data-maptab="1"
+                  >
+                    Беговая
+                  </button>
+                </div>
               </div>
             </div>
-            <div
-              class="mt-6 grid gap-4 sm:grid-cols-2 text-sm text-slate-700 dark:text-slate-200"
-            >
+            <div class="grid gap-4 sm:grid-cols-2 text-sm text-slate-700 dark:text-slate-200">
               <div class="rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
                 <div class="flex items-start justify-between gap-3">
                   <div>
@@ -2521,26 +2480,31 @@
               </div>
             </div>
             <div
-              class="surface-card-base mt-6 relative w-full overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 shadow-inner aspect-video"
+              class="surface-card-base relative w-full overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 shadow-inner aspect-video"
             >
               <iframe
+                id="map-vdnkh"
                 title="Карта — ВДНХ"
                 class="absolute inset-0 w-full h-full"
                 data-map="0"
                 src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=false&mode=search&text=%D1%83%D0%BB.%20%D0%92%D0%B8%D0%BB%D1%8C%D0%B3%D0%B5%D0%BB%D1%8C%D0%BC%D0%B0%20%D0%9F%D0%B8%D0%BA%D0%B0,%204,%20%D0%BA%D0%BE%D1%80%D0%BF.%208"
                 loading="lazy"
                 allowfullscreen
+                aria-hidden="false"
               ></iframe>
               <iframe
+                id="map-begovaya"
                 title="Карта — Беговая"
                 class="absolute inset-0 w-full h-full opacity-0 pointer-events-none"
                 data-map="1"
                 src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=false&mode=search&text=%D1%83%D0%BB.%20%D0%91%D0%B5%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F,%2012"
                 loading="lazy"
                 allowfullscreen
+                aria-hidden="true"
+                tabindex="-1"
               ></iframe>
             </div>
-            <div class="mt-4 text-sm text-slate-700 dark:text-slate-200">
+
               © <span id="y"></span> Технопарк РГСУ
             </div>
           </div>
@@ -2627,83 +2591,141 @@
     <!-- Модальное окно заявки -->
     <div
       id="modal"
+      data-modal
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="requestTitle"
+      aria-describedby="requestDescription"
+      tabindex="-1"
       class="fixed inset-0 z-[60] hidden items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalDescription"
+      tabindex="-1"
+      aria-hidden="true"
     >
-      <div id="modalBg" class="absolute inset-0 bg-black/40"></div>
+      <div id="modalBg" data-modal-bg class="absolute inset-0 bg-black/40"></div>
       <div
         class="relative w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-2xl border border-slate-200 dark:border-slate-700"
       >
-        <h3 class="text-xl font-semibold">Оставить заявку</h3>
-        <p class="text-slate-700 dark:text-slate-200 mt-1">
-          Заполните контакты — мы свяжемся и обсудим задачу.
-        </p>
-        <form id="requestForm" class="mt-4 grid gap-3">
+
+        >
           <input
             type="text"
             name="company"
             class="hidden"
             tabindex="-1"
             autocomplete="off"
-            aria-hidden
+            aria-hidden="true"
           />
-          <label class="grid gap-1 text-sm"
-            ><span>Цель обращения</span>
+          <div class="grid gap-1 text-sm">
+            <label for="requestType">Цель обращения</label>
             <select
+              id="requestType"
               name="type"
               required
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+              aria-describedby="requestTypeError"
+              aria-invalid="false"
             >
               <option value="course">Запись на курс</option>
               <option value="service">Заказ услуги</option>
               <option value="partner">Сотрудничество</option>
             </select>
-          </label>
-          <label class="grid gap-1 text-sm"
-            ><span>Имя</span
-            ><input
-              required
-              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            <p
+              id="requestTypeError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestName">Имя</label>
+            <input
+              id="requestName"
               name="name"
-          /></label>
-          <label class="grid gap-1 text-sm"
-            ><span>Телефон</span
-            ><input
-              required
+
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="requestNameError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestPhone">Телефон</label>
+            <input
+              id="requestPhone"
               name="phone"
-          /></label>
-          <label class="grid gap-1 text-sm"
-            ><span>Email</span
-            ><input
-              type="email"
+
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="requestPhoneError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestEmail">Email</label>
+            <input
+              id="requestEmail"
               name="email"
-          /></label>
-          <label class="grid gap-1 text-sm"
-            ><span>Комментарий</span
-            ><textarea
-              rows="3"
+              type="email"
+              inputmode="email"
+              aria-invalid="false"
+              aria-describedby="requestEmailError"
               class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+            />
+            <p
+              id="requestEmailError"
+              class="hidden text-xs text-rose-600"
+              data-error-message
+              aria-live="polite"
+            ></p>
+          </div>
+          <div class="grid gap-1 text-sm">
+            <label for="requestComment">Комментарий</label>
+            <textarea
+              id="requestComment"
               name="comment"
+              rows="3"
               placeholder="Опишите задачу, сроки, ссылки"
+              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
             ></textarea>
-          </label>
-          <div class="flex items-center gap-2 text-sm">
-            <input id="agree" required type="checkbox" class="h-4 w-4" /><label
-              for="agree"
+          </div>
+          <div class="flex items-start gap-2 text-sm">
+            <input
+              id="agree"
+              name="agreement"
+              type="checkbox"
+              required
+              aria-required="true"
+              aria-invalid="false"
+              aria-describedby="requestAgreementError"
+              class="mt-1 h-4 w-4"
+            />
+            <label for="agree" class="flex-1"
               >Согласен(а) на обработку персональных данных</label
             >
           </div>
-          <div class="mt-2 flex gap-3">
+          <p
+
             <button
-              class="rounded-xl bg-slate-900 text-white px-4 py-2 hover:bg-slate-800"
+              class="rounded-xl bg-slate-900 text-white px-4 py-2 font-medium transition hover:bg-slate-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
               type="submit"
+              data-submit
             >
-              Отправить</button
-            ><button
+              Отправить
+            </button>
+            <button
               class="rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2"
               type="button"
-              id="closeModal"
+              data-modal-close
             >
               Отмена
             </button>
@@ -2722,449 +2744,6 @@
       data-nav='[{"id":"top","label":"Главная"},{"id":"equipment","label":"Оборудование"},{"id":"projects","label":"Проекты"},{"id":"courses","label":"Обучение"},{"id":"team","label":"Команда"},{"id":"blog","label":"Новости"},{"id":"faq","label":"Часто задаваемые вопросы"},{"id":"contacts","label":"Контакты"}]'
     ></div>
 
-    <script>
-      // ===== Динамическое меню (desktop + mobile)
-      const navDataEl = document.getElementById("nav-data");
-      const navData = navDataEl ? JSON.parse(navDataEl.dataset.nav) : [];
-      const linksWrap = document.getElementById("links");
-      const mobileWrap = document.getElementById("mobile");
-      const mobileLinks = document.getElementById("mobileLinks");
-      const burger = document.getElementById("burger");
-      const mobileBackdrop = document.getElementById("mobile-backdrop");
-      // Определяем, нужно ли отключить анимации при системной настройке «уменьшить движение»
-      const prefersReduceMotion = window.matchMedia
-        ? window.matchMedia("(prefers-reduced-motion: reduce)")
-        : null;
-      const teamToggles = document.querySelectorAll("[data-team-toggle]");
 
-      teamToggles.forEach((button) => {
-        const targetId = button.dataset.teamToggle;
-        const target = targetId ? document.getElementById(targetId) : null;
-        if (!target) return;
-
-        button.addEventListener("click", () => {
-          const expanded = button.getAttribute("aria-expanded") === "true";
-          button.setAttribute("aria-expanded", (!expanded).toString());
-          target.classList.toggle("hidden", expanded);
-          const icon = button.querySelector("[data-state-icon]");
-          if (icon) {
-            icon.textContent = expanded ? "+" : "−";
-          }
-        });
-      });
-      function renderLinks(container, variant) {
-        if (!container) return;
-        // Каждый раз заново строим список ссылок, чтобы учесть актуальные данные из navData
-        container.innerHTML = "";
-        navData.forEach(({ id, label }) => {
-          const a = document.createElement("a");
-          a.href = `#${id}`;
-          a.textContent = label;
-          a.dataset.navLink = "true";
-          a.setAttribute("aria-current", "false");
-          // Два набора классов: компактный для десктопа и «карточки» для мобильного меню
-          a.className =
-            variant === "desktop"
-              ? "inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-600 transition hover:-translate-y-0.5 hover:bg-white/70 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800/80"
-              : "inline-flex w-full items-center justify-start gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur-sm transition hover:border-slate-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-200";
-          container.appendChild(a);
-        });
-      }
-      renderLinks(linksWrap, "desktop");
-      renderLinks(mobileLinks || mobileWrap, "mobile");
-      function setMobileState(open) {
-        if (!mobileWrap) return;
-        mobileWrap.classList.toggle("hidden", !open);
-        mobileBackdrop?.classList.toggle("hidden", !open);
-        document.body.classList.toggle("overflow-hidden", open);
-        burger?.setAttribute("aria-expanded", String(open));
-      }
-      function bindMobileLinks() {
-        if (!mobileWrap) return;
-        mobileWrap
-          .querySelectorAll("a[data-nav-link]")
-          .forEach((a) =>
-            a.addEventListener("click", () => setMobileState(false)),
-          );
-      }
-      bindMobileLinks();
-      document
-        .getElementById("mobileContact")
-        ?.addEventListener("click", () => setMobileState(false));
-      burger &&
-        burger.addEventListener("click", () => {
-          const opened = !mobileWrap.classList.contains("hidden");
-          setMobileState(!opened);
-        });
-      mobileBackdrop?.addEventListener("click", () => setMobileState(false));
-      window.addEventListener("resize", () => {
-        if (window.innerWidth >= 768) setMobileState(false);
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") setMobileState(false);
-      });
-
-      // ===== Подсветка активного пункта по скроллу
-      const sectionIds = navData.map((n) => n.id);
-      const anchors = Array.from(
-        document.querySelectorAll("#links a[data-nav-link]"),
-      );
-      const mobAnchors = Array.from(
-        document.querySelectorAll("#mobile a[data-nav-link]"),
-      );
-      const obs = new IntersectionObserver(
-        (entries) => {
-          // Берём секцию с наибольшей долей видимости, чтобы корректно подсвечивать ссылку
-          const vis = entries
-            .filter((e) => e.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (!vis) return;
-          const id = vis.target.id;
-          [...anchors, ...mobAnchors].forEach((a) => {
-            const isActive = a.getAttribute("href") === `#${id}`;
-            a.classList.toggle("active-link", isActive);
-            a.setAttribute("aria-current", isActive ? "page" : "false");
-          });
-        },
-        { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
-      );
-      sectionIds.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) obs.observe(el);
-      });
-
-      // ===== Прогресс-бар прокрутки
-      const progress = document.getElementById("progress");
-      document.addEventListener("scroll", () => {
-        const h = document.documentElement;
-        const sc = h.scrollTop / (h.scrollHeight - h.clientHeight);
-        progress.style.transform = `scaleX(${sc})`;
-      });
-
-      // ===== Модалка формы
-      const modal = document.getElementById("modal");
-      const openModal = () => modal.classList.remove("hidden");
-      const closeModal = () => modal.classList.add("hidden");
-      document
-        .getElementById("openModal")
-        ?.addEventListener("click", openModal);
-      document
-        .getElementById("openModal2")
-        ?.addEventListener("click", openModal);
-      document
-        .getElementById("closeModal")
-        ?.addEventListener("click", closeModal);
-      document.getElementById("modalBg")?.addEventListener("click", closeModal);
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !modal.classList.contains("hidden"))
-          closeModal();
-      });
-      document
-        .getElementById("requestForm")
-        ?.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const fd = new FormData(e.target);
-          console.log("[Request]", Object.fromEntries(fd.entries()));
-          closeModal();
-          alert("Заявка отправлена! (демо)");
-        });
-
-      // ===== «О лаборатории» toggle
-      document
-        .getElementById("toggleAbout")
-        ?.addEventListener("click", () =>
-          document.getElementById("aboutBox").classList.toggle("hidden"),
-        );
-
-      // ===== Просмотрщики фото (главная галерея)
-      function initPhotoViewers() {
-        document.querySelectorAll(".js-photo-viewer").forEach((viewer) => {
-          const slides = viewer.querySelectorAll(".js-photo-slide");
-          if (!slides.length) return;
-          const dotsBox = viewer.querySelector(".js-photo-dots");
-          const prev = viewer.querySelector("[data-photo-prev]");
-          const next = viewer.querySelector("[data-photo-next]");
-          viewer.dataset.index = viewer.dataset.index || "0";
-          if (dotsBox) {
-            dotsBox.innerHTML = "";
-            slides.forEach((_, i) => {
-              const dot = document.createElement("button");
-              dot.type = "button";
-              dot.className =
-                "h-2.5 w-2.5 rounded-full bg-slate-300 transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 dark:bg-slate-600";
-              dot.setAttribute("aria-label", `Перейти к кадру ${i + 1}`);
-              dot.setAttribute("aria-current", "false");
-              dot.addEventListener("click", () => {
-                setActive(i);
-                schedule();
-              });
-              dotsBox.appendChild(dot);
-            });
-          }
-          let timerId = null;
-          function setActive(rawIndex) {
-            const total = slides.length;
-            if (!total) return;
-            // Нормализуем индекс, поддерживая отрицательные значения (перелистывание назад)
-            const idx = ((rawIndex % total) + total) % total;
-            viewer.dataset.index = idx;
-            slides.forEach((slide, slideIndex) => {
-              const active = slideIndex === idx;
-              slide.classList.toggle("opacity-100", active);
-              slide.classList.toggle("opacity-0", !active);
-              slide.classList.toggle("z-10", active);
-              slide.classList.toggle("z-0", !active);
-              slide.classList.toggle("pointer-events-none", !active);
-              slide.setAttribute("aria-hidden", active ? "false" : "true");
-            });
-            dotsBox?.querySelectorAll("button").forEach((dot, dotIndex) => {
-              const active = dotIndex === idx;
-              dot.classList.toggle("w-6", active);
-              dot.classList.toggle("bg-slate-900", active);
-              dot.classList.toggle("dark:bg-white", active);
-              dot.setAttribute("aria-current", active ? "true" : "false");
-            });
-          }
-          function schedule() {
-            if (slides.length <= 1) return;
-            if (timerId) {
-              clearInterval(timerId);
-              timerId = null;
-            }
-            // Если пользователь попросил «уменьшить движение» — отключаем авто-прокрутку
-            if (prefersReduceMotion?.matches) return;
-            timerId = setInterval(
-              () => setActive((+viewer.dataset.index || 0) + 1),
-              8000,
-            );
-          }
-          prev?.addEventListener("click", () => {
-            setActive((+viewer.dataset.index || 0) - 1);
-            schedule();
-          });
-          next?.addEventListener("click", () => {
-            setActive((+viewer.dataset.index || 0) + 1);
-            schedule();
-          });
-          let startX = null;
-          viewer.addEventListener("pointerdown", (e) => {
-            if (e.target.closest("button")) return;
-            startX = e.clientX;
-          });
-          viewer.addEventListener("pointerup", (e) => {
-            // Лёгкий свайп-взаимодействие: реагируем только если пользователь провёл пальцем/мышью достаточно далеко
-            if (startX === null || e.target.closest("button")) {
-              startX = null;
-              return;
-            }
-            const dx = e.clientX - startX;
-            if (Math.abs(dx) > 40) {
-              if (dx > 0) {
-                setActive((+viewer.dataset.index || 0) - 1);
-              } else {
-                setActive((+viewer.dataset.index || 0) + 1);
-              }
-              schedule();
-            }
-            startX = null;
-          });
-          viewer.addEventListener("pointerleave", () => {
-            startX = null;
-          });
-          if (slides.length > 1) {
-            // При наведении мыши останавливаем автоперелистывание, чтобы спокойно читать подписи
-            viewer.addEventListener("mouseenter", () => {
-              if (timerId) {
-                clearInterval(timerId);
-                timerId = null;
-              }
-            });
-            viewer.addEventListener("mouseleave", () => schedule());
-          }
-          // Перестраиваем расписание, когда пользователь меняет системную настройку движения
-          if (prefersReduceMotion?.addEventListener) {
-            prefersReduceMotion.addEventListener("change", () => schedule());
-          } else if (prefersReduceMotion?.addListener) {
-            prefersReduceMotion.addListener(() => schedule());
-          }
-          setActive(+viewer.dataset.index || 0);
-          schedule();
-        });
-      }
-
-      // ===== Галереи проектов
-      function initGalleries() {
-        const motionApi = window.motion || {};
-        const autoDuration = 7000;
-        document.querySelectorAll(".js-gallery").forEach((card) => {
-          const slides = card.querySelectorAll(".slide");
-          const dotsBox = card.querySelector(".js-dots");
-          const progressEl = card.querySelector(".js-progress");
-          if (!dotsBox) return;
-          let timerId = null;
-          let progressAnimation = null;
-
-          function setActive(i) {
-            slides.forEach((s, idx) => s.classList.toggle("hidden", idx !== i));
-            dotsBox.querySelectorAll("button").forEach((dot, idx) => {
-              const active = idx === i;
-              dot.classList.toggle("bg-slate-900", active);
-              dot.classList.toggle("dark:bg-white", active);
-              dot.setAttribute("aria-current", active ? "true" : "false");
-            });
-            card.dataset.index = i;
-          }
-
-          function stopAuto() {
-            if (timerId) {
-              clearTimeout(timerId);
-              timerId = null;
-            }
-            progressAnimation?.cancel?.();
-            progressAnimation = null;
-            if (progressEl) {
-              progressEl.style.transform = "scaleX(0)";
-            }
-          }
-
-          function playProgress() {
-            if (!progressEl) return;
-            progressEl.style.transformOrigin = "left";
-            progressEl.style.transform = "scaleX(0)";
-            progressAnimation = motionApi.animate
-              ? motionApi.animate(
-                  progressEl,
-                  { transform: ["scaleX(0)", "scaleX(1)"] },
-                  { duration: autoDuration / 1000, easing: "ease-in-out" },
-                )
-              : null;
-          }
-
-          function schedule() {
-            stopAuto();
-            if (slides.length <= 1) return;
-            if (prefersReduceMotion?.matches) return;
-            playProgress();
-            timerId = window.setTimeout(() => {
-              setActive((+card.dataset.index + 1) % slides.length);
-              schedule();
-            }, autoDuration);
-          }
-
-          dotsBox.innerHTML = "";
-          slides.forEach((_, i) => {
-            const dot = document.createElement("button");
-            dot.type = "button";
-            dot.className =
-              "inline-flex size-2.5 rounded-full bg-slate-300 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 dark:bg-slate-600";
-            dot.setAttribute("aria-label", `Перейти к кадру ${i + 1}`);
-            dot.setAttribute("aria-current", "false");
-            dot.addEventListener("click", () => {
-              setActive(i);
-              schedule();
-            });
-            dotsBox.appendChild(dot);
-          });
-
-          const prev = card.querySelector(".js-prev");
-          const next = card.querySelector(".js-next");
-
-          prev?.addEventListener("click", () => {
-            setActive((+card.dataset.index - 1 + slides.length) % slides.length);
-            schedule();
-          });
-          next?.addEventListener("click", () => {
-            setActive((+card.dataset.index + 1) % slides.length);
-            schedule();
-          });
-
-          card.addEventListener("mouseenter", stopAuto);
-          card.addEventListener("mouseleave", schedule);
-          card.addEventListener("focusin", stopAuto);
-          card.addEventListener("focusout", (event) => {
-            if (!card.contains(event.relatedTarget)) schedule();
-          });
-
-          setActive(0);
-          schedule();
-
-          if (prefersReduceMotion?.addEventListener) {
-            prefersReduceMotion.addEventListener("change", () => schedule());
-          } else if (prefersReduceMotion?.addListener) {
-            prefersReduceMotion.addListener(() => schedule());
-          }
-        });
-      }
-      initPhotoViewers();
-      initGalleries();
-
-      const blogList = document.getElementById("blogList");
-      const blogEmpty = document.getElementById("blogEmpty");
-      if (blogList && blogEmpty) {
-        const hasNews = blogList.querySelectorAll("[data-news]").length > 0;
-        blogEmpty.classList.toggle("hidden", hasNews);
-      }
-
-      // ===== Карта табы
-      document.querySelectorAll("[data-maptab]").forEach((btn) =>
-        btn.addEventListener("click", () => {
-          const i = btn.dataset.maptab;
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) => b.classList.toggle("bg-slate-900", b === btn));
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) => b.classList.toggle("text-white", b === btn));
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) => b.classList.toggle("dark:bg-white", b === btn));
-          document
-            .querySelectorAll("[data-maptab]")
-            .forEach((b) =>
-              b.classList.toggle("dark:text-slate-900", b === btn),
-            );
-
-
-  document
-    .querySelectorAll("svg")
-    .forEach((icon) => {
-      if (
-        icon.getAttribute("aria-label") ||
-        icon.getAttribute("aria-labelledby") ||
-        icon.getAttribute("role") === "img"
-      ) {
-        return;
-      }
-      icon.setAttribute("aria-hidden", "true");
-      icon.setAttribute("focusable", "false");
-    });
-
-  document
-    .getElementById("shareLink")
-    ?.addEventListener("click", async () => {
-      const url = window.location.href;
-      const title = document.title;
-      if (navigator.share) {
-        try {
-          await navigator.share({ title, url });
-        } catch (err) {
-          if (err?.name !== "AbortError")
-            alert("Не удалось поделиться ссылкой. Попробуйте ещё раз.");
-        }
-        return;
-      }
-      try {
-        await navigator.clipboard.writeText(url);
-        alert("Ссылка скопирована в буфер обмена");
-      } catch (err) {
-        prompt("Скопируйте ссылку вручную:", url);
-      }
-    });
-
-  // Год в футере
-  const y = new Date().getFullYear();
-  document.getElementById("y").textContent = y;
-  document.getElementById("y2").textContent = y;
-</script>
   </body>
 </html>
