@@ -382,12 +382,137 @@
             <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Formlabs (DLP/SLA)</span><span class="text-sm text-slate-500">—</span></li>
           </ul>
         </div>
-        <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-4">
-          <h3 class="text-lg font-semibold mb-3">CNC и лазер</h3>
-          <ul class="grid sm:grid-cols-2 gap-3">
-            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Roland MDX‑40/50/540 (CNC)</span><span class="text-sm text-slate-500">—</span></li>
-            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Trotec Speedy 300 (лазер)</span><span class="text-sm text-slate-500">—</span></li>
-          </ul>
+        <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-6 bg-slate-50/60 dark:bg-slate-800/60">
+          <div class="flex flex-col gap-4">
+            <div>
+              <h3 class="text-lg font-semibold leading-tight">Экспресс-калькулятор услуг</h3>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Прикиньте бюджет на 3D‑печать, моделирование, сканирование или реверсивный инжиниринг до заявки.</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" class="js-service-tab inline-flex items-center gap-1 rounded-xl px-3 py-2 text-sm font-medium border border-slate-200 bg-white shadow-sm hover:border-sky-300 hover:text-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" data-service="print" data-active>
+                <span class="size-1.5 rounded-full bg-emerald-400"></span>3D‑печать
+              </button>
+              <button type="button" class="js-service-tab inline-flex items-center gap-1 rounded-xl px-3 py-2 text-sm font-medium border border-slate-200 bg-white shadow-sm hover:border-sky-300 hover:text-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" data-service="modeling">
+                <span class="size-1.5 rounded-full bg-sky-400"></span>3D‑моделирование
+              </button>
+              <button type="button" class="js-service-tab inline-flex items-center gap-1 rounded-xl px-3 py-2 text-sm font-medium border border-slate-200 bg-white shadow-sm hover:border-sky-300 hover:text-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" data-service="scanning">
+                <span class="size-1.5 rounded-full bg-indigo-400"></span>3D‑сканирование
+              </button>
+              <button type="button" class="js-service-tab inline-flex items-center gap-1 rounded-xl px-3 py-2 text-sm font-medium border border-slate-200 bg-white shadow-sm hover:border-sky-300 hover:text-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400" data-service="reverse">
+                <span class="size-1.5 rounded-full bg-amber-400"></span>Реверсивный инжиниринг
+              </button>
+            </div>
+
+            <form class="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900/70 space-y-4" id="serviceEstimator" novalidate>
+              <div data-service-form="print" class="grid gap-4 md:grid-cols-2">
+                <label class="flex flex-col gap-1 text-sm">
+                  <span class="font-medium text-slate-700 dark:text-slate-200">Объем модели, см³</span>
+                  <input type="number" min="1" step="1" value="120" class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800/70" data-calc-input data-service="print" data-key="volume" />
+                </label>
+                <label class="flex flex-col gap-1 text-sm">
+                  <span class="font-medium text-slate-700 dark:text-slate-200">Количество копий</span>
+                  <input type="number" min="1" step="1" value="1" class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800/70" data-calc-input data-service="print" data-key="quantity" />
+                </label>
+                <label class="flex flex-col gap-1 text-sm">
+                  <span class="font-medium text-slate-700 dark:text-slate-200">Материал</span>
+                  <select class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800/70" data-calc-input data-service="print" data-key="material">
+                    <option value="pla">PLA / PETG</option>
+                    <option value="abs">ABS / нейлон</option>
+                    <option value="resin">Фотополимер</option>
+                  </select>
+                </label>
+                <label class="flex flex-col gap-2 text-sm md:col-span-2">
+                  <span class="flex items-center justify-between font-medium text-slate-700 dark:text-slate-200">Сложность <span class="text-xs text-slate-500 dark:text-slate-400" id="printComplexityValue">средняя детализация</span></span>
+                  <input type="range" min="1" max="5" value="3" class="w-full accent-sky-500" data-calc-input data-service="print" data-key="complexity" data-output="printComplexityValue" />
+                </label>
+                <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
+                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="print" data-key="finishing" />
+                  Послепечатная обработка (шлифовка, грунт, покраска)
+                </label>
+                <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
+                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="print" data-key="urgent" />
+                  Срочное изготовление (до 48 часов)
+                </label>
+              </div>
+
+              <div data-service-form="modeling" class="grid gap-4 md:grid-cols-2 hidden">
+                <label class="flex flex-col gap-1 text-sm">
+                  <span class="font-medium text-slate-700 dark:text-slate-200">Оценка трудоёмкости, часов</span>
+                  <input type="number" min="1" step="1" value="10" class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800/70" data-calc-input data-service="modeling" data-key="hours" />
+                </label>
+                <label class="flex flex-col gap-2 text-sm md:col-span-2">
+                  <span class="flex items-center justify-between font-medium text-slate-700 dark:text-slate-200">Уровень детализации <span class="text-xs text-slate-500 dark:text-slate-400" id="modelComplexityValue">функциональный прототип</span></span>
+                  <input type="range" min="1" max="5" value="3" class="w-full accent-sky-500" data-calc-input data-service="modeling" data-key="complexity" data-output="modelComplexityValue" />
+                </label>
+                <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
+                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="modeling" data-key="renders" />
+                  Подготовить презентационные рендеры / инструкции
+                </label>
+                <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
+                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="modeling" data-key="consulting" />
+                  Сопровождение инженера по внедрению
+                </label>
+              </div>
+
+              <div data-service-form="scanning" class="grid gap-4 md:grid-cols-2 hidden">
+                <label class="flex flex-col gap-1 text-sm">
+                  <span class="font-medium text-slate-700 dark:text-slate-200">Максимальный габарит, см</span>
+                  <input type="number" min="5" step="1" value="40" class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800/70" data-calc-input data-service="scanning" data-key="size" />
+                </label>
+                <label class="flex flex-col gap-1 text-sm">
+                  <span class="font-medium text-slate-700 dark:text-slate-200">Количество объектов</span>
+                  <input type="number" min="1" step="1" value="1" class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800/70" data-calc-input data-service="scanning" data-key="count" />
+                </label>
+                <label class="flex flex-col gap-2 text-sm md:col-span-2">
+                  <span class="flex items-center justify-between font-medium text-slate-700 dark:text-slate-200">Требуемая точность <span class="text-xs text-slate-500 dark:text-slate-400" id="scanDetailValue">0,1–0,2 мм</span></span>
+                  <input type="range" min="1" max="5" value="3" class="w-full accent-sky-500" data-calc-input data-service="scanning" data-key="detail" data-output="scanDetailValue" />
+                </label>
+                <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
+                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="scanning" data-key="texturing" />
+                  Текстурирование / цветовая карта
+                </label>
+                <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
+                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="scanning" data-key="cleaning" />
+                  Чистка и выравнивание сетки
+                </label>
+              </div>
+
+              <div data-service-form="reverse" class="grid gap-4 md:grid-cols-2 hidden">
+                <label class="flex flex-col gap-1 text-sm">
+                  <span class="font-medium text-slate-700 dark:text-slate-200">Количество деталей / узлов</span>
+                  <input type="number" min="1" step="1" value="3" class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800/70" data-calc-input data-service="reverse" data-key="parts" />
+                </label>
+                <label class="flex flex-col gap-1 text-sm">
+                  <span class="font-medium text-slate-700 dark:text-slate-200">Необходимость 2D‑документации</span>
+                  <select class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800/70" data-calc-input data-service="reverse" data-key="drawings">
+                    <option value="none">Нет, только 3D</option>
+                    <option value="basic">Комплект эскизов</option>
+                    <option value="full">Полный пакет КД</option>
+                  </select>
+                </label>
+                <label class="flex flex-col gap-2 text-sm md:col-span-2">
+                  <span class="flex items-center justify-between font-medium text-slate-700 dark:text-slate-200">Сложность узла <span class="text-xs text-slate-500 dark:text-slate-400" id="reverseComplexityValue">средний уровень</span></span>
+                  <input type="range" min="1" max="5" value="3" class="w-full accent-sky-500" data-calc-input data-service="reverse" data-key="complexity" data-output="reverseComplexityValue" />
+                </label>
+                <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
+                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="reverse" data-key="analysis" />
+                  Расчёт нагрузок / рекомендации по модернизации
+                </label>
+                <label class="inline-flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200">
+                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="reverse" data-key="pilot" />
+                  Изготовить пилотную серию (3D‑печать / ЧПУ)
+                </label>
+              </div>
+            </form>
+
+            <div class="rounded-2xl bg-slate-900 text-slate-50 p-5 shadow-lg dark:bg-slate-800/90">
+              <p class="text-xs uppercase tracking-wide text-slate-400">Ориентировочная стоимость</p>
+              <div class="mt-1 text-3xl font-semibold"><span id="estimateTotal">—</span> ₽</div>
+              <ul class="mt-3 space-y-1 text-sm text-slate-200" id="estimateBreakdown"></ul>
+              <p class="mt-3 text-xs text-slate-400">Итоговая смета формируется после анализа ТЗ, материалов и исходных данных.</p>
+              <button type="button" id="openModalCalc" class="mt-4 inline-flex items-center justify-center rounded-xl border border-sky-300 bg-sky-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-300 dark:border-sky-400 dark:bg-sky-500/80">Оставить заявку с расчётом</button>
+            </div>
+          </div>
         </div>
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-4">
           <h3 class="text-lg font-semibold mb-3">GenAI + Open Source</h3>
@@ -923,6 +1048,267 @@
   </script>
 
   <script>
+    // ===== Калькулятор услуг
+    (() => {
+      const estimator = document.getElementById('serviceEstimator')
+      const tabs = document.querySelectorAll('.js-service-tab')
+      const forms = document.querySelectorAll('[data-service-form]')
+      const totalEl = document.getElementById('estimateTotal')
+      const breakdownEl = document.getElementById('estimateBreakdown')
+      if (!estimator || !tabs.length || !totalEl || !breakdownEl) return
+
+      const formatMoney = (value) => new Intl.NumberFormat('ru-RU').format(Math.round(Math.max(value, 0)))
+      const sliderLabels = {
+        print: ['черновой макет', 'простая геометрия', 'средняя детализация', 'сложная механика', 'ювелирная точность'],
+        modeling: ['скетч / концепт', 'габаритная модель', 'функциональный прототип', 'серийное изделие', 'премиальная детализация'],
+        scanning: ['2–3 мм', '0,5–1 мм', '0,1–0,2 мм', 'до 0,05 мм', 'ювелирная точность'],
+        reverse: ['простой блок', 'базовый механизм', 'средний уровень', 'сложный агрегат', 'высокоточная сборка']
+      }
+
+      const updateSliderLabel = (input) => {
+        const service = input.dataset.service
+        const value = Number(input.value)
+        const outputId = input.dataset.output
+        if (!outputId) return
+        const el = document.getElementById(outputId)
+        if (!el) return
+        const labels = sliderLabels[service] || []
+        const label = labels[value - 1] || labels[labels.length - 1] || ''
+        el.textContent = label || `${value}`
+      }
+
+      estimator.querySelectorAll('input[type="range"][data-output]').forEach((input) => {
+        updateSliderLabel(input)
+        input.addEventListener('input', () => updateSliderLabel(input))
+        input.addEventListener('change', () => updateSliderLabel(input))
+      })
+
+      tabs.forEach((tab) => {
+        tab.dataset.baseClass = tab.dataset.baseClass || tab.className
+      })
+
+      const setActiveTab = (service) => {
+        tabs.forEach((tab) => {
+          const isActive = tab.dataset.service === service
+          const base = tab.dataset.baseClass
+          const activeState = ' bg-sky-500 text-white border-sky-500 shadow-md hover:text-white hover:border-sky-500'
+          tab.className = isActive ? `${base}${activeState}` : base
+          tab.setAttribute('aria-pressed', String(isActive))
+        })
+        forms.forEach((section) => {
+          section.classList.toggle('hidden', section.dataset.serviceForm !== service)
+        })
+      }
+
+      const getNumeric = (value, fallback = 0) => {
+        const num = Number(value)
+        return Number.isFinite(num) ? num : fallback
+      }
+
+      const calculate = (service) => {
+        switch (service) {
+          case 'modeling':
+            return calcModeling()
+          case 'scanning':
+            return calcScanning()
+          case 'reverse':
+            return calcReverse()
+          default:
+            return calcPrint()
+        }
+      }
+
+      const calcPrint = () => {
+        const volume = Math.max(1, getNumeric(estimator.querySelector('[data-service="print"][data-key="volume"]').value, 0))
+        const quantity = Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="print"][data-key="quantity"]').value, 1)))
+        const material = estimator.querySelector('[data-service="print"][data-key="material"]').value || 'pla'
+        const complexity = Math.min(5, Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="print"][data-key="complexity"]').value, 3))))
+        const finishing = estimator.querySelector('[data-service="print"][data-key="finishing"]').checked
+        const urgent = estimator.querySelector('[data-service="print"][data-key="urgent"]').checked
+
+        const config = {
+          setup: 450,
+          rate: { pla: 24, abs: 32, resin: 46 },
+          complexity: [0.85, 1, 1.22, 1.45, 1.75],
+          finishing: 0.2,
+          urgent: 0.35
+        }
+
+        const materialRate = config.rate[material] || config.rate.pla
+        const base = config.setup + materialRate * volume * quantity
+        const baseWithComplexity = base * config.complexity[complexity - 1]
+
+        const breakdown = [
+          `Подготовка и печать ×${quantity}: ${formatMoney(baseWithComplexity)} ₽`
+        ]
+
+        let total = baseWithComplexity
+        if (finishing) {
+          const finishingCost = total * config.finishing
+          total += finishingCost
+          breakdown.push(`Послепечатная обработка: ${formatMoney(finishingCost)} ₽`)
+        }
+        if (urgent) {
+          const urgentCost = total * config.urgent
+          total += urgentCost
+          breakdown.push(`Срочное производство: ${formatMoney(urgentCost)} ₽`)
+        }
+
+        breakdown.push(`Срок изготовления: ${urgent ? '1–2 дня' : '3–5 дней'}`)
+
+        return { total, breakdown }
+      }
+
+      const calcModeling = () => {
+        const hours = Math.max(1, getNumeric(estimator.querySelector('[data-service="modeling"][data-key="hours"]').value, 6))
+        const complexity = Math.min(5, Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="modeling"][data-key="complexity"]').value, 3))))
+        const renders = estimator.querySelector('[data-service="modeling"][data-key="renders"]').checked
+        const consulting = estimator.querySelector('[data-service="modeling"][data-key="consulting"]').checked
+
+        const config = {
+          briefing: 1800,
+          hourly: 950,
+          complexity: [0.8, 1, 1.25, 1.55, 1.95],
+          renders: 0.22,
+          consulting: 3800
+        }
+
+        const base = (config.briefing + hours * config.hourly) * config.complexity[complexity - 1]
+        const breakdown = [`Моделирование (${hours} ч): ${formatMoney(base)} ₽`]
+        let total = base
+
+        if (renders) {
+          const renderCost = total * config.renders
+          total += renderCost
+          breakdown.push(`Презентационные материалы: ${formatMoney(renderCost)} ₽`)
+        }
+        if (consulting) {
+          total += config.consulting
+          breakdown.push(`Инженерное сопровождение: ${formatMoney(config.consulting)} ₽`)
+        }
+
+        breakdown.push(`Срок: ${Math.ceil(hours / 6)}–${Math.ceil(hours / 4)} рабочих дней`)
+
+        return { total, breakdown }
+      }
+
+      const calcScanning = () => {
+        const size = Math.max(5, getNumeric(estimator.querySelector('[data-service="scanning"][data-key="size"]').value, 20))
+        const count = Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="scanning"][data-key="count"]').value, 1)))
+        const detail = Math.min(5, Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="scanning"][data-key="detail"]').value, 3))))
+        const texturing = estimator.querySelector('[data-service="scanning"][data-key="texturing"]').checked
+        const cleaning = estimator.querySelector('[data-service="scanning"][data-key="cleaning"]').checked
+
+        const config = {
+          setup: 1900,
+          bands: [
+            { limit: 25, rate: 1100 },
+            { limit: 60, rate: 1600 },
+            { limit: Infinity, rate: 2400 }
+          ],
+          detail: [0.8, 0.95, 1.1, 1.35, 1.65],
+          texturing: 0.18,
+          cleaning: 0.22
+        }
+
+        const band = config.bands.find((b) => size <= b.limit) || config.bands[0]
+        const basePerItem = band.rate * config.detail[detail - 1]
+        let total = config.setup + basePerItem * count
+        const breakdown = [
+          `Сканирование ${count} объект${count > 1 ? 'ов' : 'а'}: ${formatMoney(basePerItem * count)} ₽`
+        ]
+
+        if (texturing) {
+          const textureCost = total * config.texturing
+          total += textureCost
+          breakdown.push(`Текстурирование и цвет: ${formatMoney(textureCost)} ₽`)
+        }
+        if (cleaning) {
+          const cleaningCost = total * config.cleaning
+          total += cleaningCost
+          breakdown.push(`Постобработка сетки: ${formatMoney(cleaningCost)} ₽`)
+        }
+
+        breakdown.push(`Отдача данных: ${texturing ? 'PBR + STL/OBJ' : 'STL/PLY'}`)
+
+        return { total, breakdown }
+      }
+
+      const calcReverse = () => {
+        const parts = Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="reverse"][data-key="parts"]').value, 1)))
+        const drawings = estimator.querySelector('[data-service="reverse"][data-key="drawings"]').value || 'none'
+        const complexity = Math.min(5, Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="reverse"][data-key="complexity"]').value, 3))))
+        const analysis = estimator.querySelector('[data-service="reverse"][data-key="analysis"]').checked
+        const pilot = estimator.querySelector('[data-service="reverse"][data-key="pilot"]').checked
+
+        const config = {
+          base: 5200,
+          perPart: 1850,
+          complexity: [0.85, 1, 1.28, 1.6, 1.95],
+          drawings: { none: 0, basic: 0.18, full: 0.38 },
+          analysis: 0.25,
+          pilot: 0.42
+        }
+
+        let total = (config.base + parts * config.perPart) * config.complexity[complexity - 1]
+        const breakdown = [`Оцифровка ${parts} дет${parts > 1 ? 'алей' : 'али'}: ${formatMoney(total)} ₽`]
+
+        const drawingMultiplier = config.drawings[drawings] ?? 0
+        if (drawingMultiplier > 0) {
+          const drawingCost = total * drawingMultiplier
+          total += drawingCost
+          breakdown.push(`2D‑документация: ${formatMoney(drawingCost)} ₽`)
+        }
+        if (analysis) {
+          const analysisCost = total * config.analysis
+          total += analysisCost
+          breakdown.push(`Инженерные расчёты: ${formatMoney(analysisCost)} ₽`)
+        }
+        if (pilot) {
+          const pilotCost = total * config.pilot
+          total += pilotCost
+          breakdown.push(`Пилотное изготовление: ${formatMoney(pilotCost)} ₽`)
+        }
+
+        breakdown.push('Передача данных: STEP / Parasolid + отчёт')
+
+        return { total, breakdown }
+      }
+
+      const renderResult = (result) => {
+        if (!result || !Number.isFinite(result.total)) {
+          totalEl.textContent = '—'
+          breakdownEl.innerHTML = '<li class="text-xs text-slate-400">Введите данные для расчёта</li>'
+          return
+        }
+        totalEl.textContent = formatMoney(result.total)
+        breakdownEl.innerHTML = result.breakdown
+          .map((line) => `<li class="flex items-start gap-2"><span class="mt-1 inline-block size-1.5 rounded-full bg-slate-500/60"></span><span>${line}</span></li>`)
+          .join('')
+      }
+
+      let activeService = (Array.from(tabs).find((tab) => tab.hasAttribute('data-active'))?.dataset.service) || tabs[0].dataset.service
+      setActiveTab(activeService)
+      renderResult(calculate(activeService))
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          activeService = tab.dataset.service
+          setActiveTab(activeService)
+          renderResult(calculate(activeService))
+        })
+      })
+
+      estimator.querySelectorAll('[data-calc-input]').forEach((input) => {
+        const handler = () => {
+          if (input.type === 'range') updateSliderLabel(input)
+          renderResult(calculate(activeService))
+        }
+        input.addEventListener('input', handler)
+        input.addEventListener('change', handler)
+      })
+    })()
+
     // ===== Hero showcase trigger
     (() => {
       const action = document.getElementById('heroAction')
@@ -1477,8 +1863,7 @@
 
     document.getElementById('openModal')?.addEventListener('click', openModal)
     document.getElementById('openModal2')?.addEventListener('click', openModal)
-    modalCloseBtn?.addEventListener('click', closeModal)
-    modalBg?.addEventListener('click', closeModal)
+
 
     // ===== «О лаборатории» toggle
     document.getElementById('toggleAbout')?.addEventListener('click', ()=> document.getElementById('aboutBox').classList.toggle('hidden'))
