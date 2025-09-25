@@ -93,6 +93,7 @@
         <div class="flex items-center justify-between gap-6">
           <a href="#top" class="flex items-center gap-3 font-semibold">
             <svg viewBox="0 0 64 64" class="h-8 w-8"><defs><linearGradient id="g3d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#22c55e"/></linearGradient></defs><rect x="6" y="6" width="52" height="52" rx="12" fill="url(#g3d)"/><path d="M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36" stroke="#fff" stroke-width="2" fill="none"/></svg>
+            <svg viewBox="0 0 32 32" class="h-6 w-6 text-slate-900 dark:text-slate-100"><rect x="6" y="8" width="4" height="4" rx="1" fill="currentColor"/><rect x="22" y="8" width="4" height="4" rx="1" fill="currentColor"/><rect x="8" y="12" width="16" height="4" fill="currentColor"/><rect x="4" y="16" width="24" height="4" fill="currentColor"/><rect x="8" y="20" width="4" height="4" fill="currentColor"/><rect x="20" y="20" width="4" height="4" fill="currentColor"/><rect x="12" y="24" width="8" height="4" fill="currentColor"/></svg>
             Step3D.Lab
           </a>
           <div class="hidden md:flex items-center gap-1" id="links">
@@ -209,14 +210,14 @@
   <section id="equipment" class="py-16 md:py-24 bg-white dark:bg-slate-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl md:text-4xl font-bold mb-6">Оборудование и ПО</h2>
-      <p class="text-slate-600 dark:text-slate-300 max-w-3xl">3D‑сканеры RangeVision и Artec; принтеры FDM/DLP (Ultimaker, Picaso 3D, Formlabs); лазер Trotec, фрезерные Roland; софт Geomagic, GOM Inspect, Inventor, Fusion 360.</p>
+      <p class="text-slate-600 dark:text-slate-300 max-w-3xl">3D‑сканеры RangeVision и Artec; принтеры FDM/DLP (Ultimaker, Picaso 3D, Formlabs); лазер Trotec, фрезерные Roland; GenAI и open-source инструменты: Perplexity AI, Qwen, Blender, FreeCAD, OpenSCAD, Hugging Face, T‑FLEX CAD.</p>
       <div class="mt-6 grid lg:grid-cols-2 gap-8">
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-4">
           <h3 class="text-lg font-semibold mb-3">3D‑сканеры</h3>
           <ul class="grid sm:grid-cols-2 gap-3">
-            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">3D‑сканер RangeVision NEO</span><span class="text-sm text-slate-500">2 шт.</span></li>
-            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">3D‑сканер RangeVision Spectrum</span><span class="text-sm text-slate-500">1 шт.</span></li>
-            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Artec Eva (ручной)</span><span class="text-sm text-slate-500">2 шт.</span></li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">RangeVision NEO</span><span class="text-sm text-slate-500">1 шт.</span></li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Artec Eva + Spider (ручной)</span><span class="text-sm text-slate-500">2 шт.</span></li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Архитектурный сканер Leica</span><span class="text-sm text-slate-500">1 шт.</span></li>
           </ul>
         </div>
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-4">
@@ -235,12 +236,36 @@
           </ul>
         </div>
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-4">
-          <h3 class="text-lg font-semibold mb-3">ПО</h3>
+          <h3 class="text-lg font-semibold mb-3">GenAI + Open Source</h3>
           <ul class="grid sm:grid-cols-2 gap-3">
-            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Geomagic (Reverse/Design)</span><span class="text-sm text-slate-500">—</span></li>
-            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">GOM Inspect (Метрология)</span><span class="text-sm text-slate-500">—</span></li>
-            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Autodesk Inventor (CAD)</span><span class="text-sm text-slate-500">—</span></li>
-            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Fusion 360 (CAD/CAM/CAE)</span><span class="text-sm text-slate-500">—</span></li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex flex-col gap-1">
+              <a href="https://www.perplexity.ai/" class="font-medium text-slate-900 dark:text-slate-100 hover:text-sky-600 dark:hover:text-sky-400" target="_blank" rel="noopener">Perplexity AI</a>
+              <p class="text-sm text-slate-500 dark:text-slate-300">AI‑поиск и аналитика для исследований и брифов.</p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex flex-col gap-1">
+              <a href="https://qwenlm.ai/" class="font-medium text-slate-900 dark:text-slate-100 hover:text-sky-600 dark:hover:text-sky-400" target="_blank" rel="noopener">Qwen AI</a>
+              <p class="text-sm text-slate-500 dark:text-slate-300">Мультимодальные модели Alibaba для генерации контента и кода.</p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex flex-col gap-1">
+              <a href="https://www.blender.org/" class="font-medium text-slate-900 dark:text-slate-100 hover:text-sky-600 dark:hover:text-sky-400" target="_blank" rel="noopener">Blender</a>
+              <p class="text-sm text-slate-500 dark:text-slate-300">Открытый пакет для 3D‑моделирования, анимации и рендера.</p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex flex-col gap-1">
+              <a href="https://www.freecadweb.org/" class="font-medium text-slate-900 dark:text-slate-100 hover:text-sky-600 dark:hover:text-sky-400" target="_blank" rel="noopener">FreeCAD (FriCAD)</a>
+              <p class="text-sm text-slate-500 dark:text-slate-300">Параметрический CAD-пакет с открытым исходным кодом.</p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex flex-col gap-1">
+              <a href="https://openscad.org/" class="font-medium text-slate-900 dark:text-slate-100 hover:text-sky-600 dark:hover:text-sky-400" target="_blank" rel="noopener">OpenSCAD</a>
+              <p class="text-sm text-slate-500 dark:text-slate-300">Скриптовый CAD для точных параметрических моделей.</p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex flex-col gap-1">
+              <a href="https://huggingface.co/" class="font-medium text-slate-900 dark:text-slate-100 hover:text-sky-600 dark:hover:text-sky-400" target="_blank" rel="noopener">Hugging Face</a>
+              <p class="text-sm text-slate-500 dark:text-slate-300">Маркетплейс моделей ИИ и инструменты для экспериментов.</p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex flex-col gap-1">
+              <a href="https://tflex.ru/products/cad/" class="font-medium text-slate-900 dark:text-slate-100 hover:text-sky-600 dark:hover:text-sky-400" target="_blank" rel="noopener">T‑FLEX CAD</a>
+              <p class="text-sm text-slate-500 dark:text-slate-300">Профессиональный параметрический CAD российского производства.</p>
+            </li>
           </ul>
         </div>
       </div>
