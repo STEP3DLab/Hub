@@ -44,19 +44,144 @@
       inset: auto 0 0 0;
       padding: 28px clamp(16px, 4vw, 48px);
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 16px;
-      pointer-events: none;
+      flex-wrap: wrap;
     }
-    #invaders-hero .badge {
-      font: 600 12px/1.2 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
-      color: #0a2540;
-      background: rgba(255,255,255,.7);
-      border: 1px solid rgba(10,37,64,.08);
-      padding: 8px 12px;
+    .hero-cta {
+      pointer-events: auto;
+      font: 700 14px/1.1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 14px 20px;
       border-radius: 999px;
-      backdrop-filter: blur(6px);
+      color: #0f172a;
+      background: linear-gradient(120deg, rgba(224,255,255,0.95), rgba(129,255,210,0.95));
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: heroPulse 2s ease-in-out infinite;
+      box-shadow: 0 10px 25px rgba(14, 165, 233, 0.35);
+    }
+    .hero-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.5), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.8;
+      animation: heroGlimmer 3s linear infinite;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 14px 32px rgba(14, 165, 233, 0.45);
+    }
+    .hero-cta:focus-visible {
+      outline: 3px solid rgba(14, 165, 233, 0.6);
+      outline-offset: 2px;
+    }
+    @keyframes heroPulse {
+      0%, 100% { box-shadow: 0 10px 25px rgba(14, 165, 233, 0.35); filter: brightness(1); }
+      45% { box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4); filter: brightness(1.08); }
+      70% { box-shadow: 0 8px 20px rgba(56, 189, 248, 0.32); filter: brightness(0.95); }
+    }
+    @keyframes heroGlimmer {
+      0% { transform: translateX(-30%) scale(1); opacity: 0.7; }
+      45% { transform: translateX(120%) scale(1.08); opacity: 1; }
+      100% { transform: translateX(150%) scale(1.12); opacity: 0.4; }
+    }
+    .hero-showcase {
+      pointer-events: auto;
+      min-width: min(280px, 60vw);
+      flex: 1 1 260px;
+      max-width: 420px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      backdrop-filter: blur(10px);
+      padding: 18px;
+      color: #0f172a;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+    }
+    .hero-showcase.dark {
+      background: rgba(15, 23, 42, 0.7);
+      color: rgba(248, 250, 252, 0.95);
+      border-color: rgba(148, 163, 184, 0.25);
+      box-shadow: 0 18px 36px rgba(8, 47, 73, 0.45);
+    }
+    .hero-card {
+      display: grid;
+      gap: 12px;
+    }
+    .hero-card figure { margin: 0; }
+    .hero-card img {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+      object-fit: cover;
+    }
+    .hero-card h3 {
+      font-size: clamp(15px, 2.6vw, 18px);
+      font-weight: 700;
+    }
+    .hero-card p {
+      font-size: clamp(13px, 2.2vw, 15px);
+      line-height: 1.45;
+    }
+    .hero-card footer {
+      font-size: clamp(12px, 2vw, 14px);
+      color: inherit;
+      opacity: 0.8;
+    }
+    .gallery-nav {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid rgba(100, 116, 139, 0.35);
+      background: linear-gradient(160deg, rgba(248, 250, 252, 0.95), rgba(226, 232, 240, 0.8));
+      transition: transform 0.18s ease, box-shadow 0.2s ease;
+    }
+    .gallery-nav svg {
+      width: 14px;
+      height: 14px;
+      fill: rgba(15, 23, 42, 0.8);
+    }
+    .gallery-nav:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(148, 163, 184, 0.35);
+    }
+    .gallery-nav:focus-visible {
+      outline: 3px solid rgba(59, 130, 246, 0.45);
+      outline-offset: 2px;
+    }
+    .dark .hero-cta {
+      color: #f8fafc;
+      background: linear-gradient(120deg, rgba(14,116,144,0.85), rgba(34,197,94,0.75));
+      border-color: rgba(148, 163, 184, 0.35);
+      box-shadow: 0 10px 26px rgba(14, 116, 144, 0.6);
+    }
+    .dark .hero-cta::after {
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.45), transparent 60%);
+    }
+    .dark .hero-showcase {
+      background: rgba(15, 23, 42, 0.72);
+      color: rgba(248, 250, 252, 0.95);
+      border-color: rgba(148, 163, 184, 0.28);
+    }
+    .dark .hero-card img {
+      box-shadow: 0 12px 28px rgba(8, 47, 73, 0.6);
+    }
+    .dark .gallery-nav {
+      border-color: rgba(148, 163, 184, 0.35);
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));
+    }
+    .dark .gallery-nav svg {
+      fill: rgba(226, 232, 240, 0.9);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -126,7 +251,8 @@
           <section id="invaders-hero" aria-label="Динамическая 3D-сцена космических захватчиков">
             <canvas id="invaders-canvas"></canvas>
             <div class="overlay">
-              <span class="badge">Step3D.Lab · Hero animation</span>
+              <button type="button" id="heroAction" class="hero-cta" aria-live="polite">Старт!</button>
+              <section id="heroShowcase" class="hero-showcase" aria-live="polite" aria-atomic="true"></section>
             </div>
           </section>
         </div>
@@ -267,9 +393,13 @@
               <div class="slide hidden items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-600">Ортез · фото 3</div>
             </div>
             <div class="flex items-center justify-between p-2">
-              <button class="rounded-lg border px-3 py-1 text-sm js-prev">◀</button>
+              <button class="gallery-nav js-prev" aria-label="Предыдущий слайд">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 4.5 8 12l7.5 7.5Z"/></svg>
+              </button>
               <div class="flex gap-1 js-dots"></div>
-              <button class="rounded-lg border px-3 py-1 text-sm js-next">▶</button>
+              <button class="gallery-nav js-next" aria-label="Следующий слайд">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 4.5 7.5 7.5-7.5 7.5Z"/></svg>
+              </button>
             </div>
           </div>
         </article>
@@ -282,9 +412,13 @@
               <div class="slide hidden items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-600">ОКН · фото 2</div>
             </div>
             <div class="flex items-center justify-between p-2">
-              <button class="rounded-lg border px-3 py-1 text-sm js-prev">◀</button>
+              <button class="gallery-nav js-prev" aria-label="Предыдущий слайд">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 4.5 8 12l7.5 7.5Z"/></svg>
+              </button>
               <div class="flex gap-1 js-dots"></div>
-              <button class="rounded-lg border px-3 py-1 text-sm js-next">▶</button>
+              <button class="gallery-nav js-next" aria-label="Следующий слайд">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 4.5 7.5 7.5-7.5 7.5Z"/></svg>
+              </button>
             </div>
           </div>
         </article>
@@ -295,22 +429,10 @@
   <!-- Курсы ДПО -->
   <section id="courses" class="py-16 md:py-24 bg-white dark:bg-slate-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Лента кубиков -->
-      <div aria-hidden class="mb-6 relative h-16 overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900">
-        <div class="absolute top-1/2 -translate-y-1/2 left-0 right-0 pointer-events-none">
-          <div class="flex gap-6 animate-[driftX_4s_ease-in-out_infinite]">
-            <div class="size-6 rotate-45 rounded-lg shadow bg-gradient-to-br from-slate-300 to-slate-500 dark:from-slate-600 dark:to-slate-800"></div>
-            <div class="size-6 rotate-45 rounded-lg shadow bg-gradient-to-br from-slate-300 to-slate-500 dark:from-slate-600 dark:to-slate-800"></div>
-            <div class="size-6 rotate-45 rounded-lg shadow bg-gradient-to-br from-slate-300 to-slate-500 dark:from-slate-600 dark:to-slate-800"></div>
-            <div class="size-6 rotate-45 rounded-lg shadow bg-gradient-to-br from-slate-300 to-slate-500 dark:from-slate-600 dark:to-slate-800"></div>
-            <div class="size-6 rotate-45 rounded-lg shadow bg-gradient-to-br from-slate-300 to-slate-500 dark:from-slate-600 dark:to-slate-800"></div>
-          </div>
-        </div>
-      </div>
       <h2 class="text-3xl md:text-4xl font-bold mb-6">Курсы ДПО и проектные школы</h2>
-      <p class="text-slate-600 dark:text-slate-300 max-w-3xl">Учебные планы на 48–72 часа с индивидуальными проектами, подготовка к чемпионатам «Профессионалы», WorldSkills, HI‑TECH.</p>
+      <p class="text-slate-600 dark:text-slate-300 max-w-3xl">Образовательный партнёр ФГБОУ ВО РГСУ — гос. регистрация: ОГРН 1027739469468, ИНН 7726039659, КПП 771401001.</p>
       <details class="mt-4 rounded-2xl border border-slate-200 dark:border-slate-700 p-4 open:shadow-sm">
-        <summary class="cursor-pointer font-medium">Образовательные проекты совместно с ФГБОУ ВО РГСУ</summary>
+        <summary class="cursor-pointer font-medium">Образовательный партнёр ФГБОУ ВО РГСУ — гос. регистрация: ОГРН 1027739469468, ИНН 7726039659, КПП 771401001</summary>
         <ul class="mt-3 list-disc pl-5 text-sm text-slate-600 dark:text-slate-300">
           <li>Знакомство со сканерами, подготовка объекта</li>
           <li>Обработка сеток: чистка, выравнивание, ремешинг</li>
@@ -379,31 +501,9 @@
             <div class="mt-1 text-sm text-slate-600 dark:text-slate-300">CAD, ЧПУ, прототипы</div>
           </div>
         </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
-          <div class="grid place-items-center rounded-2xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-100" style="width:64px;height:64px">S3</div>
-          <div>
-            <div class="font-semibold">Step3D</div>
-            <div class="text-sm text-slate-500 dark:text-slate-300">индустриальный партнёр лаборатории</div>
-          </div>
-        </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
-          <div class="grid place-items-center rounded-2xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-100" style="width:64px;height:64px">TP</div>
-          <div>
-            <div class="font-semibold">Технопарк РГСУ</div>
-            <div class="text-sm text-slate-500 dark:text-slate-300">ресурсная база: Москва, ул. Беговая, д. 12 (лаборатория промдизайна — 2 этаж; лаборатория робототехники — 1 этаж)</div>
-          </div>
-        </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
-          <div class="grid place-items-center rounded-2xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-100" style="width:64px;height:64px">РГСУ</div>
-          <div>
-            <div class="font-semibold">Российский государственный социальный университет — образовательный партнёр</div>
-            <div class="text-sm text-slate-500 dark:text-slate-300">Гос. регистрация: ОГРН 1027739469468</div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
-
   <!-- FAQ -->
   <section id="faq" class="py-16 md:py-24 bg-white dark:bg-slate-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -745,6 +845,176 @@
   </script>
 
   <script>
+    // ===== Hero showcase trigger
+    (() => {
+      const action = document.getElementById('heroAction')
+      const showcase = document.getElementById('heroShowcase')
+      if (!action || !showcase) return
+
+      const labels = ['Дальше!', 'Вперёд!', 'Старт!', 'Пуск!']
+      let lastLabel = ''
+      const nextLabel = () => {
+        const pool = labels.filter((label) => label !== lastLabel)
+        const label = pool[Math.floor(Math.random() * pool.length)]
+        lastLabel = label
+        return label
+      }
+
+      const svgData = (svg) => `data:image/svg+xml;utf8,${encodeURIComponent(svg.trim())}`
+      const heroSlides = [
+        {
+          type: 'image',
+          title: '3D‑сканирование и оцифровка',
+          description: 'Лидар и проектор собирают облако точек, создавая точную цифровую копию изделия.',
+          alt: 'Силуэт лазерного сканера и облака точек детали',
+          src: svgData(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+              <defs>
+                <linearGradient id="gScan" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#0ea5e9"/>
+                  <stop offset="1" stop-color="#22c55e"/>
+                </linearGradient>
+              </defs>
+              <rect width="400" height="240" rx="28" fill="#f1f5f9"/>
+              <g fill="none" stroke="#0f172a" stroke-opacity="0.28">
+                <path d="M40 192h320" stroke-width="2" stroke-dasharray="6 8"/>
+                <path d="M100 68c48-32 152-32 200 0" stroke-width="1.5"/>
+              </g>
+              <g fill="url(#gScan)" fill-opacity="0.72">
+                <circle cx="86" cy="110" r="4"/>
+                <circle cx="120" cy="126" r="5"/>
+                <circle cx="150" cy="144" r="6"/>
+                <circle cx="214" cy="132" r="5"/>
+                <circle cx="244" cy="118" r="4"/>
+                <circle cx="276" cy="132" r="6"/>
+                <circle cx="302" cy="150" r="5"/>
+                <circle cx="328" cy="166" r="4"/>
+                <circle cx="190" cy="160" r="7"/>
+              </g>
+              <path d="M80 176h76l30-70 58 54 22-44 54 60" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <g fill="#0f172a" fill-opacity="0.7">
+                <rect x="60" y="60" width="44" height="48" rx="10"/>
+                <rect x="300" y="74" width="44" height="32" rx="8"/>
+              </g>
+              <path d="M76 60 108 28l28 32" fill="none" stroke="#0ea5e9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          `)
+        },
+        {
+          type: 'image',
+          title: 'Роботизированная сборка',
+          description: 'Координатный манипулятор шаг за шагом выстраивает технологическую оснастку.',
+          alt: 'Роботизированный манипулятор собирает конструкцию',
+          src: svgData(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+              <rect width="400" height="240" rx="28" fill="#e0f2fe"/>
+              <path d="M110 178h200" stroke="#0f172a" stroke-opacity="0.35" stroke-width="6" stroke-linecap="round"/>
+              <g fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M132 172V88l54-38 50 42-32 42 56 38 42-22" stroke="#0f172a" stroke-opacity="0.8"/>
+                <path d="M186 50 210 26l32 28" stroke="#22c55e"/>
+              </g>
+              <g fill="#0ea5e9" fill-opacity="0.85">
+                <circle cx="132" cy="172" r="16"/>
+                <circle cx="186" cy="94" r="18"/>
+                <circle cx="240" cy="136" r="18"/>
+                <circle cx="296" cy="112" r="16"/>
+              </g>
+              <rect x="156" y="176" width="88" height="32" rx="10" fill="#0f172a" fill-opacity="0.8"/>
+              <rect x="248" y="176" width="72" height="24" rx="8" fill="#1e293b" fill-opacity="0.65"/>
+              <path d="M138 200h124" stroke="#bae6fd" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round"/>
+            </svg>
+          `)
+        },
+        {
+          type: 'image',
+          title: 'CAD‑проектирование в действии',
+          description: 'Экран САПР с параметрической моделью и графиком нагрузок для проверки прочности.',
+          alt: 'Экран CAD с 3D‑моделью и графиками нагрузок',
+          src: svgData(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+              <rect width="400" height="240" rx="28" fill="#e2e8f0"/>
+              <rect x="52" y="44" width="296" height="156" rx="18" fill="#0f172a" fill-opacity="0.88"/>
+              <rect x="64" y="60" width="272" height="124" rx="14" fill="#f8fafc"/>
+              <path d="M84 172h232" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+              <path d="M96 150c34-28 52-54 96-54s70 28 112 52" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+              <path d="M96 150c24-12 52-24 96-24s84 12 112 24" fill="none" stroke="#0ea5e9" stroke-width="3" stroke-dasharray="10 8"/>
+              <g fill="#0ea5e9" fill-opacity="0.9">
+                <circle cx="140" cy="98" r="10"/>
+                <circle cx="180" cy="122" r="8"/>
+                <circle cx="220" cy="94" r="9"/>
+                <circle cx="264" cy="128" r="11"/>
+              </g>
+              <path d="M142 96l36-30 48 32 46-22" fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="96" y="70" width="52" height="10" rx="3" fill="#0ea5e9" fill-opacity="0.4"/>
+              <rect x="156" y="70" width="112" height="10" rx="3" fill="#22c55e" fill-opacity="0.4"/>
+              <rect x="272" y="70" width="40" height="10" rx="3" fill="#f97316" fill-opacity="0.45"/>
+            </svg>
+          `)
+        },
+        {
+          type: 'text',
+          kind: 'riddle',
+          title: 'Загадка инженерам',
+          description: 'Без кисти и красок создаёт формы, послойно выводит идею из цифры в предмет. Что это?',
+          meta: 'Ответ: аддитивный 3D‑принтер — слой за слоем материализует проект.'
+        },
+        {
+          type: 'text',
+          kind: 'quote',
+          title: 'Цитата для вдохновения',
+          description: '«Инженерия — это способность делать для трёх рублей то, что любой может сделать за десять.»',
+          meta: 'Томас Эдисон'
+        },
+        {
+          type: 'text',
+          kind: 'recommendation',
+          title: 'Что почитать/посмотреть',
+          description: 'Книга Дональда Нормана «Дизайн привычных вещей» и фильм «Скрытые фигуры» — про инженерное мышление и команду мечты.',
+          meta: 'Рекомендуем для расширения кругозора и проектного взгляда.'
+        }
+      ]
+
+      const render = (item) => {
+        if (item.type === 'image') {
+          showcase.innerHTML = `
+            <article class="hero-card" data-kind="image">
+              <figure><img src="${item.src}" alt="${item.alt}"></figure>
+              <div>
+                <h3>${item.title}</h3>
+                <p>${item.description}</p>
+              </div>
+            </article>
+          `
+        } else {
+          showcase.innerHTML = `
+            <article class="hero-card" data-kind="${item.kind ?? 'text'}">
+              <h3>${item.title}</h3>
+              <p>${item.description}</p>
+              ${item.meta ? `<footer>${item.meta}</footer>` : ''}
+            </article>
+          `
+        }
+        const isDark = document.documentElement.classList.contains('dark')
+        showcase.classList.toggle('dark', isDark)
+      }
+
+      let index = 0
+      render(heroSlides[index])
+      action.textContent = nextLabel()
+
+      action.addEventListener('click', () => {
+        index = (index + 1) % heroSlides.length
+        render(heroSlides[index])
+        action.textContent = nextLabel()
+      })
+
+      const observer = new MutationObserver(() => {
+        const isDark = document.documentElement.classList.contains('dark')
+        showcase.classList.toggle('dark', isDark)
+      })
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    })()
+
     // ===== Динамическое меню (desktop + mobile)
     const navData = JSON.parse(document.getElementById('nav-data').dataset.nav)
     const linksWrap = document.getElementById('links')
