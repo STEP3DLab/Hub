@@ -159,6 +159,276 @@
       outline: 3px solid rgba(59, 130, 246, 0.45);
       outline-offset: 2px;
     }
+
+    /* Анимированные иконки для карточек услуг */
+    @keyframes serviceGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background-size: 220% 220%;
+      animation: serviceGradient 12s ease infinite;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+      color: #f8fafc;
+    }
+    .service-icon::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+    .service-icon svg {
+      width: 32px;
+      height: 32px;
+      position: relative;
+      z-index: 1;
+      stroke-width: 1.8;
+      stroke: currentColor;
+      fill: none;
+    }
+    .service-icon--cad {
+      background-image: linear-gradient(135deg, #38bdf8, #2563eb, #14b8a6);
+    }
+    .service-icon--reverse {
+      background-image: linear-gradient(135deg, #a855f7, #6366f1, #ec4899);
+    }
+    .service-icon--additive {
+      background-image: linear-gradient(135deg, #f97316, #fb7185, #fde047);
+      color: #0f172a;
+    }
+    .service-icon--proto {
+      background-image: linear-gradient(135deg, #34d399, #22c55e, #0ea5e9);
+    }
+    .service-icon--medtech {
+      background-image: linear-gradient(135deg, #2dd4bf, #22d3ee, #38bdf8);
+    }
+    .service-icon--edu {
+      background-image: linear-gradient(135deg, #f59e0b, #f97316, #6366f1);
+    }
+
+    /* Проекты: усиленный дизайн */
+    @keyframes projectGlow {
+      0% { opacity: 0.6; transform: scale(0.96); }
+      50% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.6; transform: scale(0.96); }
+    }
+    .project-card {
+      position: relative;
+      border-radius: 32px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(45,212,191,0.35), rgba(244,114,182,0.35));
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: -30% -10% auto -10%;
+      height: 60%;
+      background: radial-gradient(circle at 50% 50%, rgba(125,211,252,0.55), transparent 70%);
+      filter: blur(0px);
+      opacity: 0.8;
+      animation: projectGlow 14s ease-in-out infinite;
+    }
+    .project-card__body {
+      position: relative;
+      display: grid;
+      gap: 24px;
+      border-radius: 31px;
+      background: rgba(255, 255, 255, 0.92);
+      padding: clamp(20px, 4vw, 32px);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 40px rgba(15, 23, 42, 0.16);
+    }
+    .project-card__headline {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .project-card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: rgba(14, 165, 233, 0.12);
+      display: grid;
+      place-items: center;
+      color: #0284c7;
+    }
+    .project-card__icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      fill: none;
+    }
+    .project-card__eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: rgba(15, 23, 42, 0.55);
+    }
+    .project-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .project-card__tags span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(148, 163, 184, 0.16);
+      color: rgba(15, 23, 42, 0.7);
+    }
+    .project-card__meta {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(56,189,248,0.12), rgba(125,211,252,0.24));
+      font-size: 0.85rem;
+      color: rgba(15, 23, 42, 0.8);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .project-card__meta span {
+      flex: 1;
+      line-height: 1.45;
+    }
+    .project-card__meta svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+      flex-shrink: 0;
+    }
+    .project-card__media {
+      position: relative;
+    }
+    .project-card__slider {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+    .project-card__slider .aspect-video {
+      display: grid;
+    }
+    .project-card__slider .slide {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: radial-gradient(circle at 20% 20%, rgba(125, 211, 252, 0.4), transparent 70%),
+                  linear-gradient(135deg, rgba(226, 232, 240, 0.9), rgba(148, 163, 184, 0.5));
+      color: rgba(15, 23, 42, 0.8);
+      font-weight: 600;
+      text-align: center;
+    }
+    .project-card__slider .slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.5), transparent 65%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+    .project-card__controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      gap: 12px;
+    }
+    .project-card__controls .gallery-nav {
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      background: linear-gradient(140deg, rgba(15, 23, 42, 0.92), rgba(30, 64, 175, 0.85));
+      border-color: transparent;
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.3);
+    }
+    .project-card__controls .gallery-nav svg {
+      width: 16px;
+      height: 16px;
+      fill: rgba(248, 250, 252, 0.92);
+    }
+    .project-card__controls .js-dots {
+      display: inline-flex;
+      gap: 6px;
+    }
+    .project-card__controls .js-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.5);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+    .project-card__controls .js-dots span.bg-slate-900 {
+      background: rgba(15, 23, 42, 0.95) !important;
+      transform: scale(1.2);
+    }
+    @media (min-width: 768px) {
+      .project-card__body {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+        align-items: center;
+      }
+      .project-card__media {
+        margin-left: auto;
+      }
+    }
+    .dark .service-icon::after {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .dark .project-card__body {
+      background: rgba(15, 23, 42, 0.82);
+      color: rgba(226, 232, 240, 0.96);
+      box-shadow: 0 24px 44px rgba(15, 23, 42, 0.45);
+    }
+    .dark .project-card__eyebrow { color: rgba(148, 163, 184, 0.7); }
+    .dark .project-card__tags span {
+      background: rgba(148, 163, 184, 0.22);
+      color: rgba(226, 232, 240, 0.9);
+    }
+    .dark .project-card__meta {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(59, 130, 246, 0.18));
+      color: rgba(226, 232, 240, 0.92);
+    }
+    .dark .project-card__slider {
+      border-color: rgba(148, 163, 184, 0.35);
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.4);
+    }
+    .dark .project-card__slider .slide {
+      background: radial-gradient(circle at 30% 30%, rgba(56, 189, 248, 0.35), transparent 70%),
+                  linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      color: rgba(226, 232, 240, 0.92);
+    }
+    .dark .project-card__controls .gallery-nav {
+      background: linear-gradient(140deg, rgba(56, 189, 248, 0.75), rgba(15, 23, 42, 0.95));
+      box-shadow: 0 16px 32px rgba(8, 47, 73, 0.6);
+    }
+    .dark .project-card__controls .gallery-nav svg {
+      fill: rgba(15, 23, 42, 0.9);
+    }
     .dark .hero-cta {
       color: #f8fafc;
       background: linear-gradient(120deg, rgba(14,116,144,0.85), rgba(34,197,94,0.75));
@@ -265,7 +535,7 @@
       <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" id="top">
         <div>
           <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">Лаборатория промдизайна и инжиниринга</h1>
-          <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-prose">CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, аддитивное производство. Учим и делаем продукты на базе технопарка РГСУ совместно с ООО «СТЕП 3Д».</p>
+          <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-prose">Инженерный центр Step3D.Lab: цифровое проектирование, реверсивный инжиниринг, 3D‑сканирование и аддитивное производство. Команда технопарка РГСУ и ООО «СТЕП 3Д» выполняет разработки, сопровождает внедрение и обучает специалистов.</p>
           <div class="mt-6 flex flex-wrap gap-3">
             <button id="openModal" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300">Оставить заявку</button>
             <button id="toggleAbout" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium">О лаборатории</button>
@@ -298,7 +568,14 @@
         <!-- Карточки -->
         <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:border-slate-700 dark:bg-slate-800">
           <div class="flex items-start gap-4">
-            <svg viewBox="0 0 24 24" class="h-10 w-10"><path d="M7 3h10l5 9-5 9H7L2 12l5-9z" fill="currentColor" class="text-slate-300 dark:text-slate-500"/></svg>
+            <span class="service-icon service-icon--cad" aria-hidden="true">
+              <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 24 32 16l16 8v16l-16 8-16-8Z"/>
+                <path d="M32 16v16l16 8" opacity="0.6"/>
+                <path d="M16 24l16 8" opacity="0.6"/>
+                <circle cx="32" cy="32" r="22" stroke-dasharray="6 10" opacity="0.4"/>
+              </svg>
+            </span>
             <div>
               <h3 class="text-lg font-semibold leading-tight">CAD/CAE‑моделирование</h3>
               <p class="mt-1 text-slate-600 dark:text-slate-300 text-sm">Параметрические модели, сборки, FEA‑анализ</p>
@@ -308,7 +585,18 @@
         </article>
         <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:border-slate-700 dark:bg-slate-800">
           <div class="flex items-start gap-4">
-            <svg viewBox="0 0 24 24" class="h-10 w-10"><path d="M7 3h10l5 9-5 9H7L2 12l5-9z" fill="currentColor" class="text-slate-300 dark:text-slate-500"/></svg>
+            <span class="service-icon service-icon--reverse" aria-hidden="true">
+              <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 22h24l6 10-6 10H20l-6-10Z"/>
+                <path d="M26 32h12"/>
+                <path d="M32 20v-6" opacity="0.55"/>
+                <path d="M20 20 16 14" opacity="0.55"/>
+                <path d="M44 20 48 14" opacity="0.55"/>
+                <path d="M20 44 16 50" opacity="0.55"/>
+                <path d="M44 44 48 50" opacity="0.55"/>
+                <circle cx="32" cy="32" r="18" stroke-dasharray="4 6" opacity="0.4"/>
+              </svg>
+            </span>
             <div>
               <h3 class="text-lg font-semibold leading-tight">Реверсивный инжиниринг</h3>
               <p class="mt-1 text-slate-600 dark:text-slate-300 text-sm">3D‑сканирование, обработка сеток, NURBS/САПР</p>
@@ -318,7 +606,15 @@
         </article>
         <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:border-slate-700 dark:bg-slate-800">
           <div class="flex items-start gap-4">
-            <svg viewBox="0 0 24 24" class="h-10 w-10"><path d="M7 3h10l5 9-5 9H7L2 12l5-9z" fill="currentColor" class="text-slate-300 dark:text-slate-500"/></svg>
+            <span class="service-icon service-icon--additive" aria-hidden="true">
+              <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 18h28l4 8H14l4-8Z"/>
+                <path d="M22 26v16l10 8 10-8V26"/>
+                <path d="M32 34v16" opacity="0.7"/>
+                <path d="M22 42h20" opacity="0.6"/>
+                <path d="M26 14h12" opacity="0.6"/>
+              </svg>
+            </span>
             <div>
               <h3 class="text-lg font-semibold leading-tight">Аддитивное производство</h3>
               <p class="mt-1 text-slate-600 dark:text-slate-300 text-sm">FDM/DLP печать, постобработка, литьё</p>
@@ -328,7 +624,19 @@
         </article>
         <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:border-slate-700 dark:bg-slate-800">
           <div class="flex items-start gap-4">
-            <svg viewBox="0 0 24 24" class="h-10 w-10"><path d="M7 3h10l5 9-5 9H7L2 12l5-9z" fill="currentColor" class="text-slate-300 dark:text-slate-500"/></svg>
+            <span class="service-icon service-icon--proto" aria-hidden="true">
+              <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 20h24v24H20Z"/>
+                <path d="M20 28h-8" opacity="0.6"/>
+                <path d="M20 36h-8" opacity="0.6"/>
+                <path d="M52 28h-8" opacity="0.6"/>
+                <path d="M52 36h-8" opacity="0.6"/>
+                <path d="M28 16v8" opacity="0.6"/>
+                <path d="M36 16v8" opacity="0.6"/>
+                <path d="M28 44v8" opacity="0.6"/>
+                <path d="M36 44v8" opacity="0.6"/>
+              </svg>
+            </span>
             <div>
               <h3 class="text-lg font-semibold leading-tight">Прототипирование</h3>
               <p class="mt-1 text-slate-600 dark:text-slate-300 text-sm">Мастер‑модели, приспособления, малые серии</p>
@@ -338,7 +646,15 @@
         </article>
         <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:border-slate-700 dark:bg-slate-800">
           <div class="flex items-start gap-4">
-            <svg viewBox="0 0 24 24" class="h-10 w-10"><path d="M7 3h10l5 9-5 9H7L2 12l5-9z" fill="currentColor" class="text-slate-300 dark:text-slate-500"/></svg>
+            <span class="service-icon service-icon--medtech" aria-hidden="true">
+              <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 18v28"/>
+                <path d="M18 32h28"/>
+                <rect x="18" y="18" width="28" height="28" rx="10" opacity="0.45"/>
+                <path d="M22 24 16 18" opacity="0.5"/>
+                <path d="M42 24 48 18" opacity="0.5"/>
+              </svg>
+            </span>
             <div>
               <h3 class="text-lg font-semibold leading-tight">Мед. изделия</h3>
               <p class="mt-1 text-slate-600 dark:text-slate-300 text-sm">Ортезы, импланты, биопротезы</p>
@@ -348,7 +664,14 @@
         </article>
         <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow dark:border-slate-700 dark:bg-slate-800">
           <div class="flex items-start gap-4">
-            <svg viewBox="0 0 24 24" class="h-10 w-10"><path d="M7 3h10l5 9-5 9H7L2 12l5-9z" fill="currentColor" class="text-slate-300 dark:text-slate-500"/></svg>
+            <span class="service-icon service-icon--edu" aria-hidden="true">
+              <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 22h36l-18 12Z"/>
+                <path d="M20 30v12l12 6 12-6V30"/>
+                <path d="M32 34v14" opacity="0.6"/>
+                <path d="M44 26h6" opacity="0.6"/>
+              </svg>
+            </span>
             <div>
               <h3 class="text-lg font-semibold leading-tight">Образование</h3>
               <p class="mt-1 text-slate-600 dark:text-slate-300 text-sm">Курсы ДПО, проектные школы, чемпионаты</p>
@@ -557,46 +880,107 @@
       <h2 class="text-3xl md:text-4xl font-bold mb-6">Проекты и направления НИР</h2>
       <div class="grid md:grid-cols-2 gap-6 md:gap-8">
         <!-- Карточка проекта с мини-слайдером (ванильный JS) -->
-        <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery" data-index="0">
-          <h3 class="text-lg font-semibold">Изготовление ортезов и протезов</h3>
-          <p class="mt-1 text-slate-600 dark:text-slate-300 text-sm">Индивидуальные ортезы и протезы: от скана до готового изделия.</p>
-          <div class="mt-3 flex flex-wrap gap-2 text-sm text-slate-500 dark:text-slate-300">
-            <span class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1">MedTech</span>
-            <span class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1">FDM/DLP</span>
-          </div>
-          <div class="mt-4 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
-            <div class="aspect-video grid">
-              <div class="slide flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-600">Ортез · фото 1</div>
-              <div class="slide hidden items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-600">Ортез · фото 2</div>
-              <div class="slide hidden items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-600">Ортез · фото 3</div>
+        <article class="project-card js-gallery" data-index="0">
+          <div class="project-card__body">
+            <div class="space-y-4">
+              <div class="project-card__headline">
+                <span class="project-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3v18"/>
+                    <path d="M6 9h12"/>
+                    <path d="M5 15h14" opacity="0.6"/>
+                    <path d="M9 21h6" opacity="0.4"/>
+                  </svg>
+                </span>
+                <div>
+                  <p class="project-card__eyebrow">Проекты · MedTech</p>
+                  <h3 class="text-xl font-semibold leading-snug">Изготовление ортезов и протезов</h3>
+                </div>
+              </div>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base">Индивидуальные ортезы и протезы полного цикла: от 3D‑сканирования и проектирования до печати, постобработки и примерки.</p>
+              <div class="project-card__tags">
+                <span>MedTech</span>
+                <span>FDM/DLP</span>
+                <span>CAD→Print</span>
+              </div>
+              <div class="project-card__meta">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 6v6l3 3"/>
+                  <circle cx="12" cy="12" r="9"/>
+                </svg>
+                <span>Срок изготовления 5–7 дней: проект ведётся инженером-наставником, команда проходит все этапы от анализа до тестов.</span>
+              </div>
             </div>
-            <div class="flex items-center justify-between p-2">
-              <button class="gallery-nav js-prev" aria-label="Предыдущий слайд">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 4.5 8 12l7.5 7.5Z"/></svg>
-              </button>
-              <div class="flex gap-1 js-dots"></div>
-              <button class="gallery-nav js-next" aria-label="Следующий слайд">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 4.5 7.5 7.5-7.5 7.5Z"/></svg>
-              </button>
+            <div class="project-card__media">
+              <div class="project-card__slider">
+                <div class="aspect-video">
+                  <div class="slide">Сканирование пациента · этап 1</div>
+                  <div class="slide hidden">CAD-модель и топология · этап 2</div>
+                  <div class="slide hidden">Печать и примерка изделия · этап 3</div>
+                </div>
+                <div class="project-card__controls">
+                  <button class="gallery-nav js-prev" aria-label="Предыдущий слайд">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 4.5 8 12l7.5 7.5Z"/></svg>
+                  </button>
+                  <div class="js-dots"></div>
+                  <button class="gallery-nav js-next" aria-label="Следующий слайд">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 4.5 7.5 7.5-7.5 7.5Z"/></svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </article>
-        <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery" data-index="0">
-          <h3 class="text-lg font-semibold">Оцифровка объектов культурного наследия</h3>
-          <p class="mt-1 text-slate-600 dark:text-slate-300 text-sm">Сканирование и восстановление геометрии, подготовка экспозиционных макетов.</p>
-          <div class="mt-4 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
-            <div class="aspect-video grid">
-              <div class="slide flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-600">ОКН · фото 1</div>
-              <div class="slide hidden items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-600">ОКН · фото 2</div>
+        <article class="project-card js-gallery" data-index="0">
+          <div class="project-card__body">
+            <div class="space-y-4">
+              <div class="project-card__headline">
+                <span class="project-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 7h16l-8 5Z"/>
+                    <path d="M6 12v6l6 3 6-3v-6"/>
+                    <path d="M6 9v-2" opacity="0.5"/>
+                    <path d="M18 9v-2" opacity="0.5"/>
+                  </svg>
+                </span>
+                <div>
+                  <p class="project-card__eyebrow">Проекты · Heritage</p>
+                  <h3 class="text-xl font-semibold leading-snug">Оцифровка объектов культурного наследия</h3>
+                </div>
+              </div>
+              <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base">Высокоточная съёмка архитектуры и экспонатов, реконструкция геометрии, подготовка интерактивных и выставочных макетов.</p>
+              <div class="project-card__tags">
+                <span>3D Scan</span>
+                <span>Photogrammetry</span>
+                <span>XR-ready</span>
+              </div>
+              <div class="project-card__meta">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 6h18"/>
+                  <path d="M7 6v12"/>
+                  <path d="M17 6v12"/>
+                  <path d="M4 18h16"/>
+                </svg>
+                <span>Формируем цифровые двойники и каталоги: данные передаются музеям и проектным бюро в согласованных форматах.</span>
+              </div>
             </div>
-            <div class="flex items-center justify-between p-2">
-              <button class="gallery-nav js-prev" aria-label="Предыдущий слайд">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 4.5 8 12l7.5 7.5Z"/></svg>
-              </button>
-              <div class="flex gap-1 js-dots"></div>
-              <button class="gallery-nav js-next" aria-label="Следующий слайд">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 4.5 7.5 7.5-7.5 7.5Z"/></svg>
-              </button>
+            <div class="project-card__media">
+              <div class="project-card__slider">
+                <div class="aspect-video">
+                  <div class="slide">Лазерное сканирование фасада · сцена 1</div>
+                  <div class="slide hidden">Обработка облака точек · сцена 2</div>
+                  <div class="slide hidden">Презентация VR/AR макета · сцена 3</div>
+                </div>
+                <div class="project-card__controls">
+                  <button class="gallery-nav js-prev" aria-label="Предыдущий слайд">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 4.5 8 12l7.5 7.5Z"/></svg>
+                  </button>
+                  <div class="js-dots"></div>
+                  <button class="gallery-nav js-next" aria-label="Следующий слайд">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 4.5 7.5 7.5-7.5 7.5Z"/></svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </article>
@@ -1873,7 +2257,11 @@
       document.querySelectorAll('.js-gallery').forEach(card=>{
         const slides = card.querySelectorAll('.slide')
         const dotsBox = card.querySelector('.js-dots')
-        function setActive(i){ slides.forEach((s,idx)=> s.classList.toggle('hidden', idx!==i)); dotsBox.querySelectorAll('span').forEach((d,idx)=> d.classList.toggle('bg-slate-900', idx===i)); dotsBox.querySelectorAll('span').forEach((d,idx)=> d.classList.toggle('dark:bg-white', idx===i)); card.dataset.index = i }
+        function setActive(i){
+          slides.forEach((s,idx)=> s.classList.toggle('hidden', idx!==i));
+          dotsBox.querySelectorAll('span').forEach((d,idx)=> d.classList.toggle('bg-slate-900', idx===i));
+          card.dataset.index = i;
+        }
         // dots
         dotsBox.innerHTML = ''
         slides.forEach((_,i)=>{ const dot=document.createElement('span'); dot.className='inline-block size-2 rounded-full bg-slate-300 dark:bg-slate-600'; dot.addEventListener('click',()=> setActive(i)); dotsBox.appendChild(dot) })
