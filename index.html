@@ -28,7 +28,6 @@
     "name":"Step3D.Lab — Лаборатория промдизайна и инжиниринга",
     "department":[{"@type":"Organization","name":"Дополнительное профессиональное образование"}],
     "address":[
-      {"@type":"PostalAddress","streetAddress":"ул. Вильгельма Пика, 4, корп. 8","addressLocality":"Москва","addressCountry":"RU"},
       {"@type":"PostalAddress","streetAddress":"ул. Беговая, 12","addressLocality":"Москва","addressCountry":"RU"}
     ],
     "sameAs":["https://technopark-rgsu.ru"]
@@ -57,7 +56,6 @@
             <!-- ссылки генерятся из data-nav ниже -->
           </div>
           <div class="md:hidden flex items-center gap-2">
-            <button id="themeToggleSm" class="rounded-xl border px-3 py-2 text-sm">🌙</button>
             <button id="burger" aria-expanded="false" aria-label="Меню" class="rounded-xl border p-2">
               <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
@@ -74,7 +72,6 @@
           <div class="mt-6 flex flex-wrap gap-3">
             <button id="openModal" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300">Оставить заявку</button>
             <button id="toggleAbout" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium">О лаборатории</button>
-            <button id="themeToggle" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium">Тёмная/Светлая</button>
           </div>
           <div id="aboutBox" class="mt-6 hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 glass p-6">
             <h3 class="text-xl font-semibold mb-2">О лаборатории</h3>
@@ -364,7 +361,7 @@
           <div class="grid place-items-center rounded-2xl bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-100" style="width:64px;height:64px">TP</div>
           <div>
             <div class="font-semibold">Технопарк РГСУ</div>
-            <div class="text-sm text-slate-500 dark:text-slate-300">ресурсная база: ул. Беговая, 12 (лаб. промдизайна), ул. Вильгельма Пика, 4с8 (ауд. 203 и 205)</div>
+            <div class="text-sm text-slate-500 dark:text-slate-300">ресурсная база: Москва, ул. Беговая, д. 12 (лаборатория промдизайна — 2 этаж; лаборатория робототехники — 1 этаж)</div>
           </div>
         </div>
         <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 flex items-center gap-4">
@@ -399,28 +396,50 @@
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <div>
           <h2 class="text-3xl md:text-4xl font-bold">Контакты</h2>
-          <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-prose">Задайте вопрос или оставьте заявку — поможем выбрать формат: учебный модуль, проект, НИОКР или услуга.</p>
+          <a href="https://yandex.ru/maps/-/CDfFP6~b" target="_blank" rel="noreferrer" class="mt-4 inline-flex items-start gap-3 rounded-2xl px-3 py-3 transition hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">
+            <span class="mt-1 inline-flex size-3 rounded-full bg-violet-500"></span>
+            <span>
+              <span class="block text-sm uppercase tracking-wide text-slate-500">САО · Хорошёвский район</span>
+              <span class="block font-semibold text-lg text-slate-900 dark:text-slate-100">Москва, ул. Беговая, д. 12</span>
+            </span>
+          </a>
           <div class="mt-6 flex flex-wrap gap-3">
             <button class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300" id="openModal2">Оставить заявку</button>
             <a href="https://t.me/step_3d_mngr" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700">Написать нам в телеграм</a>
-            <button id="shareLink" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm">Поделиться ссылкой</button>
+            <button id="shareLink" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm" aria-label="Поделиться ссылкой">
+              <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M8.59 13.51l6.83 3.91m-6.83-7.83l6.83-3.91M18 8a3 3 0 10-3-3m3 14a3 3 0 10-3-3m-9 3a3 3 0 100-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="sr-only">Поделиться ссылкой</span>
+            </button>
           </div>
         </div>
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-soft">
-          <h3 class="font-semibold mb-2">Адреса</h3>
-          <div class="grid sm:grid-cols-2 gap-4 text-sm text-slate-700 dark:text-slate-300">
-            <div><div class="font-medium">ВДНХ</div><div>ул. Вильгельма Пика, 4, корп. 8</div></div>
-            <div><div class="font-medium">Беговая</div><div>ул. Беговая, 12</div></div>
-          </div>
-          <div class="mt-6">
-            <div class="flex items-center gap-2 mb-3">
-              <button class="px-3 py-1.5 rounded-xl text-sm border bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-slate-900 dark:border-white" data-maptab="0">ВДНХ</button>
-              <button class="px-3 py-1.5 rounded-xl text-sm border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700" data-maptab="1">Беговая</button>
-            </div>
-            <div class="relative w-full overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 aspect-video">
-              <iframe title="Карта — ВДНХ" class="absolute inset-0 w-full h-full" data-map="0" src="https://www.google.com/maps?q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,%20%D1%83%D0%BB.%20%D0%92%D0%B8%D0%BB%D1%8C%D0%B3%D0%B5%D0%BB%D1%8C%D0%BC%D0%B0%20%D0%9F%D0%B8%D0%BA%D0%B0,%204,%20%D0%BA%D0%BE%D1%80%D0%BF.%208&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-              <iframe title="Карта — Беговая" class="absolute inset-0 w-full h-full opacity-0 pointer-events-none" data-map="1" src="https://www.google.com/maps?q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,%20%D1%83%D0%BB.%20%D0%91%D0%B5%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F,%2012&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+          <h3 class="text-lg font-semibold mb-4">Оставить заявку</h3>
+          <form id="inlineRequestForm" class="grid gap-3">
+            <label class="grid gap-1 text-sm">
+              <span>Имя</span>
+              <input required name="name" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700">
+            </label>
+            <label class="grid gap-1 text-sm">
+              <span>Телефон</span>
+              <input required name="phone" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700">
+            </label>
+            <label class="grid gap-1 text-sm">
+              <span>Email</span>
+              <input type="email" name="email" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700">
+            </label>
+            <label class="grid gap-1 text-sm">
+              <span>Комментарий</span>
+              <textarea rows="3" name="comment" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700" placeholder="Опишите задачу, сроки, ссылки"></textarea>
+            </label>
+            <label class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <input required type="checkbox" class="h-4 w-4">
+              <span>Согласен(а) на обработку персональных данных</span>
+            </label>
+            <button type="submit" class="mt-2 inline-flex justify-center rounded-xl bg-slate-900 px-4 py-2 text-white font-medium hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:focus:ring-slate-600">Оставить заявку</button>
+          </form>
+          <div class="mt-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 p-4 text-sm text-slate-700 dark:text-slate-300">
+            <div class="font-semibold text-slate-900 dark:text-slate-100">Москва, ул. Беговая, д. 12</div>
+            <div>Лаборатория промдизайна (2 этаж), лаборатория робототехники (1 этаж)</div>
           </div>
           <div class="mt-4 text-sm text-slate-500 dark:text-slate-400">© <span id="y"></span> Технопарк РГСУ</div>
         </div>
@@ -465,7 +484,7 @@
         <label class="grid gap-1 text-sm"><span>Email</span><input type="email" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700" name="email"></label>
         <label class="grid gap-1 text-sm"><span>Комментарий</span><textarea rows="3" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700" name="comment" placeholder="Опишите задачу, сроки, ссылки"></textarea></label>
         <div class="flex items-center gap-2 text-sm"><input id="agree" required type="checkbox" class="h-4 w-4"><label for="agree">Согласен(а) на обработку персональных данных</label></div>
-        <div class="mt-2 flex gap-3"><button class="rounded-xl bg-slate-900 text-white px-4 py-2 hover:bg-slate-800" type="submit">Отправить</button><button class="rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2" type="button" id="closeModal">Отмена</button></div>
+        <div class="mt-2 flex gap-3"><button class="rounded-xl bg-slate-900 text-white px-4 py-2 hover:bg-slate-800" type="submit">Оставить заявку</button><button class="rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2" type="button" id="closeModal">Отмена</button></div>
       </form>
     </div>
   </div>
@@ -474,14 +493,6 @@
   <div id="nav-data" class="hidden" data-nav='[{"id":"services","label":"Возможности"},{"id":"equipment","label":"Оборудование"},{"id":"projects","label":"Проекты"},{"id":"courses","label":"Курсы"},{"id":"team","label":"Команда"},{"id":"faq","label":"FAQ"},{"id":"contacts","label":"Контакты"}]'></div>
 
   <script>
-    // ===== Тема (dark/light)
-    const root = document.documentElement
-    const applyThemeButton = (btn) => btn && (btn.textContent = root.classList.contains('dark') ? '☀️' : '🌙')
-    function setTheme(mode){ if(mode==='dark'){ root.classList.add('dark') } else { root.classList.remove('dark') } localStorage.setItem('theme', mode) }
-    (function initTheme(){ const saved = localStorage.getItem('theme'); if(saved){ setTheme(saved) } else if (window.matchMedia('(prefers-color-scheme: dark)').matches){ setTheme('dark') } else { setTheme('light') } })()
-    const themeToggle = document.getElementById('themeToggle'); const themeToggleSm = document.getElementById('themeToggleSm')
-    ;[themeToggle, themeToggleSm].forEach(btn=> btn && btn.addEventListener('click', ()=> setTheme(root.classList.contains('dark') ? 'light' : 'dark')))
-
     // ===== Динамическое меню (desktop + mobile)
     const navData = JSON.parse(document.getElementById('nav-data').dataset.nav)
     const linksWrap = document.getElementById('links')
@@ -496,13 +507,6 @@
         a.className = variant==='desktop' ? 'px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800' : 'px-3 py-2 rounded-xl text-sm font-medium border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700'
         container.appendChild(a)
       })
-      if(variant==='desktop'){
-        const tBtn = document.createElement('button')
-        tBtn.className = 'ml-2 rounded-xl border px-3 py-2 text-sm'
-        tBtn.textContent = root.classList.contains('dark') ? 'Светлая' : 'Тёмная'
-        tBtn.addEventListener('click', ()=>{ setTheme(root.classList.contains('dark') ? 'light':'dark'); tBtn.textContent = root.classList.contains('dark') ? 'Светлая' : 'Тёмная' })
-        container.appendChild(tBtn)
-      }
     }
     renderLinks(linksWrap, 'desktop'); renderLinks(mobileWrap, 'mobile')
     burger && burger.addEventListener('click', ()=>{ const opened = !mobileWrap.classList.contains('hidden'); burger.setAttribute('aria-expanded', String(!opened)); mobileWrap.classList.toggle('hidden') })
@@ -533,6 +537,7 @@
     document.getElementById('modalBg')?.addEventListener('click', closeModal)
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && !modal.classList.contains('hidden')) closeModal() })
     document.getElementById('requestForm')?.addEventListener('submit', (e)=>{ e.preventDefault(); const fd = new FormData(e.target); console.log('[Request]', Object.fromEntries(fd.entries())); closeModal(); alert('Заявка отправлена! (демо)') })
+    document.getElementById('inlineRequestForm')?.addEventListener('submit', (e)=>{ e.preventDefault(); const fd = new FormData(e.target); console.log('[Inline request]', Object.fromEntries(fd.entries())); e.target.reset(); alert('Заявка отправлена! (демо)') })
 
     // ===== «О лаборатории» toggle
     document.getElementById('toggleAbout')?.addEventListener('click', ()=> document.getElementById('aboutBox').classList.toggle('hidden'))
@@ -552,19 +557,6 @@
       })
     }
     initGalleries()
-
-    // ===== Карта табы
-    document.querySelectorAll('[data-maptab]').forEach(btn=> btn.addEventListener('click', ()=>{
-      const i = btn.dataset.maptab
-      document.querySelectorAll('[data-maptab]').forEach(b=> b.classList.toggle('bg-slate-900', b===btn))
-      document.querySelectorAll('[data-maptab]').forEach(b=> b.classList.toggle('text-white', b===btn))
-      document.querySelectorAll('[data-maptab]').forEach(b=> b.classList.toggle('dark:bg-white', b===btn))
-      document.querySelectorAll('[data-maptab]').forEach(b=> b.classList.toggle('dark:text-slate-900', b===btn))
-      document.querySelectorAll('[data-map]').forEach(frame=>{
-        frame.classList.toggle('opacity-0', frame.dataset.map !== i)
-        frame.classList.toggle('pointer-events-none', frame.dataset.map !== i)
-      })
-    }))
 
     // ===== Поделиться ссылкой
     document.getElementById('shareLink')?.addEventListener('click', async ()=>{
