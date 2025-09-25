@@ -8,6 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='6' y='6' width='52' height='52' rx='12' fill='%230ea5e9'/><path d='M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36' stroke='%23fff' stroke-width='2' fill='none'/></svg>">
   <!-- Tailwind (CDN, удобно для GitHub Pages). Для продакшна соберите локально. -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <script>
     // Доп. токены Tailwind
     tailwind.config = { theme: { extend: { boxShadow: { soft: '0 6px 30px rgba(15,23,42,.08)' } } } }
@@ -16,10 +17,52 @@
     /* Анимации и мелочи без фреймворков */
     @keyframes floatY { 0%,100% { transform: translate(-50%,-50%) translateY(-8px) } 50% { transform: translate(-50%,-50%) translateY(8px) } }
     @keyframes driftX { 0%,100% { transform: translateY(-50%) translateX(-10px) } 50% { transform: translateY(-50%) translateX(10px) } }
-    .invader-grid > div { border-radius: 2px }
     .glass { backdrop-filter: blur(8px) }
     .active-link { background: rgb(15 23 42); color: white }
     .dark .active-link { background: white; color: rgb(15 23 42) }
+
+    /* Hero: «космические захватчики» */
+    #invaders-hero {
+      position: relative;
+      width: 100%;
+      height: clamp(320px, 55vh, 620px);
+      border-radius: 28px;
+      overflow: hidden;
+      background: radial-gradient(1200px 600px at 80% -10%, #dff4ff 0%, #eef7ff 25%, #f8fbff 55%, #ffffff 100%);
+      box-shadow: 0 20px 60px rgba(16,24,40,.06) inset;
+      isolation: isolate;
+    }
+    #invaders-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #invaders-hero .overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 28px clamp(16px, 4vw, 48px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      pointer-events: none;
+    }
+    #invaders-hero .badge {
+      font: 600 12px/1.2 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+      color: #0a2540;
+      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(10,37,64,.08);
+      padding: 8px 12px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #invaders-canvas { display: none; }
+      #invaders-hero { background: linear-gradient(135deg,#eef6ff,#ffffff 60%); }
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -78,28 +121,14 @@
             <p class="text-slate-700 dark:text-slate-300">Step3D.Lab — команда инженеров, дизайнеров и преподавателей. Работаем на базе технопарка РГСУ совместно с ООО «СТЕП 3Д»: выполняем R&amp;D‑проекты, проводим курсы ДПО (48–72 ч), сопровождаем производственные задачи и студенческие инициативы. Фокус — CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, прототипирование и аддитивное производство.</p>
           </div>
         </div>
-        <!-- Абстрактная 3D‑сцена без библиотек -->
-        <div class="relative aspect-square">
-          <div class="absolute inset-0 grid grid-cols-9 grid-rows-9 gap-1 opacity-25 invader-grid" aria-hidden>
-            <!-- «Космический захватчик» рамка -->
-            <script>
-              document.addEventListener('DOMContentLoaded',()=>{
-                const g = document.currentScript.parentElement;
-                const on = new Set([0,1,2,3,5,6,7,8,9,17,27,35,45,53,63,71,72,73,74,75,76,77,78,79,80]);
-                for(let i=0;i<81;i++){ const d=document.createElement('div'); if(on.has(i)) d.className='bg-slate-400/70'; g.appendChild(d); }
-              })
-            </script>
-          </div>
-          <!-- Плавающие «кубы» -->
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[floatY_4s_ease-in-out_infinite]">
-            <div class="size-24 md:size-28 rotate-45 bg-gradient-to-br from-slate-200 to-slate-400 dark:from-slate-600 dark:to-slate-800 rounded-[1.25rem] shadow-lg"></div>
-          </div>
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[floatY_5.5s_ease-in-out_infinite]">
-            <div class="size-20 md:size-24 rotate-45 bg-gradient-to-br from-slate-200 to-slate-400 dark:from-slate-600 dark:to-slate-800 rounded-[1.25rem] shadow-lg"></div>
-          </div>
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[floatY_7s_ease-in-out_infinite]">
-            <div class="size-16 md:size-20 rotate-45 bg-gradient-to-br from-slate-200 to-slate-400 dark:from-slate-600 dark:to-slate-800 rounded-[1.25rem] shadow-lg"></div>
-          </div>
+        <!-- Hero: космические захватчики -->
+        <div class="relative">
+          <section id="invaders-hero" aria-label="Динамическая 3D-сцена космических захватчиков">
+            <canvas id="invaders-canvas"></canvas>
+            <div class="overlay">
+              <span class="badge">Step3D.Lab · Hero animation</span>
+            </div>
+          </section>
         </div>
       </div>
     </div>
@@ -491,6 +520,229 @@
 
   <!-- Секции для навигации (для автоподсветки) -->
   <div id="nav-data" class="hidden" data-nav='[{"id":"services","label":"Возможности"},{"id":"equipment","label":"Оборудование"},{"id":"projects","label":"Проекты"},{"id":"courses","label":"Курсы"},{"id":"team","label":"Команда"},{"id":"faq","label":"FAQ"},{"id":"contacts","label":"Контакты"}]'></div>
+
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('invaders-canvas')
+      const section = document.getElementById('invaders-hero')
+
+      if (!canvas || !section || typeof THREE === 'undefined') return
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      const scene = new THREE.Scene()
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
+      camera.position.set(0, 0.8, 6)
+
+      const ambient = new THREE.AmbientLight(0xffffff, 0.9)
+      scene.add(ambient)
+
+      const dir = new THREE.DirectionalLight(0xffffff, 0.4)
+      dir.position.set(2, 3, 2)
+      scene.add(dir)
+
+      function onResize() {
+        const { width, height } = section.getBoundingClientRect()
+        renderer.setSize(width, height, false)
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+      }
+      window.addEventListener('resize', onResize, { passive: true })
+      onResize()
+
+      let seed = 42
+      function rand() { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296 }
+      function lerp(a, b, t) { return a + (b - a) * t }
+      const TAU = Math.PI * 2
+
+      function makeInvaderTexture({ fg = '#0b3a5b', glow = '#74b6ff', scale = 6 }) {
+        const mask = [
+          '00111000000',
+          '01111100000',
+          '11111110000',
+          '11011011000',
+          '11111111100',
+          '01011001000',
+          '00100100000',
+          '01000001000'
+        ]
+        const w = mask[0].length, h = mask.length
+        const cw = w * scale, ch = h * scale
+
+        const c = document.createElement('canvas')
+        c.width = cw; c.height = ch
+        const ctx = c.getContext('2d')
+
+        const g = ctx.createRadialGradient(cw / 2, ch / 2, scale, cw / 2, ch / 2, cw)
+        g.addColorStop(0, glow + 'aa')
+        g.addColorStop(1, 'rgba(255,255,255,0)')
+        ctx.fillStyle = g
+        ctx.fillRect(0, 0, cw, ch)
+
+        ctx.fillStyle = fg
+        for (let y = 0; y < h; y++) {
+          for (let x = 0; x < w; x++) {
+            if (mask[y][x] === '1') {
+              ctx.fillRect(x * scale, y * scale, scale, scale)
+              ctx.fillRect((w - 1 - x) * scale, y * scale, scale, scale)
+            }
+          }
+        }
+        return new THREE.CanvasTexture(c)
+      }
+
+      const COLORS = [
+        ['#0b3a5b', '#74b6ff'],
+        ['#004d3f', '#6ff0c4'],
+        ['#4b0051', '#d7a1ff'],
+        ['#5b2a00', '#ffc98a']
+      ]
+
+      function makeInvaderMesh(colorPair) {
+        const tex = makeInvaderTexture({ fg: colorPair[0], glow: colorPair[1], scale: 8 })
+        const mat = new THREE.SpriteMaterial({ map: tex, depthWrite: false, transparent: true, opacity: 0.96, color: 0xffffff })
+        const sprite = new THREE.Sprite(mat)
+        sprite.scale.set(0.9, 0.9, 0.9)
+        sprite.userData = { baseScale: 0.9 }
+        return sprite
+      }
+
+      const INVADERS = []
+      const COUNT = 14
+      for (let i = 0; i < COUNT; i++) {
+        const c = COLORS[i % COLORS.length]
+        const s = makeInvaderMesh(c)
+        const r = lerp(1.4, 3.2, rand())
+        const speed = lerp(0.12, 0.32, rand()) * (rand() > 0.5 ? 1 : -1)
+        const phase = rand() * TAU
+        const height = lerp(-0.6, 0.7, rand())
+        const wobble = lerp(0.06, 0.18, rand())
+        s.position.set(0, height, -lerp(0.5, 2.0, rand()))
+        s.userData.orbit = { r, speed, phase, wobble, height }
+        scene.add(s)
+        INVADERS.push(s)
+      }
+
+      const ARCS = []
+      function spawnArc(a, b) {
+        const segments = 14
+        const positions = new Float32Array((segments + 1) * 3)
+        const start = a.position.clone()
+        const end = b.position.clone()
+        const dir = end.clone().sub(start)
+        const len = dir.length()
+        for (let i = 0; i <= segments; i++) {
+          const t = i / segments
+          const p = start.clone().addScaledVector(dir, t)
+          const n = new THREE.Vector3(-dir.y, dir.x, 0).normalize()
+            .multiplyScalar((Math.sin(t * TAU * 2 + rand() * 2) * 0.05 + (rand() - 0.5) * 0.06) * (0.6 + 0.4 * Math.sin(len * 1.7)))
+          p.add(n)
+          positions[i * 3 + 0] = p.x
+          positions[i * 3 + 1] = p.y
+          positions[i * 3 + 2] = p.z + 0.01
+        }
+        const geom = new THREE.BufferGeometry()
+        geom.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+        const mat = new THREE.LineBasicMaterial({ color: 0x99ccff, transparent: true, opacity: 0.9 })
+        const line = new THREE.Line(geom, mat)
+        scene.add(line)
+
+        const mid = start.clone().lerp(end, 0.5)
+        const sparks = makeSparks(mid, 24)
+        scene.add(sparks)
+
+        ARCS.push({ line, mat, life: 0.18, sparks })
+      }
+
+      function makeSparks(center, count) {
+        const geom = new THREE.BufferGeometry()
+        const positions = new Float32Array(count * 3)
+        const velocities = []
+        for (let i = 0; i < count; i++) {
+          positions[i * 3 + 0] = center.x
+          positions[i * 3 + 1] = center.y
+          positions[i * 3 + 2] = center.z + 0.02
+          const v = new THREE.Vector3((rand() - 0.5) * 0.9, (rand() - 0.2) * 1.2, (rand() - 0.5) * 0.2).multiplyScalar(0.6)
+          velocities.push(v)
+        }
+        geom.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+        const mat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.035, transparent: true, opacity: 1 })
+        const pts = new THREE.Points(geom, mat)
+        pts.userData.velocities = velocities
+        pts.userData.life = 0.5
+        return pts
+      }
+
+      let t0 = performance.now() / 1000
+      function tick() {
+        const t = performance.now() / 1000
+        const dt = Math.min(0.033, t - t0)
+        t0 = t
+
+        INVADERS.forEach((s) => {
+          const { r, speed, phase, wobble, height } = s.userData.orbit
+          const ang = phase + t * speed
+          const x = Math.cos(ang) * r
+          const y = height + Math.sin(ang * 1.9) * wobble
+          const z = s.position.z
+          s.position.set(x, y, z)
+          const scale = s.userData.baseScale * (1 + Math.sin(ang * 2.3) * 0.06)
+          s.scale.set(scale, scale, scale)
+          s.material.rotation = Math.sin(ang * 1.3) * 0.15
+        })
+
+        if (Math.random() < 0.02) {
+          const a = INVADERS[Math.floor(Math.random() * INVADERS.length)]
+          let b = INVADERS[Math.floor(Math.random() * INVADERS.length)]
+          if (a !== b && a.position.distanceTo(b.position) < 3.2) {
+            spawnArc(a, b)
+          }
+        }
+
+        for (let i = ARCS.length - 1; i >= 0; i--) {
+          const arc = ARCS[i]
+          arc.life -= dt
+          arc.mat.opacity = Math.max(0, arc.life / 0.18)
+          if (arc.sparks) {
+            const pts = arc.sparks
+            pts.userData.life -= dt
+            const pos = pts.geometry.attributes.position
+            for (let j = 0; j < pts.userData.velocities.length; j++) {
+              const v = pts.userData.velocities[j]
+              v.y -= 0.98 * dt * 0.3
+              pos.array[j * 3 + 0] += v.x * dt
+              pos.array[j * 3 + 1] += v.y * dt
+              pos.array[j * 3 + 2] += v.z * dt
+            }
+            pts.material.opacity = Math.max(0, pts.userData.life / 0.5)
+            pos.needsUpdate = true
+            if (pts.userData.life <= 0) {
+              scene.remove(pts)
+              arc.sparks = null
+            }
+          }
+          if (arc.life <= 0) {
+            scene.remove(arc.line)
+            arc.line.geometry.dispose()
+            ARCS.splice(i, 1)
+          }
+        }
+
+        renderer.render(scene, camera)
+        requestAnimationFrame(tick)
+      }
+      tick()
+
+      onResize()
+
+      window.addEventListener('beforeunload', () => {
+        renderer.dispose()
+        INVADERS.forEach(s => s.material.map.dispose())
+      })
+    })()
+  </script>
 
   <script>
     // ===== Динамическое меню (desktop + mobile)
