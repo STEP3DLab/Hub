@@ -83,6 +83,59 @@
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.3);
 }
 
+.course-card__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(148, 163, 184, 0.35), rgba(148, 163, 184, 0.55));
+  color: #0f172a;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 18px 40px -24px rgba(15, 23, 42, 0.55);
+}
+
+.course-card__avatar svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.course-card__avatar span {
+  font-size: 0.85rem;
+}
+
+.course-card__avatar--sky {
+  background: linear-gradient(135deg, rgba(186, 230, 253, 0.9), rgba(14, 165, 233, 0.85));
+}
+
+.course-card__avatar--emerald {
+  background: linear-gradient(135deg, rgba(209, 250, 229, 0.9), rgba(16, 185, 129, 0.85));
+}
+
+.course-card__avatar--indigo {
+  background: linear-gradient(135deg, rgba(199, 210, 254, 0.9), rgba(99, 102, 241, 0.85));
+}
+
+.dark .course-card__avatar {
+  color: rgba(241, 245, 249, 0.96);
+  box-shadow: 0 22px 44px -24px rgba(15, 23, 42, 0.75);
+}
+
+.dark .course-card__avatar--sky {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.42), rgba(56, 189, 248, 0.68));
+}
+
+.dark .course-card__avatar--emerald {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(34, 197, 94, 0.72));
+}
+
+.dark .course-card__avatar--indigo {
+  background: linear-gradient(135deg, rgba(129, 140, 248, 0.45), rgba(79, 70, 229, 0.76));
+}
+
 
 /* Hero section */
 .hero {
