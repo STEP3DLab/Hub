@@ -1364,14 +1364,9 @@
   <!-- Секции для навигации (для автоподсветки) -->
   <div id="nav-data" class="hidden" data-nav='[{"id":"services","label":"Возможности"},{"id":"equipment","label":"FabLabs R22"},{"id":"projects","label":"Проекты"},{"id":"courses","label":"Обучение"},{"id":"team","label":"Команда"},{"id":"faq","label":"FAQ (часто задаваемые вопросы)"},{"id":"contacts","label":"Контакты"}]'></div>
 
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-
   <script>
-    (() => {
-      const canvas = document.getElementById('invaders-canvas')
-      const section = document.getElementById('invaders-hero')
-
-      if (!canvas || !section || typeof THREE === 'undefined') return
+    function initInvaders(THREE, { canvas, section }) {
+      if (!THREE || !canvas || !section) return null
 
       const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -1519,6 +1514,7 @@
       }
 
       let t0 = performance.now() / 1000
+      let rafId = null
       function tick() {
         const t = performance.now() / 1000
         const dt = Math.min(0.033, t - t0)
@@ -1574,16 +1570,79 @@
         }
 
         renderer.render(scene, camera)
-        requestAnimationFrame(tick)
+        rafId = requestAnimationFrame(tick)
       }
-      tick()
 
-      onResize()
+      function start() {
+        if (rafId !== null) return
+        t0 = performance.now() / 1000
+        rafId = requestAnimationFrame(tick)
+      }
+
+      function stop() {
+        if (rafId === null) return
+        cancelAnimationFrame(rafId)
+        rafId = null
+      }
 
       window.addEventListener('beforeunload', () => {
+        stop()
         renderer.dispose()
-        INVADERS.forEach(s => s.material.map.dispose())
-      })
+        INVADERS.forEach((s) => s.material.map.dispose())
+      }, { once: true })
+
+      return { start, stop }
+    }
+
+    (() => {
+      const section = document.getElementById('invaders-hero')
+      const canvas = document.getElementById('invaders-canvas')
+      if (!section || !canvas) return
+
+      const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+      if (reduceMotionQuery.matches) return
+
+      let controller = null
+      let loadingPromise = null
+
+      const ensureController = () => {
+        if (controller) return Promise.resolve(controller)
+        if (loadingPromise) return loadingPromise
+
+        loadingPromise = import('https://unpkg.com/three@0.160.0/build/three.module.js')
+          .then((module) => {
+            const THREE = module.default ?? module
+            controller = initInvaders(THREE, { canvas, section })
+            return controller
+          })
+          .finally(() => {
+            loadingPromise = null
+          })
+
+        return loadingPromise
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.target !== section) return
+          if (entry.isIntersecting) {
+            ensureController()
+              .then((ctrl) => ctrl && ctrl.start())
+              .catch((error) => console.error('Не удалось инициализировать сцену Invaders', error))
+          } else if (controller) {
+            controller.stop()
+          }
+        })
+      }, { threshold: 0.25 })
+
+      observer.observe(section)
+
+      const actionButton = document.getElementById('heroAction')
+      if (actionButton) {
+        actionButton.addEventListener('click', () => {
+          ensureController().catch(() => {})
+        })
+      }
     })()
   </script>
 
