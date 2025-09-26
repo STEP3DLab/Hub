@@ -21,6 +21,123 @@
     .active-link { background: rgb(15 23 42); color: white }
     .dark .active-link { background: white; color: rgb(15 23 42) }
 
+    /* Хедер в стилистике NotebookLM */
+    .site-topnav {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(226, 232, 240, 0.88));
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+    .dark .site-topnav {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.88));
+      border-bottom-color: rgba(71, 85, 105, 0.55);
+      box-shadow: 0 18px 40px rgba(2, 6, 23, 0.6);
+    }
+    .site-topnav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.75rem;
+      min-height: 72px;
+    }
+    .site-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: inherit;
+    }
+    .site-brand__mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.32);
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(34, 197, 94, 0.12));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+    .site-brand__mark img {
+      display: block;
+      width: 120px;
+      height: 28px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 18px rgba(14, 165, 233, 0.35));
+    }
+    .dark .site-brand__mark {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.22), rgba(37, 99, 235, 0.2));
+      border-color: rgba(148, 163, 184, 0.38);
+    }
+    .site-brand__name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+      font-size: 1rem;
+    }
+    .site-brand__title { font-size: 1.05rem; }
+    .site-brand__tagline {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgb(71 85 105);
+    }
+    .dark .site-brand__tagline { color: rgba(226, 232, 240, 0.76); }
+    .site-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: white;
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      box-shadow: 0 14px 32px rgba(14, 165, 233, 0.3);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .site-cta--nav { white-space: nowrap; }
+    .site-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 36px rgba(14, 165, 233, 0.38);
+    }
+    .site-cta:focus-visible {
+      outline: 3px solid rgba(56, 189, 248, 0.6);
+      outline-offset: 3px;
+    }
+    .site-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(255, 255, 255, 0.65);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .site-toggle:hover {
+      border-color: rgba(14, 165, 233, 0.6);
+      box-shadow: 0 8px 18px rgba(14, 165, 233, 0.25);
+      transform: translateY(-1px);
+    }
+    .site-toggle:focus-visible {
+      outline: 3px solid rgba(56, 189, 248, 0.55);
+      outline-offset: 3px;
+    }
+    .dark .site-toggle {
+      background: rgba(15, 23, 42, 0.6);
+      border-color: rgba(71, 85, 105, 0.55);
+    }
+    @media (max-width: 768px) {
+      .site-topnav__inner { min-height: 64px; gap: 1rem; }
+      .site-brand__name { display: none; }
+      .site-brand__mark img { width: 96px; }
+      .site-cta--nav { display: none; }
+    }
+
     /* Hero: «космические захватчики» */
     #invaders-hero {
       position: relative;
@@ -491,50 +608,54 @@
   <!-- Прогресс-бар прокрутки -->
   <div id="progress" class="fixed top-0 left-0 h-1 bg-slate-900/90 origin-left z-50" style="transform:scaleX(0);transform-origin:left"></div>
 
-  <header class="relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-sky-300/30 blur-3xl"></div>
-      <div class="absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-emerald-300/30 blur-3xl"></div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-28 md:pb-18 relative z-10">
-      <!-- Навигация -->
-      <nav class="mb-10" aria-label="Главная навигация">
-        <div class="flex items-center justify-between gap-6">
-          <a href="#top" class="flex items-center gap-3 font-semibold">
-            <svg viewBox="0 0 64 64" class="h-12 w-12"><defs><linearGradient id="g3d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#22c55e"/></linearGradient></defs><rect x="6" y="6" width="52" height="52" rx="12" fill="url(#g3d)"/><path d="M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36" stroke="#fff" stroke-width="2" fill="none"/></svg>
-            <img src="Logo.svg" alt="Логотип FabLabs R22" class="h-10 w-auto">
-            <svg viewBox="0 0 32 32" class="h-6 w-6 text-slate-900 dark:text-slate-100"><rect x="6" y="8" width="4" height="4" rx="1" fill="currentColor"/><rect x="22" y="8" width="4" height="4" rx="1" fill="currentColor"/><rect x="8" y="12" width="16" height="4" fill="currentColor"/><rect x="4" y="16" width="24" height="4" fill="currentColor"/><rect x="8" y="20" width="4" height="4" fill="currentColor"/><rect x="20" y="20" width="4" height="4" fill="currentColor"/><rect x="12" y="24" width="8" height="4" fill="currentColor"/></svg>
-            Step3D.Lab
-          </a>
-          <div class="hidden md:flex items-center gap-1" id="links">
-            <!-- ссылки генерятся из data-nav ниже -->
-          </div>
-          <div class="md:hidden flex items-center gap-2">
-            <button id="burger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Меню" class="rounded-xl border p-2">
-              <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </button>
-          </div>
+  <header class="relative">
+    <div class="site-topnav sticky top-0 z-40">
+      <nav class="site-topnav__inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Главная навигация">
+        <a href="#top" class="site-brand" aria-label="Step3D.Lab — на главную">
+          <span class="site-brand__mark" aria-hidden="true">
+            <img src="Logo.svg" alt="">
+          </span>
+          <span class="site-brand__name">
+            <span class="site-brand__title">Step3D.Lab</span>
+            <span class="site-brand__tagline">Инженерный центр</span>
+          </span>
+        </a>
+        <div class="hidden md:flex items-center gap-1" id="links" aria-label="Основные разделы">
+          <!-- ссылки генерятся из data-nav ниже -->
         </div>
-        <div id="mobileMenu" class="md:hidden hidden fixed inset-0 z-[70]" role="dialog" aria-modal="true" aria-label="Мобильное меню">
-          <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-menu-overlay></div>
-          <div class="absolute inset-y-0 left-0 right-0 flex justify-end">
-            <div class="menu-panel relative h-full w-full max-w-xs translate-x-full bg-white dark:bg-slate-900 px-6 py-10 shadow-2xl transition-transform duration-200" data-menu-panel>
-              <div class="flex items-center justify-between gap-4">
-                <span class="text-lg font-semibold">Навигация</span>
-                <button type="button" class="rounded-xl border border-slate-200 dark:border-slate-700 p-2" data-menu-close aria-label="Закрыть меню">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </button>
-              </div>
-              <div id="mobile" class="mt-8 grid gap-2" role="menu"></div>
-            </div>
-          </div>
+        <div class="flex items-center gap-2">
+          <a href="#contacts" class="site-cta site-cta--nav">Связаться</a>
+          <button id="burger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Меню" class="site-toggle md:hidden">
+            <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
         </div>
       </nav>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden fixed inset-0 z-[70]" role="dialog" aria-modal="true" aria-label="Мобильное меню">
+      <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-menu-overlay></div>
+      <div class="absolute inset-y-0 right-0 flex w-full justify-end">
+        <div class="menu-panel relative h-full w-full max-w-xs translate-x-full bg-white dark:bg-slate-900 px-6 py-10 shadow-2xl transition-transform duration-200" data-menu-panel>
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-lg font-semibold">Навигация</span>
+            <button type="button" class="site-toggle size-10 p-0 text-base" data-menu-close aria-label="Закрыть меню">
+              <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <div id="mobile" class="mt-8 grid gap-2" role="menu"></div>
+        </div>
+      </div>
+    </div>
 
-      <!-- Hero -->
-      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" id="top">
-        <div>
+    <div class="relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-sky-300/30 blur-3xl"></div>
+        <div class="absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-emerald-300/30 blur-3xl"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 md:pt-24 md:pb-20 relative z-10">
+        <!-- Hero -->
+        <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" id="top">
+          <div>
 
           <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-prose">Инженерный центр Step3D.Lab: цифровое проектирование, реверсивный инжиниринг, 3D‑сканирование и аддитивное производство. Команда технопарка РГСУ и ООО «СТЕП 3Д» выполняет разработки, сопровождает внедрение и обучает специалистов.</p>
           <div class="mt-6 flex flex-wrap gap-3">
