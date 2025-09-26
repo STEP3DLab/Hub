@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 48" role="img" aria-labelledby="title desc">
+  <title id="title">Логотип технопарка РГСУ</title>
+  <desc id="desc">Стилизация: динамичные формы и текст «Технопарк РГСУ»</desc>
+  <defs>
+    <linearGradient id="badgeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#22c55e" />
+    </linearGradient>
+    <linearGradient id="arcGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#e0f2fe" stop-opacity="0.85" />
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect x="1" y="1" width="62" height="46" rx="14" fill="url(#badgeGradient)" />
+    <g transform="translate(12 10)">
+      <path d="M0 22c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="url(#arcGradient)" stroke-width="3.4" stroke-linecap="round" />
+      <path d="M6 12.5V5.2C6 2.328 8.686 0 12 0s6 2.328 6 5.2V22" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M0 22h24" stroke="#bfdbfe" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" />
+      <circle cx="12" cy="22" r="3" fill="#fff" />
+    </g>
+    <g transform="translate(70 9)" fill="#0f172a">
+      <text font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="700" letter-spacing=".02em">
+        <tspan x="0" y="17">ТЕХНОПАРК</tspan>
+      </text>
+      <text font-family="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" letter-spacing=".18em">
+        <tspan x="0" y="34">РГСУ</tspan>
+      </text>
+    </g>
+  </g>
+</svg>
