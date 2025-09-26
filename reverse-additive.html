@@ -16,42 +16,182 @@
     .glass { backdrop-filter: blur(8px) }
     .active-link { background: rgb(15 23 42); color: white }
     .dark .active-link { background: white; color: rgb(15 23 42) }
+
+    /* Универсальная шапка */
+    .site-topnav {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(226, 232, 240, 0.88));
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+    .dark .site-topnav {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.88));
+      border-bottom-color: rgba(71, 85, 105, 0.55);
+      box-shadow: 0 18px 40px rgba(2, 6, 23, 0.6);
+    }
+    .site-topnav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.75rem;
+      min-height: 72px;
+    }
+    .site-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: inherit;
+    }
+    .site-brand__mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.32);
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(34, 197, 94, 0.12));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+    .site-brand__mark img {
+      display: block;
+      width: 120px;
+      height: 28px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 18px rgba(14, 165, 233, 0.35));
+    }
+    .dark .site-brand__mark {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.22), rgba(37, 99, 235, 0.2));
+      border-color: rgba(148, 163, 184, 0.38);
+    }
+    .site-brand__name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+      font-size: 1rem;
+    }
+    .site-brand__title { font-size: 1.05rem; }
+    .site-brand__tagline {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgb(71 85 105);
+    }
+    .dark .site-brand__tagline { color: rgba(226, 232, 240, 0.76); }
+    .site-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: white;
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      box-shadow: 0 14px 32px rgba(14, 165, 233, 0.3);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .site-cta--nav { white-space: nowrap; }
+    .site-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 36px rgba(14, 165, 233, 0.38);
+    }
+    .site-cta:focus-visible {
+      outline: 3px solid rgba(56, 189, 248, 0.6);
+      outline-offset: 3px;
+    }
+    .site-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(255, 255, 255, 0.65);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .site-toggle:hover {
+      border-color: rgba(14, 165, 233, 0.6);
+      box-shadow: 0 8px 18px rgba(14, 165, 233, 0.25);
+      transform: translateY(-1px);
+    }
+    .site-toggle:focus-visible {
+      outline: 3px solid rgba(56, 189, 248, 0.55);
+      outline-offset: 3px;
+    }
+    .dark .site-toggle {
+      background: rgba(15, 23, 42, 0.6);
+      border-color: rgba(71, 85, 105, 0.55);
+    }
+    @media (max-width: 768px) {
+      .site-topnav__inner { min-height: 64px; gap: 1rem; }
+      .site-brand__name { display: none; }
+      .site-brand__mark img { width: 96px; }
+      .site-cta--nav { display: none; }
+    }
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-800 dark:from-slate-900 dark:to-slate-950 dark:text-slate-100">
   <div id="progress" class="fixed top-0 left-0 h-1 bg-slate-900/90 origin-left z-50" style="transform:scaleX(0);transform-origin:left"></div>
 
-  <header class="relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute -top-32 -right-24 h-80 w-80 rounded-full bg-sky-300/25 blur-3xl"></div>
-      <div class="absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-emerald-300/25 blur-3xl"></div>
+  <header class="relative">
+    <div class="site-topnav sticky top-0 z-40">
+      <nav class="site-topnav__inner max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Навигация по странице">
+        <a href="index.html" class="site-brand" aria-label="Step3D.Lab — на главную">
+          <span class="site-brand__mark" aria-hidden="true">
+            <img src="Logo.svg" alt="">
+          </span>
+          <span class="site-brand__name">
+            <span class="site-brand__title">Step3D.Lab</span>
+            <span class="site-brand__tagline">Инженерный центр</span>
+          </span>
+        </a>
+        <div class="hidden md:flex items-center gap-1" id="links" aria-label="Секции страницы"></div>
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" type="button" class="site-toggle" aria-label="Переключить тему">
+            <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M12 3a1 1 0 0 0-.92.6 6.5 6.5 0 1 1-7.48 9.07A1 1 0 0 0 3 13a9 9 0 1 0 9-10Z" fill="currentColor"/></svg>
+          </button>
+          <a href="#contacts" class="site-cta site-cta--nav">Связаться</a>
+          <button id="burger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Меню" class="site-toggle md:hidden">
+            <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </nav>
     </div>
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-28 md:pb-20 relative z-10">
-      <nav class="mb-12" aria-label="Навигация по странице">
-        <div class="flex items-center justify-between gap-6">
-          <a href="index.html" class="flex items-center gap-3 font-semibold">
-            <svg viewBox="0 0 64 64" class="h-12 w-12" aria-hidden>
-              <defs><linearGradient id="logo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#22c55e"/></linearGradient></defs>
-              <rect x="6" y="6" width="52" height="52" rx="12" fill="url(#logo)"/>
-              <path d="M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36" stroke="#fff" stroke-width="2" fill="none"/>
-            </svg>
-            <img src="Logo.svg" alt="Логотип FabLabs R22" class="h-10 w-auto">
-            Step3D.Lab
-          </a>
-          <div class="hidden md:flex items-center gap-1" id="links"></div>
-          <div class="md:hidden flex items-center gap-2">
-            <button id="themeToggleSm" class="rounded-xl border px-3 py-2 text-sm">🌙</button>
-            <button id="burger" aria-expanded="false" aria-label="Меню" class="rounded-xl border p-2">
-              <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <div id="mobileMenu" class="md:hidden hidden fixed inset-0 z-[70]" role="dialog" aria-modal="true" aria-label="Мобильное меню">
+      <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-menu-overlay></div>
+      <div class="absolute inset-y-0 right-0 flex w-full justify-end">
+        <div class="menu-panel relative h-full w-full max-w-xs translate-x-full bg-white dark:bg-slate-900 px-6 py-10 shadow-2xl transition-transform duration-200" data-menu-panel>
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-lg font-semibold">Навигация</span>
+            <button type="button" class="site-toggle size-10 p-0 text-base" data-menu-close aria-label="Закрыть меню">
+              <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
           </div>
+          <div class="mt-6 flex items-center justify-between gap-3">
+            <span class="text-sm font-semibold text-slate-500 dark:text-slate-300">Тема</span>
+            <button id="themeToggleSm" type="button" class="site-toggle" aria-label="Переключить тему">
+              <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M12 3a1 1 0 0 0-.92.6 6.5 6.5 0 1 1-7.48 9.07A1 1 0 0 0 3 13a9 9 0 1 0 9-10Z" fill="currentColor"/></svg>
+            </button>
+          </div>
+          <div id="mobile" class="mt-8 grid gap-2" role="menu"></div>
         </div>
-        <div id="mobile" class="mt-3 grid gap-2 md:hidden hidden"></div>
-      </nav>
+      </div>
+    </div>
 
-      <div class="grid lg:grid-cols-[1.1fr,0.9fr] gap-10 md:gap-16 items-center" id="overview">
-        <div>
+    <div class="relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-32 -right-24 h-80 w-80 rounded-full bg-sky-300/25 blur-3xl"></div>
+        <div class="absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-emerald-300/25 blur-3xl"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16 md:pt-24 md:pb-20 relative z-10">
+        <div class="grid lg:grid-cols-[1.1fr,0.9fr] gap-10 md:gap-16 items-center" id="overview">
+          <div>
           <span class="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 px-3 py-1 text-xs uppercase tracking-wider text-slate-500 dark:text-slate-300">Курс ДПО R22.AM · 48 часов</span>
           <h1 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">«ДПО R22.AM “Реверсивный инжиниринг и аддитивное производство”»</h1>
           <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-prose">Интенсивное обучение для инженеров и технологов: оцифровка изделий, восстановление CAD‑моделей и изготовление оснастки и деталей с применением аддитивных технологий. Программа выстроена вокруг реальных задач промышленности и чемпионатов профессионального мастерства.</p>
