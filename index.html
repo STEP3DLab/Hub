@@ -709,15 +709,42 @@
             <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Formlabs</span><span class="text-sm text-slate-500">—</span></li>
           </ul>
         </div>
-        <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-6 bg-white/80 dark:bg-slate-800/80">
-          <h3 class="text-lg font-semibold mb-4">Проектные сценарии</h3>
-          <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
-            <li class="flex items-start gap-2"><span class="mt-1 size-1.5 rounded-full bg-emerald-400"></span><span>Аддитивное производство прототипов и малых серий изделий.</span></li>
-            <li class="flex items-start gap-2"><span class="mt-1 size-1.5 rounded-full bg-sky-400"></span><span>Точное сканирование с постобработкой и контролем качества.</span></li>
-            <li class="flex items-start gap-2"><span class="mt-1 size-1.5 rounded-full bg-indigo-400"></span><span>Реверсивный инжиниринг и подготовка рабочей документации.</span></li>
-            <li class="flex items-start gap-2"><span class="mt-1 size-1.5 rounded-full bg-amber-400"></span><span>Интеграция цифровых решений в образовательные программы и R&amp;D.</span></li>
-          </ul>
-          <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Команда Step3D.Lab помогает подобрать оборудование, оптимизировать процессы и быстро запустить пилотные проекты.</p>
+        <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-6 bg-white/80 dark:bg-slate-800/80 js-gallery" data-interval="4800">
+          <div class="flex flex-wrap items-center gap-3 justify-between mb-4">
+            <div>
+              <h3 class="text-lg font-semibold leading-tight">Галерея проектов</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Покажите реализованные кейсы лаборатории — фотографии будут листаться автоматически.</p>
+            </div>
+            <div class="flex gap-2">
+              <button type="button" class="gallery-nav js-prev" aria-label="Предыдущее фото">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button type="button" class="gallery-nav js-next" aria-label="Следующее фото">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="relative overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-900 aspect-[4/3]">
+            <figure class="slide absolute inset-0 flex flex-col justify-end p-6 gap-3 text-white" style="background:linear-gradient(135deg,#0ea5e9,rgba(14,165,233,0.85)),url('https://images.unsplash.com/photo-1527430253228-e93688616381?auto=format&fit=crop&w=900&q=80') center/cover;">
+              <figcaption class="backdrop-blur-sm bg-white/15 rounded-2xl p-4">
+                <p class="text-sm font-semibold">Прототип корпуса дрона</p>
+                <p class="text-xs opacity-80">Аддитивное производство, постобработка и контроль геометрии.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide absolute inset-0 flex flex-col justify-end p-6 gap-3 text-white hidden" style="background:linear-gradient(135deg,#6366f1,rgba(99,102,241,0.85)),url('https://images.unsplash.com/photo-1581090468181-4f7c91f3c1d9?auto=format&fit=crop&w=900&q=80') center/cover;">
+              <figcaption class="backdrop-blur-sm bg-white/15 rounded-2xl p-4">
+                <p class="text-sm font-semibold">Точное сканирование</p>
+                <p class="text-xs opacity-80">Лазерный 3D‑сканер и обработка облаков точек.</p>
+              </figcaption>
+            </figure>
+            <figure class="slide absolute inset-0 flex flex-col justify-end p-6 gap-3 text-white hidden" style="background:linear-gradient(135deg,#f97316,rgba(249,115,22,0.85)),url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80') center/cover;">
+              <figcaption class="backdrop-blur-sm bg-white/15 rounded-2xl p-4">
+                <p class="text-sm font-semibold">Образовательные интенсивы</p>
+                <p class="text-xs opacity-80">Командная работа студентов и R&amp;D проекты.</p>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="flex items-center justify-center gap-2 mt-4 js-dots" aria-hidden="true"></div>
         </div>
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-4">
           <h3 class="text-lg font-semibold mb-3">GenAI + Open Source</h3>
@@ -1934,17 +1961,52 @@
       document.querySelectorAll('.js-gallery').forEach(card=>{
         const slides = card.querySelectorAll('.slide')
         const dotsBox = card.querySelector('.js-dots')
+        if(!slides.length || !dotsBox) return
+
+        const interval = Number(card.dataset.interval) || 5000
+        let timer
+
         function setActive(i){
-          slides.forEach((s,idx)=> s.classList.toggle('hidden', idx!==i));
-          dotsBox.querySelectorAll('span').forEach((d,idx)=> d.classList.toggle('bg-slate-900', idx===i));
-          card.dataset.index = i;
+          slides.forEach((s,idx)=> s.classList.toggle('hidden', idx!==i))
+          dotsBox.querySelectorAll('span').forEach((d,idx)=> d.classList.toggle('bg-slate-900', idx===i))
+          card.dataset.index = i
         }
-        // dots
+
+        function next(){
+          const current = Number(card.dataset.index) || 0
+          setActive((current + 1) % slides.length)
+        }
+
+        function prev(){
+          const current = Number(card.dataset.index) || 0
+          setActive((current - 1 + slides.length) % slides.length)
+        }
+
+        function startAuto(){
+          stopAuto()
+          timer = window.setInterval(next, interval)
+        }
+
+        function stopAuto(){
+          if(timer) window.clearInterval(timer)
+        }
+
         dotsBox.innerHTML = ''
-        slides.forEach((_,i)=>{ const dot=document.createElement('span'); dot.className='inline-block size-2 rounded-full bg-slate-300 dark:bg-slate-600'; dot.addEventListener('click',()=> setActive(i)); dotsBox.appendChild(dot) })
+        slides.forEach((_,i)=>{
+          const dot=document.createElement('span')
+          dot.className='inline-block size-2 rounded-full bg-slate-300 dark:bg-slate-600 transition-colors duration-200'
+          dot.addEventListener('click',()=>{ setActive(i); startAuto() })
+          dotsBox.appendChild(dot)
+        })
+
         setActive(0)
-        card.querySelector('.js-prev').addEventListener('click', ()=> setActive((+card.dataset.index - 1 + slides.length)%slides.length))
-        card.querySelector('.js-next').addEventListener('click', ()=> setActive((+card.dataset.index + 1)%slides.length))
+        startAuto()
+
+        card.querySelector('.js-prev')?.addEventListener('click', ()=>{ prev(); startAuto() })
+        card.querySelector('.js-next')?.addEventListener('click', ()=>{ next(); startAuto() })
+
+        card.addEventListener('mouseenter', stopAuto)
+        card.addEventListener('mouseleave', startAuto)
       })
     }
     initGalleries()
