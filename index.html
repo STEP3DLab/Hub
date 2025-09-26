@@ -544,9 +544,9 @@
           <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-prose">Инженерный центр Step3D.Lab: цифровое проектирование, реверсивный инжиниринг, 3D‑сканирование и аддитивное производство. Команда технопарка РГСУ и ООО «СТЕП 3Д» выполняет разработки, сопровождает внедрение и обучает специалистов.</p>
           <div class="mt-6 flex flex-wrap gap-3">
             <button id="openModal" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300">Оставить заявку</button>
-            <button id="toggleAbout" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium">О лаборатории</button>
+            <button type="button" id="toggleAbout" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium" aria-controls="aboutBox" aria-expanded="false" data-label-open="О лаборатории" data-label-close="Свернуть описание">О лаборатории</button>
           </div>
-          <div id="aboutBox" class="mt-6 hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 glass p-6">
+          <div id="aboutBox" class="mt-6 hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 glass p-6" tabindex="-1" aria-hidden="true" role="region" aria-labelledby="toggleAbout">
             <h3 class="text-xl font-semibold mb-2">О лаборатории</h3>
             <p class="text-slate-700 dark:text-slate-300">Step3D.Lab — команда инженеров, дизайнеров и преподавателей. Работаем на базе технопарка РГСУ совместно с ООО «СТЕП 3Д»: выполняем R&amp;D‑проекты, проводим курсы ДПО (48–72 ч), сопровождаем производственные задачи и студенческие инициативы. Фокус — CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, прототипирование и аддитивное производство.</p>
           </div>
@@ -695,6 +695,7 @@
       <h2 class="text-3xl md:text-4xl font-bold mb-6">Распределенная сеть 3D-печати</h2>
       <p class="text-slate-600 dark:text-slate-300 max-w-3xl">Экспериментальный проект технопарка РГСУ для слушателей программ ДПО и студентов университета: учимся проектировать, печатать и запускать инженерные кейсы в FabLab-формате.</p>
       <div class="mt-6 grid lg:grid-cols-2 gap-8">
+
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-4">
           <h3 class="text-lg font-semibold mb-3">3D‑принтеры · FDM</h3>
           <ul class="grid sm:grid-cols-2 gap-3">
@@ -708,171 +709,15 @@
             <li class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 flex items-center justify-between"><span class="font-medium">Formlabs</span><span class="text-sm text-slate-500">—</span></li>
           </ul>
         </div>
-        <div class="relative overflow-hidden rounded-3xl border border-slate-200/70 bg-gradient-to-br from-white/80 via-sky-50/60 to-slate-50/90 p-6 lg:p-8 shadow-soft dark:border-slate-700/70 dark:from-slate-900/80 dark:via-slate-900/70 dark:to-slate-800/80">
-          <span class="pointer-events-none absolute -top-20 -right-6 h-56 w-56 rounded-full bg-sky-200/30 blur-2xl dark:bg-sky-500/20"></span>
-          <span class="pointer-events-none absolute -bottom-24 -left-10 h-56 w-56 rounded-full bg-emerald-200/30 blur-2xl dark:bg-emerald-500/20"></span>
-          <div class="relative z-10 flex flex-col gap-6">
-            <div class="flex flex-wrap items-start gap-4">
-              <div class="rounded-2xl bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-slate-500 shadow-sm dark:bg-slate-900/60 dark:text-slate-300">Смета за минуту</div>
-              <div class="rounded-2xl bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-slate-500 shadow-sm dark:bg-slate-900/60 dark:text-slate-300">Персонализированные сценарии</div>
-            </div>
-            <div class="flex flex-col gap-2">
-              <h3 class="text-2xl font-semibold leading-tight text-slate-900 dark:text-slate-100">Экспресс-калькулятор услуг</h3>
-              <p class="text-sm text-slate-600 dark:text-slate-300 max-w-xl">Прикиньте бюджет на 3D‑печать, моделирование, сканирование или реверсивный инжиниринг до заявки, а затем отправьте результат менеджеру в один клик.</p>
-            </div>
-            <div class="flex flex-wrap gap-2">
-              <button type="button" class="js-service-tab inline-flex items-center gap-2 rounded-2xl border border-slate-200/70 bg-white/90 px-4 py-2 text-sm font-medium text-slate-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300 hover:text-slate-900 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-slate-700/70 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-sky-400 dark:hover:text-white dark:focus-visible:ring-offset-slate-900" data-service="print" data-active>
-                <span class="flex size-6 items-center justify-center rounded-xl bg-emerald-100 text-emerald-500 shadow-inner dark:bg-emerald-500/30 dark:text-emerald-200">
-                  <svg viewBox="0 0 20 20" fill="currentColor" class="size-3.5"><path d="M3.75 4A1.75 1.75 0 0 1 5.5 2.25h9A1.75 1.75 0 0 1 16.25 4v2.75h.5a.75.75 0 0 1 .75.75v6.5a2.75 2.75 0 0 1-2.75 2.75H5.25A2.75 2.75 0 0 1 2.5 14V7.5a.75.75 0 0 1 .75-.75h.5V4Zm1.5 0v2.75h9V4a.25.25 0 0 0-.25-.25h-9A.25.25 0 0 0 5.25 4Zm-1.75 4V14c0 .69.56 1.25 1.25 1.25h9.5c.69 0 1.25-.56 1.25-1.25V8H3.5Z"/></svg>
-                </span>
-                3D‑печать
-              </button>
-              <button type="button" class="js-service-tab inline-flex items-center gap-2 rounded-2xl border border-slate-200/70 bg-white/90 px-4 py-2 text-sm font-medium text-slate-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300 hover:text-slate-900 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-slate-700/70 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-sky-400 dark:hover:text-white dark:focus-visible:ring-offset-slate-900" data-service="modeling">
-                <span class="flex size-6 items-center justify-center rounded-xl bg-sky-100 text-sky-500 shadow-inner dark:bg-sky-500/30 dark:text-sky-200">
-                  <svg viewBox="0 0 20 20" fill="currentColor" class="size-3.5"><path d="M9.03 2.23a1.75 1.75 0 0 1 1.94 0l5.5 3.57c.49.32.78.87.78 1.46v5.48c0 .59-.29 1.14-.78 1.46l-5.5 3.57a1.75 1.75 0 0 1-1.94 0l-5.5-3.57A1.75 1.75 0 0 1 2.75 12.74V7.26c0-.59.29-1.14.78-1.46l5.5-3.57ZM4.25 7.45v5.1l4.75 3.08V10.5L4.25 7.45Zm6.75 8.18 4.75-3.08v-5.1l-4.75 3.05v5.13ZM5.04 6.1 10 9.3l4.96-3.2L10 2.9 5.04 6.1Z"/></svg>
-                </span>
-                3D‑моделирование
-              </button>
-              <button type="button" class="js-service-tab inline-flex items-center gap-2 rounded-2xl border border-slate-200/70 bg-white/90 px-4 py-2 text-sm font-medium text-slate-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300 hover:text-slate-900 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-slate-700/70 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-sky-400 dark:hover:text-white dark:focus-visible:ring-offset-slate-900" data-service="scanning">
-                <span class="flex size-6 items-center justify-center rounded-xl bg-indigo-100 text-indigo-500 shadow-inner dark:bg-indigo-500/30 dark:text-indigo-200">
-                  <svg viewBox="0 0 20 20" fill="currentColor" class="size-3.5"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h9A1.5 1.5 0 0 1 16 5.5v9A1.5 1.5 0 0 1 14.5 16h-9A1.5 1.5 0 0 1 4 14.5v-9ZM5.5 5.5v9h9v-9h-9Zm1.75 1.5h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1 0-1.5Zm0 3h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1 0-1.5Zm0 3h3.5a.75.75 0 0 1 0 1.5h-3.5a.75.75 0 0 1 0-1.5Z"/></svg>
-                </span>
-                3D‑сканирование
-              </button>
-              <button type="button" class="js-service-tab inline-flex items-center gap-2 rounded-2xl border border-slate-200/70 bg-white/90 px-4 py-2 text-sm font-medium text-slate-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300 hover:text-slate-900 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-slate-700/70 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-sky-400 dark:hover:text-white dark:focus-visible:ring-offset-slate-900" data-service="reverse">
-                <span class="flex size-6 items-center justify-center rounded-xl bg-amber-100 text-amber-500 shadow-inner dark:bg-amber-500/30 dark:text-amber-200">
-                  <svg viewBox="0 0 20 20" fill="currentColor" class="size-3.5"><path d="M4 5.75A1.75 1.75 0 0 1 5.75 4h8.5A1.75 1.75 0 0 1 16 5.75v2.2a.75.75 0 0 1-1.5 0v-2.2a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25v8.5c0 .14.11.25.25.25h2.2a.75.75 0 0 1 0 1.5h-2.2A1.75 1.75 0 0 1 4 14.25v-8.5Zm11.75 4a.75.75 0 0 1 .75.75v4.75A1.75 1.75 0 0 1 14.75 17.5H10a.75.75 0 0 1 0-1.5h4.75a.25.25 0 0 0 .25-.25V9.5a.75.75 0 0 1 .75-.75Zm-8 3.5A1.75 1.75 0 0 1 9.5 11.5h2a.75.75 0 0 1 0 1.5h-2a.25.25 0 0 0-.25.25v2a.75.75 0 0 1-1.5 0v-2Z"/></svg>
-                </span>
-                Реверсивный инжиниринг
-              </button>
-            </div>
-
-            <form class="rounded-2xl border border-slate-200/70 bg-white/90 p-5 shadow-sm backdrop-blur-sm dark:border-slate-700/70 dark:bg-slate-900/70 dark:shadow-none space-y-6" id="serviceEstimator" novalidate>
-              <div data-service-form="print" class="grid gap-4 md:grid-cols-2">
-                <label class="flex flex-col gap-1 text-sm">
-                  <span class="font-medium text-slate-700 dark:text-slate-200">Объем модели, см³</span>
-                  <input type="number" min="1" step="1" value="120" class="rounded-xl border border-slate-200/70 bg-slate-50/80 px-3 py-2 text-sm text-slate-800 shadow-inner transition focus:border-sky-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-200 dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-100 dark:focus:border-sky-400 dark:focus:ring-sky-500/40" data-calc-input data-service="print" data-key="volume" />
-                </label>
-                <label class="flex flex-col gap-1 text-sm">
-                  <span class="font-medium text-slate-700 dark:text-slate-200">Количество копий</span>
-                  <input type="number" min="1" step="1" value="1" class="rounded-xl border border-slate-200/70 bg-slate-50/80 px-3 py-2 text-sm text-slate-800 shadow-inner transition focus:border-sky-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-200 dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-100 dark:focus:border-sky-400 dark:focus:ring-sky-500/40" data-calc-input data-service="print" data-key="quantity" />
-                </label>
-                <label class="flex flex-col gap-1 text-sm">
-                  <span class="font-medium text-slate-700 dark:text-slate-200">Материал</span>
-                  <select class="rounded-xl border border-slate-200/70 bg-slate-50/80 px-3 py-2 text-sm text-slate-800 shadow-inner transition focus:border-sky-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-200 dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-100 dark:focus:border-sky-400 dark:focus:ring-sky-500/40" data-calc-input data-service="print" data-key="material">
-                    <option value="pla">PLA / PETG</option>
-                    <option value="abs">ABS / нейлон</option>
-                    <option value="resin">Фотополимер</option>
-                  </select>
-                </label>
-                <label class="flex flex-col gap-2 text-sm md:col-span-2">
-                  <span class="flex items-center justify-between font-medium text-slate-700 dark:text-slate-200">Сложность <span class="text-xs text-slate-500 dark:text-slate-400" id="printComplexityValue">средняя детализация</span></span>
-                  <input type="range" min="1" max="5" value="3" class="w-full accent-sky-500 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-slate-200 [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:-mt-1 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-sky-500 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-slate-200 [&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-sky-500 dark:[&::-webkit-slider-runnable-track]:bg-slate-700 dark:[&::-moz-range-track]:bg-slate-700" data-calc-input data-service="print" data-key="complexity" data-output="printComplexityValue" />
-                </label>
-                <label class="inline-flex items-center gap-2 rounded-xl border border-slate-200/60 bg-slate-50/60 px-3 py-2 text-sm text-slate-700 shadow-inner transition hover:border-sky-300 hover:bg-white dark:border-slate-700/60 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-sky-400">
-                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="print" data-key="finishing" />
-                  Послепечатная обработка (шлифовка, грунт, покраска)
-                </label>
-                <label class="inline-flex items-center gap-2 rounded-xl border border-slate-200/60 bg-slate-50/60 px-3 py-2 text-sm text-slate-700 shadow-inner transition hover:border-sky-300 hover:bg-white dark:border-slate-700/60 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-sky-400">
-                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="print" data-key="urgent" />
-                  Срочное изготовление (до 48 часов)
-                </label>
-              </div>
-
-              <div data-service-form="modeling" class="grid gap-4 md:grid-cols-2 hidden">
-                <label class="flex flex-col gap-1 text-sm">
-                  <span class="font-medium text-slate-700 dark:text-slate-200">Оценка трудоёмкости, часов</span>
-                  <input type="number" min="1" step="1" value="10" class="rounded-xl border border-slate-200/70 bg-slate-50/80 px-3 py-2 text-sm text-slate-800 shadow-inner transition focus:border-sky-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-200 dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-100 dark:focus:border-sky-400 dark:focus:ring-sky-500/40" data-calc-input data-service="modeling" data-key="hours" />
-                </label>
-                <label class="flex flex-col gap-2 text-sm md:col-span-2">
-                  <span class="flex items-center justify-between font-medium text-slate-700 dark:text-slate-200">Уровень детализации <span class="text-xs text-slate-500 dark:text-slate-400" id="modelComplexityValue">функциональный прототип</span></span>
-                  <input type="range" min="1" max="5" value="3" class="w-full accent-sky-500 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-slate-200 [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:-mt-1 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-sky-500 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-slate-200 [&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-sky-500 dark:[&::-webkit-slider-runnable-track]:bg-slate-700 dark:[&::-moz-range-track]:bg-slate-700" data-calc-input data-service="modeling" data-key="complexity" data-output="modelComplexityValue" />
-                </label>
-                <label class="inline-flex items-center gap-2 rounded-xl border border-slate-200/60 bg-slate-50/60 px-3 py-2 text-sm text-slate-700 shadow-inner transition hover:border-sky-300 hover:bg-white dark:border-slate-700/60 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-sky-400">
-                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="modeling" data-key="renders" />
-                  Подготовить презентационные рендеры / инструкции
-                </label>
-                <label class="inline-flex items-center gap-2 rounded-xl border border-slate-200/60 bg-slate-50/60 px-3 py-2 text-sm text-slate-700 shadow-inner transition hover:border-sky-300 hover:bg-white dark:border-slate-700/60 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-sky-400">
-                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="modeling" data-key="consulting" />
-                  Сопровождение инженера по внедрению
-                </label>
-              </div>
-
-              <div data-service-form="scanning" class="grid gap-4 md:grid-cols-2 hidden">
-                <label class="flex flex-col gap-1 text-sm">
-                  <span class="font-medium text-slate-700 dark:text-slate-200">Максимальный габарит, см</span>
-                  <input type="number" min="5" step="1" value="40" class="rounded-xl border border-slate-200/70 bg-slate-50/80 px-3 py-2 text-sm text-slate-800 shadow-inner transition focus:border-sky-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-200 dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-100 dark:focus:border-sky-400 dark:focus:ring-sky-500/40" data-calc-input data-service="scanning" data-key="size" />
-                </label>
-                <label class="flex flex-col gap-1 text-sm">
-                  <span class="font-medium text-slate-700 dark:text-slate-200">Количество объектов</span>
-                  <input type="number" min="1" step="1" value="1" class="rounded-xl border border-slate-200/70 bg-slate-50/80 px-3 py-2 text-sm text-slate-800 shadow-inner transition focus:border-sky-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-200 dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-100 dark:focus:border-sky-400 dark:focus:ring-sky-500/40" data-calc-input data-service="scanning" data-key="count" />
-                </label>
-                <label class="flex flex-col gap-2 text-sm md:col-span-2">
-                  <span class="flex items-center justify-between font-medium text-slate-700 dark:text-slate-200">Требуемая точность <span class="text-xs text-slate-500 dark:text-slate-400" id="scanDetailValue">0,1–0,2 мм</span></span>
-                  <input type="range" min="1" max="5" value="3" class="w-full accent-sky-500 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-slate-200 [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:-mt-1 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-sky-500 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-slate-200 [&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-sky-500 dark:[&::-webkit-slider-runnable-track]:bg-slate-700 dark:[&::-moz-range-track]:bg-slate-700" data-calc-input data-service="scanning" data-key="detail" data-output="scanDetailValue" />
-                </label>
-                <label class="inline-flex items-center gap-2 rounded-xl border border-slate-200/60 bg-slate-50/60 px-3 py-2 text-sm text-slate-700 shadow-inner transition hover:border-sky-300 hover:bg-white dark:border-slate-700/60 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-sky-400">
-                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="scanning" data-key="texturing" />
-                  Текстурирование / цветовая карта
-                </label>
-                <label class="inline-flex items-center gap-2 rounded-xl border border-slate-200/60 bg-slate-50/60 px-3 py-2 text-sm text-slate-700 shadow-inner transition hover:border-sky-300 hover:bg-white dark:border-slate-700/60 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-sky-400">
-                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="scanning" data-key="cleaning" />
-                  Чистка и выравнивание сетки
-                </label>
-              </div>
-
-              <div data-service-form="reverse" class="grid gap-4 md:grid-cols-2 hidden">
-                <label class="flex flex-col gap-1 text-sm">
-                  <span class="font-medium text-slate-700 dark:text-slate-200">Количество деталей / узлов</span>
-                  <input type="number" min="1" step="1" value="3" class="rounded-xl border border-slate-200/70 bg-slate-50/80 px-3 py-2 text-sm text-slate-800 shadow-inner transition focus:border-sky-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-200 dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-100 dark:focus:border-sky-400 dark:focus:ring-sky-500/40" data-calc-input data-service="reverse" data-key="parts" />
-                </label>
-                <label class="flex flex-col gap-1 text-sm">
-                  <span class="font-medium text-slate-700 dark:text-slate-200">Необходимость 2D‑документации</span>
-                  <select class="rounded-xl border border-slate-200/70 bg-slate-50/80 px-3 py-2 text-sm text-slate-800 shadow-inner transition focus:border-sky-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-200 dark:border-slate-700/70 dark:bg-slate-800/70 dark:text-slate-100 dark:focus:border-sky-400 dark:focus:ring-sky-500/40" data-calc-input data-service="reverse" data-key="drawings">
-                    <option value="none">Нет, только 3D</option>
-                    <option value="basic">Комплект эскизов</option>
-                    <option value="full">Полный пакет КД</option>
-                  </select>
-                </label>
-                <label class="flex flex-col gap-2 text-sm md:col-span-2">
-                  <span class="flex items-center justify-between font-medium text-slate-700 dark:text-slate-200">Сложность узла <span class="text-xs text-slate-500 dark:text-slate-400" id="reverseComplexityValue">средний уровень</span></span>
-                  <input type="range" min="1" max="5" value="3" class="w-full accent-sky-500 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-slate-200 [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:-mt-1 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-sky-500 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-slate-200 [&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-sky-500 dark:[&::-webkit-slider-runnable-track]:bg-slate-700 dark:[&::-moz-range-track]:bg-slate-700" data-calc-input data-service="reverse" data-key="complexity" data-output="reverseComplexityValue" />
-                </label>
-                <label class="inline-flex items-center gap-2 rounded-xl border border-slate-200/60 bg-slate-50/60 px-3 py-2 text-sm text-slate-700 shadow-inner transition hover:border-sky-300 hover:bg-white dark:border-slate-700/60 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-sky-400">
-                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="reverse" data-key="analysis" />
-                  Расчёт нагрузок / рекомендации по модернизации
-                </label>
-                <label class="inline-flex items-center gap-2 rounded-xl border border-slate-200/60 bg-slate-50/60 px-3 py-2 text-sm text-slate-700 shadow-inner transition hover:border-sky-300 hover:bg-white dark:border-slate-700/60 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:border-sky-400">
-                  <input type="checkbox" class="size-4 rounded border-slate-300 text-sky-500 focus:ring-sky-500" data-calc-input data-service="reverse" data-key="pilot" />
-                  Изготовить пилотную серию (3D‑печать / ЧПУ)
-                </label>
-              </div>
-            </form>
-
-            <div class="relative overflow-hidden rounded-2xl border border-slate-900/10 bg-slate-900 text-slate-50 p-6 shadow-xl shadow-slate-900/30 dark:border-slate-700/60 dark:bg-slate-900/80">
-              <span class="pointer-events-none absolute -top-20 -left-14 h-48 w-48 rounded-full bg-sky-500/40 blur-3xl"></span>
-              <span class="pointer-events-none absolute -bottom-16 -right-10 h-52 w-52 rounded-full bg-emerald-500/30 blur-3xl"></span>
-              <div class="relative z-10 flex flex-col gap-4">
-                <div>
-                  <p class="text-[11px] uppercase tracking-[0.32em] text-slate-400">Ориентировочная стоимость</p>
-                  <div class="mt-2 text-4xl font-semibold tracking-tight"><span id="estimateTotal">—</span> ₽</div>
-                  <p class="mt-2 text-xs text-slate-400">Расчёт обновляется моментально при изменении входных данных.</p>
-                </div>
-                <ul class="space-y-2 text-sm text-slate-200/90" id="estimateBreakdown"></ul>
-                <div class="rounded-xl border border-slate-700/60 bg-slate-900/40 p-3 text-[11px] leading-relaxed text-slate-300">
-                  Итоговая смета формируется после анализа ТЗ, материалов и исходных данных.
-                </div>
-                <div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-wide text-slate-400">
-                  <span class="inline-flex items-center gap-1 rounded-full border border-slate-700/60 bg-slate-900/60 px-2 py-1"><span class="size-1.5 rounded-full bg-emerald-400/90"></span>PDF / Excel выгрузка</span>
-                  <span class="inline-flex items-center gap-1 rounded-full border border-slate-700/60 bg-slate-900/60 px-2 py-1"><span class="size-1.5 rounded-full bg-sky-400/90"></span>Передача менеджеру</span>
-                </div>
-                <button type="button" id="openModalCalc" class="inline-flex items-center justify-center gap-2 rounded-2xl border border-sky-400/60 bg-gradient-to-r from-sky-500 via-sky-400 to-emerald-400 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/30 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 hover:scale-[1.01]">
-                  <svg viewBox="0 0 20 20" fill="currentColor" class="size-4"><path d="M2.93 2.3a.75.75 0 0 1 .82-.17l13 5a.75.75 0 0 1 .04 1.38l-4.9 2.3-2.3 4.9a.75.75 0 0 1-1.38-.04l-5-13a.75.75 0 0 1 .17-.82Zm1.76 1.44 3.47 9.02 1.62-3.46a.75.75 0 0 1 .36-.36l3.46-1.62-9.02-3.47Z"/></svg>
-                  Оставить заявку с расчётом
-                </button>
-              </div>
-            </div>
-          </div>
+        <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-6 bg-white/80 dark:bg-slate-800/80">
+          <h3 class="text-lg font-semibold mb-4">Проектные сценарии</h3>
+          <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+            <li class="flex items-start gap-2"><span class="mt-1 size-1.5 rounded-full bg-emerald-400"></span><span>Аддитивное производство прототипов и малых серий изделий.</span></li>
+            <li class="flex items-start gap-2"><span class="mt-1 size-1.5 rounded-full bg-sky-400"></span><span>Точное сканирование с постобработкой и контролем качества.</span></li>
+            <li class="flex items-start gap-2"><span class="mt-1 size-1.5 rounded-full bg-indigo-400"></span><span>Реверсивный инжиниринг и подготовка рабочей документации.</span></li>
+            <li class="flex items-start gap-2"><span class="mt-1 size-1.5 rounded-full bg-amber-400"></span><span>Интеграция цифровых решений в образовательные программы и R&amp;D.</span></li>
+          </ul>
+          <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Команда Step3D.Lab помогает подобрать оборудование, оптимизировать процессы и быстро запустить пилотные проекты.</p>
         </div>
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-4">
           <h3 class="text-lg font-semibold mb-3">GenAI + Open Source</h3>
@@ -1150,7 +995,7 @@
         <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
           <div><div class="text-sm font-semibold mb-3">Продукты</div><ul class="space-y-2 text-sm"><li><a href="#services" class="hover:underline">CAD/CAE‑моделирование</a></li><li><a href="#services" class="hover:underline">Реверсивный инжиниринг</a></li><li><a href="#services" class="hover:underline">Аддитивное производство</a></li><li><a href="#services" class="hover:underline">Прототипирование</a></li></ul></div>
           <div><div class="text-sm font-semibold mb-3">Образование</div><ul class="space-y-2 text-sm"><li><a href="#courses" class="hover:underline">Курсы ДПО</a></li><li><a href="#courses" class="hover:underline">Проектные школы</a></li><li><a href="#courses" class="hover:underline">Силлабусы</a></li><li><a href="#contacts" class="hover:underline">Заявка на обучение</a></li></ul></div>
-          <div><div class="text-sm font-semibold mb-3">Сеть 3D-печати</div><ul class="space-y-2 text-sm"><li><a href="#equipment" class="hover:underline">FDM‑принтеры</a></li><li><a href="#equipment" class="hover:underline">DLP/SLA‑принтеры</a></li><li><a href="#equipment" class="hover:underline">GenAI + Open Source</a></li><li><a href="#equipment" class="hover:underline">Экспресс-калькулятор</a></li></ul></div>
+          <div><div class="text-sm font-semibold mb-3">Сеть 3D-печати</div><ul class="space-y-2 text-sm"><li><a href="#equipment" class="hover:underline">FDM‑принтеры</a></li><li><a href="#equipment" class="hover:underline">DLP/SLA‑принтеры</a></li><li><a href="#equipment" class="hover:underline">GenAI + Open Source</a></li></ul></div>
           <div><div class="text-sm font-semibold mb-3">Ресурсы</div><ul class="space-y-2 text-sm"><li><a href="#" class="hover:underline">Методические материалы</a></li><li><a href="#" class="hover:underline">3D‑модели (STP)</a></li><li><a href="#" class="hover:underline">Политика данных</a></li><li><a href="#" class="hover:underline">Блог</a></li></ul></div>
         </div>
         <div class="mt-10 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
@@ -1478,267 +1323,6 @@
   </script>
 
   <script>
-    // ===== Калькулятор услуг
-    (() => {
-      const estimator = document.getElementById('serviceEstimator')
-      const tabs = document.querySelectorAll('.js-service-tab')
-      const forms = document.querySelectorAll('[data-service-form]')
-      const totalEl = document.getElementById('estimateTotal')
-      const breakdownEl = document.getElementById('estimateBreakdown')
-      if (!estimator || !tabs.length || !totalEl || !breakdownEl) return
-
-      const formatMoney = (value) => new Intl.NumberFormat('ru-RU').format(Math.round(Math.max(value, 0)))
-      const sliderLabels = {
-        print: ['черновой макет', 'простая геометрия', 'средняя детализация', 'сложная механика', 'ювелирная точность'],
-        modeling: ['скетч / концепт', 'габаритная модель', 'функциональный прототип', 'серийное изделие', 'премиальная детализация'],
-        scanning: ['2–3 мм', '0,5–1 мм', '0,1–0,2 мм', 'до 0,05 мм', 'ювелирная точность'],
-        reverse: ['простой блок', 'базовый механизм', 'средний уровень', 'сложный агрегат', 'высокоточная сборка']
-      }
-
-      const updateSliderLabel = (input) => {
-        const service = input.dataset.service
-        const value = Number(input.value)
-        const outputId = input.dataset.output
-        if (!outputId) return
-        const el = document.getElementById(outputId)
-        if (!el) return
-        const labels = sliderLabels[service] || []
-        const label = labels[value - 1] || labels[labels.length - 1] || ''
-        el.textContent = label || `${value}`
-      }
-
-      estimator.querySelectorAll('input[type="range"][data-output]').forEach((input) => {
-        updateSliderLabel(input)
-        input.addEventListener('input', () => updateSliderLabel(input))
-        input.addEventListener('change', () => updateSliderLabel(input))
-      })
-
-      tabs.forEach((tab) => {
-        tab.dataset.baseClass = tab.dataset.baseClass || tab.className
-      })
-
-      const setActiveTab = (service) => {
-        tabs.forEach((tab) => {
-          const isActive = tab.dataset.service === service
-          const base = tab.dataset.baseClass
-          const activeState = ' bg-slate-900 text-white border-slate-900 shadow-xl shadow-slate-900/30 hover:text-white hover:border-slate-900 dark:bg-slate-100/20 dark:text-white dark:border-slate-100/20'
-          tab.className = isActive ? `${base}${activeState}` : base
-          tab.setAttribute('aria-pressed', String(isActive))
-        })
-        forms.forEach((section) => {
-          section.classList.toggle('hidden', section.dataset.serviceForm !== service)
-        })
-      }
-
-      const getNumeric = (value, fallback = 0) => {
-        const num = Number(value)
-        return Number.isFinite(num) ? num : fallback
-      }
-
-      const calculate = (service) => {
-        switch (service) {
-          case 'modeling':
-            return calcModeling()
-          case 'scanning':
-            return calcScanning()
-          case 'reverse':
-            return calcReverse()
-          default:
-            return calcPrint()
-        }
-      }
-
-      const calcPrint = () => {
-        const volume = Math.max(1, getNumeric(estimator.querySelector('[data-service="print"][data-key="volume"]').value, 0))
-        const quantity = Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="print"][data-key="quantity"]').value, 1)))
-        const material = estimator.querySelector('[data-service="print"][data-key="material"]').value || 'pla'
-        const complexity = Math.min(5, Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="print"][data-key="complexity"]').value, 3))))
-        const finishing = estimator.querySelector('[data-service="print"][data-key="finishing"]').checked
-        const urgent = estimator.querySelector('[data-service="print"][data-key="urgent"]').checked
-
-        const config = {
-          setup: 450,
-          rate: { pla: 24, abs: 32, resin: 46 },
-          complexity: [0.85, 1, 1.22, 1.45, 1.75],
-          finishing: 0.2,
-          urgent: 0.35
-        }
-
-        const materialRate = config.rate[material] || config.rate.pla
-        const base = config.setup + materialRate * volume * quantity
-        const baseWithComplexity = base * config.complexity[complexity - 1]
-
-        const breakdown = [
-          `Подготовка и печать ×${quantity}: ${formatMoney(baseWithComplexity)} ₽`
-        ]
-
-        let total = baseWithComplexity
-        if (finishing) {
-          const finishingCost = total * config.finishing
-          total += finishingCost
-          breakdown.push(`Послепечатная обработка: ${formatMoney(finishingCost)} ₽`)
-        }
-        if (urgent) {
-          const urgentCost = total * config.urgent
-          total += urgentCost
-          breakdown.push(`Срочное производство: ${formatMoney(urgentCost)} ₽`)
-        }
-
-        breakdown.push(`Срок изготовления: ${urgent ? '1–2 дня' : '3–5 дней'}`)
-
-        return { total, breakdown }
-      }
-
-      const calcModeling = () => {
-        const hours = Math.max(1, getNumeric(estimator.querySelector('[data-service="modeling"][data-key="hours"]').value, 6))
-        const complexity = Math.min(5, Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="modeling"][data-key="complexity"]').value, 3))))
-        const renders = estimator.querySelector('[data-service="modeling"][data-key="renders"]').checked
-        const consulting = estimator.querySelector('[data-service="modeling"][data-key="consulting"]').checked
-
-        const config = {
-          briefing: 1800,
-          hourly: 950,
-          complexity: [0.8, 1, 1.25, 1.55, 1.95],
-          renders: 0.22,
-          consulting: 3800
-        }
-
-        const base = (config.briefing + hours * config.hourly) * config.complexity[complexity - 1]
-        const breakdown = [`Моделирование (${hours} ч): ${formatMoney(base)} ₽`]
-        let total = base
-
-        if (renders) {
-          const renderCost = total * config.renders
-          total += renderCost
-          breakdown.push(`Презентационные материалы: ${formatMoney(renderCost)} ₽`)
-        }
-        if (consulting) {
-          total += config.consulting
-          breakdown.push(`Инженерное сопровождение: ${formatMoney(config.consulting)} ₽`)
-        }
-
-        breakdown.push(`Срок: ${Math.ceil(hours / 6)}–${Math.ceil(hours / 4)} рабочих дней`)
-
-        return { total, breakdown }
-      }
-
-      const calcScanning = () => {
-        const size = Math.max(5, getNumeric(estimator.querySelector('[data-service="scanning"][data-key="size"]').value, 20))
-        const count = Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="scanning"][data-key="count"]').value, 1)))
-        const detail = Math.min(5, Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="scanning"][data-key="detail"]').value, 3))))
-        const texturing = estimator.querySelector('[data-service="scanning"][data-key="texturing"]').checked
-        const cleaning = estimator.querySelector('[data-service="scanning"][data-key="cleaning"]').checked
-
-        const config = {
-          setup: 1900,
-          bands: [
-            { limit: 25, rate: 1100 },
-            { limit: 60, rate: 1600 },
-            { limit: Infinity, rate: 2400 }
-          ],
-          detail: [0.8, 0.95, 1.1, 1.35, 1.65],
-          texturing: 0.18,
-          cleaning: 0.22
-        }
-
-        const band = config.bands.find((b) => size <= b.limit) || config.bands[0]
-        const basePerItem = band.rate * config.detail[detail - 1]
-        let total = config.setup + basePerItem * count
-        const breakdown = [
-          `Сканирование ${count} объект${count > 1 ? 'ов' : 'а'}: ${formatMoney(basePerItem * count)} ₽`
-        ]
-
-        if (texturing) {
-          const textureCost = total * config.texturing
-          total += textureCost
-          breakdown.push(`Текстурирование и цвет: ${formatMoney(textureCost)} ₽`)
-        }
-        if (cleaning) {
-          const cleaningCost = total * config.cleaning
-          total += cleaningCost
-          breakdown.push(`Постобработка сетки: ${formatMoney(cleaningCost)} ₽`)
-        }
-
-        breakdown.push(`Отдача данных: ${texturing ? 'PBR + STL/OBJ' : 'STL/PLY'}`)
-
-        return { total, breakdown }
-      }
-
-      const calcReverse = () => {
-        const parts = Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="reverse"][data-key="parts"]').value, 1)))
-        const drawings = estimator.querySelector('[data-service="reverse"][data-key="drawings"]').value || 'none'
-        const complexity = Math.min(5, Math.max(1, Math.round(getNumeric(estimator.querySelector('[data-service="reverse"][data-key="complexity"]').value, 3))))
-        const analysis = estimator.querySelector('[data-service="reverse"][data-key="analysis"]').checked
-        const pilot = estimator.querySelector('[data-service="reverse"][data-key="pilot"]').checked
-
-        const config = {
-          base: 5200,
-          perPart: 1850,
-          complexity: [0.85, 1, 1.28, 1.6, 1.95],
-          drawings: { none: 0, basic: 0.18, full: 0.38 },
-          analysis: 0.25,
-          pilot: 0.42
-        }
-
-        let total = (config.base + parts * config.perPart) * config.complexity[complexity - 1]
-        const breakdown = [`Оцифровка ${parts} дет${parts > 1 ? 'алей' : 'али'}: ${formatMoney(total)} ₽`]
-
-        const drawingMultiplier = config.drawings[drawings] ?? 0
-        if (drawingMultiplier > 0) {
-          const drawingCost = total * drawingMultiplier
-          total += drawingCost
-          breakdown.push(`2D‑документация: ${formatMoney(drawingCost)} ₽`)
-        }
-        if (analysis) {
-          const analysisCost = total * config.analysis
-          total += analysisCost
-          breakdown.push(`Инженерные расчёты: ${formatMoney(analysisCost)} ₽`)
-        }
-        if (pilot) {
-          const pilotCost = total * config.pilot
-          total += pilotCost
-          breakdown.push(`Пилотное изготовление: ${formatMoney(pilotCost)} ₽`)
-        }
-
-        breakdown.push('Передача данных: STEP / Parasolid + отчёт')
-
-        return { total, breakdown }
-      }
-
-      const renderResult = (result) => {
-        if (!result || !Number.isFinite(result.total)) {
-          totalEl.textContent = '—'
-          breakdownEl.innerHTML = '<li class="text-xs text-slate-400">Введите данные для расчёта</li>'
-          return
-        }
-        totalEl.textContent = formatMoney(result.total)
-        breakdownEl.innerHTML = result.breakdown
-          .map((line) => `<li class="flex items-start gap-2"><span class="mt-1 inline-block size-1.5 rounded-full bg-slate-500/60"></span><span>${line}</span></li>`)
-          .join('')
-      }
-
-      let activeService = (Array.from(tabs).find((tab) => tab.hasAttribute('data-active'))?.dataset.service) || tabs[0].dataset.service
-      setActiveTab(activeService)
-      renderResult(calculate(activeService))
-
-      tabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
-          activeService = tab.dataset.service
-          setActiveTab(activeService)
-          renderResult(calculate(activeService))
-        })
-      })
-
-      estimator.querySelectorAll('[data-calc-input]').forEach((input) => {
-        const handler = () => {
-          if (input.type === 'range') updateSliderLabel(input)
-          renderResult(calculate(activeService))
-        }
-        input.addEventListener('input', handler)
-        input.addEventListener('change', handler)
-      })
-    })()
-
     // ===== Hero showcase trigger
     (() => {
       const action = document.getElementById('heroAction')
@@ -2296,7 +1880,54 @@
 
 
     // ===== «О лаборатории» toggle
-    document.getElementById('toggleAbout')?.addEventListener('click', ()=> document.getElementById('aboutBox').classList.toggle('hidden'))
+    (() => {
+      const aboutButton = document.getElementById('toggleAbout')
+      const aboutBox = document.getElementById('aboutBox')
+      if (!aboutButton || !aboutBox) return
+
+      const openLabel = aboutButton.dataset.labelOpen?.trim() || aboutButton.textContent?.trim() || 'О лаборатории'
+      const closeLabel = aboutButton.dataset.labelClose?.trim() || 'Свернуть описание'
+
+      let isExpanded = !aboutBox.classList.contains('hidden')
+      let focusRestore = aboutButton
+
+      const setState = (expanded, { trigger, initial = false } = {}) => {
+        isExpanded = expanded
+
+        if (expanded) {
+          focusRestore = trigger instanceof HTMLElement
+            ? trigger
+            : (document.activeElement instanceof HTMLElement ? document.activeElement : aboutButton)
+        }
+
+        aboutBox.classList.toggle('hidden', !expanded)
+        aboutBox.setAttribute('aria-hidden', String(!expanded))
+        aboutButton.setAttribute('aria-expanded', String(expanded))
+        aboutButton.textContent = expanded ? closeLabel : openLabel
+
+        if (initial) return
+
+        const focusTarget = expanded ? aboutBox : focusRestore
+        if (focusTarget && typeof focusTarget.focus === 'function') {
+          requestAnimationFrame(() => {
+            focusTarget.focus({ preventScroll: true })
+          })
+        }
+      }
+
+      setState(isExpanded, { initial: true })
+
+      aboutButton.addEventListener('click', () => {
+        setState(!isExpanded, { trigger: aboutButton })
+      })
+
+      aboutBox.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && isExpanded) {
+          event.preventDefault()
+          setState(false)
+        }
+      })
+    })()
 
     // ===== Галереи проектов
     function initGalleries(){
@@ -2362,5 +1993,6 @@
     // Год в футере
     const y = new Date().getFullYear(); document.getElementById('y').textContent = y; document.getElementById('y2').textContent = y
   </script>
+
 </body>
 </html>
