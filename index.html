@@ -495,14 +495,11 @@
   <header class="relative">
     <div class="site-topnav sticky top-0 z-40">
       <nav class="site-topnav__inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Главная навигация">
-        <a href="#top" class="site-brand" aria-label="Step3D.Lab — на главную">
+        <a href="#top" class="site-brand" aria-label="Технопарк РГСУ — на главную">
           <span class="site-brand__mark" aria-hidden="true">
-            <img src="Logo.svg" alt="">
+            <img src="assets/technopark-rgsu-logo.svg" alt="" loading="lazy">
           </span>
-          <span class="site-brand__name">
-            <span class="site-brand__title">Step3D.Lab</span>
-            <span class="site-brand__tagline">Инженерный центр</span>
-          </span>
+          <span class="sr-only">Технопарк РГСУ</span>
         </a>
         <div class="hidden md:flex items-center gap-1" id="links" aria-label="Основные разделы">
           <!-- ссылки генерятся из data-nav ниже -->
@@ -544,11 +541,13 @@
           <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 max-w-prose">Инженерный центр Step3D.Lab: цифровое проектирование, реверсивный инжиниринг, 3D‑сканирование и аддитивное производство. Команда технопарка РГСУ и ООО «СТЕП 3Д» выполняет разработки, сопровождает внедрение и обучает специалистов.</p>
           <div class="mt-6 flex flex-wrap gap-3">
             <button id="openModal" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300">Оставить заявку</button>
-            <button type="button" id="toggleAbout" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium" aria-controls="aboutBox" aria-expanded="false" data-label-open="О лаборатории" data-label-close="Свернуть описание">О лаборатории</button>
+            <button type="button" id="toggleAbout" class="about-toggle inline-flex items-center gap-2 rounded-xl border border-slate-300/80 dark:border-slate-600 px-5 py-3 font-medium transition" aria-controls="aboutBox" aria-expanded="false" data-label-open="О лаборатории" data-label-close="Свернуть описание">О лаборатории</button>
           </div>
-          <div id="aboutBox" class="mt-6 hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 glass p-6" tabindex="-1" aria-hidden="true" role="region" aria-labelledby="toggleAbout">
-            <h3 class="text-xl font-semibold mb-2">О лаборатории</h3>
-            <p class="text-slate-700 dark:text-slate-300">Step3D.Lab — команда инженеров, дизайнеров и преподавателей. Работаем на базе технопарка РГСУ совместно с ООО «СТЕП 3Д»: выполняем R&amp;D‑проекты, проводим курсы ДПО (48–72 ч), сопровождаем производственные задачи и студенческие инициативы. Фокус — CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, прототипирование и аддитивное производство.</p>
+          <div id="aboutBox" class="about-box glass" data-open="false" tabindex="-1" aria-hidden="true" role="region" aria-labelledby="toggleAbout">
+            <div class="about-box__content" data-about-inner>
+              <h3 class="text-xl font-semibold mb-2">О лаборатории</h3>
+              <p class="text-slate-700 dark:text-slate-300">Step3D.Lab — команда инженеров, дизайнеров и преподавателей. Работаем на базе технопарка РГСУ совместно с ООО «СТЕП 3Д»: выполняем R&amp;D‑проекты, проводим курсы ДПО (48–72 ч), сопровождаем производственные задачи и студенческие инициативы. Фокус — CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, прототипирование и аддитивное производство.</p>
+            </div>
           </div>
         </div>
         <!-- Hero: космические захватчики -->
@@ -967,14 +966,10 @@
           <div class="mt-6 flex flex-wrap gap-3">
             <button class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-white font-medium shadow hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300" id="openModal2">Оставить заявку</button>
             <a href="https://t.me/step_3d_mngr" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700">Написать нам в телеграм</a>
-            <a href="mailto:projects.step3d@gmail.com" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm hover:shadow focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700">
+            <a href="mailto:projects.step3d@gmail.com" class="contact-email inline-flex items-center gap-2 rounded-xl px-5 py-3 font-medium transition focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-600">
               <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden><path d="M4 6h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1zm0 0l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 18l5.5-4.125" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 18l-5.5-4.125" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               projects.step3d@gmail.com
             </a>
-            <button id="copyEmail" class="inline-flex items-center gap-2 rounded-xl bg-slate-900/90 text-white px-5 py-3 font-medium shadow hover:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:focus:ring-slate-600" type="button">
-              <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden><path d="M8 8V6a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2h-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="8" width="10" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span class="copy-label">Скопировать почту</span>
-            </button>
             <button id="shareLink" class="inline-flex items-center gap-2 rounded-xl bg-white dark:bg-slate-800 px-5 py-3 border border-slate-200 dark:border-slate-700 font-medium shadow-sm" aria-label="Поделиться ссылкой">
               <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M8.59 13.51l6.83 3.91m-6.83-7.83l6.83-3.91M18 8a3 3 0 10-3-3m3 14a3 3 0 10-3-3m-9 3a3 3 0 100-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <span class="sr-only">Поделиться ссылкой</span>
@@ -1914,9 +1909,28 @@
 
       const openLabel = aboutButton.dataset.labelOpen?.trim() || aboutButton.textContent?.trim() || 'О лаборатории'
       const closeLabel = aboutButton.dataset.labelClose?.trim() || 'Свернуть описание'
+      const motionMedia = window.matchMedia?.('(prefers-reduced-motion: reduce)')
 
-      let isExpanded = !aboutBox.classList.contains('hidden')
+      let isExpanded = aboutBox.dataset.open === 'true'
       let focusRestore = aboutButton
+
+      const updateHeight = () => {
+        const inner = aboutBox.querySelector('[data-about-inner]')
+        if (!inner) return
+        const height = inner.scrollHeight
+        aboutBox.style.setProperty('--about-target', `${height}px`)
+      }
+
+      const commitState = (expanded, immediate = false) => {
+        const apply = () => {
+          aboutBox.dataset.open = expanded ? 'true' : 'false'
+        }
+        if (immediate || motionMedia?.matches) {
+          apply()
+        } else {
+          requestAnimationFrame(apply)
+        }
+      }
 
       const setState = (expanded, { trigger, initial = false } = {}) => {
         isExpanded = expanded
@@ -1927,22 +1941,38 @@
             : (document.activeElement instanceof HTMLElement ? document.activeElement : aboutButton)
         }
 
-        aboutBox.classList.toggle('hidden', !expanded)
         aboutBox.setAttribute('aria-hidden', String(!expanded))
         aboutButton.setAttribute('aria-expanded', String(expanded))
+        aboutButton.dataset.state = expanded ? 'open' : 'closed'
         aboutButton.textContent = expanded ? closeLabel : openLabel
+
+        updateHeight()
+        commitState(expanded, initial)
 
         if (initial) return
 
         const focusTarget = expanded ? aboutBox : focusRestore
         if (focusTarget && typeof focusTarget.focus === 'function') {
-          requestAnimationFrame(() => {
+          const delay = motionMedia?.matches ? 0 : 180
+          window.setTimeout(() => {
             focusTarget.focus({ preventScroll: true })
-          })
+          }, delay)
         }
       }
 
       setState(isExpanded, { initial: true })
+
+      const handleResize = () => {
+        if (!isExpanded) return
+        updateHeight()
+      }
+
+      window.addEventListener('resize', handleResize)
+
+      motionMedia?.addEventListener?.('change', () => {
+        if (!isExpanded) return
+        updateHeight()
+      })
 
       aboutButton.addEventListener('click', () => {
         setState(!isExpanded, { trigger: aboutButton })
@@ -2028,27 +2058,6 @@
         alert('Ссылка скопирована в буфер обмена')
       } catch (err) {
         prompt('Скопируйте ссылку вручную:', url)
-      }
-    })
-
-    // ===== Копирование email
-    const email = 'projects.step3d@gmail.com'
-    const copyEmailBtn = document.getElementById('copyEmail')
-    copyEmailBtn?.addEventListener('click', async ()=>{
-      const label = copyEmailBtn.querySelector('.copy-label')
-      try {
-        await navigator.clipboard.writeText(email)
-        if(label){
-          const original = label.textContent
-          label.textContent = 'Скопировано!'
-          copyEmailBtn.classList.add('ring','ring-emerald-300','ring-offset-2','ring-offset-white','dark:ring-offset-slate-900')
-          setTimeout(()=>{
-            label.textContent = original
-            copyEmailBtn.classList.remove('ring','ring-emerald-300','ring-offset-2','ring-offset-white','dark:ring-offset-slate-900')
-          }, 2000)
-        }
-      } catch (err) {
-        prompt('Скопируйте адрес вручную:', email)
       }
     })
 
