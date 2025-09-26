@@ -114,6 +114,16 @@
       background: rgba(255, 255, 255, 0.65);
       transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
+    .site-toggle--active {
+      border-color: rgba(14, 165, 233, 0.8);
+      background: rgba(14, 165, 233, 0.08);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }
+    .dark .site-toggle--active {
+      border-color: rgba(148, 163, 184, 0.65);
+      background: rgba(148, 163, 184, 0.18);
+      box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.25);
+    }
     .site-toggle:hover {
       border-color: rgba(14, 165, 233, 0.6);
       box-shadow: 0 8px 18px rgba(14, 165, 233, 0.25);
@@ -164,7 +174,7 @@
         </a>
         <div class="hidden md:flex items-center gap-1" id="links" aria-label="Секции страницы"></div>
         <div class="flex items-center gap-2">
-          <button id="themeToggle" type="button" class="site-toggle" aria-label="Переключить тему">
+          <button id="themeToggle" type="button" class="site-toggle" aria-label="Переключить тему" title="Переключить тему" data-theme-control data-pressed-class="site-toggle--active" data-label-when-dark="Переключить на светлую тему" data-label-when-light="Переключить на тёмную тему">
             <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M12 3a1 1 0 0 0-.92.6 6.5 6.5 0 1 1-7.48 9.07A1 1 0 0 0 3 13a9 9 0 1 0 9-10Z" fill="currentColor"/></svg>
           </button>
           <a href="#contacts" class="site-cta site-cta--nav">Связаться</a>
@@ -186,7 +196,7 @@
           </div>
           <div class="mt-6 flex items-center justify-between gap-3">
             <span class="text-sm font-semibold text-slate-500 dark:text-slate-300">Тема</span>
-            <button id="themeToggleSm" type="button" class="site-toggle" aria-label="Переключить тему">
+            <button id="themeToggleSm" type="button" class="site-toggle" aria-label="Переключить тему" title="Переключить тему" data-theme-control data-pressed-class="site-toggle--active" data-label-when-dark="Переключить на светлую тему" data-label-when-light="Переключить на тёмную тему">
               <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M12 3a1 1 0 0 0-.92.6 6.5 6.5 0 1 1-7.48 9.07A1 1 0 0 0 3 13a9 9 0 1 0 9-10Z" fill="currentColor"/></svg>
             </button>
           </div>
@@ -582,17 +592,46 @@
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     const initial = stored || (prefersDark ? 'dark' : 'light')
     if(initial === 'dark') root.classList.add('dark')
-    function setTheme(mode){
-      if(mode === 'dark'){ root.classList.add('dark'); localStorage.setItem('step3d-theme','dark') }
-      else { root.classList.remove('dark'); localStorage.setItem('step3d-theme','light') }
-      document.querySelectorAll('#themeToggle, #themeToggleSm').forEach(btn=>{
-        if(btn) btn.textContent = root.classList.contains('dark') ? '☀️' : '🌙'
+    root.dataset.theme = root.classList.contains('dark') ? 'dark' : 'light'
+
+    function updateThemeControls(){
+      const isDark = root.classList.contains('dark')
+      const currentTheme = isDark ? 'dark' : 'light'
+      root.dataset.theme = currentTheme
+      document.querySelectorAll('[data-theme-control]').forEach(btn => {
+        if(!(btn instanceof HTMLElement)) return
+        btn.setAttribute('aria-pressed', String(isDark))
+        btn.dataset.themeState = currentTheme
+        const pressedClass = btn.getAttribute('data-pressed-class')
+        if(pressedClass){
+          btn.classList.toggle(pressedClass, isDark)
+        }
+        const label = isDark ? btn.getAttribute('data-label-when-dark') : btn.getAttribute('data-label-when-light')
+        if(label){
+          btn.setAttribute('aria-label', label)
+          btn.setAttribute('title', label)
+        }
+        if(btn.hasAttribute('data-text-when-dark') || btn.hasAttribute('data-text-when-light')){
+          const text = isDark ? btn.getAttribute('data-text-when-dark') : btn.getAttribute('data-text-when-light')
+          if(typeof text === 'string'){
+            btn.textContent = text ?? ''
+          }
+        }
       })
+    }
+
+    function setTheme(mode){
+      const isDark = mode === 'dark'
+      root.classList.toggle('dark', isDark)
+      localStorage.setItem('step3d-theme', isDark ? 'dark' : 'light')
+      updateThemeControls()
     }
 
     const themeToggle = document.getElementById('themeToggle')
     const themeToggleSm = document.getElementById('themeToggleSm')
     ;[themeToggle, themeToggleSm].forEach(btn=> btn && btn.addEventListener('click', ()=> setTheme(root.classList.contains('dark') ? 'light' : 'dark')))
+
+    updateThemeControls()
 
     const navData = JSON.parse(document.getElementById('nav-data').dataset.nav)
     const linksWrap = document.getElementById('links')
@@ -695,10 +734,17 @@
       })
       if(variant==='desktop'){
         const tBtn = document.createElement('button')
+        tBtn.type = 'button'
         tBtn.className = 'ml-2 rounded-xl border px-3 py-2 text-sm'
+        tBtn.dataset.themeControl = ''
+        tBtn.setAttribute('data-label-when-dark', 'Переключить на светлую тему')
+        tBtn.setAttribute('data-label-when-light', 'Переключить на тёмную тему')
+        tBtn.setAttribute('data-text-when-dark', 'Светлая')
+        tBtn.setAttribute('data-text-when-light', 'Тёмная')
         tBtn.textContent = root.classList.contains('dark') ? 'Светлая' : 'Тёмная'
-        tBtn.addEventListener('click', ()=>{ setTheme(root.classList.contains('dark') ? 'light':'dark'); tBtn.textContent = root.classList.contains('dark') ? 'Светлая' : 'Тёмная' })
+        tBtn.addEventListener('click', ()=> setTheme(root.classList.contains('dark') ? 'light':'dark'))
         container.appendChild(tBtn)
+        updateThemeControls()
       }
     }
     renderLinks(linksWrap, 'desktop')
