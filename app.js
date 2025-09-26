@@ -6,58 +6,63 @@ if (doc.classList.contains('no-js')) {
 
 const body = document.body;
 const themeButtons = document.querySelectorAll('[data-theme-toggle]');
-const THEME_KEY = 'step3dlab-theme';
 
-const getStoredTheme = () => {
-  try {
-    return localStorage.getItem(THEME_KEY);
-  } catch (error) {
-    return null;
+if (themeButtons.length) {
+  const THEME_KEY = 'step3dlab-theme';
+
+  const getStoredTheme = () => {
+    try {
+      return localStorage.getItem(THEME_KEY);
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const storeTheme = (value) => {
+    try {
+      localStorage.setItem(THEME_KEY, value);
+    } catch (error) {
+      /* noop */
+    }
+  };
+
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  const applyTheme = (theme, { persist = true } = {}) => {
+    const themeValue = theme === 'dark' ? 'dark' : 'light';
+    body.classList.toggle('theme-dark', themeValue === 'dark');
+    themeButtons.forEach((button) => {
+      button.setAttribute('aria-pressed', themeValue === 'dark' ? 'true' : 'false');
+      button.title = themeValue === 'dark' ? 'Переключить на светлую тему' : 'Переключить на тёмную тему';
+    });
+    if (persist) {
+      storeTheme(themeValue);
+    }
+  };
+
+  const storedTheme = getStoredTheme();
+  const initialTheme = storedTheme ?? (prefersDark ? 'dark' : 'light');
+  applyTheme(initialTheme, { persist: Boolean(storedTheme) });
+
+  if (!storedTheme && window.matchMedia) {
+    const themeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const updateFromSystem = (event) => applyTheme(event.matches ? 'dark' : 'light', { persist: false });
+    if (typeof themeQuery.addEventListener === 'function') {
+      themeQuery.addEventListener('change', updateFromSystem);
+    } else if (typeof themeQuery.addListener === 'function') {
+      themeQuery.addListener(updateFromSystem);
+    }
   }
-};
 
-const storeTheme = (value) => {
-  try {
-    localStorage.setItem(THEME_KEY, value);
-  } catch (error) {
-    /* noop */
-  }
-};
-
-const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-const applyTheme = (theme, { persist = true } = {}) => {
-  const themeValue = theme === 'dark' ? 'dark' : 'light';
-  body.classList.toggle('theme-dark', themeValue === 'dark');
   themeButtons.forEach((button) => {
-    button.setAttribute('aria-pressed', themeValue === 'dark' ? 'true' : 'false');
-    button.title = themeValue === 'dark' ? 'Переключить на светлую тему' : 'Переключить на тёмную тему';
+    button.addEventListener('click', () => {
+      const next = body.classList.contains('theme-dark') ? 'light' : 'dark';
+      applyTheme(next);
+    });
   });
-  if (persist) {
-    storeTheme(themeValue);
-  }
-};
-
-const storedTheme = getStoredTheme();
-const initialTheme = storedTheme ?? (prefersDark ? 'dark' : 'light');
-applyTheme(initialTheme, { persist: Boolean(storedTheme) });
-
-if (!storedTheme && window.matchMedia) {
-  const themeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  const updateFromSystem = (event) => applyTheme(event.matches ? 'dark' : 'light', { persist: false });
-  if (typeof themeQuery.addEventListener === 'function') {
-    themeQuery.addEventListener('change', updateFromSystem);
-  } else if (typeof themeQuery.addListener === 'function') {
-    themeQuery.addListener(updateFromSystem);
-  }
+} else {
+  body.classList.remove('theme-dark');
 }
-
-themeButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const next = body.classList.contains('theme-dark') ? 'light' : 'dark';
-    applyTheme(next);
-  });
-});
 
 // Navigation highlight
 const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
@@ -234,6 +239,100 @@ if (inlineForm) {
       success.hidden = true;
     }, 6000);
   });
+}
+
+// Hero gallery slider
+const heroGallery = document.querySelector('[data-hero-gallery]');
+
+if (heroGallery) {
+  const track = heroGallery.querySelector('[data-gallery-track]');
+  const slides = Array.from(heroGallery.querySelectorAll('[data-gallery-slide]'));
+  const dots = Array.from(heroGallery.querySelectorAll('[data-gallery-dot]'));
+  const prev = heroGallery.querySelector('[data-gallery-prev]');
+  const next = heroGallery.querySelector('[data-gallery-next]');
+
+  if (track && slides.length) {
+    let currentIndex = Math.max(slides.findIndex((slide) => slide.classList.contains('is-active')), 0);
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let autoplayTimer = null;
+    const AUTOPLAY_INTERVAL = 6000;
+
+    const updateSlides = (targetIndex) => {
+      const index = (targetIndex + slides.length) % slides.length;
+      currentIndex = index;
+      track.style.transform = `translateX(${-index * 100}%)`;
+
+      slides.forEach((slide, slideIndex) => {
+        const isActive = slideIndex === index;
+        slide.classList.toggle('is-active', isActive);
+        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === index;
+        dot.classList.toggle('is-active', isActive);
+        dot.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        if (isActive) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    const goTo = (index) => {
+      updateSlides(index);
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
+
+    const startAutoplay = () => {
+      if (prefersReducedMotion || slides.length < 2) return;
+      stopAutoplay();
+      autoplayTimer = window.setInterval(() => {
+        goTo(currentIndex + 1);
+      }, AUTOPLAY_INTERVAL);
+    };
+
+    const restartAutoplay = () => {
+      stopAutoplay();
+      startAutoplay();
+    };
+
+    prev?.addEventListener('click', () => {
+      goTo(currentIndex - 1);
+      restartAutoplay();
+    });
+
+    next?.addEventListener('click', () => {
+      goTo(currentIndex + 1);
+      restartAutoplay();
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      dot.addEventListener('click', () => {
+        goTo(dotIndex);
+        restartAutoplay();
+      });
+    });
+
+    heroGallery.addEventListener('mouseenter', stopAutoplay);
+    heroGallery.addEventListener('mouseleave', startAutoplay);
+    heroGallery.addEventListener('focusin', stopAutoplay);
+    heroGallery.addEventListener('focusout', (event) => {
+      if (!heroGallery.contains(event.relatedTarget)) {
+        startAutoplay();
+      }
+    });
+
+    updateSlides(currentIndex);
+    startAutoplay();
+  }
 }
 
 // Smooth scrolling fallback for older browsers

@@ -14,12 +14,11 @@
 
   <header class="site-header" id="top">
     <div class="site-header__inner" role="navigation" aria-label="Основная навигация">
-      <a class="site-brand" href="index.html">
-        <img class="site-brand__logo" src="Logo.svg" alt="Step3D.Lab" width="40" height="40" loading="lazy">
-        <span class="site-brand__text">
-          <span class="site-brand__title">Step3D.Lab</span>
-          <span class="site-brand__subtitle">Инженерный центр</span>
+      <a class="site-brand" href="index.html" aria-label="Step3D.Lab — на главную">
+        <span class="site-brand__mark" aria-hidden="true">
+          <img src="assets/technopark-rgsu-logo.svg" alt="" width="40" height="40" loading="lazy">
         </span>
+        <span class="sr-only">Step3D.Lab</span>
       </a>
       <nav class="site-nav" aria-label="Разделы страницы">
         <ul class="site-nav__list">
@@ -32,9 +31,6 @@
         </ul>
       </nav>
       <div class="site-header__actions">
-        <button class="ghost-button" type="button" id="themeToggle" aria-label="Переключить тему" data-theme-toggle>
-          <span aria-hidden="true">🌗</span>
-        </button>
         <a class="cta-button" href="#enroll">Связаться</a>
         <button class="ghost-button ghost-button--menu" type="button" id="menuToggle" aria-expanded="false" aria-controls="siteMap" aria-label="Открыть меню">
           <span class="ghost-button__bars" aria-hidden="true"></span>
@@ -99,10 +95,35 @@
             </div>
           </dl>
         </div>
-        <figure class="hero__media">
-          <div class="hero__orb" aria-hidden="true"></div>
-          <img src="Logo_Step_3D.jpg" alt="Команда Step3D.Lab" loading="lazy" width="480" height="480" class="hero__image">
-        </figure>
+        <section class="hero-gallery" aria-label="Фотографии Step3D.Lab" data-hero-gallery>
+          <div class="hero-gallery__viewport">
+            <div class="hero-gallery__track" data-gallery-track>
+              <figure class="hero-gallery__slide is-active" data-gallery-slide role="group" aria-label="3D-печать детали">
+                <img src="https://images.unsplash.com/photo-1581091012184-7e0cdfbb6792?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Инженер настраивает 3D-принтер" loading="lazy" width="640" height="480">
+                <figcaption>Практика на FDM и SLA‑оборудовании</figcaption>
+              </figure>
+              <figure class="hero-gallery__slide" data-gallery-slide role="group" aria-label="3D-сканирование компонента">
+                <img src="https://images.unsplash.com/photo-1535663621759-0c4c0dac5337?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Специалист выполняет 3D-сканирование детали" loading="lazy" width="640" height="480">
+                <figcaption>Оцифровка и контроль качества геометрии</figcaption>
+              </figure>
+              <figure class="hero-gallery__slide" data-gallery-slide role="group" aria-label="Командная работа инженеров">
+                <img src="https://images.unsplash.com/photo-1581092334707-1e71c48b83c7?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Инженерная команда обсуждает проект" loading="lazy" width="640" height="480">
+                <figcaption>Совместная работа над проектными задачами</figcaption>
+              </figure>
+            </div>
+            <button class="hero-gallery__control hero-gallery__control--prev" type="button" aria-label="Предыдущее фото" data-gallery-prev>
+              <span aria-hidden="true">‹</span>
+            </button>
+            <button class="hero-gallery__control hero-gallery__control--next" type="button" aria-label="Следующее фото" data-gallery-next>
+              <span aria-hidden="true">›</span>
+            </button>
+          </div>
+          <div class="hero-gallery__dots" role="tablist" aria-label="Переключение фотографий">
+            <button class="hero-gallery__dot is-active" type="button" aria-label="Показать фото 1" data-gallery-dot="0"></button>
+            <button class="hero-gallery__dot" type="button" aria-label="Показать фото 2" data-gallery-dot="1"></button>
+            <button class="hero-gallery__dot" type="button" aria-label="Показать фото 3" data-gallery-dot="2"></button>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -480,12 +501,11 @@
   <footer class="site-footer" aria-label="Нижний колонтитул">
     <div class="container site-footer__grid">
       <div class="site-footer__brand">
-        <a class="site-brand" href="#top">
-          <img class="site-brand__logo" src="Logo.svg" alt="Step3D.Lab" width="40" height="40" loading="lazy">
-          <span class="site-brand__text">
-            <span class="site-brand__title">Step3D.Lab</span>
-            <span class="site-brand__subtitle">Инженерный центр РГСУ</span>
+        <a class="site-brand" href="#top" aria-label="Step3D.Lab — к началу страницы">
+          <span class="site-brand__mark" aria-hidden="true">
+            <img src="assets/technopark-rgsu-logo.svg" alt="" width="40" height="40" loading="lazy">
           </span>
+          <span class="sr-only">Step3D.Lab</span>
         </a>
         <p class="site-footer__about">Мы помогаем инженерным командам внедрять аддитивные технологии, развиваем компетенции WorldSkills и создаём образовательные программы нового поколения.</p>
       </div>
