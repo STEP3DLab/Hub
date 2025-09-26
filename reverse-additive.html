@@ -127,6 +127,18 @@
       background: rgba(15, 23, 42, 0.6);
       border-color: rgba(71, 85, 105, 0.55);
     }
+    #mobileMenu[data-open='true'] [data-menu-overlay] {
+      opacity: 1;
+    }
+    #mobileMenu[data-open='true'] .menu-panel {
+      transform: translateX(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #mobileMenu [data-menu-overlay],
+      #mobileMenu .menu-panel {
+        transition: none !important;
+      }
+    }
     @media (max-width: 768px) {
       .site-topnav__inner { min-height: 64px; gap: 1rem; }
       .site-brand__name { display: none; }
@@ -585,7 +597,86 @@
     const navData = JSON.parse(document.getElementById('nav-data').dataset.nav)
     const linksWrap = document.getElementById('links')
     const mobileWrap = document.getElementById('mobile')
+    const mobileMenu = document.getElementById('mobileMenu')
     const burger = document.getElementById('burger')
+    const mobileOverlay = mobileMenu?.querySelector('[data-menu-overlay]')
+    const mobilePanel = mobileMenu?.querySelector('[data-menu-panel]')
+    const mobileClose = mobileMenu?.querySelector('[data-menu-close]')
+    const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    mobileMenu?.setAttribute('aria-hidden', 'true')
+
+    function getFocusable(root){
+      if(!root) return []
+      return Array.from(root.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled') && el.getAttribute('tabindex') !== '-1' && (el.offsetParent !== null || el.getBoundingClientRect().width > 0 || el.getBoundingClientRect().height > 0))
+    }
+
+    function trapFocus(container, event){
+      if(event.key !== 'Tab') return
+      const focusable = getFocusable(container)
+      if(!focusable.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if(event.shiftKey && document.activeElement === first){
+        event.preventDefault()
+        last.focus()
+      } else if(!event.shiftKey && document.activeElement === last){
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    let mobileFocusReturn = null
+
+    function openMobileMenu(){
+      if(!mobileMenu) return
+      mobileFocusReturn = document.activeElement instanceof HTMLElement ? document.activeElement : null
+      mobileMenu.classList.remove('hidden')
+      requestAnimationFrame(()=>{
+        mobileMenu.dataset.open = 'true'
+        mobileMenu.setAttribute('aria-hidden', 'false')
+      })
+      burger?.setAttribute('aria-expanded', 'true')
+      document.body.classList.add('overflow-hidden')
+      const focusTarget = getFocusable(mobilePanel ?? mobileMenu)[0]
+      focusTarget?.focus({ preventScroll: true })
+      mobileMenu.addEventListener('keydown', handleMobileKeydown)
+    }
+
+    function closeMobileMenu({ restoreFocus = true } = {}){
+      if(!mobileMenu || mobileMenu.classList.contains('hidden')) return
+      delete mobileMenu.dataset.open
+      mobileMenu.setAttribute('aria-hidden', 'true')
+      let finished = false
+      const finish = () => {
+        if(finished) return
+        finished = true
+        mobileMenu.classList.add('hidden')
+      }
+      if(mobilePanel){
+        const onEnd = (event) => {
+          if(event.propertyName === 'transform') finish()
+        }
+        mobilePanel.addEventListener('transitionend', onEnd, { once: true })
+        setTimeout(finish, 280)
+      } else {
+        finish()
+      }
+      burger?.setAttribute('aria-expanded', 'false')
+      document.body.classList.remove('overflow-hidden')
+      mobileMenu.removeEventListener('keydown', handleMobileKeydown)
+      if(restoreFocus && mobileFocusReturn){
+        mobileFocusReturn.focus({ preventScroll: true })
+      }
+    }
+
+    function handleMobileKeydown(event){
+      if(event.key === 'Escape'){
+        event.preventDefault()
+        closeMobileMenu()
+        return
+      }
+      trapFocus(mobilePanel ?? mobileMenu, event)
+    }
 
     function renderLinks(container, variant){
       container.innerHTML = ''
@@ -593,7 +684,13 @@
         const a = document.createElement('a')
         a.href = `#${id}`
         a.textContent = label
-        a.className = variant==='desktop' ? 'px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800' : 'px-3 py-2 rounded-xl text-sm font-medium border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700'
+        if(variant==='desktop'){
+          a.className = 'px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400'
+        } else {
+          a.className = 'px-3 py-2 rounded-xl text-sm font-medium border bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400'
+          a.setAttribute('role', 'menuitem')
+          a.addEventListener('click', ()=> closeMobileMenu({ restoreFocus: false }))
+        }
         container.appendChild(a)
       })
       if(variant==='desktop'){
@@ -606,11 +703,19 @@
     }
     renderLinks(linksWrap, 'desktop')
     renderLinks(mobileWrap, 'mobile')
-    burger && burger.addEventListener('click', ()=>{
-      const opened = !mobileWrap.classList.contains('hidden')
-      burger.setAttribute('aria-expanded', String(!opened))
-      mobileWrap.classList.toggle('hidden')
+
+    burger?.addEventListener('click', ()=>{
+      if(mobileMenu?.dataset.open === 'true') closeMobileMenu()
+      else openMobileMenu()
     })
+    mobileOverlay?.addEventListener('click', ()=> closeMobileMenu())
+    mobileClose?.addEventListener('click', ()=> closeMobileMenu())
+
+    if(typeof window.matchMedia === 'function'){
+      const md = window.matchMedia('(min-width: 768px)')
+      const onChange = (event) => { if(event.matches) closeMobileMenu({ restoreFocus: false }) }
+      md.addEventListener ? md.addEventListener('change', onChange) : md.addListener(onChange)
+    }
 
     const sectionIds = navData.map(n=> n.id)
     const anchors = Array.from(document.querySelectorAll('#links a'))
