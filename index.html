@@ -743,7 +743,7 @@
               </figcaption>
             </figure>
           </div>
-          <div class="flex items-center justify-center gap-2 mt-4 js-dots" aria-hidden="true"></div>
+          <div class="flex items-center justify-center gap-2 mt-4 js-dots" role="group" aria-label="Переключение фотографий"></div>
         </div>
         <div class="rounded-3xl border border-slate-200 dark:border-slate-700 p-4">
           <h3 class="text-lg font-semibold mb-3">GenAI + Open Source</h3>
@@ -1948,48 +1948,90 @@
 
         const interval = Number(card.dataset.interval) || 5000
         let timer
+        const dots = []
 
-        function setActive(i){
+        function setActive(i, { focusDot = false } = {}){
           slides.forEach((s,idx)=> s.classList.toggle('hidden', idx!==i))
-          dotsBox.querySelectorAll('span').forEach((d,idx)=> d.classList.toggle('bg-slate-900', idx===i))
+          dots.forEach((d,idx)=>{
+            const isActive = idx===i
+            d.classList.toggle('bg-slate-300', !isActive)
+            d.classList.toggle('dark:bg-slate-600', !isActive)
+            d.classList.toggle('bg-slate-900', isActive)
+            d.classList.toggle('dark:bg-slate-200', isActive)
+            d.classList.toggle('is-active', isActive)
+            d.setAttribute('aria-pressed', String(isActive))
+            d.tabIndex = isActive ? 0 : -1
+            if (isActive && focusDot) {
+              d.focus({ preventScroll: true })
+            }
+          })
           card.dataset.index = i
         }
 
-        function next(){
+        function next({ focusDot = false } = {}){
           const current = Number(card.dataset.index) || 0
-          setActive((current + 1) % slides.length)
+          setActive((current + 1) % slides.length, { focusDot })
         }
 
-        function prev(){
+        function prev({ focusDot = false } = {}){
           const current = Number(card.dataset.index) || 0
-          setActive((current - 1 + slides.length) % slides.length)
+          setActive((current - 1 + slides.length) % slides.length, { focusDot })
         }
 
         function startAuto(){
+          if(card.matches(':focus-within')) return
           stopAuto()
           timer = window.setInterval(next, interval)
         }
 
         function stopAuto(){
-          if(timer) window.clearInterval(timer)
+          if(timer){
+            window.clearInterval(timer)
+            timer = undefined
+          }
         }
 
         dotsBox.innerHTML = ''
         slides.forEach((_,i)=>{
-          const dot=document.createElement('span')
-          dot.className='inline-block size-2 rounded-full bg-slate-300 dark:bg-slate-600 transition-colors duration-200'
-          dot.addEventListener('click',()=>{ setActive(i); startAuto() })
+          const dot=document.createElement('button')
+          dot.type='button'
+          dot.className='gallery-dot inline-flex size-2 rounded-full bg-slate-300 dark:bg-slate-600 transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400'
+          dot.setAttribute('aria-label',`Показать фото ${i+1}`)
+          dot.setAttribute('aria-pressed','false')
+          dot.tabIndex = -1
+          dot.addEventListener('click',()=>{ setActive(i,{ focusDot: true }); startAuto() })
+          dot.addEventListener('keydown',(event)=>{
+            let targetIndex = null
+            if(event.key==='ArrowRight' || event.key==='ArrowDown') targetIndex = (i + 1) % slides.length
+            else if(event.key==='ArrowLeft' || event.key==='ArrowUp') targetIndex = (i - 1 + slides.length) % slides.length
+            else if(event.key==='Home') targetIndex = 0
+            else if(event.key==='End') targetIndex = slides.length - 1
+            if(targetIndex!==null){
+              event.preventDefault()
+              setActive(targetIndex,{ focusDot: true })
+              startAuto()
+            }
+          })
           dotsBox.appendChild(dot)
+          dots.push(dot)
         })
 
         setActive(0)
         startAuto()
 
-        card.querySelector('.js-prev')?.addEventListener('click', ()=>{ prev(); startAuto() })
-        card.querySelector('.js-next')?.addEventListener('click', ()=>{ next(); startAuto() })
+        const isDotFocused = () => dots.includes(document.activeElement)
+
+        card.querySelector('.js-prev')?.addEventListener('click', ()=>{ prev({ focusDot: isDotFocused() }); startAuto() })
+        card.querySelector('.js-next')?.addEventListener('click', ()=>{ next({ focusDot: isDotFocused() }); startAuto() })
 
         card.addEventListener('mouseenter', stopAuto)
-        card.addEventListener('mouseleave', startAuto)
+        card.addEventListener('mouseleave', ()=>{
+          if(!card.matches(':focus-within')) startAuto()
+        })
+        card.addEventListener('focusin', stopAuto)
+        card.addEventListener('focusout', (event)=>{
+          if(!card.contains(event.relatedTarget)) startAuto()
+        })
       })
     }
     initGalleries()
