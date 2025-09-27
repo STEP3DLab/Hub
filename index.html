@@ -93,6 +93,10 @@
       45% { transform: translateX(120%) scale(1.08); opacity: 1; }
       100% { transform: translateX(150%) scale(1.12); opacity: 0.4; }
     }
+    @keyframes playgroundFadeIn {
+      0% { opacity: 0; transform: translateY(20px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
     .hero-showcase {
       pointer-events: auto;
       min-width: min(280px, 60vw);
@@ -455,6 +459,365 @@
       fill: rgba(226, 232, 240, 0.9);
     }
 
+    [data-experience-target] {
+      position: relative;
+    }
+    [data-experience-target]::before {
+      content: '';
+      position: absolute;
+      inset: -28px -32px -40px;
+      border-radius: 64px;
+      background: radial-gradient(140% 120% at 18% 16%, rgba(56, 189, 248, 0.32), transparent 70%);
+      opacity: 0;
+      transform: translateY(20px) scale(0.94);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(0);
+    }
+    [data-experience-target] > * {
+      position: relative;
+      z-index: 1;
+      animation: playgroundFadeIn 320ms cubic-bezier(0.22, 0.72, 0, 1) both;
+    }
+    [data-experience-target][data-mode='orbital']::before {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      background:
+        radial-gradient(140% 120% at 18% 18%, rgba(56, 189, 248, 0.34), transparent 70%),
+        radial-gradient(120% 120% at 88% 76%, rgba(16, 185, 129, 0.28), transparent 70%);
+    }
+    [data-experience-target][data-mode='reaction']::before {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      background:
+        radial-gradient(140% 120% at 20% 20%, rgba(244, 114, 182, 0.32), transparent 70%),
+        radial-gradient(120% 120% at 80% 80%, rgba(129, 140, 248, 0.3), transparent 70%);
+    }
+    [data-experience-target][data-mode='challenge']::before {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      background:
+        radial-gradient(140% 120% at 22% 22%, rgba(251, 191, 36, 0.32), transparent 70%),
+        radial-gradient(120% 120% at 80% 78%, rgba(59, 130, 246, 0.28), transparent 70%);
+    }
+    [data-experience-target][data-mode='book']::before {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      background:
+        radial-gradient(140% 120% at 18% 18%, rgba(129, 140, 248, 0.35), transparent 70%),
+        radial-gradient(120% 120% at 82% 78%, rgba(236, 72, 153, 0.28), transparent 70%);
+    }
+    [data-experience-target][data-mode='film']::before {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      background:
+        radial-gradient(140% 120% at 16% 18%, rgba(37, 99, 235, 0.32), transparent 70%),
+        radial-gradient(120% 120% at 82% 76%, rgba(14, 165, 233, 0.32), transparent 70%);
+    }
+
+    .playground-card {
+      position: relative;
+      border-radius: 28px;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(248, 250, 252, 0.9);
+      padding: clamp(20px, 4vw, 28px);
+      display: grid;
+      gap: 18px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      isolation: isolate;
+    }
+    .dark .playground-card {
+      background: rgba(15, 23, 42, 0.82);
+      border-color: rgba(71, 85, 105, 0.5);
+      color: rgba(226, 232, 240, 0.95);
+      box-shadow: 0 24px 60px rgba(2, 6, 23, 0.55);
+    }
+    .playground-card__header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .playground-card__metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .playground-card__metrics > div {
+      display: grid;
+      gap: 6px;
+    }
+    .playground-meta {
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.26em;
+      color: rgba(100, 116, 139, 0.85);
+    }
+    .dark .playground-meta {
+      color: rgba(148, 163, 184, 0.9);
+    }
+    .playground-metric-value {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 700;
+      color: rgba(15, 23, 42, 0.95);
+    }
+    .dark .playground-metric-value {
+      color: rgba(248, 250, 252, 0.95);
+    }
+    .playground-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-top: 0.75rem;
+    }
+    .playground-copy {
+      font-size: 0.94rem;
+      line-height: 1.55;
+      color: rgba(71, 85, 105, 0.9);
+    }
+    .dark .playground-copy {
+      color: rgba(148, 163, 184, 0.92);
+    }
+    .playground-status {
+      font-size: 0.9rem;
+      color: rgba(71, 85, 105, 0.95);
+    }
+    .dark .playground-status {
+      color: rgba(148, 163, 184, 0.95);
+    }
+    .playground-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.32rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.66rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      font-weight: 700;
+      gap: 0.35rem;
+    }
+    .playground-chip--emerald {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.92), rgba(20, 184, 166, 0.88));
+      color: #f8fafc;
+    }
+    .playground-chip--sky {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.92), rgba(59, 130, 246, 0.9));
+      color: #f8fafc;
+    }
+    .playground-chip--slate {
+      background: rgba(15, 23, 42, 0.85);
+      color: rgba(248, 250, 252, 0.95);
+    }
+    .playground-canvas {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      min-height: clamp(220px, 40vh, 320px);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      background: linear-gradient(160deg, rgba(15, 23, 42, 0.92), rgba(37, 99, 235, 0.48));
+    }
+    .playground-canvas canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .dark .playground-canvas {
+      border-color: rgba(71, 85, 105, 0.45);
+      background: linear-gradient(160deg, rgba(2, 6, 23, 0.92), rgba(59, 130, 246, 0.35));
+    }
+    .playground-card__cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .playground-card__cta button,
+    .playground-card__cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.3rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      background: rgba(255, 255, 255, 0.92);
+      color: rgba(15, 23, 42, 0.92);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+    }
+    .playground-card__cta button:hover,
+    .playground-card__cta a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.18);
+    }
+    .playground-card__cta .primary {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.95), rgba(34, 197, 94, 0.92));
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 18px 36px rgba(14, 165, 233, 0.25);
+    }
+    .playground-card__cta .secondary {
+      background: rgba(248, 250, 252, 0.8);
+      color: rgba(51, 65, 85, 0.95);
+    }
+    .playground-card__cta .is-disabled {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .dark .playground-card__cta button,
+    .dark .playground-card__cta a {
+      background: rgba(15, 23, 42, 0.9);
+      color: rgba(226, 232, 240, 0.95);
+      border-color: rgba(71, 85, 105, 0.55);
+    }
+    .dark .playground-card__cta .secondary {
+      background: rgba(30, 41, 59, 0.8);
+      color: rgba(226, 232, 240, 0.92);
+    }
+    .playground-pad {
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      overflow: hidden;
+      min-height: clamp(200px, 36vh, 280px);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 600;
+      font-size: clamp(1.3rem, 3.4vw, 1.8rem);
+      transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+      background: radial-gradient(circle at 28% 30%, rgba(56, 189, 248, 0.35), rgba(15, 23, 42, 0.95));
+      color: rgba(248, 250, 252, 0.95);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+    }
+    .playground-pad[data-state="waiting"] {
+      background: linear-gradient(135deg, rgba(226, 232, 240, 0.12), rgba(56, 189, 248, 0.45));
+      transform: scale(1.01);
+      border-color: rgba(56, 189, 248, 0.55);
+    }
+    .playground-pad[data-state="ready"] {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(59, 130, 246, 0.78));
+      transform: scale(1.03);
+      border-color: rgba(16, 185, 129, 0.85);
+    }
+    .playground-pad[data-state="early"] {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.85), rgba(239, 68, 68, 0.8));
+      border-color: rgba(248, 113, 113, 0.78);
+    }
+    .playground-pad:focus-visible {
+      outline: 3px solid rgba(56, 189, 248, 0.6);
+      outline-offset: 4px;
+    }
+    .playground-history {
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(248, 250, 252, 0.85);
+      padding: 18px 22px;
+    }
+    .playground-history ul {
+      margin-top: 10px;
+      display: grid;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+    .playground-history li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(51, 65, 85, 0.92);
+    }
+    .dark .playground-history {
+      background: rgba(15, 23, 42, 0.7);
+      border-color: rgba(71, 85, 105, 0.45);
+    }
+    .dark .playground-history li {
+      color: rgba(226, 232, 240, 0.92);
+    }
+    .playground-task {
+      display: grid;
+      gap: 12px;
+    }
+    .playground-task h4 {
+      font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+      font-weight: 600;
+    }
+    .playground-task__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: rgba(71, 85, 105, 0.9);
+    }
+    .dark .playground-task__meta {
+      color: rgba(148, 163, 184, 0.9);
+    }
+    .playground-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .playground-hints ul {
+      list-style: disc;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+    }
+    .playground-card--media {
+      padding: 0;
+      overflow: hidden;
+    }
+    .playground-media {
+      position: relative;
+      border-radius: 28px;
+      padding: clamp(24px, 5vw, 34px);
+      display: grid;
+      gap: 14px;
+      color: rgba(248, 250, 252, 0.96);
+      isolation: isolate;
+      min-height: clamp(220px, 36vh, 300px);
+    }
+    .playground-media::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: var(--playground-media-image, none);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.35;
+      z-index: -2;
+    }
+    .playground-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.5), rgba(14, 165, 233, 0.55));
+      z-index: -1;
+    }
+    .playground-media--film::after {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.58), rgba(14, 165, 233, 0.48));
+    }
+    .playground-card--media .playground-card__cta,
+    .playground-card--media .playground-status {
+      padding: 0 clamp(24px, 5vw, 34px) clamp(24px, 5vw, 32px);
+    }
+    [data-playground-tabs] button[data-active='true'] {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.95), rgba(34, 197, 94, 0.92));
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 18px 36px rgba(14, 165, 233, 0.28);
+    }
+    .dark [data-playground-tabs] button[data-active='true'] {
+      background: linear-gradient(135deg, rgba(226, 232, 240, 0.92), rgba(148, 163, 184, 0.85));
+      color: rgba(15, 23, 42, 0.92);
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.28);
+    }
+
     #mobileMenu[data-open='true'] [data-menu-overlay] {
       opacity: 1;
     }
@@ -473,6 +836,8 @@
     @media (prefers-reduced-motion: reduce) {
       #invaders-canvas { display: none; }
       #invaders-hero { background: linear-gradient(135deg,#eef6ff,#ffffff 60%); }
+      [data-experience-target]::before { transition: none; transform: none; }
+      [data-experience-target] > * { animation: none; }
     }
   </style>
   <script type="application/ld+json">
@@ -581,6 +946,70 @@
   </header>
 
   <main id="main" tabindex="-1">
+  <section id="playground" class="relative py-16 md:py-24">
+    <div class="pointer-events-none absolute inset-0 -z-10">
+      <div class="absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-sky-100/70 via-white/70 to-transparent dark:from-slate-800/60 dark:via-slate-900/60" aria-hidden="true"></div>
+      <div class="absolute -top-24 right-[10%] h-72 w-72 rounded-full bg-sky-300/40 blur-3xl dark:bg-sky-500/40" aria-hidden="true"></div>
+      <div class="absolute -bottom-28 left-[5%] h-80 w-80 rounded-full bg-emerald-300/30 blur-3xl dark:bg-emerald-500/40" aria-hidden="true"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] items-start">
+        <div class="space-y-6">
+          <div class="inline-flex items-center gap-2 rounded-full border border-sky-200/70 bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-sky-700 dark:border-sky-500/40 dark:bg-slate-900/70 dark:text-sky-200">R22.Play · media lab</div>
+          <div class="space-y-3">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Игровая зона Step3D</h2>
+            <p class="text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-3xl">Экспериментируйте с мини‑играми и практиками фокусировки внимания, открывайте задачу дня, собирайте подборки книг и фильмов об инженерии. Все данные хранятся локально в рамках текущей сессии.</p>
+          </div>
+          <div class="rounded-3xl border border-slate-200/80 bg-white/90 p-5 shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/70" data-playground>
+            <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Режимы игровой зоны" data-playground-tabs>
+              <button type="button" class="inline-flex items-center gap-2 rounded-2xl border border-slate-200/70 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 dark:border-slate-700/70 dark:bg-slate-800/80 dark:text-slate-300" data-experience-mode="orbital" aria-selected="false">Аркада «Орбитальный охотник»</button>
+              <button type="button" class="inline-flex items-center gap-2 rounded-2xl border border-slate-200/70 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 dark:border-slate-700/70 dark:bg-slate-800/80 dark:text-slate-300" data-experience-mode="reaction" aria-selected="false">Реакция «Поймай сигнал»</button>
+              <button type="button" class="inline-flex items-center gap-2 rounded-2xl border border-slate-200/70 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 dark:border-slate-700/70 dark:bg-slate-800/80 dark:text-slate-300" data-experience-mode="challenge" aria-selected="false">Задача дня</button>
+              <button type="button" class="inline-flex items-center gap-2 rounded-2xl border border-slate-200/70 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 dark:border-slate-700/70 dark:bg-slate-800/80 dark:text-slate-300" data-experience-mode="book" aria-selected="false">Рекомендация · книга</button>
+              <button type="button" class="inline-flex items-center gap-2 rounded-2xl border border-slate-200/70 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 shadow-sm transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 dark:border-slate-700/70 dark:bg-slate-800/80 dark:text-slate-300" data-experience-mode="film" aria-selected="false">Рекомендация · фильм</button>
+            </div>
+            <div class="mt-6 relative">
+              <div data-experience-target class="grid gap-6"></div>
+            </div>
+            <p class="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.26em] text-slate-400 dark:text-slate-500">
+              <span class="inline-flex items-center gap-2 rounded-full border border-slate-200/70 px-3 py-1 dark:border-slate-700/70"><span class="size-2 rounded-full bg-emerald-400"></span>Beta</span>
+              <span>Игровые данные не покидают браузер</span>
+              <span>Обновляем подборки каждую неделю</span>
+            </p>
+          </div>
+        </div>
+        <aside class="space-y-5 lg:space-y-6">
+          <div class="rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur dark:border-slate-700/70 dark:bg-slate-900/70">
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Ваша статистика</h3>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Лучшие результаты сохраняются до закрытия вкладки.</p>
+            <dl class="mt-4 space-y-3 text-sm" data-playground-stats>
+              <div class="flex items-center justify-between gap-3 rounded-2xl border border-slate-200/60 bg-slate-50/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-800/70">
+                <dt class="font-medium text-slate-600 dark:text-slate-300">Орбитальный охотник</dt>
+                <dd class="font-semibold text-slate-900 dark:text-white" data-stat-orbital>—</dd>
+              </div>
+              <div class="flex items-center justify-between gap-3 rounded-2xl border border-slate-200/60 bg-slate-50/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-800/70">
+                <dt class="font-medium text-slate-600 dark:text-slate-300">Реакция</dt>
+                <dd class="font-semibold text-slate-900 dark:text-white" data-stat-reaction>—</dd>
+              </div>
+              <div class="flex items-center justify-between gap-3 rounded-2xl border border-slate-200/60 bg-slate-50/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-800/70">
+                <dt class="font-medium text-slate-600 dark:text-slate-300">Задачи изучены</dt>
+                <dd class="font-semibold text-slate-900 dark:text-white" data-stat-challenge>0</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="rounded-3xl border border-slate-200/70 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 text-slate-100 shadow-[0_24px_60px_rgba(15,23,42,0.12)] dark:from-slate-800 dark:via-slate-900 dark:to-slate-950">
+            <h3 class="text-lg font-semibold">Советы для инженеров</h3>
+            <ul class="mt-4 space-y-3 text-sm">
+              <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-emerald-400"></span><span>Чередуйте режимы: аркада разогревает внимание, а задача дня развивает стратегическое мышление.</span></li>
+              <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-sky-400"></span><span>Фиксируйте идеи после просмотра фильма или чтения главы — добавьте их в проектный журнал.</span></li>
+              <li class="flex gap-3"><span class="mt-1 h-2.5 w-2.5 rounded-full bg-purple-400"></span><span>Сделайте из мини‑игр командное соревнование: запишите лучшие результаты и сравните на стенде лаборатории.</span></li>
+            </ul>
+            <p class="mt-4 text-xs uppercase tracking-[0.26em] text-slate-400">Step3D · mindset</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
   <!-- Возможности -->
   <section id="services" class="py-16 md:py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1032,7 +1461,7 @@
   </div>
 
   <!-- Секции для навигации (для автоподсветки) -->
-  <div id="nav-data" class="hidden" data-nav='[{"id":"services","label":"Возможности"},{"id":"equipment","label":"Сеть 3D-печати"},{"id":"courses","label":"Обучение"},{"id":"team","label":"Команда"},{"id":"faq","label":"FAQ (часто задаваемые вопросы)"},{"id":"contacts","label":"Контакты"}]'></div>
+  <div id="nav-data" class="hidden" data-nav='[{"id":"playground","label":"Игровая зона"},{"id":"services","label":"Возможности"},{"id":"equipment","label":"Сеть 3D-печати"},{"id":"courses","label":"Обучение"},{"id":"team","label":"Команда"},{"id":"faq","label":"FAQ (часто задаваемые вопросы)"},{"id":"contacts","label":"Контакты"}]'></div>
 
   <script>
     function initInvaders(THREE, { canvas, section }) {
@@ -1317,6 +1746,1159 @@
   </script>
 
   <script>
+    // ===== Игровая зона
+    (() => {
+      const playground = document.querySelector('[data-playground]')
+      if (!playground) return
+
+      const container = playground.querySelector('[data-experience-target]')
+      const buttons = Array.from(playground.querySelectorAll('[data-experience-mode]'))
+      if (!container || !buttons.length) return
+
+      const statOrbital = document.querySelector('[data-stat-orbital]')
+      const statReaction = document.querySelector('[data-stat-reaction]')
+      const statChallenge = document.querySelector('[data-stat-challenge]')
+
+      const STORAGE_KEY = 'step3d-playground-state-v1'
+      let storageEnabled = true
+
+      const readState = () => {
+        if (!storageEnabled) return null
+        try {
+          const raw = window.localStorage.getItem(STORAGE_KEY)
+          return raw ? JSON.parse(raw) : null
+        } catch (error) {
+          storageEnabled = false
+          return null
+        }
+      }
+
+      const writeState = (payload) => {
+        if (!storageEnabled) return
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload))
+        } catch (error) {
+          storageEnabled = false
+        }
+      }
+
+      const restoredState = readState()
+
+      const stats = {
+        orbitalBest: null,
+        reactionBest: null,
+        challengeOpened: 0
+      }
+
+      if (restoredState?.stats) {
+        if (typeof restoredState.stats.orbitalBest === 'number') {
+          stats.orbitalBest = restoredState.stats.orbitalBest
+        }
+        if (typeof restoredState.stats.reactionBest === 'number') {
+          stats.reactionBest = restoredState.stats.reactionBest
+        }
+        if (typeof restoredState.stats.challengeOpened === 'number') {
+          stats.challengeOpened = restoredState.stats.challengeOpened
+        }
+      }
+
+      let currentMode = typeof restoredState?.mode === 'string' ? restoredState.mode : null
+
+      const persistState = () => {
+        if (!storageEnabled) return
+        writeState({
+          mode: currentMode,
+          stats: {
+            orbitalBest: stats.orbitalBest,
+            reactionBest: stats.reactionBest,
+            challengeOpened: stats.challengeOpened
+          }
+        })
+      }
+
+      const getUrlModeCandidate = () => {
+        try {
+          const url = new URL(window.location.href)
+          return url.searchParams.get('playground')
+        } catch (error) {
+          return null
+        }
+      }
+
+      const syncUrlMode = (mode) => {
+        if (!history.replaceState) return
+        try {
+          const url = new URL(window.location.href)
+          if (mode) url.searchParams.set('playground', mode)
+          else url.searchParams.delete('playground')
+          history.replaceState(null, '', url.toString())
+        } catch (error) {
+          // ignore URL sync errors
+        }
+      }
+
+      const randomBetween = (min, max) => min + Math.random() * (max - min)
+
+      const pickNextIndex = (pool, currentIndex) => {
+        if (!pool.length) return -1
+        if (pool.length === 1) return 0
+        let next = currentIndex
+        while (next === currentIndex) {
+          next = Math.floor(Math.random() * pool.length)
+        }
+        return next
+      }
+
+      const createChip = (text, variant = 'slate') => {
+        const span = document.createElement('span')
+        const baseClass = 'playground-chip'
+        let modifier = 'playground-chip--slate'
+        if (variant === 'emerald') modifier = 'playground-chip--emerald'
+        else if (variant === 'sky') modifier = 'playground-chip--sky'
+        span.className = `${baseClass} ${modifier}`
+        span.textContent = text
+        return span
+      }
+
+      const safeClipboardCopy = async (text) => {
+        if (!text) return false
+        try {
+          if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+            await navigator.clipboard.writeText(text)
+            return true
+          }
+        } catch (error) {
+          // fallback ниже
+        }
+
+        const area = document.createElement('textarea')
+        area.value = text
+        area.setAttribute('readonly', '')
+        area.style.position = 'fixed'
+        area.style.top = '-1000px'
+        document.body.appendChild(area)
+        area.select()
+        let success = false
+        try {
+          success = document.execCommand('copy')
+        } catch (error) {
+          success = false
+        }
+        document.body.removeChild(area)
+        return success
+      }
+
+      const updateStats = () => {
+        if (statOrbital) {
+          statOrbital.textContent = stats.orbitalBest != null ? `${stats.orbitalBest} очков` : '—'
+        }
+        if (statReaction) {
+          statReaction.textContent = stats.reactionBest != null ? `${stats.reactionBest.toFixed(3)} с` : '—'
+        }
+        if (statChallenge) {
+          statChallenge.textContent = String(stats.challengeOpened)
+        }
+        persistState()
+      }
+
+      const challengePool = [
+        {
+          title: 'Оптимизируйте кронштейн для аддитивного производства',
+          summary: 'Есть литой алюминиевый кронштейн массой 420 г. Переспроектируйте его под печать на порошковом принтере, сохранив жёсткость и снизив массу минимум на 25%.',
+          difficulty: 'Средний уровень · CAD + топология',
+          focus: 'Прочность и AM',
+          time: '45 минут на концепт',
+          tags: ['Topology', 'AM', 'CAD'],
+          hints: [
+            'Соберите нагрузки в одном сценарии и закрепите зоны посадочных поверхностей.',
+            'Используйте ограничение по минимальной толщине ребра и направлению печати при топологической оптимизации.',
+            'Сравните моды деформации до и после оптимизации и подготовьте отчёт о жёсткости.'
+          ],
+          link: { label: 'Кейс Airbus APWorks', url: 'https://apworks.de/topology-optimization-case-study/' },
+          highlight: 'Ориентир: масса 290–310 г при коэффициенте безопасности ≥ 1.4.'
+        },
+        {
+          title: 'Реверс-инжиниринг корпуса квадрокоптера',
+          summary: 'Есть сетка сканирования верхней оболочки дрона после полевых испытаний. Требуется восстановить CAD-модель с соблюдением симметрии и посадочных мест.',
+          difficulty: 'Практика реверс-инжиниринга',
+          focus: 'Сканирование + CAD',
+          time: '60 минут на препроцессинг',
+          tags: ['3D Scan', 'Geomagic', 'QA'],
+          hints: [
+            'Очистите шум, разделите сетку на зоны симметрии и используйте инструменты выравнивания.',
+            'Создайте базовые поверхности и контрольные сечения, затем постройте NURBS-поверхности.',
+            'Сверьте отверстия и плоскости креплений с исходной моделью через отчёт отклонений.'
+          ],
+          link: { label: 'Руководство Geomagic Design X', url: 'https://www.3dsystems.com/sites/default/files/2017/2016-design-x-tutorial.pdf' },
+          highlight: 'Цель — отклонение не более ±0.2 мм на ключевых интерфейсах.'
+        },
+        {
+          title: 'Цифровой двойник редуктора для VR-демонстрации',
+          summary: 'Нужно подготовить упрощённый цифровой двойник редуктора для VR-презентации заказчику. Важно сохранить кинематику и габариты, но уменьшить полигональность.',
+          difficulty: 'Продуктовый кейс',
+          focus: 'CAD + визуализация',
+          time: '40 минут на прототип',
+          tags: ['Digital Twin', 'Visualization', 'VR'],
+          hints: [
+            'Соберите иерархию компонентов и задайте ограничения для вращений и сцепления зубьев.',
+            'Экспортируйте модель в glTF/USDZ с оптимизацией LOD и baked-материалами.',
+            'Добавьте анимацию раскрытия и пояснения ключевых этапов демонстрации.'
+          ],
+          link: { label: 'Пример workflow NVIDIA Omniverse', url: 'https://www.nvidia.com/en-us/omniverse/workflows/digital-twins/' },
+          highlight: 'Максимум 150k полигонов при сохранении ключевых сопряжений.'
+        }
+      ]
+
+      const bookPool = [
+        {
+          title: 'Fabricated: The New World of 3D Printing',
+          meta: 'Hod Lipson · Melba Kurman · Wiley, 2013',
+          description: 'Как аддитивные технологии меняют производство и продуктовые команды: кейсы промышленности, образования и медицины.',
+          tags: ['Additive', 'Strategy', 'Case studies'],
+          link: 'https://www.wiley.com/en-us/Fabricated%3A+The+New+World+of+3D+Printing-p-9781118350638',
+          linkLabel: 'Читать на Wiley',
+          image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
+          highlight: 'Подходит тимлидам, которые внедряют 3D-печать в реальный производственный поток.'
+        },
+        {
+          title: 'Designing Reality',
+          meta: 'Neil · Alan · Joel Gershenfeld · Basic Books, 2017',
+          description: 'FabLab-движение и влияние персонального производства на образование и бизнес, истории становления лабораторий.',
+          tags: ['FabLab', 'Education', 'Future'],
+          link: 'https://www.basicbooks.com/titles/neil-gershenfeld/designing-reality/9780465093476/',
+          linkLabel: 'Basic Books',
+          image: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80',
+          highlight: 'Хорошая база для обсуждения стратегии технопарка и университетских лабораторий.'
+        },
+        {
+          title: 'Additive Manufacturing Technologies',
+          meta: 'Ian Gibson · David Rosen · Brent Stucker · Springer, 2021',
+          description: 'Подробный справочник по процессам AM, материалам, постобработке и экономике внедрения.',
+          tags: ['Reference', 'Engineering', 'AM'],
+          link: 'https://link.springer.com/book/10.1007/978-3-030-56127-7',
+          linkLabel: 'SpringerLink',
+          image: 'https://images.unsplash.com/photo-1581091870627-3af6c6f1b3f5?auto=format&fit=crop&w=1200&q=80',
+          highlight: 'Настольное пособие для инженеров и преподавателей программ ДПО.'
+        }
+      ]
+
+      const filmPool = [
+        {
+          title: 'Print the Legend',
+          meta: 'Документальный фильм · 2014 · Netflix',
+          description: 'История MakerBot и Formlabs — от гаражных стартапов до борьбы за лидерство на рынке настольной 3D-печати.',
+          tags: ['Documentary', 'Startup', '3D Printing'],
+          link: 'https://www.netflix.com/title/70270362',
+          linkLabel: 'Netflix',
+          image: 'https://images.unsplash.com/photo-1527430253228-e93688616381?auto=format&fit=crop&w=1200&q=80',
+          highlight: 'Отличный повод обсудить бизнес-стратегии и рост продуктовых команд.'
+        },
+        {
+          title: 'General Magic',
+          meta: 'Документальный фильм · 2018 · Directed by Sarah Kerruish & Matt Maude',
+          description: 'Команда General Magic задолго до iPhone разработала концепт смартфона. Фильм о мечтах инженеров и управлении инновациями.',
+          tags: ['Product Design', 'Innovation', 'Teamwork'],
+          link: 'https://www.generalmagicthefilm.com/',
+          linkLabel: 'Официальный сайт',
+          image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+          highlight: 'Помогает выстроить культуру экспериментов и осознанных рисков в R&D.'
+        },
+        {
+          title: 'The Farthest',
+          meta: 'Документальный фильм · 2017 · PBS',
+          description: 'Программа Voyager: инженерные решения, межпланетная навигация и работа над задачами десятилетней сложности.',
+          tags: ['Space', 'Systems Engineering', 'Documentary'],
+          link: 'https://www.pbs.org/program/farthest-voyagers-interstellar-mission/',
+          linkLabel: 'PBS',
+          image: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80',
+          highlight: 'Вдохновляет на проекты длинного цикла и тщательные инженерные расчёты.'
+        }
+      ]
+
+      const setActiveButton = (targetButton) => {
+        buttons.forEach((button, index) => {
+          const isActive = button === targetButton
+          if (isActive) {
+            button.dataset.active = 'true'
+            button.setAttribute('aria-selected', 'true')
+            button.tabIndex = 0
+          } else {
+            delete button.dataset.active
+            button.setAttribute('aria-selected', 'false')
+            button.tabIndex = -1
+          }
+        })
+      }
+
+      const initOrbital = (root) => {
+        root.innerHTML = `
+          <article class="playground-card" data-mode="orbital">
+            <div class="playground-card__header">
+              <div>
+                <span class="playground-chip playground-chip--emerald">Arcade</span>
+                <h3 class="playground-title">Орбитальный охотник</h3>
+                <p class="playground-copy">Ловите светящиеся сферы кликом или касанием. Каждая серия ускоряет игру.</p>
+              </div>
+              <div class="playground-card__metrics">
+                <div>
+                  <div class="playground-meta">Счёт</div>
+                  <div class="playground-metric-value" data-orbital-score>0</div>
+                </div>
+                <div>
+                  <div class="playground-meta">Время</div>
+                  <div class="playground-metric-value"><span data-orbital-timer>30.0</span> с</div>
+                </div>
+              </div>
+            </div>
+            <div class="playground-canvas">
+              <canvas data-orbital-canvas aria-label="Игровое поле Орбитальный охотник"></canvas>
+            </div>
+            <p class="playground-status" data-orbital-status aria-live="polite">Нажмите «Старт игры», чтобы запустить тренировку внимания.</p>
+            <div class="playground-card__cta">
+              <button type="button" class="primary" data-orbital-start>Старт игры</button>
+              <button type="button" class="secondary" data-orbital-reset>Сбросить</button>
+            </div>
+            <p class="playground-copy">Совет: предугадывайте траекторию сферы и держите курсор ближе к центру — так проще собрать серию.</p>
+          </article>
+        `
+
+        const canvas = root.querySelector('[data-orbital-canvas]')
+        const scoreEl = root.querySelector('[data-orbital-score]')
+        const timerEl = root.querySelector('[data-orbital-timer]')
+        const statusEl = root.querySelector('[data-orbital-status]')
+        const startButton = root.querySelector('[data-orbital-start]')
+        const resetButton = root.querySelector('[data-orbital-reset]')
+        if (!canvas || !scoreEl || !timerEl || !statusEl || !startButton || !resetButton) return null
+
+        const ctx = canvas.getContext('2d')
+        const wrapper = canvas.parentElement
+        const stars = []
+        const orbs = []
+        const sparks = []
+        const ORB_COUNT = 8
+        const DURATION = 30
+        const startPrompt = 'Нажмите «Старт игры», чтобы запустить тренировку внимания.'
+
+        let width = 0
+        let height = 0
+        let running = false
+        let score = 0
+        let remaining = DURATION
+        let frameId = null
+        let lastTimestamp = 0
+        let combo = 0
+        let comboTimer = 0
+
+        const resize = () => {
+          const rect = (wrapper ?? canvas).getBoundingClientRect()
+          const ratio = window.devicePixelRatio || 1
+          const cssWidth = Math.max(rect.width, 320)
+          const cssHeight = Math.max(rect.height, 220)
+          canvas.width = cssWidth * ratio
+          canvas.height = cssHeight * ratio
+          ctx.setTransform(ratio, 0, 0, ratio, 0, 0)
+          width = cssWidth
+          height = cssHeight
+        }
+
+        const initStars = () => {
+          stars.length = 0
+          const count = 30
+          for (let i = 0; i < count; i++) {
+            stars.push({
+              x: Math.random(),
+              y: Math.random(),
+              speed: randomBetween(0.12, 0.45),
+              size: randomBetween(1, 2.4)
+            })
+          }
+        }
+
+        const spawnOrbs = () => {
+          orbs.length = 0
+          for (let i = 0; i < ORB_COUNT; i++) {
+            orbs.push({
+              x: randomBetween(36, width - 36),
+              y: randomBetween(36, height - 36),
+              vx: randomBetween(60, 130) * (Math.random() > 0.5 ? 1 : -1),
+              vy: randomBetween(60, 130) * (Math.random() > 0.5 ? 1 : -1),
+              radius: randomBetween(16, 24),
+              phase: Math.random() * Math.PI * 2
+            })
+          }
+        }
+
+        const spawnSparks = (x, y) => {
+          const count = 12
+          for (let i = 0; i < count; i++) {
+            sparks.push({
+              x,
+              y,
+              vx: randomBetween(-160, 160),
+              vy: randomBetween(-160, -40),
+              size: randomBetween(2, 4),
+              color: i % 2 === 0 ? 'rgba(96, 165, 250, 0.9)' : 'rgba(16, 185, 129, 0.9)',
+              life: 0.6,
+              maxLife: 0.6
+            })
+          }
+        }
+
+        const drawScene = (dt) => {
+          ctx.fillStyle = '#020617'
+          ctx.fillRect(0, 0, width, height)
+
+          const bg = ctx.createLinearGradient(0, 0, width, height)
+          bg.addColorStop(0, 'rgba(15, 118, 110, 0.45)')
+          bg.addColorStop(1, 'rgba(37, 99, 235, 0.55)')
+          ctx.fillStyle = bg
+          ctx.fillRect(0, 0, width, height)
+
+          for (let i = 0; i < stars.length; i++) {
+            const star = stars[i]
+            star.y += star.speed * dt * 14
+            if (star.y > 1) {
+              star.y = 0
+              star.x = Math.random()
+            }
+            ctx.globalAlpha = 0.4 + star.speed * 0.5
+            ctx.fillStyle = '#e0f2fe'
+            ctx.fillRect(star.x * width, star.y * height, star.size, star.size)
+          }
+          ctx.globalAlpha = 1
+
+          for (let i = 0; i < orbs.length; i++) {
+            const orb = orbs[i]
+            orb.x += orb.vx * dt
+            orb.y += orb.vy * dt
+
+            if (orb.x < orb.radius) { orb.x = orb.radius; orb.vx *= -1 }
+            else if (orb.x > width - orb.radius) { orb.x = width - orb.radius; orb.vx *= -1 }
+            if (orb.y < orb.radius) { orb.y = orb.radius; orb.vy *= -1 }
+            else if (orb.y > height - orb.radius) { orb.y = height - orb.radius; orb.vy *= -1 }
+
+            orb.phase += dt * 3.2
+            const energy = (Math.sin(orb.phase) + 1) * 0.5
+            const radius = orb.radius * (1 + energy * 0.22)
+            const gradient = ctx.createRadialGradient(orb.x, orb.y, orb.radius * 0.24, orb.x, orb.y, radius)
+            gradient.addColorStop(0, 'rgba(165, 243, 252, 0.95)')
+            gradient.addColorStop(0.5, 'rgba(56, 189, 248, 0.85)')
+            gradient.addColorStop(1, 'rgba(14, 165, 233, 0.08)')
+            ctx.fillStyle = gradient
+            ctx.beginPath()
+            ctx.arc(orb.x, orb.y, radius, 0, Math.PI * 2)
+            ctx.fill()
+
+            ctx.strokeStyle = 'rgba(165, 243, 252, 0.35)'
+            ctx.lineWidth = 1.1
+            ctx.beginPath()
+            ctx.arc(orb.x, orb.y, radius + 4, 0, Math.PI * 2)
+            ctx.stroke()
+          }
+
+          for (let i = sparks.length - 1; i >= 0; i--) {
+            const spark = sparks[i]
+            spark.life -= dt
+            if (spark.life <= 0) {
+              sparks.splice(i, 1)
+              continue
+            }
+            spark.x += spark.vx * dt
+            spark.y += spark.vy * dt
+            spark.vy += 180 * dt
+            const alpha = Math.max(0, spark.life / spark.maxLife)
+            ctx.globalAlpha = alpha
+            ctx.fillStyle = spark.color
+            ctx.fillRect(spark.x, spark.y, spark.size, spark.size)
+            ctx.globalAlpha = 1
+          }
+
+          if (comboTimer > 0 && combo >= 2) {
+            comboTimer = Math.max(0, comboTimer - dt)
+            ctx.font = '600 26px "Inter", "Segoe UI", sans-serif'
+            ctx.fillStyle = 'rgba(165, 243, 252, 0.92)'
+            ctx.fillText(`×${combo}`, width - 64, 40)
+            if (comboTimer <= 0) combo = 0
+          }
+        }
+
+        const stopLoop = () => {
+          if (frameId) {
+            cancelAnimationFrame(frameId)
+            frameId = null
+          }
+        }
+
+        const finishGame = () => {
+          running = false
+          stopLoop()
+          startButton.disabled = false
+          startButton.textContent = 'Сыграть ещё раз'
+          const message = `Финиш! Вы набрали ${score} очков.`
+          if (stats.orbitalBest === null || score > stats.orbitalBest) {
+            stats.orbitalBest = score
+            statusEl.textContent = `${message} Новый личный рекорд!`
+          } else {
+            statusEl.textContent = message
+          }
+          updateStats()
+        }
+
+        const loop = (timestamp) => {
+          if (!running) return
+          if (!lastTimestamp) lastTimestamp = timestamp
+          const dt = Math.min(0.032, (timestamp - lastTimestamp) / 1000)
+          lastTimestamp = timestamp
+          remaining = Math.max(0, remaining - dt)
+          timerEl.textContent = remaining.toFixed(1)
+          drawScene(dt)
+          if (remaining <= 0) {
+            finishGame()
+            return
+          }
+          frameId = requestAnimationFrame(loop)
+        }
+
+        const resetGame = (announce = true) => {
+          running = false
+          stopLoop()
+          lastTimestamp = 0
+          score = 0
+          remaining = DURATION
+          combo = 0
+          comboTimer = 0
+          timerEl.textContent = remaining.toFixed(1)
+          scoreEl.textContent = '0'
+          startButton.disabled = false
+          startButton.textContent = 'Старт игры'
+          sparks.length = 0
+          initStars()
+          spawnOrbs()
+          drawScene(0)
+          statusEl.textContent = announce ? 'Раунд сброшен. Готовы к новому старту.' : startPrompt
+        }
+
+        const startGame = () => {
+          if (running) return
+          running = true
+          score = 0
+          remaining = DURATION
+          lastTimestamp = 0
+          combo = 0
+          comboTimer = 0
+          timerEl.textContent = remaining.toFixed(1)
+          scoreEl.textContent = '0'
+          statusEl.textContent = 'Раунд запущен! Ловите сферы и собирайте серию.'
+          startButton.disabled = true
+          startButton.textContent = 'Идёт раунд…'
+          frameId = requestAnimationFrame(loop)
+        }
+
+        const handlePointer = (event) => {
+          if (!running) return
+          const rect = canvas.getBoundingClientRect()
+          const x = event.clientX - rect.left
+          const y = event.clientY - rect.top
+          let hit = false
+          for (let i = 0; i < orbs.length; i++) {
+            const orb = orbs[i]
+            const dx = x - orb.x
+            const dy = y - orb.y
+            const radius = orb.radius + 6
+            if (dx * dx + dy * dy <= radius * radius) {
+              hit = true
+              score += 1
+              combo += 1
+              comboTimer = 1.4
+              scoreEl.textContent = String(score)
+              statusEl.textContent = combo >= 3 ? `Комбо ×${combo}! Ускоряйтесь.` : 'Попадание! +1 очко.'
+              orb.x = randomBetween(orb.radius, width - orb.radius)
+              orb.y = randomBetween(orb.radius, height - orb.radius)
+              const boost = 1 + Math.min(combo, 6) * 0.08
+              orb.vx = randomBetween(70, 150) * (Math.random() > 0.5 ? 1 : -1) * boost
+              orb.vy = randomBetween(70, 150) * (Math.random() > 0.5 ? 1 : -1) * boost
+              spawnSparks(x, y)
+              break
+            }
+          }
+          if (!hit) {
+            combo = 0
+            statusEl.textContent = 'Мимо! Попробуйте предугадать траекторию.'
+          }
+        }
+
+        resize()
+        initStars()
+        spawnOrbs()
+        drawScene(0)
+        timerEl.textContent = remaining.toFixed(1)
+
+        const resizeObserver = typeof ResizeObserver === 'function'
+          ? new ResizeObserver(() => {
+              resize()
+              drawScene(0)
+            })
+          : null
+
+        if (resizeObserver) {
+          resizeObserver.observe(wrapper ?? canvas)
+        } else {
+          window.addEventListener('resize', resize)
+        }
+
+        const handleReset = () => resetGame(true)
+
+        startButton.addEventListener('click', startGame)
+        resetButton.addEventListener('click', handleReset)
+        canvas.addEventListener('pointerdown', handlePointer)
+
+        resetGame(false)
+
+        return () => {
+          running = false
+          stopLoop()
+          startButton.removeEventListener('click', startGame)
+          resetButton.removeEventListener('click', handleReset)
+          canvas.removeEventListener('pointerdown', handlePointer)
+          if (resizeObserver) {
+            resizeObserver.disconnect()
+          } else {
+            window.removeEventListener('resize', resize)
+          }
+        }
+      }
+
+      const initReaction = (root) => {
+        root.innerHTML = `
+          <article class="playground-card" data-mode="reaction">
+            <div class="playground-card__header">
+              <div>
+                <span class="playground-chip playground-chip--sky">Focus</span>
+                <h3 class="playground-title">Поймай сигнал</h3>
+                <p class="playground-copy">Дождитесь подсветки площадки и нажмите максимально быстро — тренируйте реакцию и концентрацию.</p>
+              </div>
+              <div class="playground-card__metrics">
+                <div>
+                  <div class="playground-meta">Попыток</div>
+                  <div class="playground-metric-value" data-react-count>0</div>
+                </div>
+                <div>
+                  <div class="playground-meta">Лучший результат</div>
+                  <div class="playground-metric-value" data-react-best>—</div>
+                </div>
+              </div>
+            </div>
+            <div class="playground-pad" data-state="idle" data-react-pad tabindex="0" role="button" aria-label="Игровое поле реакции">
+              <div data-react-label>Нажмите «Старт»</div>
+            </div>
+            <div class="playground-card__cta">
+              <button type="button" class="primary" data-react-start>Старт</button>
+              <button type="button" class="secondary" data-react-reset>Сбросить</button>
+            </div>
+            <p class="playground-status" data-react-status aria-live="polite">Готовы к новой попытке.</p>
+            <div class="playground-history">
+              <div class="playground-meta">История замеров</div>
+              <ul data-react-history aria-live="polite" aria-label="Последние результаты"></ul>
+            </div>
+          </article>
+        `
+
+        const pad = root.querySelector('[data-react-pad]')
+        const startButton = root.querySelector('[data-react-start]')
+        const resetButton = root.querySelector('[data-react-reset]')
+        const statusEl = root.querySelector('[data-react-status]')
+        const labelEl = root.querySelector('[data-react-label]')
+        const countEl = root.querySelector('[data-react-count]')
+        const bestEl = root.querySelector('[data-react-best]')
+        const historyEl = root.querySelector('[data-react-history]')
+        if (!pad || !startButton || !resetButton || !statusEl || !labelEl || !countEl || !bestEl || !historyEl) return null
+
+        let state = 'idle'
+        let waitTimeout = null
+        let settleTimeout = null
+        let startTime = 0
+        let attempts = 0
+        const history = []
+
+        const clearTimers = () => {
+          if (waitTimeout) {
+            clearTimeout(waitTimeout)
+            waitTimeout = null
+          }
+          if (settleTimeout) {
+            clearTimeout(settleTimeout)
+            settleTimeout = null
+          }
+        }
+
+        const updateHistory = () => {
+          historyEl.innerHTML = ''
+          const recent = history.slice(-5).reverse()
+          recent.forEach((entry) => {
+            const li = document.createElement('li')
+            const spanAttempt = document.createElement('span')
+            spanAttempt.textContent = `#${entry.attempt}`
+            const spanValue = document.createElement('span')
+            spanValue.textContent = `${entry.value.toFixed(3)} с`
+            li.append(spanAttempt, spanValue)
+            historyEl.appendChild(li)
+          })
+        }
+
+        const updateBestLabel = () => {
+          bestEl.textContent = stats.reactionBest != null ? `${stats.reactionBest.toFixed(3)} с` : '—'
+        }
+
+        updateHistory()
+        updateBestLabel()
+
+        const setPadState = (value) => {
+          pad.dataset.state = value
+        }
+
+        const finishAttempt = (reaction) => {
+          attempts += 1
+          history.push({ attempt: attempts, value: reaction })
+          countEl.textContent = String(attempts)
+          if (stats.reactionBest === null || reaction < stats.reactionBest) {
+            stats.reactionBest = reaction
+            statusEl.textContent = `🔥 ${reaction.toFixed(3)} с — новый рекорд!`
+            updateBestLabel()
+          } else {
+            statusEl.textContent = `Реакция: ${reaction.toFixed(3)} с.`
+          }
+          updateStats()
+          updateHistory()
+          setPadState('idle')
+          labelEl.textContent = `${reaction.toFixed(3)} с`
+          state = 'finished'
+          startButton.disabled = false
+          startButton.textContent = 'Ещё попытка'
+          settleTimeout = window.setTimeout(() => {
+            if (state === 'finished') {
+              labelEl.textContent = 'Нажмите «Старт»'
+              setPadState('idle')
+              state = 'idle'
+            }
+          }, 1500)
+        }
+
+        const startRound = () => {
+          clearTimers()
+          state = 'waiting'
+          setPadState('waiting')
+          labelEl.textContent = 'Ждём сигнал…'
+          statusEl.textContent = 'Не кликайте, пока площадка не загорится.'
+          startButton.disabled = true
+          startButton.textContent = 'Ожидание…'
+          waitTimeout = window.setTimeout(() => {
+            state = 'ready'
+            setPadState('ready')
+            labelEl.textContent = 'ЖМИ!'
+            statusEl.textContent = 'Сработайте как можно быстрее.'
+            startTime = performance.now()
+          }, randomBetween(1400, 3200))
+        }
+
+        const handlePad = () => {
+          if (state === 'waiting') {
+            clearTimers()
+            setPadState('early')
+            labelEl.textContent = 'Рано!'
+            statusEl.textContent = 'Фальстарт. Попробуйте ещё раз.'
+            startButton.disabled = false
+            startButton.textContent = 'Старт'
+            state = 'idle'
+            settleTimeout = window.setTimeout(() => {
+              if (state === 'idle') {
+                setPadState('idle')
+                labelEl.textContent = 'Нажмите «Старт»'
+              }
+            }, 1200)
+            return
+          }
+          if (state === 'ready') {
+            clearTimers()
+            const reaction = (performance.now() - startTime) / 1000
+            finishAttempt(reaction)
+            return
+          }
+          if (state === 'idle') {
+            statusEl.textContent = 'Сначала запустите раунд кнопкой «Старт».'
+          }
+        }
+
+        const handleStart = () => {
+          if (state === 'waiting') return
+          if (state === 'ready') return
+          clearTimers()
+          setPadState('idle')
+          labelEl.textContent = 'Готовьтесь…'
+          startRound()
+        }
+
+        const handleReset = () => {
+          clearTimers()
+          state = 'idle'
+          attempts = 0
+          history.length = 0
+          countEl.textContent = '0'
+          labelEl.textContent = 'Нажмите «Старт»'
+          setPadState('idle')
+          statusEl.textContent = 'Сброс выполнен. Готовы к новой серии.'
+          startButton.disabled = false
+          startButton.textContent = 'Старт'
+          updateHistory()
+          updateBestLabel()
+        }
+
+        const handlePadPointer = (event) => {
+          event.preventDefault()
+          handlePad()
+        }
+        const handlePadKey = (event) => {
+          if (event.key === ' ' || event.key === 'Enter') {
+            event.preventDefault()
+            handlePad()
+          }
+        }
+        pad.addEventListener('pointerdown', handlePadPointer)
+        pad.addEventListener('keydown', handlePadKey)
+        startButton.addEventListener('click', handleStart)
+        resetButton.addEventListener('click', handleReset)
+
+        return () => {
+          clearTimers()
+          pad.removeEventListener('pointerdown', handlePadPointer)
+          pad.removeEventListener('keydown', handlePadKey)
+          startButton.removeEventListener('click', handleStart)
+          resetButton.removeEventListener('click', handleReset)
+        }
+      }
+
+      const initChallenge = (root) => {
+        root.innerHTML = `
+          <article class="playground-card" data-mode="challenge">
+            <div class="playground-card__header">
+              <div>
+                <span class="playground-chip playground-chip--slate">Challenge</span>
+                <h3 class="playground-title">Задача дня</h3>
+                <p class="playground-copy">Практический кейс Step3D.Lab — обсудите его с командой или решите прямо сейчас.</p>
+              </div>
+              <div class="playground-card__metrics">
+                <div>
+                  <div class="playground-meta">Сложность</div>
+                  <div class="playground-metric-value" data-challenge-difficulty>—</div>
+                </div>
+                <div>
+                  <div class="playground-meta">Фокус</div>
+                  <div class="playground-metric-value" data-challenge-focus>—</div>
+                </div>
+              </div>
+            </div>
+            <div class="playground-task">
+              <h4 data-challenge-title></h4>
+              <p class="playground-copy" data-challenge-summary></p>
+              <div class="playground-task__meta">
+                <span data-challenge-time></span>
+                <span data-challenge-note></span>
+              </div>
+              <div class="playground-tags" data-challenge-tags></div>
+              <div class="playground-hints">
+                <div class="playground-meta">Подсказки</div>
+                <ul data-challenge-hints></ul>
+              </div>
+            </div>
+            <div class="playground-card__cta">
+              <button type="button" class="primary" data-challenge-next>Новая задача</button>
+              <button type="button" class="secondary" data-challenge-copy>Скопировать</button>
+              <a class="secondary" data-challenge-link target="_blank" rel="noopener">Источник</a>
+            </div>
+            <p class="playground-status" data-challenge-status aria-live="polite"></p>
+          </article>
+        `
+
+        const titleEl = root.querySelector('[data-challenge-title]')
+        const summaryEl = root.querySelector('[data-challenge-summary]')
+        const difficultyEl = root.querySelector('[data-challenge-difficulty]')
+        const focusEl = root.querySelector('[data-challenge-focus]')
+        const timeEl = root.querySelector('[data-challenge-time]')
+        const noteEl = root.querySelector('[data-challenge-note]')
+        const tagsEl = root.querySelector('[data-challenge-tags]')
+        const hintsEl = root.querySelector('[data-challenge-hints]')
+        const nextButton = root.querySelector('[data-challenge-next]')
+        const copyButton = root.querySelector('[data-challenge-copy]')
+        const linkEl = root.querySelector('[data-challenge-link]')
+        const statusEl = root.querySelector('[data-challenge-status]')
+        if (!titleEl || !summaryEl || !difficultyEl || !focusEl || !timeEl || !noteEl || !tagsEl || !hintsEl || !nextButton || !copyButton || !linkEl || !statusEl) return null
+
+        let currentIndex = -1
+
+        const render = (item, announce = false) => {
+          titleEl.textContent = item.title
+          summaryEl.textContent = item.summary
+          difficultyEl.textContent = item.difficulty ?? '—'
+          focusEl.textContent = item.focus ?? (item.tags?.[0] ?? '—')
+          timeEl.textContent = item.time ?? ''
+          noteEl.textContent = item.highlight ?? ''
+
+          tagsEl.innerHTML = ''
+          ;(item.tags ?? []).forEach((tag, index) => {
+            const variant = index === 0 ? 'emerald' : index === 1 ? 'sky' : 'slate'
+            tagsEl.appendChild(createChip(tag, variant))
+          })
+
+          hintsEl.innerHTML = ''
+          ;(item.hints ?? []).forEach((hint) => {
+            const li = document.createElement('li')
+            li.textContent = hint
+            hintsEl.appendChild(li)
+          })
+
+          if (item.link && item.link.url) {
+            linkEl.href = item.link.url
+            linkEl.textContent = item.link.label ?? 'Источник'
+            linkEl.classList.remove('is-disabled')
+            linkEl.removeAttribute('aria-disabled')
+            linkEl.hidden = false
+          } else {
+            linkEl.href = '#'
+            linkEl.textContent = 'Источник'
+            linkEl.classList.add('is-disabled')
+            linkEl.setAttribute('aria-disabled', 'true')
+            linkEl.hidden = true
+          }
+
+          statusEl.textContent = announce ? 'Новая задача загружена.' : (item.highlight ?? '')
+        }
+
+        const showNext = (announce = true) => {
+          currentIndex = pickNextIndex(challengePool, currentIndex)
+          if (currentIndex === -1) return
+          render(challengePool[currentIndex], announce)
+          stats.challengeOpened += 1
+          updateStats()
+        }
+
+        const handleCopy = async () => {
+          if (currentIndex === -1) return
+          const item = challengePool[currentIndex]
+          const text = [
+            item.title,
+            item.summary,
+            '',
+            'Подсказки:',
+            ...(item.hints ?? [])
+          ].join('\n')
+          const success = await safeClipboardCopy(text)
+          statusEl.textContent = success
+            ? 'Кейс скопирован в буфер обмена — обсудите его с командой.'
+            : 'Не удалось скопировать. Скопируйте текст вручную.'
+        }
+
+        const handleNext = () => showNext(true)
+        nextButton.addEventListener('click', handleNext)
+        copyButton.addEventListener('click', handleCopy)
+
+        showNext(false)
+
+        return () => {
+          nextButton.removeEventListener('click', handleNext)
+          copyButton.removeEventListener('click', handleCopy)
+        }
+      }
+
+      const initRecommendation = (root, items, { type }) => {
+        root.innerHTML = `
+          <article class="playground-card playground-card--media" data-mode="${type}">
+            <div class="playground-media" data-reco-visual>
+              <span class="playground-chip ${type === 'book' ? 'playground-chip--sky' : 'playground-chip--emerald'}">${type === 'book' ? 'Book club' : 'Cinema'}</span>
+              <h3 class="playground-title" data-reco-title></h3>
+              <p class="playground-meta" data-reco-meta></p>
+              <p class="playground-copy" data-reco-description></p>
+              <div class="playground-tags" data-reco-tags></div>
+            </div>
+            <div class="playground-card__cta">
+              <a class="primary" data-reco-link target="_blank" rel="noopener">${type === 'book' ? 'Читать' : 'Смотреть'}</a>
+              <button type="button" class="secondary" data-reco-next>Следующая рекомендация</button>
+              <button type="button" class="secondary" data-reco-share>Скопировать</button>
+            </div>
+            <p class="playground-status" data-reco-status aria-live="polite"></p>
+          </article>
+        `
+
+        const visual = root.querySelector('[data-reco-visual]')
+        const titleEl = root.querySelector('[data-reco-title]')
+        const metaEl = root.querySelector('[data-reco-meta]')
+        const descEl = root.querySelector('[data-reco-description]')
+        const tagsEl = root.querySelector('[data-reco-tags]')
+        const linkEl = root.querySelector('[data-reco-link]')
+        const nextButton = root.querySelector('[data-reco-next]')
+        const shareButton = root.querySelector('[data-reco-share]')
+        const statusEl = root.querySelector('[data-reco-status]')
+        if (!visual || !titleEl || !metaEl || !descEl || !tagsEl || !linkEl || !nextButton || !shareButton || !statusEl) return null
+
+        let currentIndex = -1
+
+        const render = () => {
+          const item = items[currentIndex]
+          visual.classList.remove('playground-media--book', 'playground-media--film')
+          visual.classList.add(`playground-media--${type}`)
+          if (item.image) {
+            visual.style.setProperty('--playground-media-image', `url('${item.image}')`)
+          } else {
+            visual.style.removeProperty('--playground-media-image')
+          }
+          titleEl.textContent = item.title
+          metaEl.textContent = item.meta ?? ''
+          descEl.textContent = item.description ?? ''
+          tagsEl.innerHTML = ''
+          ;(item.tags ?? []).forEach((tag, index) => {
+            const variant = index % 2 === 0 ? 'emerald' : 'sky'
+            tagsEl.appendChild(createChip(tag, variant))
+          })
+          if (item.link) {
+            linkEl.href = item.link
+            linkEl.textContent = item.linkLabel ?? (type === 'book' ? 'Читать' : 'Смотреть')
+            linkEl.classList.remove('is-disabled')
+            linkEl.removeAttribute('aria-disabled')
+            linkEl.hidden = false
+          } else {
+            linkEl.href = '#'
+            linkEl.textContent = type === 'book' ? 'Читать' : 'Смотреть'
+            linkEl.classList.add('is-disabled')
+            linkEl.setAttribute('aria-disabled', 'true')
+            linkEl.hidden = true
+          }
+          statusEl.textContent = item.highlight ?? 'Новая рекомендация готова.'
+        }
+
+        const showNext = () => {
+          currentIndex = pickNextIndex(items, currentIndex)
+          if (currentIndex === -1) return
+          render()
+        }
+
+        const handleShare = async () => {
+          if (currentIndex === -1) return
+          const item = items[currentIndex]
+          const payload = item.link ? `${item.title} — ${item.link}` : item.title
+          const success = await safeClipboardCopy(payload)
+          statusEl.textContent = success
+            ? 'Ссылка скопирована — делитесь с коллегами.'
+            : 'Не получилось скопировать ссылку. Попробуйте вручную.'
+        }
+
+        nextButton.addEventListener('click', showNext)
+        shareButton.addEventListener('click', handleShare)
+
+        showNext()
+
+        return () => {
+          nextButton.removeEventListener('click', showNext)
+          shareButton.removeEventListener('click', handleShare)
+        }
+      }
+
+      const modeFactories = {
+        orbital: initOrbital,
+        reaction: initReaction,
+        challenge: initChallenge,
+        book: (root) => initRecommendation(root, bookPool, { type: 'book' }),
+        film: (root) => initRecommendation(root, filmPool, { type: 'film' })
+      }
+
+      const availableModes = buttons
+        .map((btn) => btn.dataset.experienceMode)
+        .filter((value) => typeof value === 'string' && value.length)
+
+      let teardown = null
+
+      const setMode = (mode, { focusButton = false } = {}) => {
+        if (!mode) return
+        const targetButton = buttons.find((btn) => btn.dataset.experienceMode === mode)
+        if (!targetButton) return
+        container.dataset.mode = mode
+        const isAlreadyActive = targetButton.dataset.active === 'true' && container.childElementCount > 0
+        if (isAlreadyActive) {
+          if (focusButton) targetButton.focus()
+          currentMode = mode
+          persistState()
+          syncUrlMode(mode)
+          return
+        }
+        if (typeof teardown === 'function') {
+          teardown()
+          teardown = null
+        }
+        setActiveButton(targetButton)
+        if (focusButton) {
+          targetButton.focus()
+        }
+        container.innerHTML = ''
+        const factory = modeFactories[mode]
+        teardown = typeof factory === 'function' ? factory(container) : null
+        currentMode = mode
+        persistState()
+        syncUrlMode(mode)
+      }
+
+      buttons.forEach((button, index) => {
+        button.tabIndex = index === 0 ? 0 : -1
+        button.addEventListener('click', () => setMode(button.dataset.experienceMode))
+        button.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            event.preventDefault()
+            const next = buttons[(index + 1) % buttons.length]
+            next.focus()
+            setMode(next.dataset.experienceMode)
+          } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            event.preventDefault()
+            const prev = buttons[(index - 1 + buttons.length) % buttons.length]
+            prev.focus()
+            setMode(prev.dataset.experienceMode)
+          } else if (event.key === 'Home') {
+            event.preventDefault()
+            const first = buttons[0]
+            first.focus()
+            setMode(first.dataset.experienceMode)
+          } else if (event.key === 'End') {
+            event.preventDefault()
+            const last = buttons[buttons.length - 1]
+            last.focus()
+            setMode(last.dataset.experienceMode)
+          }
+        })
+      })
+
+      window.addEventListener('popstate', () => {
+        const modeFromUrl = getUrlModeCandidate()
+        const fallbackMode = availableModes[0] ?? null
+        const nextMode = modeFromUrl && availableModes.includes(modeFromUrl) ? modeFromUrl : fallbackMode
+        if (nextMode && nextMode !== currentMode) {
+          setMode(nextMode, { focusButton: true })
+        }
+      })
+
+      const urlMode = getUrlModeCandidate()
+      if (!availableModes.includes(currentMode)) {
+        currentMode = null
+      }
+
+      let initialMode = availableModes[0] ?? null
+      if (urlMode && availableModes.includes(urlMode)) {
+        initialMode = urlMode
+      } else if (currentMode && availableModes.includes(currentMode)) {
+        initialMode = currentMode
+      }
+
+      currentMode = initialMode
+      updateStats()
+      if (initialMode) {
+        setMode(initialMode)
+      }
+    })()
+
     // ===== Hero showcase trigger
     (() => {
       const action = document.getElementById('heroAction')
