@@ -502,7 +502,12 @@
           <span class="sr-only">Технопарк РГСУ</span>
         </a>
         <div class="hidden md:flex items-center gap-1" id="links" aria-label="Основные разделы">
-          <!-- ссылки генерятся из data-nav ниже -->
+          <a href="#services" class="px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Возможности</a>
+          <a href="#equipment" class="px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Сеть 3D-печати</a>
+          <a href="#courses" class="px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Обучение</a>
+          <a href="#team" class="px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Команда</a>
+          <a href="#faq" class="px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">FAQ (часто задаваемые вопросы)</a>
+          <a href="#contacts" class="px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Контакты</a>
         </div>
         <div class="flex items-center gap-2">
           <a href="#contacts" class="site-cta site-cta--nav">Связаться</a>
@@ -522,7 +527,14 @@
               <svg viewBox="0 0 24 24" class="h-5 w-5"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
           </div>
-          <div id="mobile" class="mt-8 grid gap-2" role="menu"></div>
+          <div id="mobile" class="mt-8 grid gap-2" role="menu">
+            <a href="#services" role="menuitem" class="flex items-center justify-between rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/80 px-4 py-3 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Возможности</a>
+            <a href="#equipment" role="menuitem" class="flex items-center justify-between rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/80 px-4 py-3 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Сеть 3D-печати</a>
+            <a href="#courses" role="menuitem" class="flex items-center justify-between rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/80 px-4 py-3 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Обучение</a>
+            <a href="#team" role="menuitem" class="flex items-center justify-between rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/80 px-4 py-3 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Команда</a>
+            <a href="#faq" role="menuitem" class="flex items-center justify-between rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/80 px-4 py-3 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">FAQ (часто задаваемые вопросы)</a>
+            <a href="#contacts" role="menuitem" class="flex items-center justify-between rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/80 px-4 py-3 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">Контакты</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1558,20 +1570,35 @@
     }
 
     function renderLinks(container, variant){
-      container.innerHTML = ''
-      navData.forEach(({ id, label }) => {
-        const a = document.createElement('a')
+      const anchors = Array.from(container.querySelectorAll('a'))
+      const classDesktop = 'px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400'
+      const classMobile = 'flex items-center justify-between rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/80 px-4 py-3 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400'
+
+      navData.forEach(({ id, label }, index) => {
+        let a = anchors[index]
+        if(!a){
+          a = document.createElement('a')
+          container.appendChild(a)
+        }
         a.href = `#${id}`
         a.textContent = label
+
         if(variant === 'desktop'){
-          a.className = 'px-3 py-2 rounded-xl text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400'
+          a.className = classDesktop
+          a.removeAttribute('role')
         } else {
-          a.className = 'flex items-center justify-between rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800/80 px-4 py-3 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400'
+          a.className = classMobile
           a.setAttribute('role', 'menuitem')
-          a.addEventListener('click', () => closeMobileMenu({ restoreFocus: false }))
+          if(!a.dataset.closeListener){
+            a.addEventListener('click', () => closeMobileMenu({ restoreFocus: false }))
+            a.dataset.closeListener = 'true'
+          }
         }
-        container.appendChild(a)
       })
+
+      if(anchors.length > navData.length){
+        anchors.slice(navData.length).forEach(a => a.remove())
+      }
     }
 
     renderLinks(linksWrap, 'desktop')
