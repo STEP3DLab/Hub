@@ -1855,6 +1855,13 @@
 
     document.getElementById('openModal')?.addEventListener('click', openModal)
     document.getElementById('openModal2')?.addEventListener('click', openModal)
+    modalCloseBtn?.addEventListener('click', closeModal)
+    modalBg?.addEventListener('click', closeModal)
+    modal?.addEventListener('click', event => {
+      if(event.target === modal){
+        closeModal()
+      }
+    })
 
 
     // ===== «О лаборатории» toggle
