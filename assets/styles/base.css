@@ -1,7 +1,25 @@
 /* Base styles and design tokens for Step3D.Lab */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
+  --font-sans: "Google Sans", "Roboto", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --bg: #f7f9ff;
+  --bg-subtle: #eef2ff;
+  --fg: #1c2333;
+  --fg-soft: #394660;
+  --muted: rgba(57, 70, 96, 0.78);
+  --muted-strong: rgba(35, 46, 72, 0.92);
+  --primary: #0b57d0;
+  --primary-soft: rgba(11, 87, 208, 0.12);
+  --primary-strong: #0842a0;
+  --card: #ffffff;
+  --card-alt: #f1f5ff;
+  --border-subtle: rgba(11, 87, 208, 0.12);
+  --border-strong: rgba(11, 87, 208, 0.24);
+  --shadow: 0 26px 60px -32px rgba(15, 46, 114, 0.28);
+  --shadow-soft: 0 32px 70px -40px rgba(15, 46, 114, 0.22);
+  --radius: 18px;
   --container-padding: 1rem;
 }
 
@@ -27,7 +45,10 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--fg);
-
+  background:
+    radial-gradient(130% 120% at 0% 0%, rgba(162, 198, 255, 0.2), transparent 60%),
+    radial-gradient(120% 140% at 100% 0%, rgba(180, 214, 255, 0.18), transparent 62%),
+    linear-gradient(180deg, #ffffff 0%, #f3f7ff 100%);
 }
 
 img,
@@ -70,7 +91,7 @@ a {
 }
 
 a:hover {
-
+  color: var(--primary-strong);
   text-decoration: underline;
   text-decoration-thickness: 2px;
 }
@@ -175,44 +196,61 @@ a:hover {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.625rem 0.95rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--fg);
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary-strong);
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease,
+    border-color 0.25s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 12px 28px rgba(15, 46, 114, 0.12);
 }
 
 .btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-  background: rgba(255, 255, 255, 0.06);
+  background: #ffffff;
+  border-color: var(--border-strong);
+  box-shadow: 0 18px 40px rgba(15, 46, 114, 0.18);
 }
 
 .btn-primary {
-  background: linear-gradient(180deg, rgba(110, 168, 254, 0.18), rgba(110, 168, 254, 0.06));
-  border-color: rgba(110, 168, 254, 0.35);
+  background: linear-gradient(135deg, rgba(210, 227, 252, 0.95), rgba(173, 205, 255, 0.9));
+  border-color: rgba(11, 87, 208, 0.28);
+  color: var(--primary-strong);
+}
+
+.btn-outline {
+  background: rgba(11, 87, 208, 0.06);
+  color: var(--primary-strong);
+  border-color: rgba(11, 87, 208, 0.2);
+  box-shadow: none;
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  background: rgba(11, 87, 208, 0.12);
+  box-shadow: 0 16px 32px rgba(11, 87, 208, 0.18);
 }
 
 .btn-cta {
-  color: #fff;
-  background: linear-gradient(120deg, #38bdf8, #6366f1, #ec4899);
-  border-color: rgba(99, 102, 241, 0.45);
-  box-shadow: 0 18px 38px rgba(99, 102, 241, 0.35);
-  background-size: 200% 200%;
+  color: #ffffff;
+  background: linear-gradient(120deg, #0b57d0, #4f86f7, #7c4dff);
+  border-color: rgba(11, 87, 208, 0.4);
+  box-shadow: 0 24px 48px -16px rgba(11, 87, 208, 0.45);
+  background-size: 220% 220%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-cta::after {
   content: "";
   position: absolute;
-  inset: -50% -20% 60% -20%;
-  background: radial-gradient(80% 120% at 50% 0%, rgba(255, 255, 255, 0.65), transparent 70%);
+  inset: -55% -25% 58% -25%;
+  background: radial-gradient(80% 120% at 50% 0%, rgba(255, 255, 255, 0.75), transparent 70%);
   opacity: 0;
-  transform: translateY(20%);
+  transform: translateY(18%);
   transition: opacity 0.35s ease, transform 0.35s ease;
   pointer-events: none;
 }
@@ -220,12 +258,12 @@ a:hover {
 .btn-cta:hover,
 .btn-cta:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 22px 46px rgba(99, 102, 241, 0.45);
+  box-shadow: 0 28px 56px -18px rgba(11, 87, 208, 0.52);
 }
 
 .btn-cta:hover::after,
 .btn-cta:focus-visible::after {
-  opacity: 0.75;
+  opacity: 0.8;
   transform: translateY(0);
 }
 
@@ -238,18 +276,10 @@ a:hover {
     content: "";
     position: absolute;
     inset: -1px;
-    background: linear-gradient(120deg, rgba(255, 255, 255, 0.45), transparent 35%, rgba(255, 255, 255, 0.35));
+    background: linear-gradient(130deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+    background-size: 200% 200%;
+    animation: ctaShimmer 2.8s linear infinite;
     opacity: 0;
-    transform: translateX(-60%);
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    mix-blend-mode: screen;
-  }
-
-  .btn-cta:hover::before,
-  .btn-cta:focus-visible::before {
-    opacity: 0.6;
-    animation: ctaShimmer 1.4s ease;
   }
 }
 
