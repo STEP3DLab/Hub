@@ -3019,18 +3019,45 @@
       aria-describedby="requestDescription"
       tabindex="-1"
       class="fixed inset-0 z-[60] hidden items-center justify-center p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modalTitle"
-      aria-describedby="modalDescription"
-      tabindex="-1"
       aria-hidden="true"
     >
       <div id="modalBg" data-modal-bg class="absolute inset-0 bg-black/40"></div>
       <div
         class="relative w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-2xl border border-slate-200 dark:border-slate-700"
       >
-
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h2 id="requestTitle" class="text-2xl font-semibold text-slate-900 dark:text-white">
+              Оставить заявку
+            </h2>
+            <p
+              id="requestDescription"
+              class="mt-2 text-sm text-slate-600 dark:text-slate-300"
+            >
+              Расскажите нам о запросе — мы свяжемся и уточним детали проекта или обучения.
+            </p>
+          </div>
+          <button
+            id="closeModal"
+            type="button"
+            data-modal-close
+            class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-500 transition hover:text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:text-white"
+            aria-label="Закрыть форму"
+          >
+            ✕
+          </button>
+        </div>
+        <form
+          id="requestForm"
+          class="mt-6 space-y-4"
+          novalidate
+          data-request-form
+          data-endpoint="https://httpbin.org/post"
+          data-success-message="Спасибо! Мы получили вашу заявку и скоро ответим."
+          data-error-message="Не удалось отправить заявку. Обновите страницу или напишите на projects.step3d@gmail.com."
+          data-emailjs-service=""
+          data-emailjs-template=""
+          data-emailjs-public-key=""
         >
           <input
             type="text"
@@ -3040,13 +3067,14 @@
             autocomplete="off"
             aria-hidden="true"
           />
-          <div class="grid gap-1 text-sm">
-            <label for="requestType">Цель обращения</label>
+          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
+            <label for="requestType" class="font-medium">Цель обращения</label>
             <select
               id="requestType"
               name="type"
               required
-              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+              aria-required="true"
+              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
               aria-describedby="requestTypeError"
               aria-invalid="false"
             >
@@ -3061,13 +3089,17 @@
               aria-live="polite"
             ></p>
           </div>
-          <div class="grid gap-1 text-sm">
-            <label for="requestName">Имя</label>
+          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
+            <label for="requestName" class="font-medium">Имя</label>
             <input
               id="requestName"
               name="name"
-
-              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+              type="text"
+              required
+              aria-required="true"
+              aria-invalid="false"
+              aria-describedby="requestNameError"
+              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
             />
             <p
               id="requestNameError"
@@ -3076,13 +3108,17 @@
               aria-live="polite"
             ></p>
           </div>
-          <div class="grid gap-1 text-sm">
-            <label for="requestPhone">Телефон</label>
+          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
+            <label for="requestPhone" class="font-medium">Телефон</label>
             <input
               id="requestPhone"
               name="phone"
-
-              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+              type="tel"
+              inputmode="tel"
+              placeholder="+7 (999) 123-45-67"
+              aria-invalid="false"
+              aria-describedby="requestPhoneError"
+              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
             />
             <p
               id="requestPhoneError"
@@ -3091,16 +3127,18 @@
               aria-live="polite"
             ></p>
           </div>
-          <div class="grid gap-1 text-sm">
-            <label for="requestEmail">Email</label>
+          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
+            <label for="requestEmail" class="font-medium">Email</label>
             <input
               id="requestEmail"
               name="email"
               type="email"
               inputmode="email"
+              required
+              aria-required="true"
               aria-invalid="false"
               aria-describedby="requestEmailError"
-              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
             />
             <p
               id="requestEmailError"
@@ -3109,19 +3147,19 @@
               aria-live="polite"
             ></p>
           </div>
-          <div class="grid gap-1 text-sm">
-            <label for="requestComment">Комментарий</label>
+          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
+            <label for="requestComment" class="font-medium">Комментарий</label>
             <textarea
               id="requestComment"
               name="comment"
               rows="3"
               placeholder="Опишите задачу, сроки, ссылки"
-              class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
+              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
             ></textarea>
           </div>
-          <div class="flex items-start gap-2 text-sm">
+          <div class="flex items-start gap-3 rounded-xl bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:bg-slate-800/70 dark:text-slate-300" data-field-wrapper>
             <input
-              id="agree"
+              id="requestAgreement"
               name="agreement"
               type="checkbox"
               required
@@ -3130,21 +3168,32 @@
               aria-describedby="requestAgreementError"
               class="mt-1 h-4 w-4"
             />
-            <label for="agree" class="flex-1"
+            <label for="requestAgreement" class="flex-1"
               >Согласен(а) на обработку персональных данных</label
             >
           </div>
           <p
-
+            id="requestAgreementError"
+            class="hidden text-xs text-rose-600"
+            data-error-message
+            aria-live="polite"
+          ></p>
+          <div
+            class="hidden rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-200"
+            role="status"
+            aria-live="polite"
+            data-form-status
+          ></div>
+          <div class="flex flex-wrap gap-3 pt-2">
             <button
-              class="rounded-xl bg-slate-900 text-white px-4 py-2 font-medium transition hover:bg-slate-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+              class="inline-flex w-full justify-center rounded-xl bg-slate-900 text-white py-3 font-medium transition hover:bg-slate-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
               type="submit"
               data-submit
             >
               Отправить
             </button>
             <button
-              class="rounded-xl border border-slate-300 dark:border-slate-700 px-4 py-2"
+              class="inline-flex w-full justify-center rounded-xl border border-slate-300 px-4 py-2 font-medium text-slate-600 transition hover:text-slate-900 dark:border-slate-700 dark:text-slate-200"
               type="button"
               data-modal-close
             >
