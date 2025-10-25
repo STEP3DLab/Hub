@@ -1,3239 +1,501 @@
-<!doctype html>
-<html lang="ru" class="scroll-smooth">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Step3D.Lab — Лаборатория промдизайна и инжиниринга (R22.Lab)</title>
-    <meta
-      name="description"
-      content="CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, аддитивное производство. Курсы ДПО, проекты, услуги технопарка РГСУ."
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='6' y='6' width='52' height='52' rx='12' fill='%230ea5e9'/><path d='M20 44V20l12-6 12 6v24l-12 6-12-6z M32 14v36' stroke='%23fff' stroke-width='2' fill='none'/></svg>"
-    />
-
-    <link rel="stylesheet" href="assets/styles/base.css" />
-    <link rel="stylesheet" href="assets/styles/components.css" />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "Step3D.Lab — Лаборатория промдизайна и инжиниринга (R22.Lab)",
-        "department": [
-          {
-            "@type": "Organization",
-            "name": "Дополнительное профессиональное образование"
-          }
-        ],
-        "address": [
-          {
-            "@type": "PostalAddress",
-            "streetAddress": "ул. Вильгельма Пика, 4, корп. 8",
-            "addressLocality": "Москва",
-            "addressCountry": "RU"
-          },
-          {
-            "@type": "PostalAddress",
-            "streetAddress": "ул. Беговая, 12",
-            "addressLocality": "Москва",
-            "addressCountry": "RU"
-          }
-        ],
-        "sameAs": ["https://technopark-rgsu.ru"]
-      }
-    </script>
-  </head>
-  <body>
-    <a href="#main" class="skip-link">Пропустить к содержимому</a>
-    <div id="progress" class="progress-bar" aria-hidden="true"></div>
-
-    <header class="site-header" role="banner">
-      <div class="container">
-        <nav class="top-nav" aria-label="Главная навигация">
-          <div class="top-nav__identity">
-            <a href="#top" class="top-nav__brand">
-              <img
-                src="Logo.svg"
-                alt="Логотип Step3D.Lab"
-                class="top-nav__logo"
-                loading="eager"
-                decoding="async"
-                fetchpriority="high"
-              />
-              <span class="top-nav__brand-name">Step3D.Lab</span>
-            </a>
-            <details class="site-map" data-site-map>
-              <summary class="site-map__summary">
-                <span class="site-map__icon" aria-hidden="true">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
-                <span>Карта сайта</span>
-              </summary>
-              <div class="site-map__panel">
-                <nav class="site-map__nav" aria-label="Карта сайта" data-site-map-content></nav>
-              </div>
-            </details>
-          </div>
-          <div class="top-nav__info">
-            <div class="top-nav__tagline">
-              <span class="top-nav__tagline-line">Лаборатория R22_Лаб</span>
-              <span class="top-nav__tagline-line">Курс ДПО «R22 и АТ» — 48 ч.</span>
+<!-- Этот файл разместите в корне репозитория и опубликуйте через GitHub Pages вместе со styles.css и app.js -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Базовая кодировка и адаптивность -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- SEO заголовок и описание курса -->
+    <title>Интенсив по ИИ - 5 часов практики</title>
+    <meta name="description" content="Практический интенсив по искусственному интеллекту. Документы, сайты, 3D, агенты и видео за один день в Москве и онлайн." />
+    <!-- Канонический адрес страницы для поисковых систем -->
+    <link rel="canonical" href="https://example.com/ai-intensive">
+    <!-- Предзагрузка основного woff2 шрифта для ускорения -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggOxSuXd.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Предварительное соединение с сервисами Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Подключение шрифта Manrope через Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Подключение основного файла стилей -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Метаданные для социальных сетей и мессенджеров -->
+    <meta property="og:title" content="Интенсив по ИИ - 5 часов практики">
+    <meta property="og:description" content="Документы, сайты, 3D, агенты и видео за один день. Формат Москва и онлайн." />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/ai-intensive">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=AI+Intensive">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Интенсив по ИИ - 5 часов практики">
+    <meta name="twitter:description" content="Узнайте как запускать ИИ решения всего за один день обучения." />
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630.png?text=AI+Intensive">
+    <!-- Простейший фавикон через встроенный SVG -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect fill='%234a6fff' rx='16' ry='16' width='64' height='64'/%3E%3Cpath d='M20 36l12-16 12 16-12 12-12-12z' fill='%23ffffff'/%3E%3C/svg%3E">
+    <!-- Подключение скрипта с логикой лендинга отложено для ускорения -->
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <!-- Ссылка для перехода к основному контенту с клавиатуры -->
+    <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+    <!-- Обертка сайта для управления фоном -->
+    <div class="page" data-page>
+        <!-- Шапка сайта с навигацией и логотипом -->
+        <header class="site-header" data-header>
+            <div class="container header-inner">
+                <!-- Логотип и подпись -->
+                <a class="logo" href="#hero" data-scroll>
+                    <!-- SVG заглушка логотипа -->
+                    <svg class="logo__icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                        <rect x="4" y="4" width="56" height="56" rx="16" fill="#4a6fff" />
+                        <path d="M20 24h24v6H20zM20 34h16v6H20zM20 44h24v6H20z" fill="#ffffff" />
+                    </svg>
+                    <span class="logo__text">AI Интенсив</span>
+                </a>
+                <!-- Кнопка открытия мобильного меню -->
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-nav-toggle>
+                    <span class="nav-toggle__bar" aria-hidden="true"></span>
+                    <span class="nav-toggle__bar" aria-hidden="true"></span>
+                    <span class="nav-toggle__bar" aria-hidden="true"></span>
+                    <span class="nav-toggle__label">Меню</span>
+                </button>
+                <!-- Основное меню навигации -->
+                <nav class="nav" id="main-nav" aria-label="Главные разделы" data-nav>
+                    <ul class="nav__list" data-nav-list>
+                        <!-- Каждый пункт ведет к секции и участвует в scrollspy -->
+                        <li><a class="nav__link" href="#program" data-scroll data-nav-link>Программа</a></li>
+                        <li><a class="nav__link" href="#reviews" data-scroll data-nav-link>Отзывы</a></li>
+                        <li><a class="nav__link" href="#pricing" data-scroll data-nav-link>Тарифы</a></li>
+                        <li><a class="nav__link" href="#faq" data-scroll data-nav-link>FAQ</a></li>
+                        <li><a class="nav__link" href="#registration" data-scroll data-nav-link>Регистрация</a></li>
+                    </ul>
+                </nav>
             </div>
-            <a href="#contacts" class="btn btn-primary top-nav__cta">Связаться с нами</a>
-          </div>
-        </nav>
-      </div>
-
-      <section class="section hero" id="top">
-        <div class="container hero__inner">
-          <div class="hero__content">
-            <h1>Лаборатория промдизайна и инжиниринга (R22.Lab)</h1>
-            <p class="hero__lead">
-              CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, аддитивное
-              производство. Учим и делаем продукты на базе технопарка РГСУ совместно с ООО
-              «СТЕП 3Д».
-            </p>
-            <div class="hero__actions">
-              <button id="openModal" class="btn btn-primary btn-cta">Оставить заявку</button>
-              <button
-                id="toggleAbout"
-                class="btn btn-outline"
-                aria-expanded="false"
-                aria-controls="aboutBox"
-              >
-                О лаборатории
-              </button>
-            </div>
-            <div id="aboutBox" class="hero__about hidden" aria-hidden="true">
-              <h3>О лаборатории</h3>
-              <p>
-                Step3D.Lab — команда инженеров, дизайнеров и преподавателей. Работаем на базе
-                технопарка РГСУ совместно с ООО «СТЕП 3Д»: выполняем R&amp;D‑проекты, проводим курсы
-                ДПО (48–72 ч), сопровождаем производственные задачи и студенческие инициативы.
-                Фокус — CAD/CAE, реверсивный инжиниринг, 3D‑сканирование, прототипирование и
-                аддитивное производство.
-              </p>
-            </div>
-          </div>
-          <div class="hero__visual" aria-hidden="true">
-            <div class="hero__visual-layer invader-grid" data-invader-grid></div>
-            <div class="hero__invader" data-size="lg" data-variant="boy">
-              <svg
-                viewBox="0 0 11 7"
-                class="hero__invader-shape"
-                aria-hidden="true"
-                shape-rendering="crispEdges"
-              >
-                <defs>
-                  <linearGradient
-                    id="heroInvaderBoyFill"
-                    x1="0"
-                    y1="0"
-                    x2="11"
-                    y2="7"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop offset="0%" stop-color="var(--invader-light)" />
-                    <stop offset="100%" stop-color="var(--invader-dark)" />
-                  </linearGradient>
-                  <linearGradient
-                    id="heroInvaderBoyStroke"
-                    x1="0"
-                    y1="0"
-                    x2="11"
-                    y2="11"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop offset="0%" stop-color="var(--invader-highlight)" />
-                    <stop offset="100%" stop-color="var(--invader-shadow)" />
-                  </linearGradient>
-                </defs>
-                <g
-                  fill="url(#heroInvaderBoyFill)"
-                  stroke="url(#heroInvaderBoyStroke)"
-                  stroke-width="0.08"
-                  stroke-linejoin="round"
-                >
-                  <rect x="2" y="0" width="1" height="1" />
-                  <rect x="3" y="0" width="1" height="1" />
-                  <rect x="7" y="0" width="1" height="1" />
-                  <rect x="8" y="0" width="1" height="1" />
-                  <rect x="1" y="1" width="1" height="1" />
-                  <rect x="2" y="1" width="1" height="1" />
-                  <rect x="3" y="1" width="1" height="1" />
-                  <rect x="4" y="1" width="1" height="1" />
-                  <rect x="6" y="1" width="1" height="1" />
-                  <rect x="7" y="1" width="1" height="1" />
-                  <rect x="8" y="1" width="1" height="1" />
-                  <rect x="9" y="1" width="1" height="1" />
-                  <rect x="0" y="2" width="1" height="1" />
-                  <rect x="1" y="2" width="1" height="1" />
-                  <rect x="2" y="2" width="1" height="1" />
-                  <rect x="3" y="2" width="1" height="1" />
-                  <rect x="4" y="2" width="1" height="1" />
-                  <rect x="5" y="2" width="1" height="1" />
-                  <rect x="6" y="2" width="1" height="1" />
-                  <rect x="7" y="2" width="1" height="1" />
-                  <rect x="8" y="2" width="1" height="1" />
-                  <rect x="9" y="2" width="1" height="1" />
-                  <rect x="10" y="2" width="1" height="1" />
-                  <rect x="0" y="3" width="1" height="1" />
-                  <rect x="1" y="3" width="1" height="1" />
-                  <rect x="2" y="3" width="1" height="1" />
-                  <rect x="5" y="3" width="1" height="1" />
-                  <rect x="8" y="3" width="1" height="1" />
-                  <rect x="9" y="3" width="1" height="1" />
-                  <rect x="10" y="3" width="1" height="1" />
-                  <rect x="0" y="4" width="1" height="1" />
-                  <rect x="1" y="4" width="1" height="1" />
-                  <rect x="2" y="4" width="1" height="1" />
-                  <rect x="4" y="4" width="1" height="1" />
-                  <rect x="5" y="4" width="1" height="1" />
-                  <rect x="6" y="4" width="1" height="1" />
-                  <rect x="8" y="4" width="1" height="1" />
-                  <rect x="9" y="4" width="1" height="1" />
-                  <rect x="10" y="4" width="1" height="1" />
-                  <rect x="3" y="5" width="1" height="1" />
-                  <rect x="4" y="5" width="1" height="1" />
-                  <rect x="6" y="5" width="1" height="1" />
-                  <rect x="7" y="5" width="1" height="1" />
-                  <rect x="2" y="6" width="1" height="1" />
-                  <rect x="3" y="6" width="1" height="1" />
-                  <rect x="7" y="6" width="1" height="1" />
-                  <rect x="8" y="6" width="1" height="1" />
-                </g>
-              </svg>
-            </div>
-            <div class="hero__invader" data-size="md" data-variant="girl">
-              <svg
-                viewBox="0 0 11 8"
-                class="hero__invader-shape"
-                aria-hidden="true"
-                shape-rendering="crispEdges"
-              >
-                <defs>
-                  <linearGradient
-                    id="heroInvaderGirlFill"
-                    x1="0"
-                    y1="0"
-                    x2="11"
-                    y2="8"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop offset="0%" stop-color="var(--invader-light)" />
-                    <stop offset="100%" stop-color="var(--invader-dark)" />
-                  </linearGradient>
-                  <linearGradient
-                    id="heroInvaderGirlStroke"
-                    x1="0"
-                    y1="0"
-                    x2="11"
-                    y2="11"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop offset="0%" stop-color="var(--invader-highlight)" />
-                    <stop offset="100%" stop-color="var(--invader-shadow)" />
-                  </linearGradient>
-                </defs>
-                <g
-                  fill="url(#heroInvaderGirlFill)"
-                  stroke="url(#heroInvaderGirlStroke)"
-                  stroke-width="0.08"
-                  stroke-linejoin="round"
-                >
-                  <rect x="3" y="0" width="1" height="1" />
-                  <rect x="7" y="0" width="1" height="1" />
-                  <rect x="2" y="1" width="1" height="1" />
-                  <rect x="3" y="1" width="1" height="1" />
-                  <rect x="4" y="1" width="1" height="1" />
-                  <rect x="6" y="1" width="1" height="1" />
-                  <rect x="7" y="1" width="1" height="1" />
-                  <rect x="8" y="1" width="1" height="1" />
-                  <rect x="1" y="2" width="1" height="1" />
-                  <rect x="2" y="2" width="1" height="1" />
-                  <rect x="3" y="2" width="1" height="1" />
-                  <rect x="4" y="2" width="1" height="1" />
-                  <rect x="5" y="2" width="1" height="1" />
-                  <rect x="6" y="2" width="1" height="1" />
-                  <rect x="7" y="2" width="1" height="1" />
-                  <rect x="8" y="2" width="1" height="1" />
-                  <rect x="9" y="2" width="1" height="1" />
-                  <rect x="0" y="3" width="1" height="1" />
-                  <rect x="1" y="3" width="1" height="1" />
-                  <rect x="2" y="3" width="1" height="1" />
-                  <rect x="3" y="3" width="1" height="1" />
-                  <rect x="4" y="3" width="1" height="1" />
-                  <rect x="5" y="3" width="1" height="1" />
-                  <rect x="6" y="3" width="1" height="1" />
-                  <rect x="7" y="3" width="1" height="1" />
-                  <rect x="8" y="3" width="1" height="1" />
-                  <rect x="9" y="3" width="1" height="1" />
-                  <rect x="10" y="3" width="1" height="1" />
-                  <rect x="0" y="4" width="1" height="1" />
-                  <rect x="1" y="4" width="1" height="1" />
-                  <rect x="2" y="4" width="1" height="1" />
-                  <rect x="5" y="4" width="1" height="1" />
-                  <rect x="8" y="4" width="1" height="1" />
-                  <rect x="9" y="4" width="1" height="1" />
-                  <rect x="10" y="4" width="1" height="1" />
-                  <rect x="0" y="5" width="1" height="1" />
-                  <rect x="1" y="5" width="1" height="1" />
-                  <rect x="2" y="5" width="1" height="1" />
-                  <rect x="4" y="5" width="1" height="1" />
-                  <rect x="5" y="5" width="1" height="1" />
-                  <rect x="6" y="5" width="1" height="1" />
-                  <rect x="8" y="5" width="1" height="1" />
-                  <rect x="9" y="5" width="1" height="1" />
-                  <rect x="10" y="5" width="1" height="1" />
-                  <rect x="3" y="6" width="1" height="1" />
-                  <rect x="4" y="6" width="1" height="1" />
-                  <rect x="6" y="6" width="1" height="1" />
-                  <rect x="7" y="6" width="1" height="1" />
-                  <rect x="2" y="7" width="1" height="1" />
-                  <rect x="3" y="7" width="1" height="1" />
-                  <rect x="7" y="7" width="1" height="1" />
-                  <rect x="8" y="7" width="1" height="1" />
-                </g>
-              </svg>
-            </div>
-            <div class="hero__invader" data-size="sm" data-variant="kid">
-              <svg
-                viewBox="0 0 10 6"
-                class="hero__invader-shape"
-                aria-hidden="true"
-                shape-rendering="crispEdges"
-              >
-                <defs>
-                  <linearGradient
-                    id="heroInvaderKidFill"
-                    x1="0"
-                    y1="0"
-                    x2="10"
-                    y2="6"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop offset="0%" stop-color="var(--invader-light)" />
-                    <stop offset="100%" stop-color="var(--invader-dark)" />
-                  </linearGradient>
-                  <linearGradient
-                    id="heroInvaderKidStroke"
-                    x1="0"
-                    y1="0"
-                    x2="10"
-                    y2="10"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop offset="0%" stop-color="var(--invader-highlight)" />
-                    <stop offset="100%" stop-color="var(--invader-shadow)" />
-                  </linearGradient>
-                </defs>
-                <g
-                  fill="url(#heroInvaderKidFill)"
-                  stroke="url(#heroInvaderKidStroke)"
-                  stroke-width="0.08"
-                  stroke-linejoin="round"
-                >
-                  <rect x="4" y="0" width="1" height="1" />
-                  <rect x="5" y="0" width="1" height="1" />
-                  <rect x="3" y="1" width="1" height="1" />
-                  <rect x="4" y="1" width="1" height="1" />
-                  <rect x="5" y="1" width="1" height="1" />
-                  <rect x="6" y="1" width="1" height="1" />
-                  <rect x="2" y="2" width="1" height="1" />
-                  <rect x="3" y="2" width="1" height="1" />
-                  <rect x="4" y="2" width="1" height="1" />
-                  <rect x="5" y="2" width="1" height="1" />
-                  <rect x="6" y="2" width="1" height="1" />
-                  <rect x="7" y="2" width="1" height="1" />
-                  <rect x="1" y="3" width="1" height="1" />
-                  <rect x="2" y="3" width="1" height="1" />
-                  <rect x="4" y="3" width="1" height="1" />
-                  <rect x="5" y="3" width="1" height="1" />
-                  <rect x="7" y="3" width="1" height="1" />
-                  <rect x="8" y="3" width="1" height="1" />
-                  <rect x="2" y="4" width="1" height="1" />
-                  <rect x="3" y="4" width="1" height="1" />
-                  <rect x="6" y="4" width="1" height="1" />
-                  <rect x="7" y="4" width="1" height="1" />
-                  <rect x="3" y="5" width="1" height="1" />
-                  <rect x="6" y="5" width="1" height="1" />
-                </g>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-    </header>
-
-    <main id="main">
-
-    <!-- Оборудование и ПО -->
-    <section id="equipment" class="section section--equipment">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Оборудование и ПО</h2>
-          <p class="section-lead">
-            3D‑сканеры RangeVision, Artec и Leica; принтеры FDM/DLP (UltiMaker, Raise3D, Picaso 3D, Formlabs, Anycubic); лазер Trotec, фрезерные Roland; софт Geomagic, GOM Inspect, Inventor, Fusion 360.
-          </p>
-        </div>
-        <div class="grid cols-2 equipment-grid">
-          <article class="card card--equipment">
-            <div class="card-body">
-              <h3 class="card-title">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M4 8h16l-2 8H6L4 8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                  <path d="M8 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                  <circle cx="8" cy="18" r="1.5" fill="currentColor" />
-                  <circle cx="16" cy="18" r="1.5" fill="currentColor" />
-                </svg>
-                3D‑сканеры
-              </h3>
-              <ul class="equipment-list" data-equipment-list>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-status="busy"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://rangevision.com/hardware/neo"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        RangeVision
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Модель NEO — настольный структурированный свет с точностью до 0,05 мм для малого бизнеса и учебных задач.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">2 шт.</span>
-                    <span class="meta-chip">≈ 450 тыс ₽</span>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-status="available"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://rangevision.com/hardware/spectrum"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        RangeVision Spectrum
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Высокая детализация и сменные зоны сканирования для изделий средних размеров.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">1 шт.</span>
-                    <span class="meta-chip">≈ 1,2 млн ₽</span>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-status="maintenance"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://www.artec3d.com/portable-3d-scanners/artec-eva"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Artec Eva (ручной)
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Портативный лазерный сканер для оперативной съёмки людей и крупногабаритных объектов.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">2 шт.</span>
-                    <span class="meta-chip">≈ 2,7 млн ₽</span>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-status="available"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://shop.leica-geosystems.com/leica-blk/blk360"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Leica BLK360 (архитектурный)
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Высокоточная съёмка фасадов и интерьеров для BIM и реставрационных проектов.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">1 шт.</span>
-                    <span class="meta-chip">≈ 2,8 млн ₽</span>
-                  </div>
-                </li>
-              </ul>
-              <p class="equipment-summary" data-equipment-summary>
-                Загрузка рассчитывается…
-              </p>
-            </div>
-          </article>
-          <article class="card card--equipment">
-            <div class="card-body">
-              <h3 class="card-title">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M12 3v3m0 12v3m9-9h-3M6 12H3m15.78-6.78-2.12 2.12M8.34 15.66l-2.12 2.12m0-12.12 2.12 2.12m11.32 11.32-2.12-2.12"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                GenAI + Open Source
-              </h3>
-              <ul class="equipment-list" data-equipment-list>
-                <li class="equipment-item" data-equipment-item data-status="busy">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Google NotebookLM</h4>
-                    <p class="equipment-item__text">
-                      Нейросервис для компиляции исследовательских заметок, автоанализ материалов и подготовки конспектов.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">AI‑ассистент</span>
-                    <a
-                      href="https://notebooklm.google/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      notebooklm.google
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="available">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Perplexity AI</h4>
-                    <p class="equipment-item__text">
-                      Генеративный поиск с проверяемыми источниками для техисследований и быстрых сравнительных обзоров.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">AI‑ассистент</span>
-                    <a
-                      href="https://www.perplexity.ai/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      perplexity.ai
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="maintenance">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Qwen AI</h4>
-                    <p class="equipment-item__text">
-                      Открытые языковые модели Alibaba Cloud: текст, код и мультимодальные сценарии с развёртыванием on-prem.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">AI‑модели</span>
-                    <a
-                      href="https://qwenlm.ai/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      qwenlm.ai
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="available">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Hugging Face</h4>
-                    <p class="equipment-item__text">
-                      Сообщество и репозиторий моделей, датасетов и Spaces для быстрых ML‑прототипов и интеграции в проекты.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">AI‑платформа</span>
-                    <a
-                      href="https://huggingface.co/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      huggingface.co
-                    </a>
-                  </div>
-                </li>
-              </ul>
-              <p class="equipment-summary" data-equipment-summary>
-                Подбираем ассистентов и модели под задачи проектов: от генерации документации до развёртывания своих сервисов.
-              </p>
-            </div>
-          </article>
-          <article class="card card--equipment">
-            <div class="card-body">
-              <h3 class="card-title">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 5h14v10H5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                  <path d="M3 17h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                  <path d="M9 21h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                  <circle cx="9" cy="9" r="1" fill="currentColor" />
-                  <circle cx="12" cy="9" r="1" fill="currentColor" />
-                  <circle cx="15" cy="9" r="1" fill="currentColor" />
-                </svg>
-                3D‑принтеры
-              </h3>
-              <ul
-                class="equipment-list"
-                data-equipment-list
-                data-sheet-id="YOUR_GOOGLE_SHEET_ID"
-                data-sheet-range="Printers!A:C"
-                data-sheet-columns="id,status,availableUntil"
-              >
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-equipment-id="ultimaker-3"
-                  data-status="unknown"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://ultimaker.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        UltiMaker 3 (FDM)
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Двухэкструдерная печать инженерными пластиками и поддержками PVA.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">1 шт.</span>
-                    <span class="meta-chip">≈ 420 тыс ₽</span>
-                  </div>
-                  <div class="equipment-item__status">
-                    <button
-                      type="button"
-                      class="equipment-status is-unknown"
-                      data-status-trigger
-                      aria-controls="status-ultimaker-3"
-                      aria-expanded="false"
-                      aria-label="Статус UltiMaker 3 (FDM)"
-                    >
-                      <span class="equipment-status__light" aria-hidden="true"></span>
-                      <span class="sr-only" data-status-label>Статус уточняется</span>
-                    </button>
-                    <div
-                      class="equipment-status__message"
-                      id="status-ultimaker-3"
-                      data-status-message
-                      aria-live="polite"
-                      hidden
-                    ></div>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-equipment-id="formlabs-2"
-                  data-status="unknown"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://formlabs.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Formlabs 2 (DLP/SLA)
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Две установки для серийной печати высокоточных смол и биосовместимых материалов.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">2 шт.</span>
-                    <span class="meta-chip">≈ 550 тыс ₽</span>
-                  </div>
-                  <div class="equipment-item__status">
-                    <button
-                      type="button"
-                      class="equipment-status is-unknown"
-                      data-status-trigger
-                      aria-controls="status-formlabs-2"
-                      aria-expanded="false"
-                      aria-label="Статус Formlabs 2 (DLP/SLA)"
-                    >
-                      <span class="equipment-status__light" aria-hidden="true"></span>
-                      <span class="sr-only" data-status-label>Статус уточняется</span>
-                    </button>
-                    <div
-                      class="equipment-status__message"
-                      id="status-formlabs-2"
-                      data-status-message
-                      aria-live="polite"
-                      hidden
-                    ></div>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-equipment-id="formlabs-3"
-                  data-status="unknown"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://formlabs.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Formlabs 3 (DLP/SLA)
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Следующее поколение LFS-печати с улучшенной кинематикой и удалённым мониторингом.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">2 шт.</span>
-                    <span class="meta-chip">≈ 620 тыс ₽</span>
-                  </div>
-                  <div class="equipment-item__status">
-                    <button
-                      type="button"
-                      class="equipment-status is-unknown"
-                      data-status-trigger
-                      aria-controls="status-formlabs-3"
-                      aria-expanded="false"
-                      aria-label="Статус Formlabs 3 (DLP/SLA)"
-                    >
-                      <span class="equipment-status__light" aria-hidden="true"></span>
-                      <span class="sr-only" data-status-label>Статус уточняется</span>
-                    </button>
-                    <div
-                      class="equipment-status__message"
-                      id="status-formlabs-3"
-                      data-status-message
-                      aria-live="polite"
-                      hidden
-                    ></div>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-equipment-id="anycubic-photon-mono"
-                  data-status="unknown"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://www.anycubic.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Anycubic Photon Mono
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Компактный смоляной принтер (Аникубик) для быстрых экспериментальных прототипов.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">1 шт.</span>
-                    <span class="meta-chip">≈ 55 тыс ₽</span>
-                  </div>
-                  <div class="equipment-item__status">
-                    <button
-                      type="button"
-                      class="equipment-status is-unknown"
-                      data-status-trigger
-                      aria-controls="status-anycubic-photon-mono"
-                      aria-expanded="false"
-                      aria-label="Статус Anycubic Photon Mono"
-                    >
-                      <span class="equipment-status__light" aria-hidden="true"></span>
-                      <span class="sr-only" data-status-label>Статус уточняется</span>
-                    </button>
-                    <div
-                      class="equipment-status__message"
-                      id="status-anycubic-photon-mono"
-                      data-status-message
-                      aria-live="polite"
-                      hidden
-                    ></div>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-equipment-id="anycubic-photon-mono-m5"
-                  data-status="unknown"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://www.anycubic.com/products/photon-mono-m5"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Anycubic Photon Mono M5
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      12К LCD-матрица и повышенная детализация для ювелирных и дизайнерских задач.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">1 шт.</span>
-                    <span class="meta-chip">≈ 75 тыс ₽</span>
-                  </div>
-                  <div class="equipment-item__status">
-                    <button
-                      type="button"
-                      class="equipment-status is-unknown"
-                      data-status-trigger
-                      aria-controls="status-anycubic-photon-mono-m5"
-                      aria-expanded="false"
-                      aria-label="Статус Anycubic Photon Mono M5"
-                    >
-                      <span class="equipment-status__light" aria-hidden="true"></span>
-                      <span class="sr-only" data-status-label>Статус уточняется</span>
-                    </button>
-                    <div
-                      class="equipment-status__message"
-                      id="status-anycubic-photon-mono-m5"
-                      data-status-message
-                      aria-live="polite"
-                      hidden
-                    ></div>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-equipment-id="raise3d-large"
-                  data-status="unknown"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://www.raise3d.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Raise3D Pro3 Plus (большая камера)
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Две системы для печати крупногабаритных корпусов инженерными композитами.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">2 шт.</span>
-                    <span class="meta-chip">≈ 780 тыс ₽</span>
-                  </div>
-                  <div class="equipment-item__status">
-                    <button
-                      type="button"
-                      class="equipment-status is-unknown"
-                      data-status-trigger
-                      aria-controls="status-raise3d-large"
-                      aria-expanded="false"
-                      aria-label="Статус Raise3D Pro3 Plus"
-                    >
-                      <span class="equipment-status__light" aria-hidden="true"></span>
-                      <span class="sr-only" data-status-label>Статус уточняется</span>
-                    </button>
-                    <div
-                      class="equipment-status__message"
-                      id="status-raise3d-large"
-                      data-status-message
-                      aria-live="polite"
-                      hidden
-                    ></div>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-equipment-id="picaso-designer-x-pro"
-                  data-status="unknown"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://picaso-3d.com/ru/printers/designer-x-pro"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Picaso 3D Designer X ПРО (FDM)
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Закрытая камера, стабильно нагреваемые сопла и трёхзонный обдув для ABS/PA.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">3 шт.</span>
-                    <span class="meta-chip">≈ 360 тыс ₽</span>
-                  </div>
-                  <div class="equipment-item__status">
-                    <button
-                      type="button"
-                      class="equipment-status is-unknown"
-                      data-status-trigger
-                      aria-controls="status-picaso-designer-x-pro"
-                      aria-expanded="false"
-                      aria-label="Статус Picaso 3D Designer X ПРО"
-                    >
-                      <span class="equipment-status__light" aria-hidden="true"></span>
-                      <span class="sr-only" data-status-label>Статус уточняется</span>
-                    </button>
-                    <div
-                      class="equipment-status__message"
-                      id="status-picaso-designer-x-pro"
-                      data-status-message
-                      aria-live="polite"
-                      hidden
-                    ></div>
-                  </div>
-                </li>
-                <li
-                  class="equipment-item"
-                  data-equipment-item
-                  data-equipment-id="picaso-designer-xxl"
-                  data-status="unknown"
-                >
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">
-                      <a
-                        href="https://picaso-3d.com/ru/printers/designer-xxl"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Picaso 3D Designer XXL (FDM)
-                      </a>
-                    </h4>
-                    <p class="equipment-item__text">
-                      Большой формат печати (600×400×400 мм) для демонстрационных корпусов и оснастки.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">1 шт.</span>
-                    <span class="meta-chip">≈ 890 тыс ₽</span>
-                  </div>
-                  <div class="equipment-item__status">
-                    <button
-                      type="button"
-                      class="equipment-status is-unknown"
-                      data-status-trigger
-                      aria-controls="status-picaso-designer-xxl"
-                      aria-expanded="false"
-                      aria-label="Статус Picaso 3D Designer XXL"
-                    >
-                      <span class="equipment-status__light" aria-hidden="true"></span>
-                      <span class="sr-only" data-status-label>Статус уточняется</span>
-                    </button>
-                    <div
-                      class="equipment-status__message"
-                      id="status-picaso-designer-xxl"
-                      data-status-message
-                      aria-live="polite"
-                      hidden
-                    ></div>
-                  </div>
-                </li>
-              </ul>
-              <p class="equipment-summary" data-equipment-summary>
-                Загрузка рассчитывается…
-              </p>
-            </div>
-          </article>
-          <article class="card card--equipment">
-            <div class="card-body">
-              <h3 class="card-title">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 5h14v6H5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                  <path d="M3 17h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                  <path d="M7 21h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                  <path d="M8 9h2M14 9h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                </svg>
-                CNC и лазер
-              </h3>
-              <ul class="equipment-list" data-equipment-list>
-                <li class="equipment-item" data-equipment-item data-status="busy">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Roland MDX‑40/50/540 (CNC)</h4>
-                    <p class="equipment-item__text">
-                      Настольные 3‑осевые фрезеры для обработки пластика, воска и алюминия.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">3 станции</span>
-                    <span class="meta-chip">от 650 тыс ₽</span>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="available">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Trotec Speedy 300 (лазер)</h4>
-                    <p class="equipment-item__text">
-                      CO₂‑лазер 80 Вт для резки и гравировки листовых материалов до А2.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">1 шт.</span>
-                    <span class="meta-chip">≈ 1,8 млн ₽</span>
-                  </div>
-                </li>
-              </ul>
-              <p class="equipment-summary" data-equipment-summary>
-                Загрузка рассчитывается…
-              </p>
-            </div>
-          </article>
-          <article class="card card--equipment">
-            <div class="card-body">
-              <h3 class="card-title">
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="3" y="4" width="18" height="14" rx="2.5" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.5" />
-                  <path d="M7 9h10M7 13h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                </svg>
-                Программное обеспечение
-              </h3>
-              <ul class="equipment-list" data-equipment-list>
-                <li class="equipment-item" data-equipment-item data-status="busy">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Geomagic (Reverse/Design)</h4>
-                    <p class="equipment-item__text">
-                      Реверсивный инжиниринг и восстановление поверхностей из облаков точек.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">5 лицензий</span>
-                    <a
-                      href="https://www.3dsystems.com/software/geomagic-design-x"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      3dsystems.com
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="busy">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">GOM Inspect (Метрология)</h4>
-                    <p class="equipment-item__text">
-                      Контроль геометрии, отклонения и отчёты по сканам и CMM‑данным.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">3 лицензии</span>
-                    <a
-                      href="https://www.gom.com/en/products/inspection/gom-inspect"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      gom.com
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="available">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Autodesk Inventor (CAD)</h4>
-                    <p class="equipment-item__text">
-                      Параметрическое проектирование, сборки и расчёт нагрузок.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">10 лицензий</span>
-                    <a
-                      href="https://www.autodesk.com/products/inventor/overview"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      autodesk.com/inventor
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="available">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Fusion 360 (CAD/CAM/CAE)</h4>
-                    <p class="equipment-item__text">
-                      Единая среда для CAD‑проектирования, CAM‑траекторий и симуляций.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">15 лицензий</span>
-                    <a
-                      href="https://www.autodesk.com/products/fusion-360/overview"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      autodesk.com/fusion360
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="available">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Bambu Studio (FDM-слайсер)</h4>
-                    <p class="equipment-item__text">
-                      Фирменный слайсер Bambu Lab с автоконтролем AMS, облачным мониторингом и пресетами для инженерных материалов.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">слайсер</span>
-                    <a
-                      href="https://bambulab.com/en/software/bambu-studio"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      bambulab.com
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="available">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Orca Slicer (сообщество)</h4>
-                    <p class="equipment-item__text">
-                      Открытый форк Bambu Studio с профилями под популярные FDM‑принтеры, расширенными настройками и авто‑калибровками.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">слайсер</span>
-                    <a
-                      href="https://orcaslicer.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      orcaslicer.com
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="available">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">PrusaSlicer (FDM/SLA)</h4>
-                    <p class="equipment-item__text">
-                      Кроссплатформенный слайсер с поддержкой FDM и SLA, расширенными профилями и точной настройкой поддержек.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">слайсер</span>
-                    <a
-                      href="https://www.prusa3d.com/page/prusaslicer_424/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      prusa3d.com
-                    </a>
-                  </div>
-                </li>
-                <li class="equipment-item" data-equipment-item data-status="available">
-                  <div class="equipment-item__info">
-                    <h4 class="equipment-item__title">Ultimaker Cura (FDM)</h4>
-                    <p class="equipment-item__text">
-                      Массовый слайсер с библиотекой профилей материалов, интеграцией Digital Factory и рекомендациями по качеству печати.
-                    </p>
-                  </div>
-                  <div class="equipment-item__meta">
-                    <span class="meta-chip">слайсер</span>
-                    <a
-                      href="https://ultimaker.com/software/ultimaker-cura"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="meta-chip meta-chip--link"
-                    >
-                      ultimaker.com
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-    <!-- Проекты и НИР -->
-    <section id="projects" class="section-shell py-16 md:py-24" data-section-accent="emerald">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="space-y-10 md:space-y-12">
-          <div class="space-y-4">
-            <h2 class="text-balance-2 font-bold">
-              Проекты и направления НИР
-            </h2>
-          </div>
-          <div class="grid gap-6 md:grid-cols-2 md:gap-8">
-          <!-- Карточка проекта с мини-слайдером (ванильный JS) -->
-          <article
-            data-news
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery space-y-4"
-            data-index="0"
-          >
-            <div class="space-y-4">
-              <div class="space-y-2">
-                <h3 class="text-balance-3 font-semibold text-slate-900 dark:text-white">
-                  Изготовление ортезов и протезов
-                </h3>
-                <p class="text-sm text-slate-700 dark:text-slate-200">
-                  Индивидуальные ортезы и протезы: от скана до готового изделия.
-                </p>
-              </div>
-              <div class="flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200">
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-700"
-                  >MedTech</span
-                >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-700"
-                  >FDM/DLP</span
-                >
-              </div>
-              <div
-                class="rounded-2xl border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative overflow-hidden"
-              >
-                <div class="aspect-video relative">
-                  <div class="pointer-events-none absolute inset-0 bg-slate-900/25 md:hidden"></div>
-                  <div class="grid h-full w-full">
-                    <div class="slide">
-                      <img
-                        src="assets/images/index/projects/orthosis/slide-1.svg"
-                        alt="Проект ортеза — фото 1"
-                        class="h-full w-full object-cover"
-                        loading="lazy"
-                      />
+        </header>
+        <!-- Основной контент страницы -->
+        <main id="main" class="main" tabindex="-1">
+            <!-- Первый экран с анимацией частиц -->
+            <section id="hero" class="section hero" data-section="hero">
+                <div class="hero__background" aria-hidden="true" data-particles></div>
+                <div class="container hero__inner">
+                    <!-- Текстовая колонка героя -->
+                    <div class="hero__content">
+                        <p class="hero__eyebrow">Интенсив за один день</p>
+                        <h1 class="hero__title">Интенсив по ИИ - 5 часов практики</h1>
+                        <p class="hero__subtitle">Документы, сайты, 3D, агенты, видео - все за один насыщенный день с наставниками.</p>
+                        <div class="hero__meta">
+                            <span><strong class="hero__meta-strong">Формат:</strong> Офлайн Москва и Онлайн</span>
+                            <span><strong class="hero__meta-strong">Дата:</strong> <span data-config-text="eventDateHuman">14 декабря</span></span>
+                        </div>
+                        <div class="hero__actions">
+                            <!-- Основной призыв к действию -->
+                            <a class="btn btn--primary" href="#registration" data-scroll data-cta="true" data-href-base="#registration" data-position="hero_primary" data-tariff="online">Записаться</a>
+                            <!-- Дополнительная кнопка прокрутки к программе -->
+                            <a class="btn btn--ghost" href="#program" data-scroll data-cta="true" data-href-base="#program" data-position="hero_secondary" data-tariff="online">Программа</a>
+                        </div>
+                        <p class="hero__note">Места ограничены. Все материалы и записи входят в доступ.</p>
                     </div>
-                    <div class="slide hidden">
-                      <img
-                        src="assets/images/index/projects/orthosis/slide-2.svg"
-                        alt="Проект ортеза — фото 2"
-                        class="h-full w-full object-cover"
-                        loading="lazy"
-                      />
+                    <!-- Боковая карточка с ключевыми выгодами -->
+                    <aside class="hero__aside" aria-label="Ключевые результаты">
+                        <h2 class="hero__aside-title">Что получите</h2>
+                        <ul class="hero__aside-list">
+                            <li>Скрипты генерации документов и презентаций за минуты</li>
+                            <li>Шаблон сайта и чат-бота для отдела продаж</li>
+                            <li>3D концепт и анимацию продукта в реальном времени</li>
+                            <li>Пошаговый план внедрения ИИ в компании</li>
+                        </ul>
+                    </aside>
+                </div>
+            </section>
+            <!-- Блок преимуществ курса -->
+            <section id="benefits" class="section section--light" data-section="benefits">
+                <div class="container">
+                    <header class="section__header">
+                        <h2 class="section__title">Почему стоит прийти</h2>
+                        <p class="section__description">Каждая карточка описывает выгоду. Иконки SVG встроены прямо в код, чтобы их можно было быстро изменить.</p>
+                    </header>
+                    <div class="benefits">
+                        <!-- Карточка выгоды -->
+                        <article class="benefit-card">
+                            <div class="benefit-card__icon" aria-hidden="true">
+                                <svg viewBox="0 0 64 64" width="48" height="48">
+                                    <circle cx="32" cy="32" r="30" fill="#eef2ff"></circle>
+                                    <path d="M20 36l8 8 16-20" fill="none" stroke="#4a6fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </div>
+                            <h3 class="benefit-card__title">Практика на реальных кейсах</h3>
+                            <p class="benefit-card__text">Все задания привязаны к бизнес процессам: документооборот, маркетинг, производство.</p>
+                        </article>
+                        <article class="benefit-card">
+                            <div class="benefit-card__icon" aria-hidden="true">
+                                <svg viewBox="0 0 64 64" width="48" height="48">
+                                    <rect x="10" y="12" width="44" height="40" rx="10" fill="#eef2ff"></rect>
+                                    <path d="M22 24h20M22 32h12M22 40h24" stroke="#4a6fff" stroke-width="4" stroke-linecap="round"></path>
+                                </svg>
+                            </div>
+                            <h3 class="benefit-card__title">Наставники и поддержка</h3>
+                            <p class="benefit-card__text">Эксперты помогают на площадке и в Zoom. Отвечаем на вопросы даже после интенсива.</p>
+                        </article>
+                        <article class="benefit-card">
+                            <div class="benefit-card__icon" aria-hidden="true">
+                                <svg viewBox="0 0 64 64" width="48" height="48">
+                                    <path d="M12 20l20-8 20 8v20l-20 12-20-12z" fill="#eef2ff"></path>
+                                    <path d="M20 24l12 8 12-8" fill="none" stroke="#4a6fff" stroke-width="3"></path>
+                                    <path d="M32 32v14" stroke="#4a6fff" stroke-width="3"></path>
+                                </svg>
+                            </div>
+                            <h3 class="benefit-card__title">Рабочие шаблоны</h3>
+                            <p class="benefit-card__text">Вы увозите готовые промпты, таблицы и документацию чтобы внедрять ИИ уже завтра.</p>
+                        </article>
+                        <article class="benefit-card">
+                            <div class="benefit-card__icon" aria-hidden="true">
+                                <svg viewBox="0 0 64 64" width="48" height="48">
+                                    <circle cx="32" cy="32" r="26" fill="#eef2ff"></circle>
+                                    <path d="M24 32l6 6 10-14" fill="none" stroke="#4a6fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </div>
+                            <h3 class="benefit-card__title">Сертификат ДПО</h3>
+                            <p class="benefit-card__text">Получите официальный документ о прохождении программы для портфолио и работодателя.</p>
+                        </article>
                     </div>
-                    <div class="slide hidden">
-                      <img
-                        src="assets/images/index/projects/orthosis/slide-3.svg"
-                        alt="Проект ортеза — фото 3"
-                        class="h-full w-full object-cover"
-                        loading="lazy"
-                      />
+                </div>
+            </section>
+            <!-- Блок программы интенсива -->
+            <section id="program" class="section" data-section="program" data-analytics="view_program">
+                <div class="container">
+                    <header class="section__header">
+                        <h2 class="section__title">Программа дня</h2>
+                        <p class="section__description">Основные блоки занимают 5 часов. Дополнительно доступны мастер классы, которые раскрываются по кнопке.</p>
+                    </header>
+                    <div class="program">
+                        <!-- Карточки программы по часам -->
+                        <article class="program-item">
+                            <div class="program-item__time">10:00 - 10:50</div>
+                            <div>
+                                <h3 class="program-item__title">Документы и презентации</h3>
+                                <p class="program-item__text">Настраиваем генерацию коммерческих предложений, регламентов и презентаций в несколько кликов.</p>
+                                <p class="program-item__result">Результат: готовые шаблоны и проверенные промпты для отдела продаж.</p>
+                            </div>
+                        </article>
+                        <article class="program-item">
+                            <div class="program-item__time">11:00 - 11:50</div>
+                            <div>
+                                <h3 class="program-item__title">Сайты и автоворонки</h3>
+                                <p class="program-item__text">Создаем лендинг и цепочку писем с помощью генеративных моделей и подключаем аналитику.</p>
+                                <p class="program-item__result">Результат: готовая связка лендинг плюс боты для лидогенерации.</p>
+                            </div>
+                        </article>
+                        <article class="program-item">
+                            <div class="program-item__time">12:00 - 12:50</div>
+                            <div>
+                                <h3 class="program-item__title">3D и визуализации</h3>
+                                <p class="program-item__text">Собираем 3D концепты, готовим рендер и создаем короткое видео в одном интерфейсе.</p>
+                                <p class="program-item__result">Результат: 3D сцена и видео тизер продукта.</p>
+                            </div>
+                        </article>
+                        <article class="program-item">
+                            <div class="program-item__time">13:00 - 13:50</div>
+                            <div>
+                                <h3 class="program-item__title">Агенты и автоматизация</h3>
+                                <p class="program-item__text">Собираем агентов для поддержки клиентов, генерации отчетов и синхронизации в CRM.</p>
+                                <p class="program-item__result">Результат: прототип агента и карта интеграций.</p>
+                            </div>
+                        </article>
+                        <article class="program-item">
+                            <div class="program-item__time">14:00 - 14:50</div>
+                            <div>
+                                <h3 class="program-item__title">Видео и генеративный контент</h3>
+                                <p class="program-item__text">Создаем обучающие ролики, редактируем голос и генерируем сценарии для соцсетей.</p>
+                                <p class="program-item__result">Результат: видео заготовки и набор голосовых пресетов.</p>
+                            </div>
+                        </article>
                     </div>
-                  </div>
-                </div>
-                <button
-                  class="js-prev group absolute left-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                  aria-label="Предыдущее изображение"
-                >
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                    <path
-                      d="m14 18-6-6 6-6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                    />
-                  </svg>
-                </button>
-                <button
-                  class="js-next group absolute right-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                  aria-label="Следующее изображение"
-                >
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                    <path
-                      d="m10 6 6 6-6 6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.8"
-                    />
-                  </svg>
-                </button>
-                <div
-                  class="flex w-full flex-col items-center gap-2 border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
-                >
-                  <div class="flex gap-2 js-dots"></div>
-                  <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-700/60">
-                    <div class="h-full w-full origin-left scale-x-0 rounded-full bg-slate-900 dark:bg-white js-progress"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article
-            data-news
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery space-y-4"
-            data-index="0"
-          >
-            <h3 class="text-balance-3 font-semibold text-slate-900 dark:text-white">Промдизайн и прототипирование</h3>
-            <p class="text-sm text-slate-700 dark:text-slate-200">
-              Комплексные проекты по промышленному дизайну: быстрые макеты,
-              пользовательские испытания, подготовка к малосерийному
-              производству.
-            </p>
-            <div
-              class="flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200"
-            >
-              <span
-                class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                >Промдизайн</span
-              >
-              <span
-                class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                >Прототипы</span
-              >
-              <span
-                class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                >CMF</span
-              >
-            </div>
-            <div
-              class="rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
-            >
-              <div class="aspect-video relative">
-          <div class="pointer-events-none absolute inset-0 bg-slate-900/25 md:hidden"></div>
-          <div class="grid h-full w-full">
-                <div
-                  class="slide flex items-center justify-center bg-gradient-to-br from-orange-200 via-rose-200 to-amber-200 dark:from-orange-500/40 dark:via-rose-500/40 dark:to-amber-500/40 text-slate-700 dark:text-white text-sm font-medium"
-                >
-                  Мокапы и эргономика
-                </div>
-                <div
-                  class="slide hidden flex items-center justify-center bg-gradient-to-br from-slate-200 via-slate-100 to-white dark:from-slate-600 dark:via-slate-700 dark:to-slate-800 text-slate-700 dark:text-white text-sm font-medium"
-                >
-                  CMF‑концепты и визуализации
-                </div>
-                <div
-                  class="slide hidden flex items-center justify-center bg-gradient-to-br from-emerald-200 via-cyan-200 to-sky-200 dark:from-emerald-500/40 dark:via-cyan-500/40 dark:to-sky-500/40 text-slate-700 dark:text-white text-sm font-medium"
-                >
-                  Подготовка к серийному выпуску
-                </div>
-              </div>
-              <button
-                class="js-prev group absolute left-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                aria-label="Предыдущее изображение"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                  <path
-                    d="m14 18-6-6 6-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                  />
-                </svg>
-              </button>
-              <button
-                class="js-next group absolute right-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                aria-label="Следующее изображение"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                  <path
-                    d="m10 6 6 6-6 6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                  />
-                </svg>
-              </button>
-              <div
-                class="flex w-full flex-col items-center gap-2 border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
-              >
-                <div class="flex gap-2 js-dots"></div>
-                <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-700/60">
-                  <div class="h-full w-full origin-left scale-x-0 rounded-full bg-slate-900 dark:bg-white js-progress"></div>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article
-            data-news
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery space-y-4"
-            data-index="0"
-          >
-            <h3 class="text-balance-3 font-semibold text-slate-900 dark:text-white">
-              Оцифровка объектов культурного наследия
-            </h3>
-            <p class="text-sm text-slate-700 dark:text-slate-200">
-              Сканирование и восстановление геометрии, подготовка экспозиционных
-              макетов.
-            </p>
-            <div
-              class="rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
-            >
-              <div class="aspect-video relative">
-          <div class="pointer-events-none absolute inset-0 bg-slate-900/25 md:hidden"></div>
-          <div class="grid h-full w-full">
-                <div class="slide">
-                  <img
-                    src="assets/images/index/projects/heritage/slide-1.svg"
-                    alt="Оцифровка объектов культурного наследия — фото 1"
-                    class="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="slide hidden">
-                  <img
-                    src="assets/images/index/projects/heritage/slide-2.svg"
-                    alt="Оцифровка объектов культурного наследия — фото 2"
-                    class="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <button
-                class="js-prev group absolute left-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                aria-label="Предыдущее изображение"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                  <path
-                    d="m14 18-6-6 6-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                  />
-                </svg>
-              </button>
-              <button
-                class="js-next group absolute right-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                aria-label="Следующее изображение"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                  <path
-                    d="m10 6 6 6-6 6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                  />
-                </svg>
-              </button>
-              <div
-                class="flex w-full flex-col items-center gap-2 border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
-              >
-                <div class="flex gap-2 js-dots"></div>
-                <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-700/60">
-                  <div class="h-full w-full origin-left scale-x-0 rounded-full bg-slate-900 dark:bg-white js-progress"></div>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 js-gallery space-y-4"
-            data-index="0"
-          >
-            <h3 class="text-balance-3 font-semibold text-slate-900 dark:text-white">
-              GenAI и XR‑технологии в инженерии
-            </h3>
-            <p class="text-sm text-slate-700 dark:text-slate-200">
-              Используем генеративный ИИ и дополненную/виртуальную реальность
-              для ускорения проектирования, ревью и обучения инженеров.
-            </p>
-            <div
-              class="flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-200"
-            >
-              <span
-                class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                >GenAI</span
-              >
-              <span
-                class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                >XR</span
-              >
-              <span
-                class="inline-flex items-center rounded-lg bg-slate-100 dark:bg-slate-700 px-2.5 py-1"
-                >Digital Twins</span
-              >
-            </div>
-            <div
-              class="rounded-2xl overflow-hidden border border-slate-200 bg-white/95 dark:border-slate-700 dark:bg-slate-900/70 relative"
-            >
-              <div class="aspect-video relative">
-          <div class="pointer-events-none absolute inset-0 bg-slate-900/25 md:hidden"></div>
-          <div class="grid h-full w-full">
-                <div
-                  class="slide flex items-center justify-center bg-gradient-to-br from-indigo-200 via-sky-200 to-purple-200 dark:from-indigo-500/40 dark:via-sky-500/40 dark:to-purple-500/40 text-slate-700 dark:text-white text-sm font-medium text-center px-6"
-                >
-                  Генерация концептов и CAD‑элементов
-                </div>
-                <div
-                  class="slide hidden flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 text-white text-sm font-medium text-center px-6"
-                >
-                  XR‑коллаборация и обучение
-                </div>
-                <div
-                  class="slide hidden flex items-center justify-center bg-gradient-to-br from-emerald-300 via-teal-200 to-cyan-200 dark:from-emerald-500/40 dark:via-teal-500/40 dark:to-cyan-500/40 text-slate-700 dark:text-white text-sm font-medium text-center px-6"
-                >
-                  Аналитика цифровых двойников
-                </div>
-              </div>
-              <button
-                class="js-prev group absolute left-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                aria-label="Предыдущее изображение"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                  <path
-                    d="m14 18-6-6 6-6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                  />
-                </svg>
-              </button>
-              <button
-                class="js-next group absolute right-4 top-1/2 -translate-y-1/2 inline-flex size-11 items-center justify-center rounded-full border border-slate-200/70 bg-white/90 text-slate-700 shadow-lg backdrop-blur transition hover:-translate-y-1/2 hover:scale-105 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-100"
-                aria-label="Следующее изображение"
-              >
-                <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-                  <path
-                    d="m10 6 6 6-6 6"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                  />
-                </svg>
-              </button>
-              <div
-                class="flex w-full flex-col items-center gap-2 border-t border-slate-200/60 bg-white/80 px-4 py-3 dark:border-slate-700/60 dark:bg-slate-900/60"
-              >
-                <div class="flex gap-2 js-dots"></div>
-                <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200/80 dark:bg-slate-700/60">
-                  <div class="h-full w-full origin-left scale-x-0 rounded-full bg-slate-900 dark:bg-white js-progress"></div>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Курсы ДПО -->
-
-          >
-            <div
-              class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"
-            >
-              <div class="flex items-start gap-4">
-                <div
-                  class="course-card__avatar course-card__avatar--sky"
-                  aria-hidden="true"
-                >
-                  <span>R22</span>
-                </div>
-                <div>
-                  <h3 class="text-xl font-semibold text-slate-900 dark:text-white">
-                    Образовательные проекты совместно с ФГБОУ ВО РГСУ
-                  </h3>
-                  <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                    3D‑сканирование, обработка сканов, CAD, 3D‑печать
-                  </p>
-                </div>
-              </div>
-              <dl
-                class="grid gap-3 text-xs text-slate-600 dark:text-slate-300 sm:grid-cols-2 lg:grid-cols-3"
-              >
-                <div>
-                  <dt
-                    class="font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
-                  >
-                    Объём
-                  </dt>
-                  <dd class="mt-1 text-base font-semibold text-slate-900 dark:text-white">
-                    48–72 ч
-                  </dd>
-                </div>
-                <div>
-                  <dt
-                    class="font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
-                  >
-                    Аудитория
-                  </dt>
-                  <dd class="mt-1 text-base font-semibold text-slate-900 dark:text-white">
-                    Студенты и специалисты
-                  </dd>
-                </div>
-                <div>
-                  <dt
-                    class="font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
-                  >
-                    Стоимость
-                  </dt>
-                  <dd class="mt-1 text-base font-semibold text-slate-900 dark:text-white">
-                    48&nbsp;000&nbsp;₽
-                  </dd>
-                </div>
-                <div>
-                  <dt
-                    class="font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
-                  >
-                    Старт
-                  </dt>
-                  <dd class="mt-1 text-base font-semibold text-slate-900 dark:text-white">
-                    Через 24 дня
-                  </dd>
-                </div>
-                <div>
-                  <dt
-                    class="font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
-                  >
-                    Места
-                  </dt>
-                  <dd class="mt-1 text-base font-semibold text-slate-900 dark:text-white">
-                    Свободно 11 из 12
-                  </dd>
-                </div>
-              </dl>
-            </div>
-            <p class="mt-4 text-slate-700 dark:text-slate-200">
-              Проходим путь от цифрового двойника до запуска аддитивного
-              производства, закрепляя навыки на собственных проектах слушателей.
-            </p>
-            <ul
-              class="mt-6 grid gap-3 text-sm text-slate-700 dark:text-slate-200"
-            >
-              <li class="flex items-start gap-3">
-                <span
-                  class="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-sky-500"
-                ></span>
-                Знакомство с оборудованием, подготовка объекта к сканированию
-              </li>
-              <li class="flex items-start gap-3">
-                <span
-                  class="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-sky-500"
-                ></span>
-                Обработка сеток, ремешинг, контроль качества поверхности
-              </li>
-              <li class="flex items-start gap-3">
-                <span
-                  class="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-sky-500"
-                ></span>
-                CAD‑проектирование, подготовка в CAM и цифровая аттестация
-              </li>
-              <li class="flex items-start gap-3">
-                <span
-                  class="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-sky-500"
-                ></span>
-                Подготовка к печати, постобработка и упаковка кейса для защиты
-              </li>
-            </ul>
-            <div
-              class="mt-6 flex flex-wrap items-center gap-3 text-xs text-slate-600 dark:text-slate-300"
-            >
-              <span
-                class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 font-medium uppercase tracking-wide text-slate-700 dark:bg-slate-800 dark:text-slate-200"
-              >
-                Сертификат РГСУ
-              </span>
-              <span
-                class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 font-medium uppercase tracking-wide text-slate-700 dark:bg-slate-800 dark:text-slate-200"
-              >
-                Проектный трек
-              </span>
-              <span
-                class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 font-medium uppercase tracking-wide text-slate-700 dark:bg-slate-800 dark:text-slate-200"
-              >
-                Наставники-практики
-              </span>
-            </div>
-            <div class="mt-8 flex flex-wrap gap-3">
-              <a href="#contacts" class="btn btn-primary">
-                Подобрать программу
-                <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
-                  <path
-                    d="M5 12h14m-6-7 7 7-7 7"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                  />
-                </svg>
-              </a>
-              <a href="reverse-additive.html" class="btn btn-outline">
-                Смотреть подробности
-              </a>
-            </div>
-          </div>
-          <div class="grid gap-4">
-            <div
-              class="surface-card-base rounded-3xl border border-white/50 bg-white/70 p-6 shadow-lg backdrop-blur-sm transition duration-300 hover:shadow-xl dark:border-slate-700/60 dark:bg-slate-900/70"
-            >
-              <div class="flex items-start gap-4">
-                <div
-                  class="course-card__avatar course-card__avatar--sky"
-                  aria-hidden="true"
-                >
-                  <svg viewBox="0 0 24 24" class="h-5 w-5">
-                    <path
-                      d="M4 7h16M4 12h16M4 17h10"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                </div>
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
-                    Интенсив «Digital Manufacturing Sprint»
-                  </h3>
-                  <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
-                    Неделя сжатой практики: от 3D‑сканирования до печати на
-                    индустриальном оборудовании с наставником.
-                  </p>
-                </div>
-              </div>
-              <div
-                class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-600 dark:text-slate-300"
-              >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
-                  >48 ч</span
-                >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
-                  >Проектная защита</span
-                >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
-                  >Смешанный формат</span
-                >
-              </div>
-            </div>
-            <div
-              class="surface-card-base rounded-3xl border border-white/50 bg-white/70 p-6 shadow-lg backdrop-blur-sm transition duration-300 hover:shadow-xl dark:border-slate-700/60 dark:bg-slate-900/70"
-            >
-              <div class="flex items-start gap-4">
-                <div
-                  class="course-card__avatar course-card__avatar--emerald"
-                  aria-hidden="true"
-                >
-                  <svg viewBox="0 0 24 24" class="h-5 w-5">
-                    <path
-                      d="M12 5v14m0 0 5-5m-5 5-5-5m10-8-5-5-5 5"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                </div>
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
-                    Проектная школа «Advanced CAD/CAE»
-                  </h3>
-                  <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
-                    Работаем над цифровыми прототипами, осваиваем анализ и оптимизацию
-                    конструкции в CAE, завершаем защитой перед индустриальными
-                    партнёрами.
-                  </p>
-                </div>
-              </div>
-              <div
-                class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-600 dark:text-slate-300"
-              >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
-                  >72 ч</span
-                >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
-                  >Наставники из R22.Lab</span
-                >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
-                  >Командная работа</span
-                >
-              </div>
-            </div>
-            <div
-              class="surface-card-base rounded-3xl border border-white/50 bg-white/70 p-6 shadow-lg backdrop-blur-sm transition duration-300 hover:shadow-xl dark:border-slate-700/60 dark:bg-slate-900/70"
-            >
-              <div class="flex items-start gap-4">
-                <div
-                  class="course-card__avatar course-card__avatar--indigo"
-                  aria-hidden="true"
-                >
-                  <svg viewBox="0 0 24 24" class="h-5 w-5">
-                    <path
-                      d="M12 5v14m-7-8 7 5 7-5-7-5-7 5Z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                </div>
-                <div class="flex-1">
-                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
-                    Практикум «Reverse Engineering Lab»
-                  </h3>
-                  <p class="mt-2 text-sm text-slate-700 dark:text-slate-200">
-                    От скана до цифрового двойника: отрабатываем методики контроля,
-                    обмеров, реверсивного проектирования и подготовки в CAM.
-                  </p>
-                </div>
-              </div>
-              <div
-                class="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-600 dark:text-slate-300"
-              >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
-                  >Гибкий график</span
-                >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
-                  >Индивидуальные кейсы</span
-                >
-                <span
-                  class="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 dark:bg-slate-800"
-                  >Доступ к лаборатории 24/7</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Команда -->
-    <section id="team" class="section team-section">
-      <div class="container">
-        <h2 class="section-title">Команда</h2>
-        <div class="team-grid">
-          <article class="card team-card">
-            <div class="team-card__header">
-              <img
-                src="assets/images/index/team/vladimir-ganishin.svg"
-                alt="Владимир Ганьшин"
-                class="avatar"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="team-card__summary">
-                <h3 class="team-card__name">Владимир Ганьшин</h3>
-                <p class="team-card__role">
-                  руководитель технопарка, эксперт в области АТ и GenСAD
-                </p>
-                <p class="team-card__focus">ведущий инженер-исследователь лаборатории</p>
-              </div>
-              <div class="team-card__actions">
-                <button
-                  type="button"
-                  class="team-toggle btn-icon"
-                  aria-expanded="false"
-                  aria-controls="team-details-ganishin"
-                  data-team-toggle="team-details-ganishin"
-                >
-                  <span aria-hidden="true" data-state-icon>+</span>
-                  <span class="sr-only">Показать подробности о Владимире Ганьшине</span>
-                </button>
-              </div>
-            </div>
-            <div id="team-details-ganishin" class="team-card__details hidden" aria-hidden="true">
-              <ul class="team-card__list">
-                <li><span class="team-card__label">Возраст и город:</span> 34 года, Москва.</li>
-                <li>
-                  <span class="team-card__label">Должности:</span>
-                  <ul>
-                    <li>Руководитель технопарка ФГБОУ РГСУ (2019 — н.в.).</li>
-                    <li>Преподаватель РГСУ, филиал в г. Пятигорске (2024 — н.в.).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Образование:</span>
-                  <ul>
-                    <li>МГТУ «Станкин», бакалавриат «Технология, оборудование и автоматизация машиностроительных производств» (2008–2012).</li>
-                    <li>МГТУ «Станкин», магистратура «Конструкторско-технологическое обеспечение машиностроительных производств» (2012–2014).</li>
-                    <li>Аспирантура по направлению 05.02.07 «Технология и оборудование механической и физико-технической обработки», квалификация преподаватель-исследователь высшей школы (2014–2018).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Педагогический стаж &gt;10 лет:</span>
-                  <ul>
-                    <li>
-                      ВУЗы:
-                      <ul>
-                        <li>МГТУ «Станкин», кафедра «ИТиТФ» (2014–2018).</li>
-                        <li>Российский государственный социальный университет, факультет информационных технологий (2018 — н.в.).</li>
-                      </ul>
-                    </li>
-                    <li>
-                      СУЗы:
-                      <ul>
-                        <li>Политехнический колледж № 42 — мастер производственного обучения (2014).</li>
-                        <li>Западный комплекс непрерывного образования — преподаватель специальных дисциплин (2015–2018).</li>
-                      </ul>
-                    </li>
-                    <li>
-                      Школы:
-                      <ul>
-                        <li>ЗКНО — уроки технологии по 3D-моделированию (2017–2018).</li>
-                        <li>«Марьина Роща им. Орлова» — курсы «Промышленный дизайн» и «Прототипирование» (2021–2022).</li>
-                      </ul>
-                    </li>
-                    <li>ДПО: технопарк РГСУ (2018 — н.в.).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Преподаваемые курсы:</span>
-                  <ul>
-                    <li>«Промышленный дизайн и инжиниринг» (разработчик).</li>
-                    <li>«Инженерный дизайн (САПР)» (разработчик).</li>
-                    <li>«Реверсивный инжиниринг и технологии аддитивного производства» (соавтор).</li>
-                    <li>«Применение технологий искусственного интеллекта в профессиональной деятельности» (разработчик).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Программное обеспечение и оборудование:</span>
-                  <ul>
-                    <li>САПР: Autodesk Inventor, Fusion 360, T-FLEX CAD, КОМПАС-3D, Geomagic Design X, GOM Inspect и др.</li>
-                    <li>Оборудование: 3D-сканеры RangeVision, Artec Eva, Leica; 3D-принтеры (FDM, DLP, SLA); станки лазерной резки и механообрабатывающие станки с ЧПУ.</li>
-                    <li>Языки программирования: C++, Python и др.</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Достижения и тренерский опыт:</span>
-                  <ul>
-                    <li>Тренер сборной России по компетенции «Реверсивный инжиниринг» (WorldSkills): 3 место — Казань 2019, 1 место — BRICS 2020.</li>
-                    <li>Подготовил четырёх чемпионов России по WorldSkills (2018–2021) и двух призёров движения «Профессионалы» (2023–2025).</li>
-                    <li>Главный эксперт конкурсов (WorldSkills, «Абилимпикс», «Профессионалы», HI-TECH) в 2018–2023.</li>
-                    <li>Участник команды «Дезинтегратор», 1/4 Битвы роботов в категории 100+ кг (2023, 2024).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Учебно-методические материалы и интервью:</span>
-                  <ul>
-                    <li>Видео-цикл «Методология проведения курсов ДПО по техническим дисциплинам» (<a href="https://surl.lu/xcfxzz" target="_blank" rel="noopener noreferrer">ссылка</a>).</li>
-                    <li>Интервью: «Онлайн-экскурсия в социальный университет РГСУ», «Что такое технопарк РГСУ?».</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Проекты и портфолио:</span>
-                  <ul>
-                    <li>Композиционный обвес для Kawasaki Puccetti Racing совместно с Umatex (Росатом).</li>
-                    <li>Telegram-канал: <a href="https://t.me/step_3d_mngr" target="_blank" rel="noopener noreferrer">t.me/step_3d_mngr</a>.</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Увлечения и контакты:</span>
-                  <ul>
-                    <li>Шахматы, футбол, искусственный интеллект.</li>
-                    <li>E-mail: <a href="mailto:projects.step3d@gmail.com">projects.step3d@gmail.com</a>.</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </article>
-          <article class="card team-card">
-            <div class="team-card__header">
-              <img
-                src="assets/images/index/team/anna-ponkratova.svg"
-                alt="Христина Понкратова"
-                class="avatar"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="team-card__summary">
-                <h3 class="team-card__name">Христина Понкратова</h3>
-                <p class="team-card__role">
-                  чемпион России, HI-TECH и BRICS по реверс инжинирингу
-                  (WorldSkills 2019)
-                </p>
-                <p class="team-card__focus">
-                  ведущий тренер и преподаватель сообщества Step3D, лауреат Москвы в
-                  области образования 2025
-                </p>
-              </div>
-              <div class="team-card__actions">
-                <button
-                  type="button"
-                  class="team-toggle btn-icon"
-                  aria-expanded="false"
-                  aria-controls="team-details-ponkratova"
-                  data-team-toggle="team-details-ponkratova"
-                >
-                  <span aria-hidden="true" data-state-icon>+</span>
-                  <span class="sr-only">Показать подробности о Христине Понкратовой</span>
-                </button>
-              </div>
-            </div>
-            <div id="team-details-ponkratova" class="team-card__details hidden" aria-hidden="true">
-              <ul class="team-card__list">
-                <li><span class="team-card__label">Полное имя:</span> Понкратова Христина Анатольевна.</li>
-                <li><span class="team-card__label">Возраст:</span> 23 года.</li>
-                <li>
-                  <span class="team-card__label">Образование:</span>
-                  <ul>
-                    <li>РУДН, факультет ФМиЕН — бакалавриат «Прикладная математика и информатика» (2020–2024).</li>
-                    <li>Университет «Синергия», факультет «Дизайн» — магистратура «Дизайн и продвижение цифрового продукта» (2024 — н.в.).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Место работы:</span>
-                  <ul>
-                    <li>Технопарк РГСУ — учебный мастер.</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Педагогический стаж &gt;5 лет:</span>
-                  <ul>
-                    <li>
-                      СУЗы:
-                      <ul>
-                        <li>Первый Московский образовательный комплекс — мастер производственного обучения (аддитивное производство, подготовка к «Московским мастерам», 2023–2025).</li>
-                        <li>Западный комплекс непрерывного образования — лаборант лаборатории широкополосных систем радиосвязи, кружок по 3D-моделированию (2019–2020).</li>
-                      </ul>
-                    </li>
-                    <li>
-                      Школы:
-                      <ul>
-                        <li>Школа № 1287 — преподаватель допобразования, 3D-моделирование (6–11 классы, 2022–2024).</li>
-                        <li>«Марьина Роща им. Орлова» — преподаватель ДО, подготовка к «Московским мастерам», 3D-моделирование (5–11 классы, 2021–2024).</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Компетенции:</span>
-                  <ul>
-                    <li>Реверсивный инжиниринг и изготовление индивидуальных имплантов.</li>
-                    <li>Аддитивное производство, инженерный дизайн САПР, биопротезирование.</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Программное обеспечение:</span>
-                  <ul>
-                    <li>САПР: КОМПАС-3D, Geomagic Design X, Autodesk Inventor Professional 2018+, Fusion 360, GOM Inspect 2018+, Geomagic Control X, Materialise 3-matic и др.</li>
-                    <li>Blender.</li>
-                    <li>Слайсеры: Ultimaker Cura, Polygon X, Creality Slicer и др.</li>
-                    <li>ПО 3D-сканирования: Artec Studio 15 Professional+, RV 3D Studio (до 2023 — ScanCenter NG) и др.</li>
-                    <li>Языки программирования: C++, Python.</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Достижения:</span>
-                  <ul>
-                    <li>Чемпион финала VII Национального чемпионата «Молодые профессионалы» (WorldSkills Russia 2019) по реверсивному инжинирингу.</li>
-                    <li>Чемпион BRICS Skills Challenge 2019 (FutureSkills, реверсивный инжиниринг).</li>
-                    <li>Призёр WorldSkills HI-TECH 2018, чемпион WorldSkills HI-TECH 2019.</li>
-                    <li>Наставник десятков участников и победителей конкурсов профмастерства (Ростех, Сибур, Роскосмос, Северсталь и др.).</li>
-                    <li>Лауреат гранта Правительства Москвы в сфере образования (2024).</li>
-                  </ul>
-                </li>
-                <li><span class="team-card__label">Увлечения:</span> музыка, программирование, спорт.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="card team-card">
-            <div class="team-card__header">
-              <img
-                src="assets/images/index/team/alexey-rekut.svg"
-                alt="Алексей Рекут"
-                class="avatar"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="team-card__summary">
-                <h3 class="team-card__name">Алексей Рекут</h3>
-                <p class="team-card__role">
-                  главный инженер‑конструктор лаборатории R22_Лаб и команды из «Битва
-                  Роботов» «Дезинтегратор» (2023-2024)
-                </p>
-                <p class="team-card__focus">
-                  один из разработчиков первого ФГОС по аддитивным технологам
-                </p>
-              </div>
-              <div class="team-card__actions">
-                <button
-                  type="button"
-                  class="team-toggle btn-icon"
-                  aria-expanded="false"
-                  aria-controls="team-details-rekut"
-                  data-team-toggle="team-details-rekut"
-                >
-                  <span aria-hidden="true" data-state-icon>+</span>
-                  <span class="sr-only">Показать подробности об Алексее Рекуте</span>
-                </button>
-              </div>
-            </div>
-            <div id="team-details-rekut" class="team-card__details hidden" aria-hidden="true">
-              <ul class="team-card__list">
-                <li><span class="team-card__label">Возраст:</span> 54 года.</li>
-                <li>
-                  <span class="team-card__label">Должности:</span>
-                  <ul>
-                    <li>Заместитель руководителя технопарка (2022 — н.в.).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Разработчик программ:</span>
-                  <ul>
-                    <li>Программа ДПК преподавателей «Практика и методика реализации образовательных программ основного и среднего общего образования по предмету труд (технологии) на основе проектов спортивно-боевого роботостроения».</li>
-                    <li>Дополнительная общеразвивающая программа «Спортивно-боевое роботостроение».</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Образование:</span>
-                  <ul>
-                    <li>Высшее: ГАУ им. Серго Орджоникидзе, «Экономическая кибернетика» (1994).</li>
-                    <li>Повышение квалификации: АНХ при Правительстве РФ, «Управление в маркетинге» (2004).</li>
-                    <li>Повышение квалификации: СКФУ, «Преподаватель высшей школы» (2017).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Педагогический стаж &gt;9 лет:</span>
-                  <ul>
-                    <li>ВУЗ: РГСУ, технопарк (2022 — н.в.).</li>
-                    <li>СУЗ: ГАПОУ Колледж предпринимательства №11 (2009–2020).</li>
-                    <li>ДПО: ГАПОУ Колледж предпринимательства №11 (2009–2015).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Компетенции:</span>
-                  <ul>
-                    <li>Аддитивное производство (3D-печать FDM, DLP, SLA).</li>
-                    <li>Реверсивный инжиниринг.</li>
-                    <li>Промышленный дизайн и прототипирование (включая станки с ЧПУ).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Программное обеспечение:</span>
-                  <ul>
-                    <li>САПР: Rhino 3D, Geomagic Design X, GOM Inspect.</li>
-                    <li>Слайсеры: Ultimaker Cura, CHITUBOX, Polygon X, Creality Slicer.</li>
-                    <li>ПО 3D-сканирования: Artec Studio 15 Professional+, RV 3D Studio (до 2023 — ScanCenter NG).</li>
-                    <li>Языки программирования: C++.</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Достижения:</span>
-                  <ul>
-                    <li>Инициатор создания ФГОС СПО «Аддитивные технологии» (соавтор первой редакции, 2010–2013).</li>
-                    <li>Создатель компетенций «Реверсивный инжиниринг» (WorldSkills Russia, 2014) и «Additive Manufacturing» (WorldSkills, 2020).</li>
-                    <li>Менеджер компетенции «Реверсивный инжиниринг» в WorldSkills/Агентстве развития профессий и навыков (2014 — н.в.).</li>
-                    <li>Менеджер компетенции «Реверсивный инжиниринг» Всероссийского чемпионатного движения (2023 — н.в.).</li>
-                    <li>Инициатор и капитан команды «Дезинтегратор» — ТОП-16 «Битвы роботов» в категории 100+ кг (2023).</li>
-                  </ul>
-                </li>
-                <li>
-                  <span class="team-card__label">Учебные материалы и интервью:</span>
-                  <ul>
-                    <li>«Учебное пособие по Rhinoceros 3D», «Базовый курс Rhinoceros 3D».</li>
-                    <li>Интервью: фильм «Лучший по профессии» (Россия 24), канал «Аддитивная кухня», 4 канал (Екатеринбург).</li>
-                  </ul>
-                </li>
-                <li><span class="team-card__label">Увлечения:</span> механика, кинетическая скульптура, креативная механика, спортивно-боевые роботы.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="card team-card">
-            <div class="team-card__header">
-              <img
-                src="assets/images/index/team/evgeny-vakin.svg"
-                alt="Евгений Вакин"
-                class="avatar"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="team-card__summary">
-                <h3 class="team-card__name">Евгений Вакин</h3>
-                <p class="team-card__role">
-                  главный инженер-технолог fab-lab технопарка РГСУ
-                </p>
-                <p class="team-card__focus">
-                  эксперт по технологиям FDM, DLP и SLA 3D-печати
-                </p>
-              </div>
-              <div class="team-card__actions">
-                <button
-                  type="button"
-                  class="team-toggle btn-icon"
-                  aria-expanded="false"
-                  aria-controls="team-details-vakin"
-                  data-team-toggle="team-details-vakin"
-                >
-                  <span aria-hidden="true" data-state-icon>+</span>
-                  <span class="sr-only">Показать подробности о Евгении Вакине</span>
-                </button>
-              </div>
-            </div>
-            <div id="team-details-vakin" class="team-card__details hidden" aria-hidden="true">
-              <ul class="team-card__list">
-                <li><span class="team-card__label">Полное имя:</span> Вакин Евгений Юрьевич.</li>
-                <li>
-                  <span class="team-card__label">Должность:</span>
-                  главный инженер-технолог fab-lab технопарка РГСУ.
-                </li>
-                <li>
-                  <span class="team-card__label">Экспертиза:</span>
-                  внедрение и настройка процессов FDM, DLP и SLA-печати под задачи
-                  образовательных и производственных проектов.
-                </li>
-                <li>
-                  <span class="team-card__label">Фокус работы:</span>
-                  технологическое сопровождение лаборатории, выбор материалов и
-                  разработка регламентов для 3D-печати.
-                </li>
-                <li>
-                  <span class="team-card__label">Социальные сети:</span>
-                  TikTok-канал: <span class="font-medium">ссылка будет добавлена</span>.
-                </li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-    <!-- Новости и статьи -->
-    <section id="blog" class="section-shell py-16 md:py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div class="space-y-4 max-w-3xl">
-            <h2 class="text-balance-2 font-bold">Образовательные программы и статьи</h2>
-            <p class="text-slate-700 dark:text-slate-200">
-              Коротко делимся проектами лаборатории, методическими материалами и
-              вдохновляющими кейсами индустриального дизайна и инженерии.
-            </p>
-          </div>
-          <a
-            href="https://t.me/step_3d_mngr"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 self-start rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-          >
-            Все обновления в телеграме
-            <svg viewBox="0 0 24 24" class="h-4 w-4">
-              <path
-                d="M5 12h13M13 5l7 7-7 7"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </a>
-        </div>
-
-        <div id="blogList" class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <article
-            data-news
-            class="surface-card-base group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800"
-          >
-            <div class="aspect-[16/10] overflow-hidden">
-              <img
-                src="assets/images/index/blog/reverse-engineering.svg"
-                alt="Реверс-инжиниринг в Step3D.Lab"
-                class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-            <div class="space-y-4 p-6">
-              <div class="flex items-center gap-3 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
-                <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 dark:bg-slate-700">Проекты</span>
-                <time datetime="2024-04-18">18 апреля 2024</time>
-              </div>
-              <h3 class="text-balance-3 text-xl font-semibold text-slate-900 dark:text-white">
-                Курс ДПО (48 ч.) R22.AM «Реверсивный инжиниринг и аддитивное производство»
-              </h3>
-              <p class="text-sm text-slate-700 dark:text-slate-200">
-                Образовательные проекты совместно с ФГБОУ ВО РГСУ. Проходим путь
-                от цифрового двойника до запуска аддитивного производства,
-                закрепляя навыки на собственных проектах слушателей.
-              </p>
-              <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-200">
-                <li>Знакомство с оборудованием, подготовка объекта к сканированию</li>
-                <li>Обработка сеток, ремешинг, контроль качества поверхности</li>
-                <li>CAD‑проектирование, подготовка в CAM и цифровая аттестация</li>
-                <li>Подготовка к печати, постобработка и упаковка кейса для защиты</li>
-              </ul>
-              <div class="flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-slate-600 dark:text-slate-200">
-                <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-700">Сертификат РГСУ</span>
-                <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-700">Проектный трек</span>
-                <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-700">Наставники-практики</span>
-              </div>
-              <div class="flex flex-wrap gap-3">
-                <a
-                  href="#"
-                  class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow transition hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 dark:focus:ring-slate-700"
-                >
-                  Подобрать программу
-                </a>
-                <a
-                  href="#"
-                  class="inline-flex items-center justify-center rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700 dark:text-slate-100"
-                >
-                  Смотреть подробности
-                </a>
-              </div>
-              <div class="space-y-4 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700 dark:bg-slate-900/50 dark:text-slate-200">
-                <div>
-                  <h4 class="font-semibold text-slate-900 dark:text-white">Интенсив «Digital Manufacturing Sprint»</h4>
-                  <p class="mt-1 text-sm">Неделя сжатой практики: от 3D‑сканирования до печати на индустриальном оборудовании с наставником.</p>
-                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
-                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">48 ч</span>
-                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Проектная защита</span>
-                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Смешанный формат</span>
-                  </div>
-                </div>
-                <div>
-                  <h4 class="font-semibold text-slate-900 dark:text-white">Проектная школа «Advanced CAD/CAE»</h4>
-                  <p class="mt-1 text-sm">Работаем над цифровыми прототипами, осваиваем анализ и оптимизацию конструкции в CAE, завершаем защитой перед индустриальными партнёрами.</p>
-                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
-                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">72 ч</span>
-                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Наставники из R22.Lab</span>
-                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Командная работа</span>
-                  </div>
-                </div>
-                <div>
-                  <h4 class="font-semibold text-slate-900 dark:text-white">Практикум «Reverse Engineering Lab»</h4>
-                  <p class="mt-1 text-sm">От скана до цифрового двойника: отрабатываем методики контроля, обмеров, реверсивного проектирования и подготовки в CAM.</p>
-                  <div class="mt-2 flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
-                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Гибкий график</span>
-                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Индивидуальные кейсы</span>
-                    <span class="rounded-md bg-white px-2 py-1 shadow-sm dark:bg-slate-800">Доступ к лаборатории 24/7</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article
-            data-news
-            class="surface-card-base group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800"
-          >
-            <div class="aspect-[16/10] overflow-hidden">
-              <img
-                src="assets/images/index/blog/additive-production.svg"
-                alt="Аддитивное производство"
-                class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-            <div class="space-y-4 p-6">
-              <div class="flex items-center gap-3 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
-                <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 dark:bg-slate-700">Методика</span>
-                <time datetime="2024-03-27">27 марта 2024</time>
-              </div>
-              <h3 class="text-balance-3 text-xl font-semibold text-slate-900 dark:text-white">
-                7 советов по выбору технологии 3D‑печати под задачу
-              </h3>
-              <p class="text-sm text-slate-700 dark:text-slate-200">
-                Как понимать ограничения материалов, точность и экономику разных
-                процессов — чек‑лист для конструкторов и менеджеров проекта.
-              </p>
-              <a
-                href="#"
-                class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-sky-600 transition hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200"
-              >
-                Читать статью
-                <svg viewBox="0 0 24 24" class="h-4 w-4">
-                  <path
-                    d="M5 12h13M13 5l7 7-7 7"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <article
-            data-news
-            class="surface-card-base group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800"
-          >
-            <div class="aspect-[16/10] overflow-hidden">
-              <img
-                src="assets/images/index/blog/education-lab.svg"
-                alt="Обучение в лаборатории"
-                class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-            <div class="space-y-4 p-6">
-              <div class="flex items-center gap-3 text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">
-                <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 dark:bg-slate-700">Обучение</span>
-                <time datetime="2024-02-10">10 февраля 2024</time>
-              </div>
-              <h3 class="text-balance-3 text-xl font-semibold text-slate-900 dark:text-white">
-                Новый поток курса по комплексному реверсу: что внутри
-              </h3>
-              <p class="text-sm text-slate-700 dark:text-slate-200">
-                Содержание модулей, проектные задания и практика на оборудовании
-                технопарка — делимся, что ждёт слушателей.
-              </p>
-              <a
-                href="#"
-                class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-sky-600 transition hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-200"
-              >
-                Читать обзор
-                <svg viewBox="0 0 24 24" class="h-4 w-4">
-                  <path
-                    d="M5 12h13M13 5l7 7-7 7"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </a>
-            </div>
-          </article>
-        </div>
-      </div>
-      </section>
-
-      <section
-        id="reverse-checklist"
-        class="section-shell py-16 md:py-24 cylindrical-checklist-section"
-      >
-        <div class="container cylindrical-checklist">
-          <div class="cylindrical-checklist__content">
-            <span class="cylindrical-checklist__badge">Практика Step3D.Lab</span>
-            <h2 class="cylindrical-checklist__title">
-              Приёмка детали и технический анализ
-            </h2>
-            <p class="cylindrical-checklist__lead">
-              Изучаем геометрию, определяем критичные зоны, снимаем габариты.
-              Преподаватель помогает составить план сканирования и подобрать
-              калибры.
-            </p>
-            <p class="cylindrical-checklist__note">
-              Готовый чек-лист пригодится на демонстрационном экзамене:
-              сохраняйте профили сканирования и отчёты — их можно повторно
-              использовать.
-            </p>
-            <ol class="cylindrical-checklist__list">
-              <li>
-                <h3>Подбор держателей</h3>
-                <p>
-                  Чек-лист приёмки: выбираем держатели и опоры, фиксируем деталь
-                  и задаём базовые поверхности под сканирование.
-                </p>
-              </li>
-              <li>
-                <h3>Калибровка RangeVision / Artec</h3>
-                <p>
-                  Настраиваем рабочую базу, прогоняем тестовые кадры, сверяем
-                  точность по шаблону. При необходимости меняем линзы и масштаб
-                  съёмки. Совет: сохраняйте профиль настроек под проект —
-                  пригодится на демонстрационном экзамене.
-                </p>
-              </li>
-              <li>
-                <h3>Сканирование и сбор облака точек</h3>
-                <p>
-                  Снимаем деталь в нескольких положениях, используем маркеры и
-                  контрольные метки. После каждой серии проверяем перекрытия и
-                  шум, выполняем авто- и ручную стыковку траекторий и
-                  экспортируем *.RCP и *.STL.
-                </p>
-              </li>
-              <li>
-                <h3>Обработка сеток и выравнивание</h3>
-                <p>
-                  Чистим артефакты, выполняем ремешинг, сглаживание и выстраиваем
-                  базовые плоскости в Geomagic или GOM Inspect. Контроль по
-                  эталонному облаку с допуском ±0,05 мм.
-                </p>
-              </li>
-              <li>
-                <h3>Построение CAD-модели и выпуск документации</h3>
-                <p>
-                  Переводим полигоны в поверхности, собираем эскизы и историю
-                  построения в Inventor или Fusion, готовим чертёж с допусками и
-                  спецификацией. Экспортируем STEP/IGES и PDF.
-                </p>
-              </li>
-              <li>
-                <h3>Подготовка к печати и запуск производства</h3>
-                <p>
-                  Импортируем модель в Cura или CHITUBOX, расставляем поддержки и
-                  рассчитываем время печати. Запускаем процесс и фиксируем
-                  параметры: материалы ABS, PETG или смолы Formlabs — по запросу
-                  проекта.
-                </p>
-              </li>
-              <li>
-                <h3>Контроль качества и финальный отчёт</h3>
-                <p>
-                  Сравниваем напечатанное изделие с CAD, оформляем протокол
-                  измерений и собираем финальный пакет файлов: CAD, STL, отчёт и
-                  фото. Готовим комплект для внедрения.
-                </p>
-              </li>
-            </ol>
-          </div>
-          <div class="cylindrical-checklist__visual" aria-hidden="true">
-            <div class="cylindrical-drum">
-              <div class="cylindrical-drum__stage">
-                <div class="cylindrical-drum__surface" style="--panel-count: 8">
-                  <article class="cylindrical-drum__panel" style="--i: 0">
-                    <span class="cylindrical-drum__label">Старт</span>
-                    <h3>Приёмка детали и технический анализ</h3>
-                    <p>
-                      Изучаем геометрию, определяем критичные зоны и габариты.
-                      Наставник помогает составить план сканирования и подобрать
-                      калибры.
-                    </p>
-                  </article>
-                  <article class="cylindrical-drum__panel" style="--i: 1">
-                    <span class="cylindrical-drum__label">1</span>
-                    <h3>Подбор держателей</h3>
-                    <p>
-                      Подготавливаем чек-лист приёмки, подбираем держатели и
-                      базовые поверхности для стабильной фиксации детали.
-                    </p>
-                  </article>
-                  <article class="cylindrical-drum__panel" style="--i: 2">
-                    <span class="cylindrical-drum__label">2</span>
-                    <h3>Калибровка RangeVision / Artec</h3>
-                    <p>
-                      Настраиваем рабочую базу, прогоняем тестовые кадры,
-                      контролируем точность по шаблону. При необходимости
-                      меняем линзы и масштаб съёмки. Совет: сохраняем профиль
-                      настроек под проект.
-                    </p>
-                  </article>
-                  <article class="cylindrical-drum__panel" style="--i: 3">
-                    <span class="cylindrical-drum__label">3</span>
-                    <h3>Сканирование и сбор облака точек</h3>
-                    <p>
-                      Снимаем деталь в нескольких положениях, используем маркеры
-                      и контрольные метки, проверяем перекрытия, выполняем авто-
-                      и ручную стыковку, экспортируем *.RCP и *.STL.
-                    </p>
-                  </article>
-                  <article class="cylindrical-drum__panel" style="--i: 4">
-                    <span class="cylindrical-drum__label">4</span>
-                    <h3>Обработка сеток и выравнивание</h3>
-                    <p>
-                      Чистим артефакты, делаем ремешинг и сглаживание,
-                      выстраиваем базовые плоскости в Geomagic или GOM Inspect,
-                      контролируем отклонения ±0,05 мм.
-                    </p>
-                  </article>
-                  <article class="cylindrical-drum__panel" style="--i: 5">
-                    <span class="cylindrical-drum__label">5</span>
-                    <h3>Построение CAD-модели</h3>
-                    <p>
-                      Переводим сетку в поверхностную модель, формируем эскизы и
-                      историю построения в Inventor или Fusion, подготавливаем
-                      документацию и экспорт STEP/IGES + PDF.
-                    </p>
-                  </article>
-                  <article class="cylindrical-drum__panel" style="--i: 6">
-                    <span class="cylindrical-drum__label">6</span>
-                    <h3>Подготовка к печати</h3>
-                    <p>
-                      Импортируем модель в Cura/CHITUBOX, расставляем поддержки,
-                      рассчитываем время печати. Материалы: ABS, PETG или смолы
-                      Formlabs.
-                    </p>
-                  </article>
-                  <article class="cylindrical-drum__panel" style="--i: 7">
-                    <span class="cylindrical-drum__label">7</span>
-                    <h3>Контроль качества</h3>
-                    <p>
-                      Сравниваем изделие с CAD, оформляем протокол измерений,
-                      собираем финальный отчёт с CAD, STL и фото для
-                      демонстрационного экзамена.
-                    </p>
-                  </article>
-                </div>
-              </div>
-              <div class="cylindrical-drum__shadow" aria-hidden="true"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FAQ -->
-    <section id="faq" class="section-shell py-16 md:py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <h2 class="text-balance-2 font-bold">Часто задаваемые вопросы</h2>
-        <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-          <details
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm open:shadow-md dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary class="cursor-pointer font-medium">
-              Какие материалы печати доступны?
-            </summary>
-            <p class="mt-2 text-slate-700 dark:text-slate-200">
-              PLA, PETG, ABS, нейлон; смолы DLP/SLA (стандартные и инженерные).
-              Постобработка и окраска — доступны.
-            </p>
-          </details>
-          <details
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm open:shadow-md dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary class="cursor-pointer font-medium">
-              Сколько занимает цикл «скан‑CAD‑печать»?
-            </summary>
-            <p class="mt-2 text-slate-700 dark:text-slate-200">
-              От 2 до 10 рабочих дней — зависит от размера, точности и загрузки.
-            </p>
-          </details>
-          <details
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm open:shadow-md dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary class="cursor-pointer font-medium">
-              Можно ли обучаться дистанционно?
-            </summary>
-            <p class="mt-2 text-slate-700 dark:text-slate-200">
-              Да: теория и разбор кейсов — онлайн. Практика и сканирование —
-              очно.
-            </p>
-          </details>
-          <details
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm open:shadow-md dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary class="cursor-pointer font-medium">
-              Выдаёте ли документы о повышении квалификации?
-            </summary>
-            <p class="mt-2 text-slate-700 dark:text-slate-200">
-              Да, по итогам программ ДПО (48–72 ч) — удостоверение
-              установленного образца.
-            </p>
-          </details>
-          <details
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm open:shadow-md dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary class="cursor-pointer font-medium">
-              Берёте проекты под НИР/НИОКР?
-            </summary>
-            <p class="mt-2 text-slate-700 dark:text-slate-200">
-              Да, оформляем задачи как исследовательские проекты: публикации,
-              отчёты.
-            </p>
-          </details>
-          <details
-            class="surface-card-base rounded-3xl border border-slate-200 bg-white p-6 shadow-sm open:shadow-md dark:border-slate-700 dark:bg-slate-800"
-          >
-            <summary class="cursor-pointer font-medium">
-              Как оставить заявку?
-            </summary>
-            <p class="mt-2 text-slate-700 dark:text-slate-200">
-              Нажмите «Оставить заявку» и заполните форму — мы свяжемся.
-            </p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    </main>
-
-    <!-- Контакты + карта -->
-
-    <footer
-      id="contacts"
-      class="section-shell py-16 md:py-24 border-t border-slate-200/60 dark:border-slate-700/60"
-    >
-      <div class="container space-y-16">
-        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr),auto] items-start">
-          <div class="space-y-4">
-            <h2 class="text-3xl font-semibold text-slate-900 dark:text-white">Контакты</h2>
-            <p class="text-base text-slate-700 dark:text-slate-200">
-              Задайте вопрос или оставьте заявку — поможем выбрать формат: учебный модуль,
-              проект, НИОКР или услуга.
-            </p>
-          </div>
-          <div class="flex flex-wrap items-center gap-3 justify-start lg:justify-end">
-            <button id="openModal2" class="btn btn-primary btn-cta">Оставить заявку</button>
-            <a
-              href="https://t.me/step_3d_mngr"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-outline"
-              >Написать нам в телеграм</a
-            >
-            <button id="shareLink" type="button" class="btn btn-outline">Поделиться ↗</button>
-          </div>
-        </div>
-
-        <div class="grid gap-10 xl:grid-cols-[minmax(0,1fr),minmax(0,1.15fr)]">
-          <div class="space-y-10">
-            <div class="grid gap-4 sm:grid-cols-2">
-              <div
-                class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
-              >
-                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
-                  По всем вопросам
-                </div>
-                <a href="mailto:projects.step3d@gmail.com" class="btn btn-primary mt-2">
-                  projects.step3d@gmail.com
-                </a>
-                <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
-                  Почта команды Step3D.Lab для любых запросов и заявок.
-                </div>
-              </div>
-              <div
-                class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
-              >
-                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
-                  Контакт в Telegram
-                </div>
-                <a
-                  href="https://t.me/step_3d_mngr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn btn-outline contact-handle mt-2"
-                >
-                  @step_3d_mngr
-                </a>
-                <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
-                  Никита — менеджер проекта, оперативная связь по Telegram.
-                </div>
-              </div>
-              <div
-                class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
-              >
-                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
-                  Портфолио и новости
-                </div>
-                <a
-                  href="https://t.me/STEP_3D_Lab"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-medium text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
-                >
-                  t.me/STEP_3D_Lab
-                </a>
-                <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
-                  Кейсы лаборатории, новости проектов и behind the scenes.
-                </div>
-              </div>
-              <div
-                class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800"
-              >
-                <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
-                  Обучение и профориентация
-                </div>
-                <a
-                  href="https://technopark-rgsu.ru/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-2 inline-flex items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 font-medium text-slate-900 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:bg-slate-700/70 dark:text-slate-100 dark:hover:bg-slate-600"
-                >
-                  technopark-rgsu.ru
-                </a>
-                <div class="mt-2 text-xs text-slate-600 dark:text-slate-200">
-                  Образовательные программы и профориентация школьников.
-                </div>
-              </div>
-            </div>
-
-            <div class="space-y-6">
-              <div class="space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-4">
-                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
-                    Площадки Step3D.Lab
-                  </h3>
-                  <div class="flex gap-2" role="tablist" aria-label="Переключение VR-туров">
-                    <button
-                      class="px-3 py-1.5 rounded-xl text-sm font-medium text-white bg-slate-900 dark:bg-white dark:text-slate-900 shadow-sm"
-                      data-maptab="0"
-                      data-active-class="bg-slate-900 text-white dark:bg-white dark:text-slate-900"
-                      data-inactive-class="text-slate-700 dark:text-slate-200"
-                    >
-                      ВДНХ
-                    </button>
-                    <button
-                      class="px-3 py-1.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 shadow-sm"
-                      data-maptab="1"
-                      data-active-class="bg-slate-900 text-white dark:bg-white dark:text-slate-900"
-                      data-inactive-class="text-slate-700 dark:text-slate-200"
-                    >
-                      Беговая
-                    </button>
-                  </div>
-                </div>
-                <div class="grid gap-4 sm:grid-cols-2 text-sm text-slate-700 dark:text-slate-200">
-                  <div class="rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
-                    <div class="flex items-start justify-between gap-3">
-                      <div>
-                        <div class="font-semibold text-slate-900 dark:text-white">ВДНХ</div>
-                        <div>ул. Вильгельма Пика, 4, корп. 8</div>
-                      </div>
-                      <div class="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-                        <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-full bg-[#ff8c00] text-white">
-                          M
-                        </span>
-                        <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">СВАО</span>
-                      </div>
+                    <!-- Скрытая расширенная программа -->
+                    <div class="program-extra" data-program-extra hidden>
+                        <h3 class="program-extra__title">Дополнительные блоки после основного дня</h3>
+                        <ul class="program-extra__list">
+                            <li>Настройка корпоративных политик безопасности и контроль доступа</li>
+                            <li>Индивидуальный аудит процессов и подбор сервисов</li>
+                            <li>Пакет материалов для запуска пилотного проекта внутри компании</li>
+                        </ul>
                     </div>
-                    <a
-                      href="https://pika.technopark-rgsu.ru/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-sky-600 hover:text-sky-700 dark:text-sky-300 dark:hover:text-sky-200"
-                    >
-                      <span>VR‑тур по площадке ВДНХ</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        class="h-4 w-4"
-                      >
-                        <path d="M5 12h14" stroke-linecap="round" />
-                        <path d="m13 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </a>
-                  </div>
-                  <div class="rounded-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 shadow-sm">
-                    <div class="flex items-start justify-between gap-3">
-                      <div>
-                        <div class="font-semibold text-slate-900 dark:text-white">Беговая</div>
-                        <div>ул. Беговая, 12</div>
-                      </div>
-                      <div class="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-                        <span aria-hidden class="inline-flex size-9 items-center justify-center rounded-full bg-[#a6007a] text-white">
-                          M
-                        </span>
-                        <span class="text-xs uppercase tracking-wide text-slate-600 dark:text-slate-200">САО</span>
-                      </div>
+                    <div class="program__toggle">
+                        <!-- Кнопка для показа дополнительной программы -->
+                        <button class="btn btn--ghost" type="button" aria-expanded="false" data-program-toggle>Показать полную программу</button>
                     </div>
-                    <a
-                      href="https://begovaya.technopark-rgsu.ru/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700 dark:text-emerald-300 dark:hover:text-emerald-200"
-                    >
-                      <span>VR‑тур по площадке Беговая</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        class="h-4 w-4"
-                      >
-                        <path d="M5 12h14" stroke-linecap="round" />
-                        <path d="m13 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </a>
-                  </div>
                 </div>
-              </div>
+            </section>
+            <!-- Секция отзывов со слайдером -->
+            <section id="reviews" class="section section--light" data-section="reviews">
+                <div class="container">
+                    <header class="section__header">
+                        <h2 class="section__title">Отзывы участников</h2>
+                        <p class="section__description">Слайдер прокручивается стрелками или с клавиатуры. Все изображения ленивые и с размерами.</p>
+                    </header>
+                    <div class="reviews-slider">
+                        <button class="slider-control" type="button" aria-label="Предыдущий отзыв" data-slider-prev>&larr;</button>
+                        <div class="slider-window">
+                            <div class="slider-track" data-slider-track>
+                                <!-- Отзыв 1 -->
+                                <article class="review-card">
+                                    <div class="review-card__profile">
+                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' rx='24' fill='%23eef2ff'/%3E%3Ctext x='40' y='52' font-size='36' text-anchor='middle' fill='%234a6fff'%3EA%3C/text%3E%3C/svg%3E" alt="Фото Анны" width="80" height="80" loading="lazy" decoding="async">
+                                        <div class="review-card__info">
+                                            <h3 class="review-card__name">Анна Кузнецова</h3>
+                                            <p class="review-card__role">Руководитель маркетинга, FinTech Corp</p>
+                                        </div>
+                                    </div>
+                                    <p class="review-card__quote">Наставники помогли связать чат-ботов и CRM. Уже на следующий день запустили пилот и получили первых лидов.</p>
+                                    <img class="review-card__result" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3Crect width='320' height='180' rx='20' fill='%23f4f6ff'/%3E%3Ctext x='160' y='100' font-size='20' text-anchor='middle' fill='%234a6fff'%3EГрафик роста%3C/text%3E%3C/svg%3E" alt="Результат Анны" width="320" height="180" loading="lazy" decoding="async">
+                                </article>
+                                <!-- Отзыв 2 -->
+                                <article class="review-card">
+                                    <div class="review-card__profile">
+                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' rx='24' fill='%23eef2ff'/%3E%3Ctext x='40' y='52' font-size='36' text-anchor='middle' fill='%234a6fff'%3ES%3C/text%3E%3C/svg%3E" alt="Фото Сергея" width="80" height="80" loading="lazy" decoding="async">
+                                        <div class="review-card__info">
+                                            <h3 class="review-card__name">Сергей Дроздов</h3>
+                                            <p class="review-card__role">Генеральный директор, 3D Studio</p>
+                                        </div>
+                                    </div>
+                                    <p class="review-card__quote">Интенсив дал пошаговый план по 3D визуализации. Экономим неделю на подготовке прототипов.</p>
+                                    <img class="review-card__result" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3Crect width='320' height='180' rx='20' fill='%23f4f6ff'/%3E%3Ctext x='160' y='100' font-size='20' text-anchor='middle' fill='%234a6fff'%3E3D макет%3C/text%3E%3C/svg%3E" alt="3D макет Сергея" width="320" height="180" loading="lazy" decoding="async">
+                                </article>
+                                <!-- Отзыв 3 -->
+                                <article class="review-card">
+                                    <div class="review-card__profile">
+                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' rx='24' fill='%23eef2ff'/%3E%3Ctext x='40' y='52' font-size='36' text-anchor='middle' fill='%234a6fff'%3EO%3C/text%3E%3C/svg%3E" alt="Фото Ольги" width="80" height="80" loading="lazy" decoding="async">
+                                        <div class="review-card__info">
+                                            <h3 class="review-card__name">Ольга Миронова</h3>
+                                            <p class="review-card__role">HR бизнес партнер, Retail Group</p>
+                                        </div>
+                                    </div>
+                                    <p class="review-card__quote">Запустили агента для адаптации новичков. Освободили наставникам 30 процентов времени.</p>
+                                    <img class="review-card__result" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3Crect width='320' height='180' rx='20' fill='%23f4f6ff'/%3E%3Ctext x='160' y='100' font-size='20' text-anchor='middle' fill='%234a6fff'%3EЧат бот%3C/text%3E%3C/svg%3E" alt="Чат бот Ольги" width="320" height="180" loading="lazy" decoding="async">
+                                </article>
+                                <!-- Отзыв 4 -->
+                                <article class="review-card">
+                                    <div class="review-card__profile">
+                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' rx='24' fill='%23eef2ff'/%3E%3Ctext x='40' y='52' font-size='36' text-anchor='middle' fill='%234a6fff'%3EL%3C/text%3E%3C/svg%3E" alt="Фото Леонида" width="80" height="80" loading="lazy" decoding="async">
+                                        <div class="review-card__info">
+                                            <h3 class="review-card__name">Леонид Власов</h3>
+                                            <p class="review-card__role">Продакт менеджер, MedAI</p>
+                                        </div>
+                                    </div>
+                                    <p class="review-card__quote">Команда помогла собрать MVP агента поддержки пациентов. Сократили время ответа до трех минут.</p>
+                                    <img class="review-card__result" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3Crect width='320' height='180' rx='20' fill='%23f4f6ff'/%3E%3Ctext x='160' y='100' font-size='20' text-anchor='middle' fill='%234a6fff'%3EИнтерфейс%3C/text%3E%3C/svg%3E" alt="Интерфейс Леонида" width="320" height="180" loading="lazy" decoding="async">
+                                </article>
+                            </div>
+                        </div>
+                        <button class="slider-control" type="button" aria-label="Следующий отзыв" data-slider-next>&rarr;</button>
+                    </div>
+                </div>
+            </section>
+            <!-- Тарифы участия -->
+            <section id="pricing" class="section" data-section="pricing" data-analytics="open_pricing">
+                <div class="container">
+                    <header class="section__header">
+                        <h2 class="section__title">Выберите формат</h2>
+                        <p class="section__description">Цены и количество мест берутся из конфигурации в app.js. Редактируйте переменные без изменения вёрстки.</p>
+                    </header>
+                    <div class="tariffs">
+                        <!-- Тариф Онлайн -->
+                        <article class="tariff-card" data-tariff-card data-tariff="online" tabindex="0">
+                            <div class="tariff-card__badges">
+                                <span class="tariff-card__badge tariff-card__badge--accent">Популярный</span>
+                                <span class="tariff-card__badge" data-seats-label="online">Осталось 50 мест</span>
+                            </div>
+                            <h3 class="tariff-card__title">Онлайн</h3>
+                            <p class="tariff-card__text">Подключение из любой точки. Доступ к трансляции, чату и всем материалам.</p>
+                            <ul class="tariff-card__list">
+                                <li>Полный день практики в Zoom</li>
+                                <li>Доступ к записям и обновлениям на 6 месяцев</li>
+                                <li>Групповые сессии с наставником</li>
+                            </ul>
+                            <div class="tariff-card__price">
+                                <span class="tariff-card__price-value" data-price-label="online">7 900 ₽</span>
+                                <span class="tariff-card__price-note">Оплата картой или по счету</span>
+                            </div>
+                            <a class="btn btn--primary" href="#registration" data-scroll data-cta="true" data-href-base="#registration" data-position="pricing_online" data-tariff="online">Записаться</a>
+                        </article>
+                        <!-- Тариф Офлайн -->
+                        <article class="tariff-card" data-tariff-card data-tariff="offline" tabindex="0">
+                            <div class="tariff-card__badges">
+                                <span class="tariff-card__badge">Осталось</span>
+                                <span class="tariff-card__badge tariff-card__badge--accent" data-seats-label="offline">Осталось 30 мест</span>
+                            </div>
+                            <h3 class="tariff-card__title">Офлайн Москва</h3>
+                            <p class="tariff-card__text">Работа в пространстве технопарка. Индивидуальные консультации и закрытый нетворкинг.</p>
+                            <ul class="tariff-card__list">
+                                <li>Рабочее место с техникой и VR стендом</li>
+                                <li>Личные сессии и аудит проектов</li>
+                                <li>Питание и материалы на площадке</li>
+                            </ul>
+                            <div class="tariff-card__price">
+                                <span class="tariff-card__price-value" data-price-label="offline">12 900 ₽</span>
+                                <span class="tariff-card__price-note">Предоплата 30 процентов для брони</span>
+                            </div>
+                            <a class="btn btn--secondary" href="#registration" data-scroll data-cta="true" data-href-base="#registration" data-position="pricing_offline" data-tariff="offline">Записаться</a>
+                        </article>
+                    </div>
+                </div>
+            </section>
+            <!-- Секция FAQ -->
+            <section id="faq" class="section section--light" data-section="faq">
+                <div class="container">
+                    <header class="section__header">
+                        <h2 class="section__title">Частые вопросы</h2>
+                        <p class="section__description">Ниже ответы на самые популярные вопросы. Текст используется и для JSON-LD.</p>
+                    </header>
+                    <div class="faq" data-faq-list>
+                        <!-- Вопросы оформлены как аккордеон -->
+                        <article class="faq-item" data-faq-item>
+                            <h3>
+                                <button class="faq-item__button" type="button" aria-expanded="false" data-faq-button>
+                                    Нужно ли готовиться заранее?
+                                </button>
+                            </h3>
+                            <div class="faq-item__panel" data-faq-panel hidden>
+                                <p>Мы пришлем чек лист по сервисам и подготовим аккаунты. Возьмите ноутбук, наушники и зарядку.</p>
+                            </div>
+                        </article>
+                        <article class="faq-item" data-faq-item>
+                            <h3>
+                                <button class="faq-item__button" type="button" aria-expanded="false" data-faq-button>
+                                    Будет ли запись трансляции?
+                                </button>
+                            </h3>
+                            <div class="faq-item__panel" data-faq-panel hidden>
+                                <p>Да. Доступ к записям и материалам сохраняется на 6 месяцев для всех тарифов.</p>
+                            </div>
+                        </article>
+                        <article class="faq-item" data-faq-item>
+                            <h3>
+                                <button class="faq-item__button" type="button" aria-expanded="false" data-faq-button>
+                                    Чем отличаются тарифы?
+                                </button>
+                            </h3>
+                            <div class="faq-item__panel" data-faq-panel hidden>
+                                <p>Онлайн включает трансляцию и групповые сессии. Офлайн дает рабочее место, оборудование и личный аудит.</p>
+                            </div>
+                        </article>
+                        <article class="faq-item" data-faq-item>
+                            <h3>
+                                <button class="faq-item__button" type="button" aria-expanded="false" data-faq-button>
+                                    Можно оплатить от компании?
+                                </button>
+                            </h3>
+                            <div class="faq-item__panel" data-faq-panel hidden>
+                                <p>Мы выставляем счет и договор. Отправьте реквизиты и менеджер подготовит документы в течение дня.</p>
+                            </div>
+                        </article>
+                        <article class="faq-item" data-faq-item>
+                            <h3>
+                                <button class="faq-item__button" type="button" aria-expanded="false" data-faq-button>
+                                    Что если планы изменятся?
+                                </button>
+                            </h3>
+                            <div class="faq-item__panel" data-faq-panel hidden>
+                                <p>Предупредите заранее. Перенесем на следующий поток или предоставим запись и материалы.</p>
+                            </div>
+                        </article>
+                        <article class="faq-item" data-faq-item>
+                            <h3>
+                                <button class="faq-item__button" type="button" aria-expanded="false" data-faq-button>
+                                    Поможете внедрить решения?
+                                </button>
+                            </h3>
+                            <div class="faq-item__panel" data-faq-panel hidden>
+                                <p>Наставники сопровождают 14 дней после интенсива и помогают запускать пилоты.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+            <!-- Форма регистрации -->
+            <section id="registration" class="section" data-section="registration">
+                <div class="container">
+                    <header class="section__header">
+                        <h2 class="section__title">Регистрация на интенсив</h2>
+                        <p class="section__description">Заполните форму. Мы свяжемся в день заявки и подтвердим участие.</p>
+                    </header>
+                    <form class="form" novalidate data-registration-form>
+                        <div class="form__grid">
+                            <!-- Поле имя -->
+                            <div class="form__field">
+                                <label class="form__label" for="full-name">Имя</label>
+                                <input class="form__input" id="full-name" name="fullName" type="text" placeholder="Анна" autocomplete="name" required data-required>
+                                <span class="form__error" data-error-for="full-name"></span>
+                            </div>
+                            <!-- Поле email -->
+                            <div class="form__field">
+                                <label class="form__label" for="email">Email</label>
+                                <input class="form__input" id="email" name="email" type="email" placeholder="you@example.ru" autocomplete="email" required data-required>
+                                <span class="form__error" data-error-for="email"></span>
+                            </div>
+                            <!-- Поле телефон с маской -->
+                            <div class="form__field">
+                                <label class="form__label" for="phone">Телефон</label>
+                                <input class="form__input" id="phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" required data-required data-phone-mask>
+                                <span class="form__error" data-error-for="phone"></span>
+                            </div>
+                            <!-- Поле комментарий -->
+                            <div class="form__field form__field--full">
+                                <label class="form__label" for="comment">Комментарий</label>
+                                <textarea class="form__textarea" id="comment" name="comment" rows="4" placeholder="Опишите задачу или формат участия"></textarea>
+                                <span class="form__error" data-error-for="comment"></span>
+                            </div>
+                        </div>
+                        <!-- Блок согласия -->
+                        <div class="form__consent">
+                            <input class="form__checkbox" id="consent" name="consent" type="checkbox" required data-required>
+                            <label class="form__checkbox-label" for="consent">
+                                Я согласен с <a class="form__link" href="privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a> и <a class="form__link" href="offer.html" target="_blank" rel="noopener">Публичной офертой</a>.
+                            </label>
+                        </div>
+                        <!-- Кнопка отправки -->
+                        <div class="form__actions">
+                            <button class="btn btn--primary" type="submit" data-cta="true" data-href-base="#registration" data-position="form_submit" data-tariff="online">Отправить заявку</button>
+                            <p class="form__note">Мы свяжемся в день заявки.</p>
+                        </div>
+                    </form>
+                    <!-- Баннер успешной отправки -->
+                    <div class="form__success" data-success-banner hidden role="status" aria-live="polite">
+                        Заявка отправлена. Мы получили данные и свяжемся в ближайшее время.
+                    </div>
+                    <!-- Контакты организаторов -->
+                    <div class="form__contacts">
+                        <p class="form__contacts-title">Контакты организаторов</p>
+                        <ul class="form__contacts-list">
+                            <li><a class="form__link" href="mailto:" data-config-link="email">hello@example.ru</a></li>
+                            <li><a class="form__link" href="tel:" data-config-link="phone">+7 (900) 000-00-00</a></li>
+                            <li><span class="form__link" data-config-text="venue">Москва, площадка уточняется</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Футер сайта -->
+        <footer class="footer">
+            <div class="container footer__inner">
+                <p class="footer__copy">© <span data-config-text="eventYear">2024</span> <span data-config-text="organizerName">Технопарк РГСУ</span>. Все права защищены.</p>
+                <nav class="footer__nav" aria-label="Документы">
+                    <a class="footer__link" href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a>
+                    <a class="footer__link" href="offer.html" target="_blank" rel="noopener">Публичная оферта</a>
+                </nav>
+                <div class="footer__contacts">
+                    <a class="footer__link" href="mailto:" data-config-link="emailFooter">hello@example.ru</a>
+                    <a class="footer__link" href="tel:" data-config-link="phoneFooter">+7 (900) 000-00-00</a>
+                </div>
+                <button class="footer__top" type="button" data-scroll-top>Вверх</button>
             </div>
-          </div>
-
-          <div class="space-y-4">
-            <div
-              class="surface-card-base relative w-full overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 shadow-inner aspect-video"
-            >
-              <iframe
-                id="map-vdnkh"
-                title="VR‑тур — ВДНХ"
-                class="absolute inset-0 w-full h-full"
-                data-map="0"
-                src="https://pika.technopark-rgsu.ru/"
-                loading="lazy"
-                allow="accelerometer; gyroscope; fullscreen"
-                allowfullscreen
-                aria-hidden="false"
-              ></iframe>
-              <iframe
-                id="map-begovaya"
-                title="VR‑тур — Беговая"
-                class="absolute inset-0 w-full h-full opacity-0 pointer-events-none"
-                data-map="1"
-                src="https://begovaya.technopark-rgsu.ru/"
-                loading="lazy"
-                allow="accelerometer; gyroscope; fullscreen"
-                allowfullscreen
-                aria-hidden="true"
-                tabindex="-1"
-              ></iframe>
-            </div>
-            <div class="text-xs text-slate-600 dark:text-slate-200">© <span id="y"></span> Технопарк РГСУ</div>
-          </div>
-        </div>
-
-        <div class="border-t border-slate-200 dark:border-slate-700 pt-10 space-y-6">
-          <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <div>
-              <div class="text-sm font-semibold mb-3">Образование</div>
-              <ul class="space-y-2 text-sm">
-                <li>
-                  <a href="index.html#courses" class="hover:underline">Курсы ДПО</a>
-                </li>
-                <li>
-                  <a
-                    href="https://technopark-rgsu.ru/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="hover:underline"
-                    >Курсы для школьников</a
-                  >
-                </li>
-                <li>
-                  <a href="index.html#contacts" class="hover:underline">Заявка на обучение</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <div class="text-sm font-semibold mb-3">Проекты</div>
-              <ul class="space-y-2 text-sm">
-                <li>
-                  <a href="index.html#equipment" class="hover:underline"
-                    >Оборудование и ПО</a
-                  >
-                </li>
-                <li>
-                  <a href="index.html#projects" class="hover:underline"
-                    >Проекты и направления НИР</a
-                  >
-                </li>
-                <li>
-                  <a href="index.html#team" class="hover:underline">Команда</a>
-                </li>
-                <li>
-                  <a href="index.html#faq" class="hover:underline">FAQ</a>
-                </li>
-                <li>
-                  <a href="index.html#contacts" class="hover:underline"
-                    >Контакты</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div>
-              <div class="text-sm font-semibold mb-3">Ресурсы</div>
-              <ul class="space-y-2 text-sm">
-                <li>
-                  <a href="index.html#blog" class="hover:underline"
-                    >Лекции по методологии преподавания технических дисциплин</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://t.me/step3d_lab"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="hover:underline"
-                    >Телеграм-канал Step3D.Lab</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div
-            class="flex flex-wrap items-center justify-between gap-4 text-xs text-slate-600 dark:text-slate-200"
-          >
-            <div class="flex flex-wrap gap-3">
-              <a href="#" class="hover:underline">Конфиденциальность</a
-              ><a href="#" class="hover:underline">Условия использования</a
-              ><a href="#" class="hover:underline">Cookies</a
-              ><a href="#contacts" class="hover:underline">Контакты</a>
-            </div>
-            <div class="flex items-center gap-2">
-              <span aria-hidden>🌐</span
-              ><select
-                class="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 py-1"
-              >
-                <option>Русский (RU)</option>
-                <option>English (EN)</option>
-              </select>
-            </div>
-          </div>
-          <div class="text-xs text-slate-600 dark:text-slate-200">
-            © <span id="y2"></span> Step3D.Lab · Все права защищены
-          </div>
-        </div>
-      </div>
-    </footer>
-
-
-    <!-- Модальное окно заявки -->
-    <div
-      id="modal"
-      data-modal
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="requestTitle"
-      aria-describedby="requestDescription"
-      tabindex="-1"
-      class="fixed inset-0 z-[60] hidden items-center justify-center p-4"
-      aria-hidden="true"
-    >
-      <div id="modalBg" data-modal-bg class="absolute inset-0 bg-black/40"></div>
-      <div
-        class="relative w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-2xl border border-slate-200 dark:border-slate-700"
-      >
-        <div class="flex items-start justify-between gap-4">
-          <div>
-            <h2 id="requestTitle" class="text-2xl font-semibold text-slate-900 dark:text-white">
-              Оставить заявку
-            </h2>
-            <p
-              id="requestDescription"
-              class="mt-2 text-sm text-slate-600 dark:text-slate-300"
-            >
-              Расскажите нам о запросе — мы свяжемся и уточним детали проекта или обучения.
-            </p>
-          </div>
-          <button
-            id="closeModal"
-            type="button"
-            data-modal-close
-            class="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-500 transition hover:text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:text-white"
-            aria-label="Закрыть форму"
-          >
-            ✕
-          </button>
-        </div>
-        <form
-          id="requestForm"
-          class="mt-6 space-y-4"
-          novalidate
-          data-request-form
-          data-endpoint="https://httpbin.org/post"
-          data-success-message="Спасибо! Мы получили вашу заявку и скоро ответим."
-          data-error-message="Не удалось отправить заявку. Обновите страницу или напишите на projects.step3d@gmail.com."
-          data-emailjs-service=""
-          data-emailjs-template=""
-          data-emailjs-public-key=""
-        >
-          <input
-            type="text"
-            name="company"
-            class="hidden"
-            tabindex="-1"
-            autocomplete="off"
-            aria-hidden="true"
-          />
-          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
-            <label for="requestType" class="font-medium">Цель обращения</label>
-            <select
-              id="requestType"
-              name="type"
-              required
-              aria-required="true"
-              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
-              aria-describedby="requestTypeError"
-              aria-invalid="false"
-            >
-              <option value="course">Запись на курс</option>
-              <option value="service">Заказ услуги</option>
-              <option value="partner">Сотрудничество</option>
-            </select>
-            <p
-              id="requestTypeError"
-              class="hidden text-xs text-rose-600"
-              data-error-message
-              aria-live="polite"
-            ></p>
-          </div>
-          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
-            <label for="requestName" class="font-medium">Имя</label>
-            <input
-              id="requestName"
-              name="name"
-              type="text"
-              required
-              aria-required="true"
-              aria-invalid="false"
-              aria-describedby="requestNameError"
-              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
-            />
-            <p
-              id="requestNameError"
-              class="hidden text-xs text-rose-600"
-              data-error-message
-              aria-live="polite"
-            ></p>
-          </div>
-          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
-            <label for="requestPhone" class="font-medium">Телефон</label>
-            <input
-              id="requestPhone"
-              name="phone"
-              type="tel"
-              inputmode="tel"
-              placeholder="+7 (999) 123-45-67"
-              aria-invalid="false"
-              aria-describedby="requestPhoneError"
-              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
-            />
-            <p
-              id="requestPhoneError"
-              class="hidden text-xs text-rose-600"
-              data-error-message
-              aria-live="polite"
-            ></p>
-          </div>
-          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
-            <label for="requestEmail" class="font-medium">Email</label>
-            <input
-              id="requestEmail"
-              name="email"
-              type="email"
-              inputmode="email"
-              required
-              aria-required="true"
-              aria-invalid="false"
-              aria-describedby="requestEmailError"
-              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
-            />
-            <p
-              id="requestEmailError"
-              class="hidden text-xs text-rose-600"
-              data-error-message
-              aria-live="polite"
-            ></p>
-          </div>
-          <div class="grid gap-1 text-sm text-slate-600 dark:text-slate-300" data-field-wrapper>
-            <label for="requestComment" class="font-medium">Комментарий</label>
-            <textarea
-              id="requestComment"
-              name="comment"
-              rows="3"
-              placeholder="Опишите задачу, сроки, ссылки"
-              class="mt-1 w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700"
-            ></textarea>
-          </div>
-          <div class="flex items-start gap-3 rounded-xl bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:bg-slate-800/70 dark:text-slate-300" data-field-wrapper>
-            <input
-              id="requestAgreement"
-              name="agreement"
-              type="checkbox"
-              required
-              aria-required="true"
-              aria-invalid="false"
-              aria-describedby="requestAgreementError"
-              class="mt-1 h-4 w-4"
-            />
-            <label for="requestAgreement" class="flex-1"
-              >Согласен(а) на обработку персональных данных</label
-            >
-          </div>
-          <p
-            id="requestAgreementError"
-            class="hidden text-xs text-rose-600"
-            data-error-message
-            aria-live="polite"
-          ></p>
-          <div
-            class="hidden rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-200"
-            role="status"
-            aria-live="polite"
-            data-form-status
-          ></div>
-          <div class="flex flex-wrap gap-3 pt-2">
-            <button
-              class="inline-flex w-full justify-center rounded-xl bg-slate-900 text-white py-3 font-medium transition hover:bg-slate-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-300 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
-              type="submit"
-              data-submit
-            >
-              Отправить
-            </button>
-            <button
-              class="inline-flex w-full justify-center rounded-xl border border-slate-300 px-4 py-2 font-medium text-slate-600 transition hover:text-slate-900 dark:border-slate-700 dark:text-slate-200"
-              type="button"
-              data-modal-close
-            >
-              Отмена
-            </button>
-          </div>
-        </form>
-      </div>
+        </footer>
     </div>
-
-    <!-- Секции для навигации (для автоподсветки) -->
-
-    <div
-      id="nav-data"
-      class="hidden"
-      data-nav='[
-        {
-          "label": "Разделы сайта",
-          "children": [
-            {"id": "top", "label": "Главная"},
-            {"id": "equipment", "label": "Оборудование"},
-            {"id": "projects", "label": "Проекты"},
-            {"id": "courses", "label": "Обучение"},
-            {"id": "team", "label": "Команда"},
-            {"id": "faq", "label": "FAQ"},
-            {"id": "blog", "label": "Блог"},
-            {"id": "contacts", "label": "Контакты"}
-          ]
-        },
-        {
-          "label": "Дополнительно",
-          "children": [
-            {"href": "reverse-additive.html", "label": "Кейс: Reverse Additive"},
-            {"href": "https://t.me/step3d_lab", "label": "Telegram Step3D.Lab", "external": true},
-            {"href": "https://technopark-rgsu.ru/", "label": "Technopark RGSU", "external": true}
-          ]
-        }
-      ]'
-    ></div>
-
-    <script type="module" src="js/main.js"></script>
-  </body>
+    <!-- Липкая панель с CTA, появляется после прокрутки -->
+    <div class="sticky-cta" data-sticky-cta aria-hidden="true" aria-live="polite">
+        <div class="sticky-cta__info">
+            <span class="sticky-cta__label" data-sticky-label>Онлайн</span>
+            <span class="sticky-cta__price" data-sticky-price>7 900 ₽</span>
+        </div>
+        <a class="btn btn--primary" href="#registration" data-scroll data-cta="true" data-href-base="#registration" data-position="sticky" data-tariff="online">Записаться</a>
+    </div>
+</body>
 </html>
