@@ -77,6 +77,32 @@ const formatDateHuman = (iso) => {
     });
 };
 
+const formatDateFull = (iso) => {
+    const date = new Date(iso);
+    const datePart = date.toLocaleDateString("ru-RU", {
+        day: "numeric",
+        month: "long"
+    });
+    const timePart = date.toLocaleTimeString("ru-RU", {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+    return `${datePart} · ${timePart} (МСК)`;
+};
+
+const formatDateCountdownLabel = (iso) => {
+    const date = new Date(iso);
+    const dayMonth = date.toLocaleDateString("ru-RU", {
+        day: "numeric",
+        month: "long"
+    });
+    const time = date.toLocaleTimeString("ru-RU", {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+    return `${dayMonth} в ${time}`;
+};
+
 // Состояние приложения. Хранит UTM метки и текущий тариф.
 const state = {
     utm: {
@@ -103,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initFaqAccordion();
     initForm();
     initStickyCTA();
+    initCountdown();
     initParticles();
     initAnalyticsObservers();
     injectJsonLd();
@@ -129,6 +156,11 @@ function bindConfigData() {
     const organizerElement = document.querySelector('[data-config-text="organizerName"]');
     if (organizerElement) {
         organizerElement.textContent = "Технопарк РГСУ";
+    }
+
+    const announcementElement = document.querySelector('[data-config-text="eventDateFull"]');
+    if (announcementElement) {
+        announcementElement.textContent = formatDateFull(CONFIG.eventDateISO);
     }
 
     document.querySelectorAll('[data-config-link="email"]').forEach((link) => {
@@ -185,6 +217,64 @@ function bindConfigData() {
     if (stickyPrice) {
         stickyPrice.textContent = formatPrice(CONFIG.priceOnline);
     }
+}
+
+// Отсчет времени до события в верхнем баннере
+function initCountdown() {
+    const countdown = document.querySelector('[data-countdown]');
+    if (!countdown) {
+        return;
+    }
+
+    const valuesWrap = countdown.querySelector('[data-countdown-values]');
+    const daysElement = countdown.querySelector('[data-countdown-days]');
+    const hoursElement = countdown.querySelector('[data-countdown-hours]');
+    const minutesElement = countdown.querySelector('[data-countdown-minutes]');
+    const labelElement = countdown.querySelector('[data-countdown-label]');
+
+    if (!daysElement || !hoursElement || !minutesElement || !labelElement) {
+        return;
+    }
+
+    const eventTimestamp = new Date(CONFIG.eventDateISO).getTime();
+    const labelSuffix = formatDateCountdownLabel(CONFIG.eventDateISO);
+
+    let timerId;
+
+    const update = () => {
+        const now = Date.now();
+        const diff = eventTimestamp - now;
+
+        if (diff <= 0) {
+            labelElement.textContent = "Интенсив уже начался";
+            daysElement.textContent = "00";
+            hoursElement.textContent = "00";
+            minutesElement.textContent = "00";
+            if (valuesWrap) {
+                valuesWrap.setAttribute("data-countdown-ended", "");
+            }
+            if (timerId) {
+                window.clearInterval(timerId);
+            }
+            return;
+        }
+
+        const totalMinutes = Math.floor(diff / 60000);
+        const days = Math.floor(totalMinutes / (24 * 60));
+        const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
+        const minutes = totalMinutes % 60;
+
+        daysElement.textContent = String(days).padStart(2, "0");
+        hoursElement.textContent = String(hours).padStart(2, "0");
+        minutesElement.textContent = String(minutes).padStart(2, "0");
+        labelElement.textContent = `До старта ${labelSuffix}`;
+        if (valuesWrap) {
+            valuesWrap.removeAttribute("data-countdown-ended");
+        }
+    };
+
+    update();
+    timerId = window.setInterval(update, 60000);
 }
 
 // Читаем UTM метки из адресной строки и сохраняем в state.

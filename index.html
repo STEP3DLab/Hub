@@ -39,6 +39,24 @@
     <a class="skip-link" href="#main">Перейти к основному содержимому</a>
     <!-- Обертка сайта для управления фоном -->
     <div class="page" data-page>
+        <!-- Верхний анонс с отсчетом времени -->
+        <div class="announcement" data-announcement>
+            <div class="announcement__inner container">
+                <div class="announcement__status">
+                    <span class="announcement__dot" aria-hidden="true"></span>
+                    <span class="announcement__label" data-config-text="eventDateFull">14 декабря в 10:00 (МСК)</span>
+                </div>
+                <div class="announcement__timer" data-countdown>
+                    <span class="announcement__timer-label" data-countdown-label>До старта осталось:</span>
+                    <div class="announcement__timer-values" data-countdown-values>
+                        <span class="announcement__time"><span data-countdown-days>00</span><small>д</small></span>
+                        <span class="announcement__time"><span data-countdown-hours>00</span><small>ч</small></span>
+                        <span class="announcement__time"><span data-countdown-minutes>00</span><small>м</small></span>
+                    </div>
+                </div>
+                <a class="announcement__link" href="#registration" data-scroll data-cta="true" data-href-base="#registration" data-position="announcement" data-tariff="online">Забронировать место</a>
+            </div>
+        </div>
         <!-- Шапка сайта с навигацией и логотипом -->
         <header class="site-header" data-header>
             <div class="container header-inner">
@@ -63,6 +81,7 @@
                     <ul class="nav__list" data-nav-list>
                         <!-- Каждый пункт ведет к секции и участвует в scrollspy -->
                         <li><a class="nav__link" href="#program" data-scroll data-nav-link>Программа</a></li>
+                        <li><a class="nav__link" href="#mentors" data-scroll data-nav-link>Менторы</a></li>
                         <li><a class="nav__link" href="#reviews" data-scroll data-nav-link>Отзывы</a></li>
                         <li><a class="nav__link" href="#pricing" data-scroll data-nav-link>Тарифы</a></li>
                         <li><a class="nav__link" href="#faq" data-scroll data-nav-link>FAQ</a></li>
@@ -257,6 +276,50 @@
                     <div class="program__toggle">
                         <!-- Кнопка для показа дополнительной программы -->
                         <button class="btn btn--ghost" type="button" aria-expanded="false" data-program-toggle>Показать полную программу</button>
+                    </div>
+                </div>
+            </section>
+            <!-- Блок с наставниками -->
+            <section id="mentors" class="section section--panel" data-section="mentors">
+                <div class="container">
+                    <header class="section__header">
+                        <h2 class="section__title">Наставники интенсива</h2>
+                        <p class="section__description">За каждым блоком стоит практик, который внедряет ИИ в реальных компаниях и делится собственными кейсами.</p>
+                    </header>
+                    <div class="mentor-grid">
+                        <article class="mentor-card">
+                            <img class="mentor-card__photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Crect width='96' height='96' rx='30' fill='%23eef2ff'/%3E%3Ctext x='48' y='62' font-size='40' text-anchor='middle' fill='%234a6fff'%3EА%3C/text%3E%3C/svg%3E" alt="Фото наставника Антона" width="96" height="96" loading="lazy" decoding="async">
+                            <div class="mentor-card__body">
+                                <h3 class="mentor-card__name">Антон Михайлов</h3>
+                                <p class="mentor-card__role">Руководитель AI-направления, FinTech Corp</p>
+                                <ul class="mentor-card__list">
+                                    <li>Запустил 12 продуктов на базе больших языковых моделей</li>
+                                    <li>Сертифицированный тренер по корпоративным внедрениям</li>
+                                </ul>
+                            </div>
+                        </article>
+                        <article class="mentor-card">
+                            <img class="mentor-card__photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Crect width='96' height='96' rx='30' fill='%23eef2ff'/%3E%3Ctext x='48' y='62' font-size='40' text-anchor='middle' fill='%234a6fff'%3EЕ%3C/text%3E%3C/svg%3E" alt="Фото наставницы Екатерины" width="96" height="96" loading="lazy" decoding="async">
+                            <div class="mentor-card__body">
+                                <h3 class="mentor-card__name">Екатерина Власова</h3>
+                                <p class="mentor-card__role">Директор по данным, Retail Group</p>
+                                <ul class="mentor-card__list">
+                                    <li>Внедрила систему генерации отчётности для сети из 80 магазинов</li>
+                                    <li>Наставник по построению дата-команд и ML Ops</li>
+                                </ul>
+                            </div>
+                        </article>
+                        <article class="mentor-card">
+                            <img class="mentor-card__photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Crect width='96' height='96' rx='30' fill='%23eef2ff'/%3E%3Ctext x='48' y='62' font-size='40' text-anchor='middle' fill='%234a6fff'%3EИ%3C/text%3E%3C/svg%3E" alt="Фото наставника Игоря" width="96" height="96" loading="lazy" decoding="async">
+                            <div class="mentor-card__body">
+                                <h3 class="mentor-card__name">Игорь Сафронов</h3>
+                                <p class="mentor-card__role">Основатель студии генеративного дизайна</p>
+                                <ul class="mentor-card__list">
+                                    <li>Создаёт 3D и видео-контент для международных брендов</li>
+                                    <li>Проводит воркшопы по интеграции агентов и автоматизации</li>
+                                </ul>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </section>
