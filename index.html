@@ -75,16 +75,33 @@
         <main id="main" class="main" tabindex="-1">
             <!-- Первый экран с анимацией частиц -->
             <section id="hero" class="section hero" data-section="hero">
-                <div class="hero__background" aria-hidden="true" data-particles></div>
+                <div class="hero__background" aria-hidden="true" data-particles>
+                    <span class="hero__glow hero__glow--one"></span>
+                    <span class="hero__glow hero__glow--two"></span>
+                    <span class="hero__glow hero__glow--three"></span>
+                </div>
                 <div class="container hero__inner">
                     <!-- Текстовая колонка героя -->
                     <div class="hero__content">
+                        <div class="hero__badge-group" aria-label="Основные направления">
+                            <span class="hero__badge">Документы</span>
+                            <span class="hero__badge">Сайты</span>
+                            <span class="hero__badge">3D</span>
+                            <span class="hero__badge">Агенты</span>
+                            <span class="hero__badge">Видео</span>
+                        </div>
                         <p class="hero__eyebrow">Интенсив за один день</p>
                         <h1 class="hero__title">Интенсив по ИИ - 5 часов практики</h1>
                         <p class="hero__subtitle">Документы, сайты, 3D, агенты, видео - все за один насыщенный день с наставниками.</p>
-                        <div class="hero__meta">
-                            <span><strong class="hero__meta-strong">Формат:</strong> Офлайн Москва и Онлайн</span>
-                            <span><strong class="hero__meta-strong">Дата:</strong> <span data-config-text="eventDateHuman">14 декабря</span></span>
+                        <div class="hero__meta" role="list">
+                            <div class="hero__meta-item" role="listitem">
+                                <span class="hero__meta-label">Формат</span>
+                                <span class="hero__meta-value">Офлайн Москва и Онлайн</span>
+                            </div>
+                            <div class="hero__meta-item" role="listitem">
+                                <span class="hero__meta-label">Дата</span>
+                                <span class="hero__meta-value" data-config-text="eventDateHuman">14 декабря</span>
+                            </div>
                         </div>
                         <div class="hero__actions">
                             <!-- Основной призыв к действию -->
@@ -95,19 +112,38 @@
                         <p class="hero__note">Места ограничены. Все материалы и записи входят в доступ.</p>
                     </div>
                     <!-- Боковая карточка с ключевыми выгодами -->
-                    <aside class="hero__aside" aria-label="Ключевые результаты">
-                        <h2 class="hero__aside-title">Что получите</h2>
-                        <ul class="hero__aside-list">
-                            <li>Скрипты генерации документов и презентаций за минуты</li>
-                            <li>Шаблон сайта и чат-бота для отдела продаж</li>
-                            <li>3D концепт и анимацию продукта в реальном времени</li>
-                            <li>Пошаговый план внедрения ИИ в компании</li>
-                        </ul>
+                    <aside class="hero__aside hero__visual" aria-label="Ключевые результаты">
+                        <div class="hero-card hero-card--primary">
+                            <h2 class="hero-card__title">Что получите</h2>
+                            <ul class="hero-card__list">
+                                <li>Скрипты генерации документов и презентаций за минуты</li>
+                                <li>Шаблон сайта и чат-бота для отдела продаж</li>
+                                <li>3D концепт и анимацию продукта в реальном времени</li>
+                                <li>Пошаговый план внедрения ИИ в компании</li>
+                            </ul>
+                        </div>
+                        <div class="hero-card hero-card--secondary">
+                            <p class="hero-card__lead">+14 дней сопровождения наставников</p>
+                            <dl class="hero-card__stats">
+                                <div class="hero-card__stat">
+                                    <dt>Форматы</dt>
+                                    <dd>Офлайн и онлайн</dd>
+                                </div>
+                                <div class="hero-card__stat">
+                                    <dt>Проекты</dt>
+                                    <dd>5 практических кейсов</dd>
+                                </div>
+                                <div class="hero-card__stat">
+                                    <dt>Результат</dt>
+                                    <dd>Готовые шаблоны и скрипты</dd>
+                                </div>
+                            </dl>
+                        </div>
                     </aside>
                 </div>
             </section>
             <!-- Блок преимуществ курса -->
-            <section id="benefits" class="section section--light" data-section="benefits">
+            <section id="benefits" class="section section--panel" data-section="benefits">
                 <div class="container">
                     <header class="section__header">
                         <h2 class="section__title">Почему стоит прийти</h2>
@@ -160,7 +196,7 @@
                 </div>
             </section>
             <!-- Блок программы интенсива -->
-            <section id="program" class="section" data-section="program" data-analytics="view_program">
+            <section id="program" class="section section--panel" data-section="program" data-analytics="view_program">
                 <div class="container">
                     <header class="section__header">
                         <h2 class="section__title">Программа дня</h2>
@@ -225,7 +261,7 @@
                 </div>
             </section>
             <!-- Секция отзывов со слайдером -->
-            <section id="reviews" class="section section--light" data-section="reviews">
+            <section id="reviews" class="section section--panel" data-section="reviews">
                 <div class="container">
                     <header class="section__header">
                         <h2 class="section__title">Отзывы участников</h2>
@@ -290,7 +326,7 @@
                 </div>
             </section>
             <!-- Тарифы участия -->
-            <section id="pricing" class="section" data-section="pricing" data-analytics="open_pricing">
+            <section id="pricing" class="section section--panel" data-section="pricing" data-analytics="open_pricing">
                 <div class="container">
                     <header class="section__header">
                         <h2 class="section__title">Выберите формат</h2>
@@ -339,7 +375,7 @@
                 </div>
             </section>
             <!-- Секция FAQ -->
-            <section id="faq" class="section section--light" data-section="faq">
+            <section id="faq" class="section section--panel" data-section="faq">
                 <div class="container">
                     <header class="section__header">
                         <h2 class="section__title">Частые вопросы</h2>
@@ -411,7 +447,7 @@
                 </div>
             </section>
             <!-- Форма регистрации -->
-            <section id="registration" class="section" data-section="registration">
+            <section id="registration" class="section section--panel" data-section="registration">
                 <div class="container">
                     <header class="section__header">
                         <h2 class="section__title">Регистрация на интенсив</h2>
