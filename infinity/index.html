@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Интерактивный визуальный сайт о бесконечности: математика, физика, космос, философия, религия, искусство и программирование." />
+  <title>Бесконечность - интерактивное визуальное исследование</title>
+
+  <style>
+    /*
+      UX/UI версия 2.
+      Сайт автономный: один HTML-файл, без внешних библиотек и серверов.
+      Можно открыть локально или разместить на GitHub Pages.
+    */
+
+    :root {
+      --bg: #050611;
+      --bg-2: #090b19;
+      --panel: rgba(255, 255, 255, 0.07);
+      --panel-2: rgba(255, 255, 255, 0.105);
+      --panel-3: rgba(255, 255, 255, 0.15);
+      --text: #f7f8ff;
+      --muted: #aeb7d9;
+      --soft: #70799a;
+      --line: rgba(255, 255, 255, 0.16);
+      --line-2: rgba(255, 255, 255, 0.26);
+      --aqua: #8ffcff;
+      --violet: #b78cff;
+      --gold: #ffd166;
+      --pink: #ff6b9a;
+      --green: #6bffb8;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+      --radius: 30px;
+      --max: 1220px;
+      --nav-h: 74px;
+    }
+
+    [data-theme="light"] {
+      --bg: #eef2ff;
+      --bg-2: #ffffff;
+      --panel: rgba(255, 255, 255, 0.72);
+      --panel-2: rgba(255, 255, 255, 0.9);
+      --panel-3: rgba(255, 255, 255, 1);
+      --text: #111426;
+      --muted: #4c5575;
+      --soft: #6d7691;
+      --line: rgba(17, 20, 38, 0.13);
+      --line-2: rgba(17, 20, 38, 0.22);
+      --shadow: 0 28px 80px rgba(44, 51, 90, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Manrope, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 8%, rgba(143, 252, 255, 0.2), transparent 31%),
+        radial-gradient(circle at 85% 16%, rgba(183, 140, 255, 0.22), transparent 33%),
+        radial-gradient(circle at 50% 98%, rgba(255, 209, 102, 0.12), transparent 45%),
+        linear-gradient(180deg, var(--bg), var(--bg-2) 48%, var(--bg));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.044) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.044) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 78%);
+      pointer-events: none;
+      z-index: -4;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.045) 49%, transparent 52%),
+        radial-gradient(circle at 50% 35%, transparent, rgba(0,0,0,0.34));
+      pointer-events: none;
+      z-index: -3;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.62;
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 18px;
+      top: 18px;
+      transform: translateY(-120px);
+      background: var(--text);
+      color: var(--bg);
+      padding: 12px 16px;
+      border-radius: 999px;
+      z-index: 100;
+      transition: 0.2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 3px;
+      width: 0%;
+      z-index: 90;
+      background: linear-gradient(90deg, var(--aqua), var(--violet), var(--gold));
+      box-shadow: 0 0 24px rgba(143, 252, 255, 0.5);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 70;
+      border-bottom: 1px solid rgba(255,255,255,0.09);
+      background: rgba(5, 6, 17, 0.72);
+      backdrop-filter: blur(26px);
+    }
+
+    [data-theme="light"] .topbar {
+      background: rgba(238, 242, 255, 0.75);
+    }
+
+    .nav {
+      min-height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(143,252,255,0.26), rgba(183,140,255,0.26));
+      border: 1px solid var(--line);
+      box-shadow: 0 0 35px rgba(143,252,255,0.18);
+      font-size: 24px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      padding: 10px 11px;
+      border-radius: 999px;
+      transition: 0.24s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .theme-btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      min-width: 44px;
+      height: 44px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: 0.25s ease;
+    }
+
+    .theme-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-2);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.055);
+      backdrop-filter: blur(18px);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--aqua);
+      box-shadow: 0 0 18px var(--aqua);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--aqua), var(--violet), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section {
+      padding: 96px 0;
+      position: relative;
+      scroll-margin-top: 92px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 26px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+
+    .kicker {
+      color: var(--aqua);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(34px, 6vw, 74px);
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+      margin: 0;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .card,
+    .glass {
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+    }
+
+    .glass {
+      box-shadow: none;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-weight: 850;
+      transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, rgba(143,252,255,0.96), rgba(183,140,255,0.96));
+      color: #050611;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 44px rgba(143,252,255,0.18);
+    }
+
+    /* ------------------------------
+       HERO
+       ------------------------------ */
+    .hero {
+      min-height: calc(100vh - var(--nav-h));
+      display: grid;
+      place-items: center;
+      padding: 88px 0 82px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(58px, 10vw, 128px);
+      line-height: 0.82;
+      letter-spacing: -0.095em;
+      margin: 22px 0 28px;
+      text-wrap: balance;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: clamp(19px, 2.2vw, 25px);
+      line-height: 1.5;
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .hero-meta {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 640px;
+    }
+
+    .meta-item {
+      padding: 15px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.052);
+    }
+
+    .meta-item b {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .meta-item span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .infinity-card {
+      min-height: 560px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .infinity-symbol {
+      position: absolute;
+      inset: 36px;
+      display: grid;
+      place-items: center;
+      font-size: clamp(220px, 30vw, 395px);
+      line-height: 1;
+      font-weight: 950;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(143,252,255,0.56);
+      text-shadow:
+        0 0 34px rgba(143,252,255,0.25),
+        0 0 96px rgba(183,140,255,0.24);
+      animation: pulseInfinity 4.4s ease-in-out infinite;
+      user-select: none;
+    }
+
+    @keyframes pulseInfinity {
+      0%, 100% { transform: scale(1) rotate(-4deg); opacity: 0.84; }
+      50% { transform: scale(1.045) rotate(4deg); opacity: 1; }
+    }
+
+    .orbit {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 24px var(--gold);
+      offset-path: path("M 70 280 C 70 95, 280 95, 280 280 C 280 465, 490 465, 490 280 C 490 95, 280 95, 280 280 C 280 465, 70 465, 70 280");
+      animation: orbit 7s linear infinite;
+      z-index: 3;
+    }
+
+    @keyframes orbit {
+      to { offset-distance: 100%; }
+    }
+
+    .axis-label {
+      position: absolute;
+      color: var(--soft);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      z-index: 4;
+    }
+
+    .axis-top { top: 28px; left: 28px; }
+    .axis-right { right: 28px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+    .axis-bottom { bottom: 28px; right: 28px; }
+
+    .hero-insight {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 72px;
+      z-index: 4;
+      display: grid;
+      gap: 10px;
+    }
+
+    .insight-row {
+      padding: 14px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(5,6,17,0.56);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+    }
+
+    [data-theme="light"] .insight-row {
+      background: rgba(255,255,255,0.66);
+    }
+
+    .insight-row b {
+      color: var(--text);
+    }
+
+    /* ------------------------------
+       СМЫСЛ И ИНТЕРАКТИВНЫЙ СЧЕТЧИК
+       ------------------------------ */
+    .meaning-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+    }
+
+    .compare-card {
+      min-height: 420px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .compare-card h3,
+    .interactive-card h3,
+    .math-panel h3,
+    .continuum h3,
+    .cosmos-visual h3,
+    .universe h3,
+    .hilbert h3,
+    .code-card h3,
+    .machine h3 {
+      font-size: 31px;
+      letter-spacing: -0.055em;
+      margin: 0 0 12px;
+    }
+
+    .compare-card p,
+    .interactive-card p,
+    .math-panel p,
+    .continuum p,
+    .cosmos-visual p,
+    .universe p,
+    .hilbert p,
+    .code-card p,
+    .machine p {
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .finite-bars {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 34px;
+      display: flex;
+      gap: 9px;
+      align-items: flex-end;
+      height: 132px;
+    }
+
+    .finite-bars span {
+      flex: 1;
+      border-radius: 999px 999px 10px 10px;
+      background: linear-gradient(180deg, rgba(255,209,102,0.98), rgba(255,209,102,0.08));
+      animation: barUp 2.6s ease-in-out infinite;
+      animation-delay: calc(var(--i) * 0.11s);
+    }
+
+    @keyframes barUp {
+      0%, 100% { height: 28%; opacity: 0.55; }
+      50% { height: calc(34% + var(--i) * 6%); opacity: 1; }
+    }
+
+    .limit-arrow {
+      position: absolute;
+      right: 34px;
+      bottom: 74px;
+      font-size: 70px;
+      color: var(--pink);
+      text-shadow: 0 0 24px rgba(255,107,154,0.35);
+    }
+
+    .interactive-card {
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+    }
+
+    .number-runner {
+      margin-top: 26px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.045);
+    }
+
+    .runner-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .runner-value {
+      font-size: clamp(38px, 6vw, 76px);
+      letter-spacing: -0.08em;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .runner-note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      max-width: 310px;
+    }
+
+    .runner-track {
+      position: relative;
+      height: 76px;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.18);
+    }
+
+    .runner-track::before {
+      content: "";
+      position: absolute;
+      inset: 37px 0 auto;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--aqua), var(--violet), transparent);
+      box-shadow: 0 0 28px rgba(143,252,255,0.28);
+    }
+
+    .runner-dots {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-left: 18px;
+      transition: transform 0.35s ease;
+    }
+
+    .runner-dot {
+      min-width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: var(--bg);
+      background: linear-gradient(135deg, var(--aqua), var(--violet));
+      font-weight: 900;
+      box-shadow: 0 0 22px rgba(143,252,255,0.22);
+    }
+
+    /* ------------------------------
+       КАРТА ЯЗЫКОВ БЕСКОНЕЧНОСТИ
+       ------------------------------ */
+    .perspective-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .perspective {
+      min-height: 260px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      transition: 0.25s ease;
+    }
+
+    .perspective:hover {
+      transform: translateY(-6px);
+      border-color: rgba(143,252,255,0.43);
+      box-shadow: 0 28px 80px rgba(143,252,255,0.13);
+    }
+
+    .perspective .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 19px;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    .perspective h3 {
+      margin: 0 0 12px;
+      font-size: 21px;
+      letter-spacing: -0.04em;
+    }
+
+    .perspective p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .perspective::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      right: -84px;
+      top: -84px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(143,252,255,0.22), transparent 65%);
+    }
+
+    /* ------------------------------
+       МАТЕМАТИКА
+       ------------------------------ */
+    .math-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .math-panel {
+      padding: 30px;
+    }
+
+    .pairing {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .pair-row {
+      display: grid;
+      grid-template-columns: 64px 1fr 64px;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border-radius: 17px;
+      background: rgba(255,255,255,0.056);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .num {
+      display: grid;
+      place-items: center;
+      height: 42px;
+      border-radius: 14px;
+      background: rgba(143,252,255,0.12);
+      color: var(--aqua);
+      font-weight: 900;
+    }
+
+    .pair-line {
+      height: 2px;
+      background: linear-gradient(90deg, var(--aqua), var(--violet));
+      position: relative;
+      box-shadow: 0 0 18px rgba(143,252,255,0.28);
+    }
+
+    .pair-line::after {
+      content: "→";
+      position: absolute;
+      right: -3px;
+      top: -15px;
+      color: var(--violet);
+      font-size: 22px;
+    }
+
+    .continuum {
+      padding: 30px;
+      min-height: 540px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .number-tunnel {
+      position: absolute;
+      inset: 128px 20px 20px;
+      perspective: 900px;
+      overflow: hidden;
+    }
+
+    .number-tunnel span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-style: preserve-3d;
+      color: rgba(255,255,255,0.52);
+      font-weight: 900;
+      animation: tunnel 9s linear infinite;
+      animation-delay: calc(var(--i) * -0.66s);
+      font-size: calc(12px + var(--i) * 1.4px);
+    }
+
+    [data-theme="light"] .number-tunnel span {
+      color: rgba(17,20,38,0.48);
+    }
+
+    @keyframes tunnel {
+      0% {
+        transform: translate(-50%, -50%) translateZ(-900px) rotate(var(--rot));
+        opacity: 0;
+      }
+      18% { opacity: 0.75; }
+      100% {
+        transform: translate(-50%, -50%) translateZ(540px) rotate(calc(var(--rot) + 40deg));
+        opacity: 0;
+      }
+    }
+
+    .size-scale {
+      margin-top: 26px;
+      display: grid;
+      gap: 11px;
+    }
+
+    .scale-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .scale-bar {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .scale-bar i {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--aqua), var(--violet), var(--gold));
+      width: var(--w);
+    }
+
+    /* ------------------------------
+       ФИЗИКА И КОСМОС
+       ------------------------------ */
+    .cosmos-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .cosmos-visual {
+      min-height: 545px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .black-hole {
+      position: absolute;
+      width: 270px;
+      height: 270px;
+      border-radius: 999px;
+      left: 50%;
+      top: 60%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, #000 0 34%, rgba(20,20,30,0.96) 35% 44%, transparent 45%);
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,0.05),
+        0 0 74px rgba(183,140,255,0.26),
+        0 0 136px rgba(143,252,255,0.16);
+    }
+
+    .black-hole::before {
+      content: "";
+      position: absolute;
+      inset: -48px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-left-color: rgba(143,252,255,0.86);
+      border-right-color: rgba(255,209,102,0.86);
+      transform: rotate(-18deg) scaleY(0.34);
+      filter: blur(0.2px);
+      animation: diskSpin 7s linear infinite;
+    }
+
+    .black-hole::after {
+      content: "предел модели";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 132px;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: rgba(255,255,255,0.78);
+      font-size: 12px;
+      line-height: 1.25;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    @keyframes diskSpin {
+      to { transform: rotate(342deg) scaleY(0.34); }
+    }
+
+    .space-rings {
+      position: absolute;
+      left: 50%;
+      top: 60%;
+      transform: translate(-50%, -50%);
+      width: 480px;
+      height: 480px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .space-rings::before,
+    .space-rings::after {
+      content: "";
+      position: absolute;
+      inset: 58px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .space-rings::after {
+      inset: 126px;
+    }
+
+    .universe {
+      padding: 30px;
+      display: grid;
+      align-content: start;
+      gap: 16px;
+    }
+
+    .universe-option {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .universe-option b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .universe-option span {
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    /* ------------------------------
+       ОТЕЛЬ ГИЛЬБЕРТА
+       ------------------------------ */
+    .hilbert {
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rooms {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .room {
+      min-height: 80px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.055);
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      color: var(--aqua);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.45s ease, border-color 0.45s ease, background 0.45s ease;
+    }
+
+    .room::after {
+      content: "гость";
+      position: absolute;
+      bottom: 9px;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .rooms.shifted .room {
+      transform: translateX(10px);
+      border-color: rgba(143,252,255,0.5);
+      background: rgba(143,252,255,0.08);
+    }
+
+    .rooms.shifted .room:first-child {
+      background: rgba(107,255,184,0.13);
+      color: var(--green);
+    }
+
+    .new-guest {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      background: linear-gradient(90deg, rgba(143,252,255,0.14), rgba(183,140,255,0.14));
+      border: 1px solid rgba(143,252,255,0.24);
+    }
+
+    .new-guest span {
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .new-guest b {
+      font-size: 42px;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(255,209,102,0.35);
+    }
+
+    /* ------------------------------
+       ФИЛОСОФИЯ И ИСКУССТВО
+       ------------------------------ */
+    .philo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    .big-quote {
+      grid-column: span 2;
+      padding: 36px;
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .big-quote .quote {
+      font-size: clamp(30px, 4vw, 55px);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
+      margin: 0;
+    }
+
+    .big-quote .note {
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 720px;
+      margin: 28px 0 0;
+    }
+
+    .mandala {
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+
+    .mandala svg {
+      width: 88%;
+      max-width: 340px;
+      filter: drop-shadow(0 0 28px rgba(143,252,255,0.2));
+      animation: mandalaSpin 28s linear infinite;
+    }
+
+    @keyframes mandalaSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .concept-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .concept {
+      padding: 20px;
+      min-height: 162px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .concept b {
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+
+    .concept span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    /* ------------------------------
+       ПРОГРАММИРОВАНИЕ
+       ------------------------------ */
+    .code-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .code-card {
+      padding: 30px;
+      overflow: hidden;
+    }
+
+    .code-card pre {
+      margin: 22px 0 0;
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(0,0,0,0.44);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #d9fff9;
+      overflow-x: auto;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    [data-theme="light"] .code-card pre {
+      background: rgba(17,20,38,0.92);
+    }
+
+    .machine {
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      min-height: 370px;
+    }
+
+    .chip {
+      position: absolute;
+      width: 198px;
+      height: 198px;
+      left: 50%;
+      top: 63%;
+      transform: translate(-50%, -50%);
+      border-radius: 36px;
+      background:
+        linear-gradient(135deg, rgba(143,252,255,0.18), rgba(183,140,255,0.18)),
+        rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 0 70px rgba(143,252,255,0.12);
+      display: grid;
+      place-items: center;
+      font-size: 52px;
+      font-weight: 950;
+    }
+
+    .pin {
+      position: absolute;
+      background: rgba(143,252,255,0.5);
+      box-shadow: 0 0 18px rgba(143,252,255,0.35);
+    }
+
+    .pin.h { height: 2px; width: 92px; }
+    .pin.v { width: 2px; height: 92px; }
+
+    .p1 { left: 24%; top: 44%; }
+    .p2 { right: 24%; top: 44%; }
+    .p3 { left: 24%; top: 70%; }
+    .p4 { right: 24%; top: 70%; }
+    .p5 { left: 42%; top: 30%; }
+    .p6 { left: 58%; top: 30%; }
+    .p7 { left: 42%; bottom: 10%; }
+    .p8 { left: 58%; bottom: 10%; }
+
+    .final {
+      padding: 96px 0 112px;
+    }
+
+    .final-card {
+      padding: clamp(32px, 6vw, 74px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-card h2 {
+      margin: 0 auto 24px;
+      max-width: 980px;
+      font-size: clamp(40px, 7vw, 90px);
+      line-height: 0.95;
+      letter-spacing: -0.075em;
+    }
+
+    .final-card p {
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 20px;
+    }
+
+    .footer {
+      padding: 30px 0;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1050px) {
+      .hero-grid,
+      .meaning-grid,
+      .math-layout,
+      .cosmos-grid,
+      .code-layout,
+      .section-head {
+        grid-template-columns: 1fr;
+      }
+
+      .perspective-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .philo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .big-quote {
+        grid-column: span 1;
+      }
+
+      .concept-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .infinity-card {
+        min-height: 500px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      :root {
+        --nav-h: 66px;
+      }
+
+      .wrap {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+
+      .hero-meta,
+      .perspective-grid,
+      .concept-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .rooms {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .runner-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .infinity-card {
+        min-height: 540px;
+      }
+
+      .infinity-symbol {
+        font-size: 190px;
+      }
+
+      .hero-insight {
+        bottom: 54px;
+      }
+
+      .insight-row {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .section-title {
+        letter-spacing: -0.055em;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Перейти к содержанию</a>
+  <div class="progress" id="progress"></div>
+  <canvas class="stars" id="stars" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <div class="wrap nav">
+      <a href="#top" class="brand" aria-label="В начало сайта">
+        <span class="brand-mark">∞</span>
+        <span>Бесконечность</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Навигация по разделам">
+        <a href="#meaning">Смысл</a>
+        <a href="#map">Карта</a>
+        <a href="#math">Математика</a>
+        <a href="#physics">Физика</a>
+        <a href="#hilbert">Парадокс</a>
+        <a href="#philosophy">Философия</a>
+        <a href="#code">Код</a>
+      </nav>
+
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Переключить светлую и темную тему">◐</button>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="pill"><span class="pill-dot"></span> Визуальное исследование понятия</div>
+          <h1>Не число. <br><span class="gradient-text">Отсутствие края.</span></h1>
+          <p>
+            Бесконечность - это идея, которая меняет смысл в математике, физике,
+            космосе, философии, религии, искусстве и программировании.
+            Она не равна «очень много». У нее нет последней границы.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#meaning" class="btn btn-primary">Начать разбор</a>
+            <a href="#math" class="btn">Смотреть инфографику</a>
+          </div>
+
+          <div class="hero-meta" aria-label="Ключевые тезисы">
+            <div class="meta-item"><b>01</b><span>Всегда можно сделать следующий шаг</span></div>
+            <div class="meta-item"><b>∞</b><span>Это не самое большое число</span></div>
+            <div class="meta-item"><b>?</b><span>В физике часто показывает предел модели</span></div>
+          </div>
+        </div>
+
+        <div class="card infinity-card reveal">
+          <div class="axis-label axis-top">mathematics</div>
+          <div class="axis-label axis-right">cosmos</div>
+          <div class="axis-label axis-bottom">philosophy</div>
+          <div class="infinity-symbol">∞</div>
+          <div class="orbit"></div>
+
+          <div class="hero-insight">
+            <div class="insight-row"><span>Очень много</span><b>имеет конец</b></div>
+            <div class="insight-row"><span>Бесконечно</span><b>конца не имеет</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="meaning">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">01 / базовая интуиция</div>
+            <h2 class="section-title">Очень много <span class="gradient-text">не равно</span> бесконечно</h2>
+          </div>
+          <p class="section-lead">
+            Миллиард, триллион и даже количество атомов во Вселенной - конечные величины.
+            Бесконечность начинается там, где нельзя указать последний элемент.
+          </p>
+        </div>
+
+        <div class="meaning-grid">
+          <article class="card compare-card reveal">
+            <h3>Конечное</h3>
+            <p>Огромное число может быть трудным для воображения, но у него есть граница. К нему можно прибавить единицу.</p>
+            <div class="finite-bars" aria-hidden="true">
+              <span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span>
+              <span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span>
+            </div>
+            <div class="limit-arrow" aria-hidden="true">⊣</div>
+          </article>
+
+          <article class="card interactive-card reveal">
+            <h3>Интерактивная мысль</h3>
+            <p>Нажимай «прибавить 1». Число растет, но никогда не становится бесконечностью.</p>
+
+            <div class="number-runner">
+              <div class="runner-top">
+                <div class="runner-value" id="runnerValue">1</div>
+                <div class="runner-note">Каким бы большим ни стало число, следующий шаг все равно возможен.</div>
+              </div>
+
+              <div class="runner-track" aria-hidden="true">
+                <div class="runner-dots" id="runnerDots">
+                  <span class="runner-dot">1</span>
+                </div>
+              </div>
+
+              <div class="hero-actions">
+                <button class="btn btn-primary" id="addOne" type="button">Прибавить 1</button>
+                <button class="btn" id="resetRunner" type="button">Сбросить</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="map">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">02 / карта смыслов</div>
+            <h2 class="section-title">Одна идея - <span class="gradient-text">много языков</span></h2>
+          </div>
+          <p class="section-lead">
+            В разных областях бесконечность работает как математический объект,
+            модель пространства, предел физической теории, философская проблема
+            и художественный образ.
+          </p>
+        </div>
+
+        <div class="perspective-grid">
+          <article class="glass perspective reveal"><div class="icon">∑</div><h3>Математика</h3><p>Строго изучает бесконечные множества, ряды, пределы и разные мощности бесконечности.</p></article>
+          <article class="glass perspective reveal"><div class="icon">⌁</div><h3>Геометрия</h3><p>Мыслит прямые, плоскости и пространство без края как идеальные модели.</p></article>
+          <article class="glass perspective reveal"><div class="icon">◉</div><h3>Физика</h3><p>Часто видит бесконечность как сигнал: модель дошла до предела применимости.</p></article>
+          <article class="glass perspective reveal"><div class="icon">✦</div><h3>Космос</h3><p>Спрашивает, конечна ли Вселенная, есть ли край пространства и начало времени.</p></article>
+          <article class="glass perspective reveal"><div class="icon">?</div><h3>Философия</h3><p>Исследует, существует ли бесконечность реально или только в мышлении.</p></article>
+          <article class="glass perspective reveal"><div class="icon">☼</div><h3>Религия</h3><p>Связывает бесконечность с вечностью, абсолютом и тем, что выше измеримых границ.</p></article>
+          <article class="glass perspective reveal"><div class="icon">✺</div><h3>Искусство</h3><p>Передает бесконечность через повторение, спирали, зеркала, фракталы и орнаменты.</p></article>
+          <article class="glass perspective reveal"><div class="icon">{ }</div><h3>Код</h3><p>Использует бесконечные циклы, но всегда упирается в память, время и железо.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="math">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">03 / математическая строгость</div>
+            <h2 class="section-title">Бесконечности <span class="gradient-text">бывают разного размера</span></h2>
+          </div>
+          <p class="section-lead">
+            Натуральных чисел бесконечно много. Четных чисел тоже бесконечно много.
+            И странность в том, что их можно поставить в пары один к одному.
+          </p>
+        </div>
+
+        <div class="math-layout">
+          <article class="card math-panel reveal">
+            <h3>Счетная бесконечность</h3>
+            <p>
+              Каждому натуральному числу можно поставить в соответствие четное.
+              Поэтому натуральных и четных чисел «одинаково бесконечно много».
+            </p>
+
+            <div class="pairing" aria-label="Соответствие натуральных и четных чисел">
+              <div class="pair-row"><div class="num">1</div><div class="pair-line"></div><div class="num">2</div></div>
+              <div class="pair-row"><div class="num">2</div><div class="pair-line"></div><div class="num">4</div></div>
+              <div class="pair-row"><div class="num">3</div><div class="pair-line"></div><div class="num">6</div></div>
+              <div class="pair-row"><div class="num">4</div><div class="pair-line"></div><div class="num">8</div></div>
+              <div class="pair-row"><div class="num">5</div><div class="pair-line"></div><div class="num">10</div></div>
+            </div>
+
+            <div class="size-scale">
+              <div class="scale-row"><span>Натуральные</span><div class="scale-bar"><i style="--w:76%"></i></div></div>
+              <div class="scale-row"><span>Четные</span><div class="scale-bar"><i style="--w:76%"></i></div></div>
+              <div class="scale-row"><span>Дроби 0...1</span><div class="scale-bar"><i style="--w:100%"></i></div></div>
+            </div>
+          </article>
+
+          <article class="card continuum reveal">
+            <h3>Континуум</h3>
+            <p>
+              Между 0 и 1 бесконечно много дробей. Эта бесконечность больше,
+              чем бесконечность натуральных чисел. Не все бесконечности одного размера.
+            </p>
+
+            <div class="number-tunnel" aria-hidden="true">
+              <span style="--i:1; --rot: 11deg;">0.1</span>
+              <span style="--i:2; --rot: -18deg;">0.01</span>
+              <span style="--i:3; --rot: 28deg;">0.333...</span>
+              <span style="--i:4; --rot: -42deg;">0.718281...</span>
+              <span style="--i:5; --rot: 66deg;">0.141592...</span>
+              <span style="--i:6; --rot: -72deg;">0.123456...</span>
+              <span style="--i:7; --rot: 90deg;">0.000001</span>
+              <span style="--i:8; --rot: -108deg;">0.999...</span>
+              <span style="--i:9; --rot: 126deg;">0.500...</span>
+              <span style="--i:10; --rot: -144deg;">0.618...</span>
+              <span style="--i:11; --rot: 166deg;">0.2026...</span>
+              <span style="--i:12; --rot: -188deg;">0.777...</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="physics">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">04 / физика и космос</div>
+            <h2 class="section-title">Бесконечность как <span class="gradient-text">предел модели</span></h2>
+          </div>
+          <p class="section-lead">
+            В физике бесконечность часто означает не «так устроен мир», а
+            «наша теория перестала работать в этой точке».
+          </p>
+        </div>
+
+        <div class="cosmos-grid">
+          <article class="card cosmos-visual reveal">
+            <h3>Сингулярность</h3>
+            <p>
+              В черной дыре или у начала космологической модели могут появляться
+              бесконечные плотности. Это может быть признаком неполноты уравнений.
+            </p>
+            <div class="space-rings" aria-hidden="true"></div>
+            <div class="black-hole" aria-hidden="true"></div>
+          </article>
+
+          <article class="card universe reveal">
+            <h3>Вселенная</h3>
+            <p>Что значит «конец пространства» - вопрос не бытовой, а модельный.</p>
+            <div class="universe-option"><b>Конечна, но без края</b><span>Как поверхность шара: площадь конечна, но края на самой поверхности нет.</span></div>
+            <div class="universe-option"><b>Бесконечна</b><span>Куда бы мы ни летели, конец пространства не встретится.</span></div>
+            <div class="universe-option"><b>Наблюдаемая область конечна</b><span>Мы видим только область, свет от которой успел дойти до нас.</span></div>
+            <div class="universe-option"><b>Время остается вопросом</b><span>Было ли начало времени и будет ли конец времени - зависит от модели.</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hilbert">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">05 / парадокс</div>
+            <h2 class="section-title">Полный отель, <span class="gradient-text">где есть место</span></h2>
+          </div>
+          <p class="section-lead">
+            Отель Гильберта показывает, что бесконечность ведет себя не так,
+            как привычные конечные количества.
+          </p>
+        </div>
+
+        <article class="card hilbert reveal">
+          <h3>Если все номера заняты, нового гостя все равно можно поселить</h3>
+          <p>
+            Переселяем гостя из номера 1 в номер 2, из 2 в 3, из 3 в 4 и так далее.
+            Номер 1 освобождается.
+          </p>
+
+          <div class="rooms" id="rooms" aria-label="Номера бесконечного отеля">
+            <div class="room">1</div><div class="room">2</div><div class="room">3</div><div class="room">4</div>
+            <div class="room">5</div><div class="room">6</div><div class="room">7</div><div class="room">...</div>
+          </div>
+
+          <div class="new-guest">
+            <span>Обычная логика говорит: мест нет. Логика бесконечности говорит: можно сдвинуть всю последовательность.</span>
+            <b>+1</b>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="shiftRooms" type="button">Показать сдвиг</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="philosophy">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">06 / смысл и образ</div>
+            <h2 class="section-title">Предел <span class="gradient-text">воображения</span></h2>
+          </div>
+          <p class="section-lead">
+            Человек понимает идею бесконечности, но не может полностью представить ее.
+            Поэтому она становится образом тайны, вечности и абсолютного.
+          </p>
+        </div>
+
+        <div class="philo-grid">
+          <article class="card big-quote reveal">
+            <p class="quote">«Бесконечность - это не то, что очень далеко. Это то, у чего нет последней границы».</p>
+            <p class="note">
+              В философии это вопрос о том, где заканчивается опыт и начинается чистое мышление.
+              В религии - язык вечности и абсолютного. В искусстве - чувство глубины, повторения и бездонности.
+            </p>
+          </article>
+
+          <article class="card mandala reveal" aria-label="Орнамент бесконечного повторения">
+            <svg viewBox="0 0 300 300" role="img">
+              <defs>
+                <radialGradient id="g" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#8ffcff" stop-opacity="0.95"/>
+                  <stop offset="52%" stop-color="#b78cff" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <circle cx="150" cy="150" r="132" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+              <circle cx="150" cy="150" r="82" fill="url(#g)" opacity="0.35"/>
+              <g fill="none" stroke="#8ffcff" stroke-width="2" opacity="0.9">
+                <path d="M150 22 C210 70 210 230 150 278 C90 230 90 70 150 22Z"/>
+                <path d="M22 150 C70 90 230 90 278 150 C230 210 70 210 22 150Z"/>
+                <path d="M58 58 C132 52 248 168 242 242 C168 248 52 132 58 58Z"/>
+                <path d="M242 58 C248 132 132 248 58 242 C52 168 168 52 242 58Z"/>
+              </g>
+              <g fill="none" stroke="#ffd166" stroke-width="1.4" opacity="0.68">
+                <circle cx="150" cy="150" r="36"/>
+                <circle cx="150" cy="150" r="58"/>
+                <circle cx="150" cy="150" r="108"/>
+              </g>
+              <text x="150" y="159" text-anchor="middle" fill="#f4f6ff" font-size="46" font-weight="900">∞</text>
+            </svg>
+          </article>
+        </div>
+
+        <div class="concept-strip">
+          <div class="glass concept reveal"><b>Вечность</b><span>Не просто долго, а вне последнего конца.</span></div>
+          <div class="glass concept reveal"><b>Абсолют</b><span>То, что нельзя полностью измерить привычной шкалой.</span></div>
+          <div class="glass concept reveal"><b>Тайна</b><span>Граница между знанием и тем, что превосходит опыт.</span></div>
+          <div class="glass concept reveal"><b>Орнамент</b><span>Повторение, которое визуально уходит за предел кадра.</span></div>
+          <div class="glass concept reveal"><b>Фрактал</b><span>Форма, где подобие повторяется на разных масштабах.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="code">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">07 / программирование</div>
+            <h2 class="section-title">Бесконечный цикл <span class="gradient-text">не бесконечен физически</span></h2>
+          </div>
+          <p class="section-lead">
+            Компьютер может запустить процесс без заданного конца. Но железо,
+            память, питание и время всегда конечны.
+          </p>
+        </div>
+
+        <div class="code-layout">
+          <article class="card code-card reveal">
+            <h3>Пример цикла</h3>
+            <p>В коде бесконечность часто означает «нет условия выхода».</p>
+<pre><code>// Цикл без условия выхода.
+// В теории он работает бесконечно.
+// На практике его остановят ресурсы или человек.
+
+while (true) {
+  console.log("Работаю дальше");
+}</code></pre>
+          </article>
+
+          <article class="card machine reveal">
+            <h3>Машина ограничена</h3>
+            <p>
+              Настоящая бесконечность в программировании заменяется процессом
+              без заранее заданного завершения. Это модель, а не магия.
+            </p>
+            <div class="chip" aria-hidden="true">∞</div>
+            <div class="pin h p1"></div><div class="pin h p2"></div><div class="pin h p3"></div><div class="pin h p4"></div>
+            <div class="pin v p5"></div><div class="pin v p6"></div><div class="pin v p7"></div><div class="pin v p8"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="wrap">
+        <article class="card final-card reveal">
+          <h2>Бесконечность - это не самое большое число.</h2>
+          <p>
+            Это отсутствие последнего числа, последней точки, последней границы.
+            Поэтому она одновременно строгая математическая идея, предел физической модели,
+            философская проблема и сильный художественный образ.
+          </p>
+
+          <div class="hero-actions" style="justify-content:center">
+            <a href="#top" class="btn btn-primary">Вернуться наверх</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      Интерактивный сайт-конспект: математика, физика, космос, философия, религия, искусство и код.
+    </div>
+  </footer>
+
+  <script>
+    /*
+      Скрипты отвечают за UX:
+      1. прогресс чтения;
+      2. подсветка текущего раздела в меню;
+      3. появление блоков при прокрутке;
+      4. интерактивный счетчик;
+      5. демонстрация отеля Гильберта;
+      6. светлая/темная тема;
+      7. фоновое звездное поле.
+    */
+
+    const root = document.documentElement;
+    const progress = document.getElementById("progress");
+    const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+    const sections = navLinks.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progress.style.width = `${percent}%`;
+
+      let currentId = "";
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= 120) currentId = section.id;
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    const cards = document.querySelectorAll(".card, .glass");
+
+    cards.forEach((card) => {
+      card.addEventListener("mousemove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        card.style.background = `
+          radial-gradient(circle at ${x}px ${y}px, rgba(143,252,255,0.16), transparent 34%),
+          linear-gradient(180deg, var(--panel-2), var(--panel))
+        `;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.background = "";
+      });
+    });
+
+    const runnerValue = document.getElementById("runnerValue");
+    const runnerDots = document.getElementById("runnerDots");
+    const addOne = document.getElementById("addOne");
+    const resetRunner = document.getElementById("resetRunner");
+    let currentNumber = 1;
+
+    function renderRunner() {
+      runnerValue.textContent = currentNumber.toLocaleString("ru-RU");
+      runnerDots.innerHTML = "";
+
+      const start = Math.max(1, currentNumber - 7);
+      const end = currentNumber + 3;
+
+      for (let i = start; i <= end; i += 1) {
+        const dot = document.createElement("span");
+        dot.className = "runner-dot";
+        dot.textContent = i;
+        runnerDots.appendChild(dot);
+      }
+    }
+
+    addOne.addEventListener("click", () => {
+      currentNumber += 1;
+      renderRunner();
+    });
+
+    resetRunner.addEventListener("click", () => {
+      currentNumber = 1;
+      renderRunner();
+    });
+
+    const rooms = document.getElementById("rooms");
+    const shiftRooms = document.getElementById("shiftRooms");
+
+    shiftRooms.addEventListener("click", () => {
+      rooms.classList.toggle("shifted");
+      shiftRooms.textContent = rooms.classList.contains("shifted") ? "Вернуть обратно" : "Показать сдвиг";
+    });
+
+    const themeBtn = document.getElementById("themeBtn");
+
+    themeBtn.addEventListener("click", () => {
+      const isLight = document.body.dataset.theme === "light";
+      document.body.dataset.theme = isLight ? "" : "light";
+      themeBtn.textContent = isLight ? "◐" : "●";
+    });
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * window.devicePixelRatio;
+      canvas.height = window.innerHeight * window.devicePixelRatio;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+
+      stars = Array.from({ length: Math.min(130, Math.floor(window.innerWidth / 9)) }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 1.6 + 0.3,
+        s: Math.random() * 0.35 + 0.06
+      }));
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      stars.forEach((star) => {
+        star.y += star.s;
+        if (star.y > window.innerHeight + 8) {
+          star.y = -8;
+          star.x = Math.random() * window.innerWidth;
+        }
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(143, 252, 255, 0.72)";
+        ctx.fill();
+      });
+
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    drawStars();
+  </script>
+</body>
+</html>
