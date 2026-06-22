@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Бесконечность - интерактивный сайт</title>
+  <style>
+    :root { --bg:#050611; --text:#f7f8ff; --muted:#aeb7d9; --aqua:#8ffcff; --violet:#b78cff; --gold:#ffd166; --line:rgba(255,255,255,.16); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; font-family:Arial,sans-serif; color:var(--text); background:radial-gradient(circle at 15% 8%,rgba(143,252,255,.22),transparent 32%),radial-gradient(circle at 85% 16%,rgba(183,140,255,.22),transparent 34%),#050611; }
+    header { position:sticky; top:0; z-index:10; background:rgba(5,6,17,.82); backdrop-filter:blur(18px); border-bottom:1px solid var(--line); }
+    nav { width:min(1120px,calc(100% - 32px)); margin:auto; min-height:68px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    nav b { font-size:20px; } nav a { color:var(--muted); text-decoration:none; margin-left:14px; }
+    section { width:min(1120px,calc(100% - 32px)); margin:auto; padding:86px 0; }
+    .hero { min-height:calc(100vh - 68px); display:grid; grid-template-columns:1.1fr .9fr; gap:36px; align-items:center; }
+    h1 { font-size:clamp(54px,10vw,118px); line-height:.82; letter-spacing:-.08em; margin:0 0 24px; }
+    h2 { font-size:clamp(34px,6vw,70px); line-height:.95; letter-spacing:-.06em; margin:0 0 20px; }
+    h3 { font-size:26px; margin:0 0 12px; }
+    p { color:var(--muted); font-size:20px; line-height:1.55; margin:0; }
+    .grad { background:linear-gradient(90deg,var(--aqua),var(--violet),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .card { border:1px solid var(--line); border-radius:28px; background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.055)); box-shadow:0 28px 90px rgba(0,0,0,.45); padding:28px; }
+    .symbol { min-height:430px; display:grid; place-items:center; font-size:280px; color:transparent; -webkit-text-stroke:2px rgba(143,252,255,.72); text-shadow:0 0 60px rgba(143,252,255,.3); }
+    .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    .item { min-height:190px; padding:22px; border:1px solid var(--line); border-radius:24px; background:rgba(255,255,255,.07); }
+    .item .icon { font-size:34px; margin-bottom:18px; color:var(--aqua); }
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .numbers { display:grid; gap:10px; margin-top:20px; }
+    .row { display:grid; grid-template-columns:60px 1fr 60px; gap:12px; align-items:center; padding:10px; background:rgba(255,255,255,.06); border-radius:16px; }
+    .num { height:42px; display:grid; place-items:center; border-radius:14px; background:rgba(143,252,255,.13); color:var(--aqua); font-weight:900; }
+    .line { height:2px; background:linear-gradient(90deg,var(--aqua),var(--violet)); }
+    .hotel { display:grid; grid-template-columns:repeat(8,1fr); gap:10px; margin-top:22px; }
+    .room { min-height:70px; display:grid; place-items:center; border:1px solid var(--line); border-radius:18px; color:var(--aqua); font-weight:900; background:rgba(255,255,255,.06); }
+    .btn { display:inline-flex; margin-top:28px; min-height:50px; align-items:center; justify-content:center; padding:14px 22px; border-radius:999px; color:#050611; font-weight:900; text-decoration:none; background:linear-gradient(90deg,var(--aqua),var(--violet),var(--gold)); }
+    footer { width:min(1120px,calc(100% - 32px)); margin:auto; padding:32px 0; color:var(--muted); border-top:1px solid var(--line); }
+    @media(max-width:900px){ .hero,.split{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.symbol{min-height:300px;font-size:190px} }
+    @media(max-width:560px){ nav span{display:none}.grid{grid-template-columns:1fr}.hotel{grid-template-columns:repeat(4,1fr)} }
+  </style>
+</head>
+<body>
+  <header><nav><b>∞ Бесконечность</b><span><a href="#sense">Смысл</a><a href="#math">Математика</a><a href="#physics">Физика</a><a href="#philo">Философия</a></span></nav></header>
+  <main>
+    <section class="hero">
+      <div><h1>Не число.<br><span class="grad">Отсутствие края.</span></h1><p>Бесконечность - это не «очень много». Это идея о том, что нет последнего элемента, последней точки и последней границы.</p><a class="btn" href="#sense">Начать разбор</a></div>
+      <div class="card symbol">∞</div>
+    </section>
+    <section id="sense"><h2>Очень много <span class="grad">не равно</span> бесконечно</h2><p>Миллиард и триллион конечны. Каким бы большим ни было число, к нему можно прибавить 1. Бесконечность начинается там, где последнего числа нет вообще.</p></section>
+    <section><div class="grid"><div class="item"><div class="icon">∑</div><h3>Математика</h3><p>Множества, пределы и разные мощности бесконечности.</p></div><div class="item"><div class="icon">⌁</div><h3>Геометрия</h3><p>Прямые и пространства без края как идеальные модели.</p></div><div class="item"><div class="icon">◉</div><h3>Физика</h3><p>Часто бесконечность показывает предел применимости теории.</p></div><div class="item"><div class="icon">✦</div><h3>Космос</h3><p>Вопрос о размере Вселенной и начале времени.</p></div><div class="item"><div class="icon">?</div><h3>Философия</h3><p>Реальность бесконечности или инструмент мышления.</p></div><div class="item"><div class="icon">☼</div><h3>Религия</h3><p>Вечность, абсолют и то, что выше измеримых границ.</p></div><div class="item"><div class="icon">✺</div><h3>Искусство</h3><p>Спирали, зеркала, орнаменты и фракталы.</p></div><div class="item"><div class="icon">{ }</div><h3>Код</h3><p>Бесконечные циклы, ограниченные железом.</p></div></div></section>
+    <section id="math"><h2>Математика: <span class="grad">бесконечности разные</span></h2><div class="split"><div class="card"><h3>Счетная бесконечность</h3><p>Натуральные и четные числа можно поставить в пары.</p><div class="numbers"><div class="row"><div class="num">1</div><div class="line"></div><div class="num">2</div></div><div class="row"><div class="num">2</div><div class="line"></div><div class="num">4</div></div><div class="row"><div class="num">3</div><div class="line"></div><div class="num">6</div></div><div class="row"><div class="num">4</div><div class="line"></div><div class="num">8</div></div></div></div><div class="card"><h3>Континуум</h3><p>Между 0 и 1 бесконечно много дробей. Эта бесконечность больше, чем бесконечность натуральных чисел.</p><p style="margin-top:20px;font-size:34px;color:#8ffcff">0.1  0.01  0.333...  0.618...  0.999...</p></div></div></section>
+    <section id="physics"><h2>Физика: <span class="grad">предел модели</span></h2><p>Когда в физике появляется бесконечная плотность или кривизна, это часто означает не «так устроен мир», а «наши уравнения перестали работать в этой области».</p></section>
+    <section><h2>Отель Гильберта</h2><div class="card"><p>Даже если все номера заняты, в бесконечном отеле можно поселить нового гостя: каждого переселяют в следующий номер.</p><div class="hotel"><div class="room">1</div><div class="room">2</div><div class="room">3</div><div class="room">4</div><div class="room">5</div><div class="room">6</div><div class="room">7</div><div class="room">...</div></div></div></section>
+    <section id="philo"><h2>Философия и искусство: <span class="grad">предел воображения</span></h2><p>Человек понимает идею бесконечности, но не может полностью ее представить. Поэтому она становится образом тайны, вечности, абсолютного и бездонности.</p></section>
+    <section><div class="card"><h2>Главная мысль</h2><p>Бесконечность - это не самое большое число. Это отсутствие последнего числа, последней точки и последней границы.</p></div></section>
+  </main>
+  <footer>Сайт-конспект о бесконечности. Версия для GitHub Pages.</footer>
+</body>
+</html>
